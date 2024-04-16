@@ -1,0 +1,17 @@
+.d-block.w-100{
+    height:400px;
+}
+.carousel-control-next{
+    justify-content: end !important;
+}
+.carousel-control-prev{
+    justify-content: start;
+}
+.product-img{
+    width:296px;
+    height:296px;
+}
+.All-product-img{
+    width:232px;
+    height:232px;
+}

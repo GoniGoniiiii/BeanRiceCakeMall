@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/index.css">
+    <title>콩떡몰 메인페이지</title>
+    <!-- <h3 class="my-5">베스트</h3>
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">베스트</li>
+        </ol>
+      </nav> -->
+<body>
+<header th:include="header"></header>
+<section>
+    <div id="carousel" class="carousel slide mb-5" data-bs-ride="carousel">
+        <div class="carousel-indicators">
+            <button type="button" data-bs-target="#carousel" data-bs-slide-to="0" class="active" aria-current="true"
+                    aria-label="Slide 1"></button>
+            <button type="button" data-bs-target="#carousel" data-bs-slide-to="1" aria-label="Slide 2"></button>
+            <button type="button" data-bs-target="#carousel" data-bs-slide-to="2" aria-label="Slide 3"></button>
+        </div>
+        <div class="carousel-inner">
+            <div class="carousel-item active">
+                <img src="/img/img4.png" class="d-block w-100" alt="목줄콩">
+            </div>
+            <div class="carousel-item">
+                <img src="/img/img5.png" class="d-block w-100" alt="조끼콩">
+            </div>
+            <div class="carousel-item">
+                <img src="/img/img6.png" class="d-block w-100" alt="옷입었콩">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">이전</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">다음</span>
+        </button>
+    </div>
+
+    <h2 class="fw-bold text-center pt-3 pb-5">인기상품</h2>
+    <div class="d-flex justify-content-between"><!--상품 한 줄-->
+        <div class="product"><!--상품1-->
+            <img src="/img/img1.png" class="product-img">
+            <h5 class="fw-bold my-2">콩떡이 인형</h5>
+            <div class="d-flex"><!--상품 가격, 원래 가격, 할인율-->
+                <p class="fw-bold">50,000원</p><!--상품 가격-->
+                <del class="px-2 text-secondary small">500,000원</del><!-- 원래 가격 -->
+                <p class="fw-bold text-danger">90%</p><!--할인율-->
+            </div>
+            <small class="text-secondary">귀여운 강아지 콩떡이 인형입니다~<br>싸게싸게 들여가세요~</small>
+        </div>
+        <div class="product"><!--상품2-->
+            <img src="/img/img1.png" class="product-img">
+            <h5 class="fw-bold my-2">콩떡이 인형</h5>
+            <div class="d-flex"><!--상품 가격, 원래 가격, 할인율-->
+                <p class="fw-bold">50,000원</p><!--상품 가격-->
+                <del class="px-2 text-secondary small">500,000원</del><!-- 원래 가격 -->
+                <p class="fw-bold text-danger">90%</p><!--할인율-->
+            </div>
+            <small class="text-secondary">귀여운 강아지 콩떡이 인형입니다~<br>싸게싸게 들여가세요~</small>
+        </div>
+        <div class="product"><!--상품 3-->
+            <img src="/img/img1.png" class="product-img">
+            <h5 class="fw-bold my-2">콩떡이 인형</h5>
+            <div class="d-flex"><!--상품 가격, 원래 가격, 할인율-->
+                <p class="fw-bold">50,000원</p><!--상품 가격-->
+                <del class="px-2 text-secondary small">500,000원</del><!-- 원래 가격 -->
+                <p class="fw-bold text-danger">90%</p><!--할인율-->
+            </div>
+            <small class="text-secondary">귀여운 강아지 콩떡이 인형입니다~<br>싸게싸게 들여가세요~</small>
+        </div>
+        <div class="product"><!--상품4-->
+            <img src="/img/img1.png" class="product-img">
+            <h5 class="fw-bold my-2">콩떡이 인형</h5>
+            <div class="d-flex"><!--상품 가격, 원래 가격, 할인율-->
+                <p class="fw-bold">50,000원</p><!--상품 가격-->
+                <del class="px-2 text-secondary small">500,000원</del><!-- 원래 가격 -->
+                <p class="fw-bold text-danger">90%</p><!--할인율-->
+            </div>
+            <small class="text-secondary">귀여운 강아지 콩떡이 인형입니다~<br>싸게싸게 들여가세요~</small>
+        </div>
+    </div>
+    <!--인기상품 끝 , 신상품 시작-->
+    <h2 class="fw-bold text-center py-5 my-3">신상품</h2>
+    <div class="d-flex justify-content-between"><!--상품 한 줄-->
+        <div class="product"><!--상품1-->
+            <img src="/img/img1.png" class="product-img">
+            <h5 class="fw-bold my-2">콩떡이 인형</h5>
+            <div class="d-flex"><!--상품 가격, 원래 가격, 할인율-->
+                <p class="fw-bold">50,000원</p><!--상품 가격-->
+                <del class="px-2 text-secondary small">500,000원</del><!-- 원래 가격 -->
+                <p class="fw-bold text-danger">90%</p><!--할인율-->
+            </div>
+            <small class="text-secondary">귀여운 강아지 콩떡이 인형입니다~<br>싸게싸게 들여가세요~</small>
+        </div>
+        <div class="product"><!--상품2-->
+            <img src="/img/img1.png" class="product-img">
+            <h5 class="fw-bold my-2">콩떡이 인형</h5>
+            <div class="d-flex"><!--상품 가격, 원래 가격, 할인율-->
+                <p class="fw-bold">50,000원</p><!--상품 가격-->
+                <del class="px-2 text-secondary small">500,000원</del><!-- 원래 가격 -->
+                <p class="fw-bold text-danger">90%</p><!--할인율-->
+            </div>
+            <small class="text-secondary">귀여운 강아지 콩떡이 인형입니다~<br>싸게싸게 들여가세요~</small>
+        </div>
+        <div class="product"><!--상품 3-->
+            <img src="/img/img1.png" class="product-img">
+            <h5 class="fw-bold my-2">콩떡이 인형</h5>
+            <div class="d-flex"><!--상품 가격, 원래 가격, 할인율-->
+                <p class="fw-bold">50,000원</p><!--상품 가격-->
+                <del class="px-2 text-secondary small">500,000원</del><!-- 원래 가격 -->
+                <p class="fw-bold text-danger">90%</p><!--할인율-->
+            </div>
+            <small class="text-secondary">귀여운 강아지 콩떡이 인형입니다~<br>싸게싸게 들여가세요~</small>
+        </div>
+        <div class="product"><!--상품4-->
+            <img src="/img/img1.png" class="product-img">
+            <h5 class="fw-bold my-2">콩떡이 인형</h5>
+            <div class="d-flex"><!--상품 가격, 원래 가격, 할인율-->
+                <p class="fw-bold">50,000원</p><!--상품 가격-->
+                <del class="px-2 text-secondary small">500,000원</del><!-- 원래 가격 -->
+                <p class="fw-bold text-danger">90%</p><!--할인율-->
+            </div>
+            <small class="text-secondary">귀여운 강아지 콩떡이 인형입니다~<br>싸게싸게 들여가세요~</small>
+        </div>
+    </div>
+    <div class="d-flex justify-content-between mt-4"><!--신상품 두 번째 줄-->
+        <div class="product"><!--상품5-->
+            <img src="/img/img1.png" class="product-img">
+            <h5 class="fw-bold my-2">콩떡이 인형</h5>
+            <div class="d-flex"><!--상품 가격, 원래 가격, 할인율-->
+                <p class="fw-bold">50,000원</p><!--상품 가격-->
+                <del class="px-2 text-secondary small">500,000원</del><!-- 원래 가격 -->
+                <p class="fw-bold text-danger">90%</p><!--할인율-->
+            </div>
+            <small class="text-secondary">귀여운 강아지 콩떡이 인형입니다~<br>싸게싸게 들여가세요~</small>
+        </div>
+        <div class="product"><!--상품6-->
+            <img src="/img/img1.png" class="product-img">
+            <h5 class="fw-bold my-2">콩떡이 인형</h5>
+            <div class="d-flex"><!--상품 가격, 원래 가격, 할인율-->
+                <p class="fw-bold">50,000원</p><!--상품 가격-->
+                <del class="px-2 text-secondary small">500,000원</del><!-- 원래 가격 -->
+                <p class="fw-bold text-danger">90%</p><!--할인율-->
+            </div>
+            <small class="text-secondary">귀여운 강아지 콩떡이 인형입니다~<br>싸게싸게 들여가세요~</small>
+        </div>
+        <div class="product"><!--상품7-->
+            <img src="/img/img1.png" class="product-img">
+            <h5 class="fw-bold my-2">콩떡이 인형</h5>
+            <div class="d-flex"><!--상품 가격, 원래 가격, 할인율-->
+                <p class="fw-bold">50,000원</p><!--상품 가격-->
+                <del class="px-2 text-secondary small">500,000원</del><!-- 원래 가격 -->
+                <p class="fw-bold text-danger">90%</p><!--할인율-->
+            </div>
+            <small class="text-secondary">귀여운 강아지 콩떡이 인형입니다~<br>싸게싸게 들여가세요~</small>
+        </div>
+        <div class="product"><!--상품8-->
+            <img src="/img/img1.png" class="product-img">
+            <h5 class="fw-bold my-2">콩떡이 인형</h5>
+            <div class="d-flex"><!--상품 가격, 원래 가격, 할인율-->
+                <p class="fw-bold">50,000원</p><!--상품 가격-->
+                <del class="px-2 text-secondary small">500,000원</del><!-- 원래 가격 -->
+                <p class="fw-bold text-danger">90%</p><!--할인율-->
+            </div>
+            <small class="text-secondary">귀여운 강아지 콩떡이 인형입니다~<br>싸게싸게 들여가세요~</small>
+        </div>
+    </div>
+
+    <h2 class="fw-bold text-center pt-5 mt-3">상품전체</h2>
+    <div class="d-flex justify-content-center mb-5 text-secondary">
+        <small>인기도순</small>
+        <small class="px-2">|</small>
+        <small>최신등록순</small>
+        <small class="px-2">|</small>
+        <small>낮은가격순</small>
+        <small class="px-2">|</small>
+        <small>높은가격순</small>
+        <small class="px-2">|</small>
+        <small>할인율순</small>
+        <small class="px-2">|</small>
+        <small>누적판매순</small>
+    </div>
+
+    <div class="d-flex justify-content-between my-3"><!--상품 한 줄-->
+        <div class="product"><!--상품1-->
+            <img src="/img/img1.png" class="All-product-img">
+            <h5 class="fw-bold my-2">콩떡이 인형</h5>
+            <div class="d-flex"><!--상품 가격, 원래 가격, 할인율-->
+                <p class="fw-bold">50,000원</p><!--상품 가격-->
+                <del class="px-2 text-secondary small">500,000원</del><!-- 원래 가격 -->
+                <p class="fw-bold text-danger">90%</p><!--할인율-->
+            </div>
+            <small class="text-secondary">귀여운 강아지 콩떡이 인형입니다~<br>싸게싸게 들여가세요~</small>
+        </div>
+        <div class="product"><!--상품2-->
+            <img src="/img/img1.png" class="All-product-img">
+            <h5 class="fw-bold my-2">콩떡이 인형</h5>
+            <div class="d-flex"><!--상품 가격, 원래 가격, 할인율-->
+                <p class="fw-bold">50,000원</p><!--상품 가격-->
+                <del class="px-2 text-secondary small">500,000원</del><!-- 원래 가격 -->
+                <p class="fw-bold text-danger">90%</p><!--할인율-->
+            </div>
+            <small class="text-secondary">귀여운 강아지 콩떡이 인형입니다~<br>싸게싸게 들여가세요~</small>
+        </div>
+        <div class="product"><!--상품 3-->
+            <img src="/img/img1.png" class="All-product-img">
+            <h5 class="fw-bold my-2">콩떡이 인형</h5>
+            <div class="d-flex"><!--상품 가격, 원래 가격, 할인율-->
+                <p class="fw-bold">50,000원</p><!--상품 가격-->
+                <del class="px-2 text-secondary small">500,000원</del><!-- 원래 가격 -->
+                <p class="fw-bold text-danger">90%</p><!--할인율-->
+            </div>
+            <small class="text-secondary">귀여운 강아지 콩떡이 인형입니다~<br>싸게싸게 들여가세요~</small>
+        </div>
+        <div class="product"><!--상품4-->
+            <img src="/img/img1.png" class="All-product-img">
+            <h5 class="fw-bold my-2">콩떡이 인형</h5>
+            <div class="d-flex"><!--상품 가격, 원래 가격, 할인율-->
+                <p class="fw-bold">50,000원</p><!--상품 가격-->
+                <del class="px-2 text-secondary small">500,000원</del><!-- 원래 가격 -->
+                <p class="fw-bold text-danger">90%</p><!--할인율-->
+            </div>
+            <small class="text-secondary">귀여운 강아지 콩떡이 인형입니다~<br>싸게싸게 들여가세요~</small>
+        </div>
+        <div class="product"><!--상품5-->
+            <img src="/img/img1.png" class="All-product-img">
+            <h5 class="fw-bold my-2">콩떡이 인형</h5>
+            <div class="d-flex"><!--상품 가격, 원래 가격, 할인율-->
+                <p class="fw-bold">50,000원</p><!--상품 가격-->
+                <del class="px-2 text-secondary small">500,000원</del><!-- 원래 가격 -->
+                <p class="fw-bold text-danger">90%</p><!--할인율-->
+            </div>
+            <small class="text-secondary">귀여운 강아지 콩떡이 인형입니다~<br>싸게싸게 들여가세요~</small>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-between my-3"><!--전체상품 두 번째 줄-->
+        <div class="product"><!--상품6-->
+            <img src="/img/img1.png" class="All-product-img">
+            <h5 class="fw-bold my-2">콩떡이 인형</h5>
+            <div class="d-flex"><!--상품 가격, 원래 가격, 할인율-->
+                <p class="fw-bold">50,000원</p><!--상품 가격-->
+                <del class="px-2 text-secondary small">500,000원</del><!-- 원래 가격 -->
+                <p class="fw-bold text-danger">90%</p><!--할인율-->
+            </div>
+            <small class="text-secondary">귀여운 강아지 콩떡이 인형입니다~<br>싸게싸게 들여가세요~</small>
+        </div>
+        <div class="product"><!--상품7-->
+            <img src="/img/img1.png" class="All-product-img">
+            <h5 class="fw-bold my-2">콩떡이 인형</h5>
+            <div class="d-flex"><!--상품 가격, 원래 가격, 할인율-->
+                <p class="fw-bold">50,000원</p><!--상품 가격-->
+                <del class="px-2 text-secondary small">500,000원</del><!-- 원래 가격 -->
+                <p class="fw-bold text-danger">90%</p><!--할인율-->
+            </div>
+            <small class="text-secondary">귀여운 강아지 콩떡이 인형입니다~<br>싸게싸게 들여가세요~</small>
+        </div>
+        <div class="product"><!--상품8-->
+            <img src="/img/img1.png" class="All-product-img">
+            <h5 class="fw-bold my-2">콩떡이 인형</h5>
+            <div class="d-flex"><!--상품 가격, 원래 가격, 할인율-->
+                <p class="fw-bold">50,000원</p><!--상품 가격-->
+                <del class="px-2 text-secondary small">500,000원</del><!-- 원래 가격 -->
+                <p class="fw-bold text-danger">90%</p><!--할인율-->
+            </div>
+            <small class="text-secondary">귀여운 강아지 콩떡이 인형입니다~<br>싸게싸게 들여가세요~</small>
+        </div>
+        <div class="product"><!--상품9-->
+            <img src="/img/img1.png" class="All-product-img">
+            <h5 class="fw-bold my-2">콩떡이 인형</h5>
+            <div class="d-flex"><!--상품 가격, 원래 가격, 할인율-->
+                <p class="fw-bold">50,000원</p><!--상품 가격-->
+                <del class="px-2 text-secondary small">500,000원</del><!-- 원래 가격 -->
+                <p class="fw-bold text-danger">90%</p><!--할인율-->
+            </div>
+            <small class="text-secondary">귀여운 강아지 콩떡이 인형입니다~<br>싸게싸게 들여가세요~</small>
+        </div>
+        <div class="product"><!--상품10-->
+            <img src="/img/img1.png" class="All-product-img">
+            <h5 class="fw-bold my-2">콩떡이 인형</h5>
+            <div class="d-flex"><!--상품 가격, 원래 가격, 할인율-->
+                <p class="fw-bold">50,000원</p><!--상품 가격-->
+                <del class="px-2 text-secondary small">500,000원</del><!-- 원래 가격 -->
+                <p class="fw-bold text-danger">90%</p><!--할인율-->
+            </div>
+            <small class="text-secondary">귀여운 강아지 콩떡이 인형입니다~<br>싸게싸게 들여가세요~</small>
+        </div>
+    </div>
+
+</section>
+</body>
+</html>
