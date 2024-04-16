@@ -1,0 +1,42 @@
+section{
+    max-width:1280px;
+    width:1280px;
+    margin:0 auto;
+}
+@font-face {
+    font-family: 'Dovemayo_gothic';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+body{
+    font-family:'GmarketSansMedium';
+}
+.navbar-brand{
+    font-family: 'Dovemayo_gothic';
+}
+.nav-item{
+    font-size:17px;
+    margin-right:60px;
+}
+.nav-link:hover{
+    color:#ded304 !important;
+}
+.alarm-box{
+    background-color:#fbf9e1;
+    font-size:16px;
+}
+.alarm-box li{
+    margin-right:20px;
+}
+.dropdown-menu{
+    height:120px;
+    font-size:16px;
+}

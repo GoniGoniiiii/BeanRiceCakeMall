@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/header.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <title>헤더</title>
+</head>
+<body>
+<header>
+    <div class="alarm-box">
+        <!-- <section> -->
+        <ul class="nav pt-2 justify-content-end">
+            <li>
+                <a class="btn" style="text-decoration: none; color: black; font-size: 23px; border:none; position: relative;" data-bs-toggle="offcanvas"
+                   data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" onclick="notificationList()">
+                    <i class="fas bi bi-bell fa-2x m-auto"></i> <!-- 종 모양 아이콘 -->
+                    <span class="badge rounded-circle bg-danger" style="position: absolute; top: 0; right: 0; font-size:10px; ">1</span> <!-- 숫자 -->
+                </a>
+            </li>
+            <li class="pt-2">마이페이지</li>
+            <li class="pt-2">장바구니</li>
+            <li class="pt-2">고니</li>
+            <li class="search">
+                <form class="d-flex" role="search">
+                    <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+                    <button class="btn" type="submit"><i class="bi bi-search"></i></button>
+                </form>
+            </li>
+        </ul>
+        </section>
+    </div>
+    <nav class="navbar bg-body-tertiary">
+        <div class="container-fluid py-3">
+            <a class="navbar-brand fs-1 mx-auto" href="#">
+                <img src="/img/logo.jpg" alt="Logo" width="60" height="50" class="d-inline-block align-text-top">
+                콩떡몰
+            </a>
+        </div>
+    </nav>
+    <p class="border-top pt-1"></p>
+    <section>
+        <ul class="nav nav-underline pb-3">
+            <li class="nav-item">
+                <a class="nav-link text-black" aria-current="page" href="#">베스트</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-black" href="#">신상품New</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-black" href="#">전체상품</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-black" href="#">장난감</a>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link text-black dropdown-toggle"  data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">산책용품</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">목줄</a></li>
+                    <li><a class="dropdown-item" href="#">하네스</a></li>
+                    <li><a class="dropdown-item" href="#">액세서리</a></li>
+                </ul>
+            <li class="nav-item dropdown">
+                <a class="nav-link text-black dropdown-toggle"  data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">사료&간식</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">사료</a></li>
+                    <li><a class="dropdown-item" href="#">간식</a></li>
+                </ul>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link text-black dropdown-toggle"  data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">강아지옷</a>
+                <ul class="dropdown-menu">
+                    <li><a class="dropdown-item" href="#">올인원&원피스</a></li>
+                    <li><a class="dropdown-item" href="#">티셔츠</a></li>
+                    <li><a class="dropdown-item" href="#">패딩&아우터</a></li>
+                </ul>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link text-black" href="#">가방</a>
+            </li>
+        </ul>
+    </section>
+    <p class="border-top pb-4"></p>
+</header>
+</body>
+</html>
