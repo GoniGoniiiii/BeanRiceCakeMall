@@ -8,7 +8,7 @@ public class MainController {
 
     @GetMapping("/productList")
     public String productListP(){
-        return "/product/productList";
+        return "product/productList";
 
     }
 
