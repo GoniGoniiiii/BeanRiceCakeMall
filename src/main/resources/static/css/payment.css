@@ -1,0 +1,95 @@
+.content{
+    max-width:1280px;
+    width:1280px;
+    margin:auto !important;
+}
+.left-content{
+    width:850px;
+}
+.right-content{
+    width:385px;
+    border:1px solid #ddd;
+}
+.order-title{
+    font-weight: bold;
+    padding: 0 0 10px 20px;
+}
+table{
+    border:1px solid #ddd;
+}
+
+input{
+    border: 1px solid #ddd;
+    height:50px;
+    border-radius: 5px;
+    padding-left:10px;
+}
+th{
+    padding-left:20px !important;
+    width:145px;
+}
+tr{
+    border-bottom:1px solid #ddd;
+    min-height:50px !important;
+}
+td{
+    width:635px;
+}
+.email{
+    width:290px;
+}
+.form-select{
+    height:50px;
+    width:550px;
+}
+.order-num{
+    width:100px;
+}
+.order-items{
+    padding: 20px 28px 20px 28px;
+}
+.order-items:nth-child(2){
+    box-sizing: border-box;
+}
+.order-item{
+    position: relative;
+    padding: 10px 0px;
+}
+/* .order-item:nth-last-child(2){
+} */
+.order-title2{
+    width:50%;
+    display:inline-block;
+}
+.order-price{
+    width:50%;
+    display:inline-block;
+    font-weight: bold;
+    text-align: end;
+}
+.zipcode{
+    height:50px;
+    padding:0px 10px;
+    line-height: 50px;
+}
+.address{
+    width:595px;
+}
+textarea{
+    border:1px solid #ddd;
+    width:595px;
+}
+.img{
+    width:125px;
+    height:125px;
+}
+.point{
+    padding-left:20px !important;
+    width:150px;
+}
+.payment{
+    border-bottom:1px solid white;
+}
+.order-agree{
+    padding-left:45px !important;
+}
