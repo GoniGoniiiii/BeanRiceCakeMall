@@ -3,6 +3,13 @@ section{
     width:1280px;
     margin:0 auto;
 }
+.content{
+    min-height: calc(100% - (285px + 245px));
+    padding : 10px 0 80px 0;
+    max-width: 1280px;
+    width:1280px;
+    margin: 0 auto !important;
+}
 @font-face {
     font-family: 'Dovemayo_gothic';
     src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2302@1.1/Dovemayo_gothic.woff2') format('woff2');

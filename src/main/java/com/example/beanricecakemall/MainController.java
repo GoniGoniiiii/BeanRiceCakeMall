@@ -11,5 +11,8 @@ public class MainController {
         return "product/productList";
 
     }
-
+    @GetMapping("/payment")
+    public String paymentP(){
+        return "product/payment";
+    }
 }
