@@ -15,4 +15,8 @@ public class MainController {
     public String paymentP(){
         return "product/payment";
     }
+    @GetMapping("/login")
+    public String loingP(){
+        return "user/login";
+    }
 }
