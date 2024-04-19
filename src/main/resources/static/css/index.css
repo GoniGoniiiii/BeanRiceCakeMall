@@ -5,7 +5,7 @@
     justify-content: end !important;
 }
 .carousel-control-prev{
-    justify-content: start;
+    justify-content: start !important;
 }
 .product-img{
     width:296px;
