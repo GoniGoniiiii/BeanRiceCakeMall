@@ -38,8 +38,9 @@ body{
 }
 .alarm-box{
     /*background-color:#fbf9e1;*/
-    background-color:#fbf9e1;
+    background-color: #ffc12b;
     font-size:16px;
+    color:white;
 }
 .alarm-box li{
     margin-right:20px;
