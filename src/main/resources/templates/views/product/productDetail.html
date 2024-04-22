@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/productDetail.css">
+    <title>상품 상세페이지</title>
+</head>
+<body>
+<header th:include="header"></header>
+<section class="product-content">
+    <div class="productDetail-breadcrumb">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item small"><a href="#" class="text-black">Home</a></li>
+                <li class="breadcrumb-item active small" aria-current="page">베스트</li>
+            </ol>
+        </nav>
+    </div>
+    <div class="d-flex justify-content-between productDetail-content">
+        <div class="left-content ">
+            <img src="img/img3.png" class="product-img">
+        </div>
+        <div class="right-content ">
+            <h5 class="pt-3 mb-3 fw-bold">퍼플락 핸드메이드 강아지 버클 목줄 20mm 강아지 목줄</h5>
+            <div class="d-flex justify-content-between product-price">
+                <div><span class="text-danger fs-4  ">25%</span></div>
+                <div><del class="text-secondary">10000원</del><span class="fw-bold fs-4  text-danger">7500원</span></div>
+            </div>
+            <!-- <div class="border-bottom pb-3"><span class="text-danger fs-5">25%</span><del class="text-secondary small mx-2">10000원</del><span class="fw-bold fs-4  text-danger">7500원</span></div> -->
+            <div class="product-box">
+                <p class="text-secondary">Information</p>
+                <p class="">강아지가 너무너무 좋아하는 목줄입니다.정말정말 좋아해요 우하하ㅏ하 하나 구매해보세요 후회하지 않으실거에요</p>
+                <!-- <span class="product-item"><small>배송비</small><small class="mx-1">|</small><small>3000원</small></span>  -->
+                <p class="m-0 small"><span>배송비</span><span class="mx-2">3000원</span><span>|</span><span class="mx-2">리뷰</span><span>4 건</span></p>
+            </div>
+            <div class="product-box">
+                <!-- <p class="m-0"><span class="product-item">배송비</span><span>3000원</span></p>
+                <p class="m-0"><span class="product-item">리뷰</span><span>3000원</span></p> -->
+                <span>퍼플락 핸드메이드 강아지 버클 목줄 20mm 강아지 목줄</span>
+                <div class="quantity">
+                    <button class="minus border">-</button>
+                    <input type="text" class="quantity-input" value="1">
+                    <button class="plus border" >+</button>
+                </div>
+
+            </div>
+            <div class="d-flex justify-content-between my-4 mb-5">
+                <div><span>총합계</span></div>
+                <div><span class="fw-bold fs-4 text-danger">7500원</span></div>
+            </div>
+            <div class="d-flex justify-content-between">
+                <button class="btn btn-light product-button">장바구니 담기</button>
+                <button class="btn btn-warning product-button">바로 구매</button>
+            </div>
+        </div>
+    </div>  <!--productDetail.css-content끝(left content+right content)-->
+    <div class="product-review my-2 mb-5">
+        <p class="py-2 pb-3"><span class="fs-5">상품리뷰</span><span class="text-secondary small px-1">가장 최신 2건만 노출됩니다!</span></p>
+        <span name="review-title py-1 pb-2">완전 귀엽구 강아지가 좋아해요!</span>
+        <div class="d-flex text-secondary mb-2">
+            <small name="user_id">gonigoni1216</small><small class="px-1">-</small>
+            <small name="review-rdate">2024.04.22</small><small class="px-1">-</small>
+            <small name="product_name">퍼플락 핸드메이드 강아지 버클 목줄 20mm 강아지 목줄</small>
+        </div>
+        <div class="w-50 mb-4">
+            <small> 내구성은 물론 디자인도 너무너무 예뻐요 ㅠㅠ 다음에 또 재구매할게요!!</small>
+        </div>
+        <span name="review-title py-1 pb-2">완전 귀엽구 강아지가 좋아해요!</span>
+        <div class="d-flex text-secondary mb-2">
+            <small name="user_id">gonigoni1216</small><small class="px-1">-</small>
+            <small name="review-rdate">2024.04.22</small><small class="px-1">-</small>
+            <small name="product_name">퍼플락 핸드메이드 강아지 버클 목줄 20mm 강아지 목줄</small>
+        </div>
+        <div class="w-50">
+            <small> 내구성은 물론 디자인도 너무너무 예뻐요 ㅠㅠ 다음에 또 재구매할게요!!</small>
+        </div>
+    </div>
+
+    <div class="d-flex text-center my-5  border-bottom border-top">
+        <div class="flex-fill border-end py-3">상세정보</div>
+        <div class="flex-fill border-start py-3">리뷰</div>
+    </div>
+    <h5>상품이미지</h5>
+    <div class="product-explain mb-5 pb-5">
+        <div class="py-4">
+            <img src="img/img1.png">
+            <img src="img/img1.png">
+            <img src="img/img1.png">
+            <img src="img/img1.png">
+            <img src="img/img1.png">
+            <img src="img/img1.png">
+            <img src="img/img1.png">
+        </div>
+        <span class="product-content">귀여운 강아지입니다~^^</span>
+    </div>
+
+    <h5 class="mt-5 pb-3 border-bottom">상품리뷰</h5>
+    <div class="all-review my-3  pb-3 border-bottom">
+        <span name="review-title">완전 귀엽구 강아지가 좋아해요!</span>
+        <div class="d-flex text-secondary mb-2 small">
+            <small name="user_id">gonigoni1216</small><small class="px-1">-</small>
+            <small name="review-rdate">2024.04.22</small>
+        </div>
+        <div class="w-100">
+            <p class="m-0"><small class="text-secondary">제품명:<span> 퍼플락 핸드메이드 강아지 버클 목줄 20mm 강아지 목줄</span></small></p>
+            <small> 내구성은 물론 디자인도 너무너무 예뻐요 ㅠㅠ 다음에 또 재구매할게요!!</small>
+        </div>
+    </div>
+    <div class="all-review my-3 pb-3 border-bottom">
+        <span name="review-title">완전 귀엽구 강아지가 좋아해요!</span>
+        <div class="d-flex text-secondary mb-2 small">
+            <small name="user_id">gonigoni1216</small><small class="px-1">-</small>
+            <small name="review-rdate">2024.04.22</small>
+        </div>
+        <div class="w-100">
+            <p class="m-0"><small class="text-secondary">제품명:<span> 퍼플락 핸드메이드 강아지 버클 목줄 20mm 강아지 목줄</span></small></p>
+            <small> 내구성은 물론 디자인도 너무너무 예뻐요 ㅠㅠ 다음에 또 재구매할게요!!</small>
+        </div>
+    </div>
+</section>
+<footer th:include="footer"></footer>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const minusButton = document.querySelector('.minus');
+        const plusButton = document.querySelector('.plus');
+        const quantityInput = document.querySelector('.quantity-input');
+
+        minusButton.addEventListener('click', function() {
+            let currentValue = parseInt(quantityInput.value);
+            if (currentValue > 1) {
+                quantityInput.value = currentValue - 1;
+            }
+        });
+
+        plusButton.addEventListener('click', function() {
+            let currentValue = parseInt(quantityInput.value);
+            quantityInput.value = currentValue + 1;
+        });
+    });
+</script>
+</body>
+</html>

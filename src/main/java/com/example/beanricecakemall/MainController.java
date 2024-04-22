@@ -19,4 +19,9 @@ public class MainController {
     public String loingP(){
         return "user/login";
     }
+
+    @GetMapping("/productDetail")
+    public String productDeatilP(){
+        return "product/productDetail";
+    }
 }
