@@ -37,10 +37,9 @@ body{
     color:#ded304 !important;
 }
 .alarm-box{
-    /*background-color:#fbf9e1;*/
-    background-color: #ffc12b;
+    background-color:#fbf9e1;
+    /*background-color: #f9f9f9;*/
     font-size:16px;
-    color:white;
 }
 .alarm-box li{
     margin-right:20px;
@@ -49,3 +48,4 @@ body{
     height:120px;
     font-size:16px;
 }
+
