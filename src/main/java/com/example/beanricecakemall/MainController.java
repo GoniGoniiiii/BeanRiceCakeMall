@@ -24,4 +24,7 @@ public class MainController {
     public String productDeatilP(){
         return "product/productDetail";
     }
+
+    @GetMapping("/shoppingBag")
+    public String shoppingBag(){ return "product/shoppingBag";}
 }

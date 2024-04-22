@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -120,24 +120,6 @@
     </div>
 </section>
 <footer th:include="footer"></footer>
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const minusButton = document.querySelector('.minus');
-        const plusButton = document.querySelector('.plus');
-        const quantityInput = document.querySelector('.quantity-input');
-
-        minusButton.addEventListener('click', function() {
-            let currentValue = parseInt(quantityInput.value);
-            if (currentValue > 1) {
-                quantityInput.value = currentValue - 1;
-            }
-        });
-
-        plusButton.addEventListener('click', function() {
-            let currentValue = parseInt(quantityInput.value);
-            quantityInput.value = currentValue + 1;
-        });
-    });
-</script>
+<script  src="/js/productDetail.js"></script>
 </body>
 </html>

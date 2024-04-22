@@ -22,7 +22,10 @@ section{
     font-weight: normal;
     font-style: normal;
 }
-
+a{
+    text-decoration: none;
+    color:inherit;
+}
 body{
     font-family:'GmarketSansMedium';
 }

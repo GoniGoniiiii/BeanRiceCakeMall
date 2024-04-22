@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/shoppingBag.css">
+    <title>장바구니</title>
+</head>
+<body>
+<header th:include="header"></header>
+<section class="content">
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb float-end">
+            <li class="breadcrumb-item small"><a href="#" class="text-black">Home</a></li>
+            <li class="breadcrumb-item active small" aria-current="page">장바구니</li>
+        </ol>
+    </nav>
+    <h3 class="pt-5  mb-5 text-center fw-bold">장바구니</h3>
+    <form action="" method="">
+        <div class="d-flex justify-content-between">
+            <div class="left-content" id="left-content"><!--왼쪽 전체 영역-->
+                <div class="mb-5 border shopping-list">
+                    <div class="py-4 m-0 fw-bold row" style="width:850px;">
+                        <div class="col-1 ms-4"><input class="form-check-input" type="checkbox" id="All-choose"
+                                                       value="ischekced"></div>
+                        <div class="col-5"><label class="form-check-label pt-1" for="All-choose">전체 선택</label></div>
+                    </div>
+                    <div class="row align-items-center border-top py-3 m-0" style="width:850px;">
+                        <div class="col-1 ms-4">
+                            <input class="form-check-input" type="checkbox" id="item-2" value="ischekced">
+                        </div>
+                        <div class="col-2"><img src="img//img1.png" class="img"></div>
+                        <div class="col-6">
+                            <div class="d-inline-block">
+                                <div class="text-start my-2">귀여운 강아지 인형</div>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <span class="me-2">수량 :</span>
+                                    <div class="quantity d-flex align-items-center">
+                                        <button class="minus border me-1">-</button>
+                                        <input type="text" class="quantity-input me-1 rounded  border-0 text-center"
+                                               value="1" style="width:30px;">
+                                        <button class="plus border me-2">+</button>
+                                        <button class="btn btn-outline-secondary btn-sm">수량 적용</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col text-end me-3">
+                            <div class="d-inline-block">
+                                <button type="button" class="btn-close" aria-label="Close"></button>
+                                <div class="my-2 mt-3">￦48,000</div>
+                            </div>
+                        </div>
+                    </div><!--장바구니 상품1-->
+
+                    <div class="row align-items-center border-top py-3 m-0" style="width:850px;"><!--장바구니 상품-->
+                        <div class="col-1 ms-4">
+                            <input class="form-check-input" type="checkbox" id="item-1" value="ischekced">
+                        </div>
+                        <div class="col-2"><img src="img/img1.png" class="img"></div>
+                        <div class="col-6">
+                            <div class="d-inline-block">
+                                <div class="text-start my-2">귀여운 강아지 인형</div>
+                                <div class="d-flex align-items-center justify-content-between">
+                                    <span class="me-2">수량 :</span>
+                                    <div class="quantity d-flex align-items-center">
+                                        <button class="minus border me-1">-</button>
+                                        <input type="text" class="quantity-input me-1 rounded  border-0 text-center"
+                                               value="1" style="width:30px;">
+                                        <button class="plus border me-2">+</button>
+                                        <button class="btn btn-outline-secondary btn-sm">수량 적용</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col text-end me-3">
+                            <div class="d-inline-block">
+                                <button type="button" class="btn-close" aria-label="Close"></button>
+                                <div class="my-2 mt-3">￦48,000</div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div><!--left content-->
+
+            <div class="border-0 right-content" id="right-content"><!--오른쪽 결제 화면-->
+                <div class="border"><!--결제금액 박스-->
+                    <div class="order-items"><p class="fw-bold fs-4 m-0">결제 예정 내역</p></div><!--제목-->
+                    <div class="border-top order-items "><!--상품금액,배송비,할인금액,추가금액-->
+                        <div class="order-item"><span class="order-title2">총 상품금액</span><strong class="order-price">42000</strong>
+                        </div>
+                        <div class="order-item"><span class="order-title2">배송비</span><strong
+                                class="order-price">0</strong></div>
+                    </div>
+                    <div class="border-top order-items"><!--최종 결제 금액-->
+                        <div class="order-item fs-5 fw-bold"><span class="order-title2">결제 예정 금액</span><strong
+                                class="order-price text-danger">27300원</strong></div>
+                    </div>
+                </div>
+                <button class="btn btn-outline-warning w-100 py-3 mt-4 fs-5">결제하기</button>
+            </div>
+        </div>
+    </form>
+</section>
+<footer th:include="footer"></footer>
+<script src="/js/shoppingBag.js"></script>
+</body>
+</html>
