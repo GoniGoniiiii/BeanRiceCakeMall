@@ -27,4 +27,8 @@ public class MainController {
 
     @GetMapping("/shoppingBag")
     public String shoppingBag(){ return "product/shoppingBag";}
+
+    @GetMapping("/orderList")
+    public String orderListP(){return "user/orderList";}
+
 }

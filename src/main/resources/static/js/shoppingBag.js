@@ -17,3 +17,10 @@ document.addEventListener('DOMContentLoaded', function() {
         quantityInput.value = currentValue + 1;
     });
 });
+
+function changeQuantity(){
+    var quantity=document.querySelector('.quantity-input').value;
+    let currentValue = parseInt(quantity);
+    console.log("수량변경 : "+quantity);
+    return quantity;
+}
