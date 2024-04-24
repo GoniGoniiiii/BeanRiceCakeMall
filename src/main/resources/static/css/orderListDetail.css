@@ -1,0 +1,32 @@
+.orderListDetail-content{
+    width:1100px;
+    margin-bottom:100px;
+    padding-bottom:40px;
+}
+td{
+    height:50px;
+}
+.order-date{
+    width:135px;
+}
+.order-img{
+    width:95px;
+}
+.order-info{
+    width:400px;
+}
+.order-cnt{
+    width:65px;
+}
+.order-price{
+    width:110px;
+}
+.order-process{
+    width:110px;
+}
+.order-cancle{
+    width:110px;
+}
+.product-info td{
+    font-size:13.5px;
+}
