@@ -31,4 +31,6 @@ public class MainController {
     @GetMapping("/orderList")
     public String orderListP(){return "user/orderList";}
 
+    @GetMapping("/orderListDetail")
+    public String orderListDetailP(){return "user/orderListDetail";}
 }
