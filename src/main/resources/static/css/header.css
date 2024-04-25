@@ -39,7 +39,19 @@ body{
 }
 .nav-item{
     font-size:17px;
-    margin-right:60px;
+    margin-right:38px;
+}
+.nav-item:nth-last-child(1){
+    margin:0 !important;
+    padding:0 !important;
+    float: right !important;
+}
+.nav-item:nth-last-child(2){
+    margin-right:53px;
+}
+.search{
+    width:280px;
+    padding-top:5px;
 }
 .nav-link:hover{
     color:#ded304 !important;
@@ -49,10 +61,13 @@ body{
     /*background-color: #f9f9f9;*/
     /*padding-left:300px;*/
     font-size:16px;
+    height:55px;
+    padding-top:5px;
 }
 .alarm-box li{
     margin-right:20px;
 }
+
 .dropdown-menu{
     height:120px;
     font-size:16px;

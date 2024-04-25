@@ -14,34 +14,26 @@
 </head>
 <body>
 <header>
-    <div class="alarm-box">
-        <!-- <section> -->
-        <div class="float-start pt-2">
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-                <button class="btn" type="submit"><i class="bi bi-search"></i></button>
-            </form>
-        </div>
-        <ul class="nav pt-2 justify-content-end">
+    <div class="alarm-box ">
+        <ul class="nav pt-1 justify-content-end">
             <li>
                 <a class="btn"
-                   style="text-decoration: none; color: black; font-size: 23px; border:none; position: relative;"
+                   style="text-decoration: none; color: black; font-size: 15px; border:none; position: relative;"
                    data-bs-toggle="offcanvas"
                    data-bs-target="#offcanvasScrolling" aria-controls="offcanvasScrolling" onclick="notificationList()">
-                    <i class="fas bi bi-bell fa-2x m-auto"></i> <!-- 종 모양 아이콘 -->
+                    <i class="fas bi bi-bell fa-2x  m-auto" ></i> <!-- 종 모양 아이콘 -->
                     <span class="badge rounded-circle bg-danger"
                           style="position: absolute; top: 0; right: 0; font-size:10px; ">1</span> <!-- 숫자 -->
                 </a>
             </li>
-            <li class="pt-2">마이페이지</li>
+            <li class="pt-2"><a href="/memberInfo">마이페이지</a></li>
             <li class="pt-2"><a href="/shoppingBag">장바구니</a></li>
             <li class="pt-2"><a href="/login">로그인</a></li>
             <li class="pt-2"><a href="/orderList">주문내역</a></li>
-            <!--            <li class="search">-->
-
-            <!--            </li>-->
         </ul>
     </div>
+
+
 
 
     <nav class="navbar ">
@@ -54,7 +46,7 @@
     </nav>
     <p class="border-top pt-1"></p>
     <section>
-        <ul class="nav nav-underline pb-3">
+        <ul class="nav nav-underline pb-3 p-0">
             <li class="nav-item">
                 <a class="nav-link text-black" aria-current="page" href="/productList">베스트</a>
             </li>
@@ -94,6 +86,14 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link text-black" href="/productList">가방</a>
+            </li>
+            <li class="nav-item pt-2">
+                <form class="d-flex" role="search">
+                    <div class="position-relative">
+                        <input class="text border-0 border-bottom search" type="search" placeholder="Search" aria-label="Search">
+                        <button class="btn position-absolute top-50 start-100 translate-middle" type="submit" style="transform: translateX(-50%);"><i class="bi bi-search "></i></button>
+                    </div>
+                </form>
             </li>
         </ul>
     </section>
