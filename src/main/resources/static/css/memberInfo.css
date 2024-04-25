@@ -1,0 +1,64 @@
+td{
+    height: 20px;
+}
+.update-title{
+    width:200px;
+    padding-left:20px !important;
+    font-size:14px;
+    border-right:1px solid #eee;
+}
+.update-email{
+    width:212px;
+    border-radius: 5px;
+    height:37px;
+    border:1px solid #eee;
+    padding:10px 0px 10px 10px;
+}
+
+.update-input{
+    padding-left:20px !important;
+    width:980px;
+}
+.update-num{
+    width:137px;
+    border-radius: 5px;
+    height:37px;
+    border:1px solid #eee;
+    padding:10px 0px 10px 10px;
+}
+.form-select{
+    width:450px !important;
+}
+.input{
+    border:1px solid #eee;
+    padding:10px 0px 10px 10px;
+    width:450px;
+    border-radius: 5px;
+    height:37px;
+
+}
+.join-year{
+    width:120px;
+    margin-right:5px;
+    border-radius: 5px;
+    height:37px;
+    border:1px solid #eee;
+    padding:10px 0px 10px 10px;
+}
+.join-month,.join-day{
+    width:50px;
+    margin: 0 5px 0 10px;
+    border-radius: 5px;
+    height:37px;
+    border:1px solid #eee;
+    padding:10px 0px 10px 10px;
+}
+.update-button{
+    width:150px;
+    height:45px;
+    margin-right:10px;
+}
+
+.update-button:nth-child(1){
+    margin-left:150px !important;
+}

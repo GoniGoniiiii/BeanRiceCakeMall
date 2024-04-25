@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/memberInfo.css">
+    <title>회원정보수정</title>
+</head>
+<body>
+<header th:include="header"></header>
+<section class="content">
+    <h3 class="pt-3 mb-5 text-center fw-bold">회원 정보 수정</h3>
+    <form action="" method="post">
+        <table class="table border-top border-bottom align-middle mb-4">
+            <tr>
+                <td class="update-title">아이디</td>
+                <td class="update-input">
+                    <input type="text" name="update_userId" id="user_id" placeholder="id입력" value="gonigoni1216"  class="input" readonly >
+                    <p id="idMessage" style="display:none;" class="m-auto my-1 small"></p>
+                </td>
+            </tr>
+            <tr>
+                <td class="update-title">비밀번호</td>
+                <td class="update-input">
+                    <input type="password" name="update_userPw" id="user_pw" required placeholder="8자리이상/대소문자/특수문자 포함" class="input">
+                    <p id="pwMessage" style="display:none;" class="m-auto my-1 small"></p>
+                </td>
+            </tr>
+            <tr>
+                <td class="update-title">비밀번호 확인</td>
+                <td class="update-input">
+                    <input type="password" name="update_userPW2" id="user_pw2" placeholder="비밀번호 재입력" class="input" required>
+                    <p id="checkMessage" style="display:none;" class="m-auto my-1 small"></p>
+                </td>
+            </tr>
+            <tr>
+                <td class="update-title">이름</td>
+                <td class="update-input"><input type="text" name="update_userName" id="user_name" placeholder="이름 입력" value="유고운" class="input" required></td>
+            </tr>
+            <tr class="border-white">
+                <td class="update-title border-bottom" rowspan="2">이메일</td>
+                <td class="update-input">
+                    <input type="text" name="update_userId" placeholder="id입력" class="update-email" id="user_emailId"  value="gonigoni1216"   required> @
+                    <input type="text" name="update-userEmail" class="update-email" id="input_userEmail" value="naver.com" required>
+                </td>
+            </tr>
+            <tr>
+                <td class="update-input">
+                    <select class="form-select" name="update-userEmail" id="select_userEmail"  >
+                        <option value="직접 입력" select>직접 입력</option> <!--직접입력 누르면 위에 입력하는 칸에 입력할 수 있게-->
+                        <option value="naver.com">naver.com</option>
+                        <option value="gmail.com">gmail.com</option>
+                        <option value="nate.com">nate.com</option>
+                        <option value="daum.net">daum.net</option>
+                        <option value="icolud.com">icloud.com</option>
+                    </select>
+                </td>
+            </tr>
+            <tr class="border-white">
+                <td class="update-title border-bottom" rowspan="3">주소</td>
+                <td class="update-input">
+                    <input type="text" name="update_zipcode" value="08616" class="w-25 input" required>
+                    <button class="btn btn-outline-secondary zipcode">우편번호</button>
+                </td>
+            </tr>
+            <tr class="border-white">
+                <td class="update-input">
+                    <input type="text" name="update_addr" placeholder="주소입력" value=""  class="input" required>
+                </td>
+            </tr>
+            <tr>
+                <td class="update-input">
+                    <input type="text" name="update_addrDetail" placeholder="상세주소입력" value=""  class="input" required>
+                </td>
+            </tr>
+            <tr>
+                <td class="update-title">전화번호</td>
+                <td class="update-input">
+                    <input type="text" name="update_num" id="p_num1" class="update-num" value="010" required> -
+                    <input type="text" name="update_num" id="p_num2" class="update-num" value="3394" required> -
+                    <input type="text" name="update_num" id="p_num3" class="update-num" value="8775" required></td>
+            </tr>
+            <tr>
+                <td class="update-title">생년월일</td>
+                <td class="update-input">
+                    <input type="text" name="join-birth1" id="year" class="join-year" value="2000" readonly>년
+                    <input type="text" name="join-birth1" id="month" class="join-month" value="1" readonly>월
+                    <input type="text" name="join-birth1" id="day" class="join-day" value="14" readonly>일
+                </td>
+            </tr>
+        </table>
+        <div class="text-center my-5">
+            <button class="btn btn-warning rounded-2 py-2 mt-1 update-button" type="submit">회원정보수정</button>
+            <button class="btn btn-outline-secondary rounded-2 py-2 mt-1 update-button" href="/">취소</button>
+            <button class="btn btn-light rounded-2 py-2 mt-1 update-button float-end" onclick="unRegister()">회원탈퇴</button>
+        </div>
+    </form>
+</section>
+<footer th:include="footer"></footer>
+</body>
+<script src="/js/memberInfo.js"></script>
+</html>
