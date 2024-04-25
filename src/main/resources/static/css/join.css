@@ -1,0 +1,52 @@
+.join-content{
+    max-width:800px;
+    width:800px;
+    padding:0px 100px 80px 100px;
+}
+td{
+    height: 65px;
+}
+.join-title{
+    width:300px;
+    padding-left:20px !important;
+    font-size:14px;
+}
+.join-email{
+    width:212px;
+}
+
+.join-input{
+    width:500px;
+}
+.join-num{
+    width:137px;
+}
+.form-select{
+    width:450px !important;
+    height:44px !important;
+}
+input{
+    border:none;
+    padding:10px 0px 10px 20px;
+    width:450px;
+    border-radius: 5px;
+    background-color: #f4f4f4;
+}
+.join-year{
+    width:120px;
+    margin-right:5px;
+}
+.join-month,.join-day{
+    width:50px;
+    margin: 0 5px 0 10px;
+}
+.join-allAgree{
+    width:20px;
+    height:20px;
+
+}
+.join-agree{
+    width:15px;
+    height:15px;
+    margin-bottom:10px;
+}
