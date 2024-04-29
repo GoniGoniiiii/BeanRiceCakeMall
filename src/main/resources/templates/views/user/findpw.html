@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="/css/findPw.css">
+    <title>비밀번호 찾기</title>
+    <style>
+        .find-content{
+            max-width:500px;
+            width:500px;
+            padding:50px 0px 150px 0px;
+            margin:0 auto;
+        }
+        .find-title{
+            width:125px;
+        }
+        .find-input{
+            height:40px;
+            padding:5px 10px;
+        }
+        .find-select{
+            height:40px;
+            padding:5px;
+        }
+        .tel-input{
+            height:40px;
+            padding:5px;
+            width:109px;
+        }
+        .hidden{
+            display: none !important;
+        }
+
+    </style>
+</head>
+<body>
+<header th:include="header"></header>
+<section class="find-content">
+    <h3 class="pb-2 text-center fw-bold">비밀번호 찾기</h3>
+    <p class="small text-secondary text-center mb-5">가입하신 방법에 따라 비밀번호 찾기가 가능합니다.</p>
+    <form action="" method="post">
+        <div class="d-flex my-2">
+            <span class="pt-2 find-title">인증방법</span>
+            <select class="find-select w-75 border rounded-2" id="select-value" required >
+                <option value="email" name="email" selected>이메일</option>
+                <option value="tel" name="tel" >휴대폰번호</option>
+            </select>
+        </div>
+        <div class="d-flex my-3">
+            <span class="pt-2 find-title">아이디</span>
+            <input type="text" id="user_id" class="w-75 border rounded-2 find-input" required>
+        </div>
+        <div class="d-flex my-3">
+            <span class="pt-2 find-title" >이름</span>
+            <input type="text" id="user_name" class="w-75 border rounded-2 find-input" required>
+        </div>
+        <div class="d-flex my-3" id="email">
+            <span class="pt-2 find-title">이메일</span>
+            <input type="email" id="user_email" class="w-75 border rounded-2 find-input"  required>
+        </div>
+        <div class="d-flex my-3 " id="tel">
+            <span class="pt-2 find-title">휴대폰 번호</span>
+            <input type="text" id="tel1" class="border rounded-2 tel-input me-2"  required><span class="pt-2">-</span>
+            <input type="text" id="tel2" class="border rounded-2 tel-input mx-2"  required><span class="pt-2">-</span>
+            <input type="text" id="tel3" class="border rounded-2 tel-input ms-2"  required>
+        </div>
+        <button class="btn btn-success w-100 my-4 py-2" type="submit">확인</button>
+    </form>
+</section>
+<footer th:include="footer"></footer>
+<script>
+    // document.addEventListener("DOMContentLoaded", function() {
+    //     var selectValue = document.getElementById("select-value");
+    //     var tel = document.getElementById("tel");
+    //     var email = document.getElementById("email");
+    //
+    //     if(selectValue.value==='email'){
+    //         email.classList.remove("hidden");
+    //         tel.classList.add("hidden");
+    //     }
+    //
+    //     selectValue.addEventListener("change", function() {
+    //         var select = selectValue.value;
+    //         console.log("선택된 인증 방법 : " + select);
+    //
+    //         if (select === 'tel') {
+    //             email.classList.add("hidden");
+    //             tel.classList.remove("hidden");
+    //         } else {
+    //             email.classList.remove("hidden");
+    //             tel.classList.add("hidden");
+    //         }
+    //     });
+    // });
+
+
+
+        document.addEventListener("DOMContentLoaded", function() {
+            var selectValue = document.getElementById("select-value");
+            var tel = document.getElementById("tel");
+            var email = document.getElementById("email");
+
+            // 페이지가 로드될 때 select 요소의 값을 확인하여 초기 설정을 수행합니다.
+            if (selectValue.value === 'email') {
+                email.classList.remove("hidden");
+                tel.classList.add("hidden");
+            } else {
+                email.classList.add("hidden");
+                tel.classList.remove("hidden");
+            }
+
+            selectValue.addEventListener("change", function() {
+                var select = selectValue.value;
+                console.log("선택된 인증 방법 : " + select);
+
+                if (select === 'tel') {
+                    email.classList.add("hidden");
+                    tel.classList.remove("hidden");
+                } else {
+                    email.classList.remove("hidden");
+                    tel.classList.add("hidden");
+                }
+            });
+        });
+
+</script>
+</body>
+</html>
