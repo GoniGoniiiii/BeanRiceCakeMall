@@ -45,9 +45,10 @@
                     </tr>
                     <tr class="tr-last">
                         <th>연락처</th>
-                        <td><input type="text" name="order_num1" value="010" class="order-num" required> -
-                            <input type="text" name="order_num1" value="010" class="order-num" required> -
-                            <input type="text" name="order_num1" value="010" class="order-num" required></td>
+                        <td><input type="text" name="order_num1" id="order_num1" value="010" class="order-num" required> -
+                            <input type="text" name="order_num1"  id="order_num2 " value="010" class="order-num" required> -
+                            <input type="text" name="order_num1" id="order_num3" value="010" class="order-num" required></td>
+                        <input type="hidden" id="order_tel1" name="order_userTel1">
                     </tr>
                 </table><!--주문자 정보 테이블 끝-->
 
@@ -65,17 +66,17 @@
                     </tr>
                     <tr>
                         <th>연락처1</th>
-                        <td><input type="text" name="delivery_pnum1" value="010" class="order-num" required> -
-                            <input type="text" name="delivery_pnum1" value="010" class="order-num" required> -
-                            <input type="text" name="delivery_pnum1" value="010" class="order-num" required></td>
-                        <input type="hidden" id="order_usertel1" name="order_deliverytel1">
+                        <td><input type="text" name="delivery_pnum1" id="delivery_num1" value="010" class="order-num" required> -
+                            <input type="text" name="delivery_pnum1"  id="delivery_num2"value="010" class="order-num" required> -
+                            <input type="text" name="delivery_pnum1"id="delivery_num3" value="010" class="order-num" required></td>
+                        <input type="hidden" id="order_deliverutel1" name="order_deliverytel1">
                     </tr>
                     <tr>
                         <th>연락처2</th>
                         <td><input type="text" name="delivery_pnum1" value="010" class="order-num"> -
                             <input type="text" name="delivery_pnum1" value="010" class="order-num"> -
                             <input type="text" name="delivery_pnum1" value="010" class="order-num"></td>
-                        <input type="hidden" id="order_usertel2" name="order_deliverytel1">
+                        <input type="hidden" id="order_deliverytel2" name="order_deliverytel1">
                     </tr>
 <!--                    <tr>-->
 <!--                        <th>배송지 선택</th>-->
@@ -256,5 +257,38 @@
             input.value=selectValue;
         }
     })
+
+
+    //전화번호 체크
+    var p_num1=document.getElementById("order_num1");
+    var p_num2=document.getElementById("order_num2");
+    var p_num3=document.getElementById("order_num3");
+
+    function validatePhoneNumber(input, minLength,maxLength) {
+        var value = input.value;
+        if (isNaN(value)) { // 숫자가 아닌 경우
+            input.focus();
+            input.value = '';
+            alert("숫자만 입력 가능합니다!");
+            return false;
+        } else if (value.length < minLength || value.length>maxLength) {
+            input.focus();
+            alert("번호를 올바르게 입력하세요!");
+            return false;
+        }
+        return true;
+    }
+
+    p_num1.addEventListener("change", function() {
+        validatePhoneNumber(p_num1, 2,4);
+    });
+
+    p_num2.addEventListener("change", function() {
+        validatePhoneNumber(p_num2, 4,4);
+    });
+
+    p_num3.addEventListener("change", function() {
+        validatePhoneNumber(p_num3, 4,4);
+    });
 </script>
 </html>
