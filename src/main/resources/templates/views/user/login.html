@@ -7,12 +7,12 @@
 </head>
 <body>
 <header th:include="header"></header>
-<section class="login_content">
+<section class="login-content">
     <h2 class="pt-4 pb-3 mt-2 mb-4  border-bottom">로그인</h2>
     <form action="/user/login" method="post">
-        <input type="text" name="user_id" id="user_id" class="border rounded-1 mb-4 px-2" placeholder="아이디를 입력해주세요."
+        <input type="text" name="user_id" id="user_id" class="border rounded-1 mb-4 px-2 login-input" placeholder="아이디를 입력해주세요."
                required>
-        <input type="text" name="user_pw" id="user_pw" class="border rounded-1 mb-2 px-2" placeholder="비밀번호를 입력해주세요."
+        <input type="text" name="user_pw" id="user_pw" class="border rounded-1 mb-2 px-2 login-input" placeholder="비밀번호를 입력해주세요."
                required>
         <div class="form-check text-start mt-2 mb-3">
             <input class="form-check-input" type="checkbox" value="remember-me" id="savedUser" onclick="savedUserId()">
@@ -20,16 +20,16 @@
                 아이디 저장
             </label>
         </div>
-        <button class="btn btn-outline-light text-secondary w-100 py-2">로그인</button>
+        <button class="btn btn-outline-light text-secondary w-100 py-2 login-button">로그인</button>
     </form>
     <p class="d-flex justify-content-center text-secondary my-4">
         <small><a href="/findId">아이디 찾기</a></small><small class="mx-2">|</small><small><a href="/findPw">비밀번호 찾기</a></small><small
             class="mx-2">|</small><small><a href="/join">회원가입</a></small>
     </p>
     <h4 class="pt-2 mt-5 mb-4">SNS 로그인</h4>
-    <button class="btn btn-outline-light text-secondary w-100"><img src="/img/naver.png" class="float-start"><span
+    <button class="btn btn-outline-light text-secondary w-100 login-button"><img src="/img/naver.png" class="float-start"><span
             class="">네이버 계정으로 로그인</span></button>
-    <button class="btn btn-outline-light text-secondary w-100 mt-3"><img src="/img/kakao.png" class="float-start"><span>카카오 계정으로 로그인</span>
+    <button class="btn btn-outline-light text-secondary w-100 mt-3 login-button"><img src="/img/kakao.png" class="float-start"><span>카카오 계정으로 로그인</span>
     </button>
 </section>
 <footer th:include="footer"></footer>

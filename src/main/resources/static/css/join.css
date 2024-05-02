@@ -13,19 +13,28 @@ td{
 }
 .join-email{
     width:212px;
+    border:none;
+    padding:10px 0px 10px 20px;
+    border-radius: 5px;
+    background-color: #f4f4f4;
 }
 
 .join-input{
     width:500px;
+
 }
 .join-num{
     width:137px;
+    border:none;
+    padding:10px 0px 10px 20px;
+    border-radius: 5px;
+    background-color: #f4f4f4;
 }
 .form-select{
     width:450px !important;
     height:44px !important;
 }
-input{
+.join-inputText{
     border:none;
     padding:10px 0px 10px 20px;
     width:450px;
@@ -35,10 +44,18 @@ input{
 .join-year{
     width:120px;
     margin-right:5px;
+    border:none;
+    padding:10px 0px 10px 20px;
+    border-radius: 5px;
+    background-color: #f4f4f4;
 }
 .join-month,.join-day{
     width:50px;
     margin: 0 5px 0 10px;
+    border:none;
+    padding:10px 0px 10px 20px;
+    border-radius: 5px;
+    background-color: #f4f4f4;
 }
 .join-allAgree{
     width:20px;

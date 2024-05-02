@@ -1,14 +1,14 @@
-.login_content{
+.login-content{
     max-width:800px;
     width:800px;
     padding:5px 100px 105px 100px;
 }
-input{
+.login-input{
     width:100%;
     height:45px;
 }
 
-button {
+.login-button{
     position: relative;
     line-height: 45px; /* 버튼 높이에 맞게 조절 */
     outline: 1px solid #ddd;

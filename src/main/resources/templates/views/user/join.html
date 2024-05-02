@@ -14,33 +14,33 @@
             <tr>
                 <td class="join-title">아이디</td>
                 <td class="join-input">
-                    <input type="text" name="user_id" id="user_id" placeholder="id입력" required>
+                    <input type="text" name="user_id" id="user_id" class="join-inputText" placeholder="id입력" required>
                     <p id="idMessage" style="display:none;" class="m-auto my-1 small"></p>
                 </td>
             </tr>
             <tr>
                 <td class="join-title">비밀번호</td>
                 <td class="join-input">
-                    <input type="password" name="user_pw" id="user_pw" required placeholder="8자리이상/대소문자/특수문자 포함">
+                    <input type="password" name="user_pw" id="user_pw"  class="join-inputText" required placeholder="8자리이상/대소문자/특수문자 포함">
                     <p id="pwMessage" style="display:none;" class="m-auto my-1 small"></p>
                 </td>
             </tr>
             <tr>
                 <td class="join-title">비밀번호 확인</td>
                 <td class="join-input">
-                    <input type="password" name="user_pw2" id="user_pw2" placeholder="비밀번호 재입력" required>
+                    <input type="password" name="user_pw2" id="user_pw2" class="join-inputText" placeholder="비밀번호 재입력" required>
                     <p id="checkMessage" style="display:none;" class="m-auto my-1 small"></p>
                 </td>
             </tr>
             <tr>
                 <td class="join-title">이름</td>
-                <td class="join-input"><input type="text" name="user_name" id="user_name" placeholder="이름 입력" required></td>
+                <td class="join-input"><input type="text" name="user_name" id="user_name" class="join-inputText" placeholder="이름 입력" required></td>
             </tr>
             <tr class="border-white">
                 <td class="join-title border-bottom" rowspan="2">이메일</td>
                 <td class="join-input">
                     <input type="text" name="join_userId" placeholder="id입력" class="join-email" id="user_emailId" required> @
-                    <input type="text" name="join-userEmail" class="join-email" id="input_userEmail" required>
+                    <input type="text" name="join-userEmail" class="join-email" id="input_userEmail"  required>
                 </td>
             </tr>
             <tr>
@@ -58,18 +58,18 @@
             <tr class="border-white">
                 <td class="join-title border-bottom" rowspan="3">주소</td>
                 <td class="join-input">
-                    <input type="text" name="join_zipcode" value="08616" class="w-25" required>
+                    <input type="text" name="join_zipcode" value="08616" class="w-25 join-inputText" required>
                     <button class="btn btn-outline-secondary zipcode">우편번호</button>
                 </td>
             </tr>
             <tr class="border-white">
                 <td>
-                    <input type="text" name="join_addr" placeholder="주소입력" required>
+                    <input type="text" name="join_addr" placeholder="주소입력" class="join-inputText" required>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <input type="text" name="join_addrDetail" placeholder="상세주소입력" required>
+                    <input type="text" name="join_addrDetail" placeholder="상세주소입력" class="join-inputText" required>
                 </td>
             </tr>
             <tr>

@@ -46,6 +46,10 @@ public class MainController {
     @GetMapping("/findPw")
     public String findPw(){return "user/findPw";}
 
+    @GetMapping("/paymentFailed")
+    public String paymentFailedP(){ return "product/paymentFailed";}
 
+    @GetMapping("/paymentCompleted")
+    public String paymentCompletedP(){ return "product/paymentCompleted";}
 }
 

@@ -51,7 +51,10 @@ body{
 }
 .search{
     width:280px;
-    padding-top:5px;
+    padding:5px 15px 5px 0px;
+}
+.search :hover{
+    border:none;
 }
 .nav-link:hover{
     color:#ded304 !important;
