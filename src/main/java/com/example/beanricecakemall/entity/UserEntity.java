@@ -7,6 +7,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -40,4 +42,12 @@ public class UserEntity{
     @Column
     private String user_point;
 
+    @OneToMany(mappedBy = "userEntity",cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
+    private List<ProductEntity> productEntityList=new ArrayList<>();
+
+    @OneToMany(mappedBy = "userEntity",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<OrderEntity> orderEntityList=new ArrayList<>();
+
+    @OneToMany(mappedBy ="userEntity" ,cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<ReviewEntity> reviewEntityList=new ArrayList<>();
 }

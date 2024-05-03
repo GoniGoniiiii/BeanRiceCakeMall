@@ -7,6 +7,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Time;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -45,4 +47,26 @@ public class ProductEntity {
 
     @Column
     private int product_deliveryFee;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_num",insertable = true,updatable = false)
+    private UserEntity userEntity;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="category_num", insertable = true,updatable = false)
+    private CategoryEntity categoryEntity;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="cart_num",insertable = true,updatable = false)
+    private CartEntity cartEntity;
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="order_num",updatable = false)
+    private OrderEntity orderEntity;
+
+    @OneToMany(mappedBy = "productEntity",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<FileEntity> fileEntityList=new ArrayList<>();
+
+    @OneToMany(mappedBy = "productEntity", cascade=CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<ReviewEntity> reviewEntityList=new ArrayList<>();
 }

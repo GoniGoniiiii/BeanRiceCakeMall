@@ -41,6 +41,9 @@ public class DeliveryEntity {
     @Column(length=1)
     private String delivery_def;
 
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="order_num")
+    private OrderEntity orderEntity;
 
 
 }

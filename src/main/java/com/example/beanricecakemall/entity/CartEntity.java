@@ -6,6 +6,8 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Getter
@@ -23,5 +25,6 @@ public class CartEntity {
     @Column(nullable = false)
     private int cart_cnt;
 
-
+    @OneToMany(mappedBy = "cartEntity",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<ProductEntity> productEntityList=new ArrayList<>();
 }

@@ -16,4 +16,13 @@ public class FileEntity {
     @Column
     private String file_url;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="product_num",insertable = true, updatable = false)
+    private ProductEntity productEntity;
+
+
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name="review_num",insertable = true,updatable = false)
+    private ReviewEntity reviewEntity;
+
 }
