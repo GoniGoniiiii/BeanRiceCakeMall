@@ -16,7 +16,7 @@
     </nav>
     <h3 class="pt-5 mt-2 mb-3 text-center">주문/결제</h3>
     <h5 class="order-title">주문자 정보</h5>
-    <form action="" method="post">
+    <form action="" name="payment">
         <div class="d-flex justify-content-between">
             <div class="left-content" id="left-content"><!--왼쪽 전체 영역-->
                 <table class="table align-middle mb-5"><!--첫번째 주문자 정보 테이블-->
@@ -45,10 +45,10 @@
                     </tr>
                     <tr class="tr-last">
                         <th>연락처</th>
-                        <td><input type="text" name="order_num1" id="order_num1" value="010" class="order-num" required> -
-                            <input type="text" name="order_num1"  id="order_num2 " value="010" class="order-num" required> -
-                            <input type="text" name="order_num1" id="order_num3" value="010" class="order-num" required></td>
-                        <input type="hidden" id="order_tel1" name="order_userTel1">
+                        <td><input type="text"  id="p_num1" value="010" class="order-num" required> -
+                            <input type="text"   id="p_num2" class="order-num" required> -
+                            <input type="text"  id="p_num3" class="order-num" required></td>
+                        <input type="hidden" id="order_userTel" name="order_userTel1">
                     </tr>
                 </table><!--주문자 정보 테이블 끝-->
 
@@ -66,17 +66,17 @@
                     </tr>
                     <tr>
                         <th>연락처1</th>
-                        <td><input type="text" name="delivery_pnum1" id="delivery_num1" value="010" class="order-num" required> -
-                            <input type="text" name="delivery_pnum1"  id="delivery_num2"value="010" class="order-num" required> -
-                            <input type="text" name="delivery_pnum1"id="delivery_num3" value="010" class="order-num" required></td>
-                        <input type="hidden" id="order_deliverutel1" name="order_deliverytel1">
+                        <td><input type="text" id="p_num4" value="010" class="order-num" required> -
+                            <input type="text"  id="p_num5" value="" class="order-num" required> -
+                            <input type="text"  id="p_num6" value="" class="order-num" required></td>
+                        <input type="hidden" id="order_deliveryTel1" name="order_deliveryTel1">
                     </tr>
                     <tr>
                         <th>연락처2</th>
-                        <td><input type="text" name="delivery_pnum1" value="010" class="order-num"> -
-                            <input type="text" name="delivery_pnum1" value="010" class="order-num"> -
-                            <input type="text" name="delivery_pnum1" value="010" class="order-num"></td>
-                        <input type="hidden" id="order_deliverytel2" name="order_deliverytel1">
+                        <td><input type="text"  id="p_num7"  value="010" class="order-num"> -
+                            <input type="text"  id="p_num8" value="" class="order-num"> -
+                            <input type="text" id="p_num9" value="" class="order-num"></td>
+                        <input type="hidden" id="order_deliveryTel2" name="order_deliveryTel2">
                     </tr>
 <!--                    <tr>-->
 <!--                        <th>배송지 선택</th>-->
@@ -122,7 +122,7 @@
                     <input class="form-check-input" type="checkbox" id="myDelivery" name="myDelivery" value="ischekced">
                     <label class="form-check-label" for="myCheckbox">해당 배송지 정보를 나의 정보로 등록합니다.</label>
                 </div>
-
+                <div class="order-product">
                 <h5 class="order-title">주문 상품</h5>
                 <table class="table align-middle text-center mb-5">
                     <tr>
@@ -148,7 +148,7 @@
                         </td>
                     </tr>
                 </table>
-
+                </div>
                 <h5 class="order-title">할인 정보</h5>
                 <table class="table align-middle mb-5">
                     <tr>
@@ -241,54 +241,133 @@
 </section>
 <footer th:include="footer"></footer>
 </body>
-<script>
-    var select=document.getElementById("select-userEmail");
-    var input=document.getElementById("input-userEmail");
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var rightContent = document.querySelector(".right-content");
+            var orderProduct = document.querySelector(".order-product");``
 
-    select.addEventListener("change",function(){
-        var selectValue=select.value;
+            // order-product 요소를 만났을 때 오른쪽 박스의 바닥이 보이게 함
+            orderProduct.addEventListener("mouseenter", function() {
+                // 오른쪽 박스의 scrollTop을 최대값으로 설정하여 바닥이 보이게 함
+                rightContent.scrollTop = rightContent.scrollHeight;
+            });
 
-        if(selectValue==='직접 입력'){
-            input.removeAttribute('readonly');
-            input.focus(); // 포커스를 input 요소로 이동
-            input.value = ''; // 내용을 빈 문자열로 설정하여 내용을 지움
-        }else{
-            input.setAttribute('readonly', 'readonly');
-            input.value=selectValue;
+            var select = document.getElementById("select-userEmail");
+            var input = document.getElementById("input-userEmail");
+
+            select.addEventListener("change", function () {
+                var selectValue = select.value;
+
+                if (selectValue === '직접 입력') {
+                    input.removeAttribute('readonly');
+                    input.focus(); // 포커스를 input 요소로 이동
+                    input.value = ''; // 내용을 빈 문자열로 설정하여 내용을 지움
+                } else {
+                    input.setAttribute('readonly', 'readonly');
+                    input.value = selectValue;
+                }
+            })
+
+
+            //전화번호 체크
+            var p_num1 = document.getElementById("p_num1");
+            var p_num2 = document.getElementById("p_num2");
+            var p_num3 = document.getElementById("p_num3");
+            var p_num4 = document.getElementById("p_num4");
+            var p_num5 = document.getElementById("p_num5");
+            var p_num6 = document.getElementById("p_num6");
+            var p_num7 = document.getElementById("p_num7");
+            var p_num8 = document.getElementById("p_num8");
+            var p_num9 = document.getElementById("p_num9");
+
+            function validatePhoneNumber(input, minLength, maxLength) {
+                var value = input.value.trim();
+
+                console.log(value);
+                if (isNaN(value)) { // 숫자가 아닌 경우
+                    input.focus();
+                    input.value = '';
+                    alert("숫자만 입력 가능합니다!");
+                    return false;
+                } else if (value.length < minLength || value.length > maxLength) {
+                    input.focus();
+                    alert("번호를 올바르게 입력하세요!");
+                    return false;
+                }
+                return true;
+            }
+
+            p_num1.addEventListener("change", function () {
+                validatePhoneNumber(p_num1, 2, 4);
+            });
+
+            p_num2.addEventListener("change", function () {
+                validatePhoneNumber(p_num2, 4, 4);
+            });
+
+            p_num3.addEventListener("change", function () {
+                validatePhoneNumber(p_num3, 4, 4);
+            });
+            p_num4.addEventListener("change", function () {
+                validatePhoneNumber(p_num4, 2, 4);
+            });
+
+            p_num5.addEventListener("change", function () {
+                validatePhoneNumber(p_num5, 4, 4);
+            });
+
+            p_num6.addEventListener("change", function () {
+                validatePhoneNumber(p_num6, 4, 4);
+            });
+            p_num7.addEventListener("change", function () {
+                validatePhoneNumber(p_num7, 2, 4);
+            });
+
+            p_num8.addEventListener("change", function () {
+                validatePhoneNumber(p_num8, 4, 4);
+            });
+
+            p_num9.addEventListener("change", function () {
+                validatePhoneNumber(p_num9, 4, 4);
+            });
+
+        });
+
+        // 폼 요소 가져오기
+        var form = document.querySelector("form[name='payment']");
+
+        // 폼 제출 시 실행할 함수
+        function handleSubmit(event) {
+            // 입력 요소의 값 가져오기
+            var p_num1 = document.getElementById("p_num1").value;
+            var p_num2 = document.getElementById("p_num2").value;
+            var p_num3 = document.getElementById("p_num3").value;
+            var p_num4 = document.getElementById("p_num4").value;
+            var p_num5 = document.getElementById("p_num5").value;
+            var p_num6 = document.getElementById("p_num6").value;
+            var p_num7 = document.getElementById("p_num7").value;
+            var p_num8 = document.getElementById("p_num8").value;
+            var p_num9 = document.getElementById("p_num9").value;
+
+            // 전화번호 값 합치기
+            var telNumber1 = p_num1 + p_num2 + p_num3;
+            var telNumber2= p_num4 + p_num5 + p_num6;
+            var telNumber3= p_num7 + p_num8 + p_num9;
+
+            // 숨겨진 입력 요소에 값 설정
+            document.getElementById("order_userTel").value = telNumber1;
+            document.getElementById("order_deliveryTel1").value=telNumber2;
+            if( p_num7 && p_num8 && p_num9) {
+                document.getElementById("order_deliveryTel2").value=telNumber3;
+            }
+            console.log("주문자 연락처 :"+telNumber1);
+            console.log("배송지 연락처 :"+telNumber2);
+            console.log("배송지 연락처 :"+telNumber3);
         }
-    })
+
+        // 폼 제출 이벤트에 핸들러 등록
+        form.addEventListener("submit", handleSubmit);
 
 
-    //전화번호 체크
-    var p_num1=document.getElementById("order_num1");
-    var p_num2=document.getElementById("order_num2");
-    var p_num3=document.getElementById("order_num3");
-
-    function validatePhoneNumber(input, minLength,maxLength) {
-        var value = input.value;
-        if (isNaN(value)) { // 숫자가 아닌 경우
-            input.focus();
-            input.value = '';
-            alert("숫자만 입력 가능합니다!");
-            return false;
-        } else if (value.length < minLength || value.length>maxLength) {
-            input.focus();
-            alert("번호를 올바르게 입력하세요!");
-            return false;
-        }
-        return true;
-    }
-
-    p_num1.addEventListener("change", function() {
-        validatePhoneNumber(p_num1, 2,4);
-    });
-
-    p_num2.addEventListener("change", function() {
-        validatePhoneNumber(p_num2, 4,4);
-    });
-
-    p_num3.addEventListener("change", function() {
-        validatePhoneNumber(p_num3, 4,4);
-    });
-</script>
+    </script>
 </html>
