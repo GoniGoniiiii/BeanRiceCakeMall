@@ -78,24 +78,24 @@
                             <input type="text" id="p_num9" value="" class="order-num"></td>
                         <input type="hidden" id="order_deliveryTel2" name="delivery_userTel2">
                     </tr>
-<!--                    <tr>-->
-<!--                        <th>배송지 선택</th>-->
-<!--                        <td>-->
-<!--                            <div class="form-check form-check-inline py-2 px-3">-->
-<!--                                <input class="form-check-input" type="radio" name="delivery_address1" id="delivery_address1" value="option1">-->
-<!--                                <label class="form-check-label" for="delivery_address1">집</label>-->
-<!--                            </div>-->
-<!--                            <div class="form-check form-check-inline px-3">-->
-<!--                                <input class="form-check-input" type="radio" name="delivery_address2" id="delivery_address2" value="option2">-->
-<!--                                <label class="form-check-label" for="delivery_address2">직장</label>-->
-<!--                            </div>-->
-<!--                            <div class="form-check form-check-inline px-3">-->
-<!--                                <input class="form-check-input" type="radio" name="delivery_address3" id="delivery_address3" value="option3">-->
-<!--                                <label class="form-check-label" for="delivery_address3">콩떡집</label>-->
-<!--                            </div>-->
-<!--                            <button class="btn btn-outline-secondary">주소록</button>-->
-<!--                        </td>-->
-<!--                    </tr>-->
+                    <!--                    <tr>-->
+                    <!--                        <th>배송지 선택</th>-->
+                    <!--                        <td>-->
+                    <!--                            <div class="form-check form-check-inline py-2 px-3">-->
+                    <!--                                <input class="form-check-input" type="radio" name="delivery_address1" id="delivery_address1" value="option1">-->
+                    <!--                                <label class="form-check-label" for="delivery_address1">집</label>-->
+                    <!--                            </div>-->
+                    <!--                            <div class="form-check form-check-inline px-3">-->
+                    <!--                                <input class="form-check-input" type="radio" name="delivery_address2" id="delivery_address2" value="option2">-->
+                    <!--                                <label class="form-check-label" for="delivery_address2">직장</label>-->
+                    <!--                            </div>-->
+                    <!--                            <div class="form-check form-check-inline px-3">-->
+                    <!--                                <input class="form-check-input" type="radio" name="delivery_address3" id="delivery_address3" value="option3">-->
+                    <!--                                <label class="form-check-label" for="delivery_address3">콩떡집</label>-->
+                    <!--                            </div>-->
+                    <!--                            <button class="btn btn-outline-secondary">주소록</button>-->
+                    <!--                        </td>-->
+                    <!--                    </tr>-->
                     <tr class="border-white">
                         <th rowspan="3" class="border-bottom">주소</th>
                         <td class="delivery">
@@ -123,31 +123,31 @@
                     <label class="form-check-label" for="myCheckbox">해당 배송지 정보를 나의 정보로 등록합니다.</label>
                 </div>
                 <div class="order-product">
-                <h5 class="order-title">주문 상품</h5>
-                <table class="table align-middle text-center mb-5">
-                    <tr>
-                        <td colspan="2" class="py-3">상품명</td>
-                        <td>할인</td>
-                        <td>쿠폰할인</td>
-                        <td>적립</td>
-                        <td>주문금액</td>
-                    </tr>
-                    <tr>
-                        <td class="text-end"><img src="img//img1.png" class="img"></td>
-                        <td class="text-start">상품명 - 귀여운 강아지 인형</td>
-                        <td class="text-danger">-450000원</td>
-                        <td></td>
-                        <td>0</td>
-                        <td><del><small class="text-secondary">48,000원</small></del><br><strong>24,000원</strong></td>
-                    </tr>
-                    <tr>
-                        <td colspan="6">
-                            <p class="fs-5 pt-3 ">
-                                주문금액 <strong>48,000원</strong><strong class="text-danger"> -상품할인 24,000원</strong>
-                                +배송비<strong>0원</strong> =<strong> 주문금액 24,000원</strong></p>
-                        </td>
-                    </tr>
-                </table>
+                    <h5 class="order-title">주문 상품</h5>
+                    <table class="table align-middle text-center mb-5">
+                        <tr>
+                            <td colspan="2" class="py-3">상품명</td>
+                            <td>할인</td>
+                            <td>쿠폰할인</td>
+                            <td>적립</td>
+                            <td>주문금액</td>
+                        </tr>
+                        <tr>
+                            <td class="text-end"><img src="img//img1.png" class="img"></td>
+                            <td class="text-start">상품명 - 귀여운 강아지 인형</td>
+                            <td class="text-danger">-450000원</td>
+                            <td></td>
+                            <td>0</td>
+                            <td><del><small class="text-secondary">48,000원</small></del><br><strong>24,000원</strong></td>
+                        </tr>
+                        <tr>
+                            <td colspan="6">
+                                <p class="fs-5 pt-3 ">
+                                    주문금액 <strong>48,000원</strong><strong class="text-danger"> -상품할인 24,000원</strong>
+                                    +배송비<strong>0원</strong> =<strong> 주문금액 24,000원</strong></p>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
                 <h5 class="order-title">할인 정보</h5>
                 <table class="table align-middle mb-5">
@@ -160,7 +160,7 @@
                             </div>
                         </td>
                         <td class="w-25">
-                            (사용가능:<input type="text" value="640" class="w-50" id="pointAll">원)
+                            (사용가능:<input type="text" value="640" class="w-50" id="pointAll" readonly>원)
                         </td>
                     </tr>
                 </table>
@@ -241,5 +241,5 @@
 </section>
 <footer th:include="footer"></footer>
 </body>
-    <script src="/js/payment.js"></script>
+<script src="/js/payment.js"></script>
 </html>
