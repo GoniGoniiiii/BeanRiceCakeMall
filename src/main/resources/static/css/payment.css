@@ -1,16 +1,3 @@
-/*.content{*/
-/*    max-width:1280px;*/
-/*    width:1280px;*/
-/*    margin:auto !important;*/
-/*}*/
-/*.left-content{*/
-/*    width:850px;*/
-/*}*/
-/*.right-content{*/
-/*    width:385px;*/
-/*    border:1px solid #ddd;*/
-
-/*}*/
 .content {
     max-width: 1280px;
     margin: auto;
@@ -29,7 +16,7 @@
     width: 385px;
     border: 1px solid #ddd;
     position: sticky;
-    max-height: calc(100vh - 240px); /* 푸터의 높이 100px 추가 */
+    max-height: 115vh;
     top: 20px;
 }
 .order-title{
@@ -117,6 +104,6 @@ textarea{
 }
 footer {
     position:relative;
-    margin-top:200px;
+    /*margin-top:200px;*/
     padding: 20px;
 }

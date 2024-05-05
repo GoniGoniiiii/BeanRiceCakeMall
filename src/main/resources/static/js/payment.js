@@ -1,9 +1,10 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
     var rightContent = document.querySelector(".right-content");
-    var orderProduct = document.querySelector(".order-product");``
+    var orderProduct = document.querySelector(".order-product");
+    ``
 
     // order-product 요소를 만났을 때 오른쪽 박스의 바닥이 보이게 함
-    orderProduct.addEventListener("mouseenter", function() {
+    orderProduct.addEventListener("mouseenter", function () {
         // 오른쪽 박스의 scrollTop을 최대값으로 설정하여 바닥이 보이게 함
         rightContent.scrollTop = rightContent.scrollHeight;
     });
@@ -107,43 +108,43 @@ function handleSubmit(event) {
 
     // 전화번호 값 합치기
     var telNumber1 = p_num1 + p_num2 + p_num3;
-    var telNumber2= p_num4 + p_num5 + p_num6;
-    var telNumber3= p_num7 + p_num8 + p_num9;
+    var telNumber2 = p_num4 + p_num5 + p_num6;
+    var telNumber3 = p_num7 + p_num8 + p_num9;
 
     // 숨겨진 입력 요소에 값 설정
     document.getElementById("order_userTel").value = telNumber1;
-    document.getElementById("order_deliveryTel1").value=telNumber2;
-    if( p_num7 && p_num8 && p_num9) {
-        document.getElementById("order_deliveryTel2").value=telNumber3;
+    document.getElementById("order_deliveryTel1").value = telNumber2;
+    if (p_num7 && p_num8 && p_num9) {
+        document.getElementById("order_deliveryTel2").value = telNumber3;
     }
-    console.log("주문자 연락처 :"+telNumber1);
-    console.log("배송지 연락처 :"+telNumber2);
-    console.log("배송지 연락처 :"+telNumber3);
+    console.log("주문자 연락처 :" + telNumber1);
+    console.log("배송지 연락처 :" + telNumber2);
+    console.log("배송지 연락처 :" + telNumber3);
 }
 
 // 폼 제출 이벤트에 핸들러 등록
 form.addEventListener("submit", handleSubmit);
 
 //위 정보와 동일 누르면 배송정보에 주문자 정보 입력
-function Check(){
-    var checkbox=document.getElementById("myCheckbox");
-    if(checkbox.checked){ //체크박스에 체크가 되면 주문정보칸에 있는 이름,연락처 저장
-        var order_userName=document.getElementById("order_userName").value;
+function Check() {
+    var checkbox = document.getElementById("myCheckbox");
+    if (checkbox.checked) { //체크박스에 체크가 되면 주문정보칸에 있는 이름,연락처 저장
+        var order_userName = document.getElementById("order_userName").value;
 
-        var p_num1=document.getElementById("p_num1").value;
-        var p_num2=document.getElementById("p_num2").value;
-        var p_num3=document.getElementById("p_num3").value;
-        
+        var p_num1 = document.getElementById("p_num1").value;
+        var p_num2 = document.getElementById("p_num2").value;
+        var p_num3 = document.getElementById("p_num3").value;
+
         //배송정보칸에 출력
-        var userName=document.getElementById("delivery_userName");
-        var p_num4=document.getElementById("p_num4");
-        var p_num5=document.getElementById("p_num5");
-        var p_num6=document.getElementById("p_num6");
+        var userName = document.getElementById("delivery_userName");
+        var p_num4 = document.getElementById("p_num4");
+        var p_num5 = document.getElementById("p_num5");
+        var p_num6 = document.getElementById("p_num6");
 
-        userName.value=order_userName;
-        p_num4.value=p_num1;
-        p_num5.value=p_num2;
-        p_num6.value=p_num3;
+        userName.value = order_userName;
+        p_num4.value = p_num1;
+        p_num5.value = p_num2;
+        p_num6.value = p_num3;
 
         console.log(p_num4.value);
         console.log(p_num5.value);
@@ -151,18 +152,48 @@ function Check(){
     }
 }
 
-function useAllPoint(){
-     var pointCheck=document.getElementById("user_allPoint");
+function useAllPoint() {
+    var pointCheck = document.getElementById("user_allPoint");
 
-     if(pointCheck.checked){
-         var allPoint=document.getElementById("pointAll").value;
+    if (pointCheck.checked) {
+        var allPoint = document.getElementById("pointAll").value;
         console.log(allPoint);
 
-         var user_point=document.getElementById("user_point");
-         user_point.value=allPoint;
+        var user_point = document.getElementById("user_point");
+        user_point.value = allPoint;
 
-     }
+    }
 }
+    function uncheckOthers(clickedId) {
+        var checkboxes = document.getElementsByName('order_paymethod');
+        checkboxes.forEach(function(checkbox) {
+            if (checkbox.id !== clickedId) {
+                checkbox.checked = false;
+            }
+        });
+    }
+
+    document.getElementById('order_paymethod1').onchange = function() {
+        uncheckOthers('order_paymethod1');
+        console.log(document.getElementById('order_paymethod1').value);
+    };
+
+    document.getElementById('order_paymethod2').onchange = function() {
+        uncheckOthers('order_paymethod2');
+        console.log(document.getElementById('order_paymethod2').value);
+    };
+
+    document.getElementById('order_paymethod3').onchange = function() {
+        uncheckOthers('order_paymethod3');
+        console.log(document.getElementById('order_paymethod3').value);
+    };
+
+    document.getElementById('order_paymethod4').onchange = function() {
+        uncheckOthers('order_paymethod4');
+        console.log(document.getElementById('order_paymethod4').value);
+    };
+
+
 
 
 

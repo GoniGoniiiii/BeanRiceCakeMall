@@ -171,7 +171,7 @@
                         <th rowspan="4" >결제수단</th>
                         <td class="payment">
                             <div class="form-check mx-1 pt-1 mt-1">
-                                <input class="form-check-input" type="checkbox" id="order_paymethod1" name="order_paymethod" value="card">
+                                <input class="form-check-input" type="checkbox" id="order_paymethod1" name="order_paymethod" value="card" onchange="uncheckOthers(this.id)">
                                 <label class="form-check-label" for="order_paymethod1">카드 결제</label>
                             </div>
                         </td>
@@ -179,7 +179,7 @@
                     <tr class="border-white">
                         <td>
                             <div class="form-check  mx-1  pt-1">
-                                <input class="form-check-input" type="checkbox" id="order_paymethod2" name="order_paymethod" value="kakaopay">
+                                <input class="form-check-input" type="checkbox" id="order_paymethod2" name="order_paymethod" value="kakaopay" onchange="uncheckOthers(this.id)">
                                 <label class="form-check-label" for="order_paymethod2">카카오페이</label>
                             </div>
                         </td>
@@ -187,7 +187,7 @@
                     <tr class="border-white">
                         <td>
                             <div class="form-check  mx-1 pt-1">
-                                <input class="form-check-input" type="checkbox" id="order_paymethod3" name="order_paymethod" value=".">
+                                <input class="form-check-input" type="checkbox" id="order_paymethod3" name="order_paymethod" value="." onchange="uncheckOthers(this.id)">
                                 <label class="form-check-label" for="order_paymethod3">가상 계좌</label>
                             </div>
                         </td>
@@ -195,7 +195,7 @@
                     <tr>
                         <td>
                             <div class="form-check  mx-1 pt-1 mb-1">
-                                <input class="form-check-input" type="checkbox" id="order_paymethod4" name="order_paymethod" value="toss">
+                                <input class="form-check-input" type="checkbox" id="order_paymethod4" name="order_paymethod" value="toss" onchange="uncheckOthers(this.id)">
                                 <label class="form-check-label" for="order_paymethod4">토스</label>
                             </div>
                         </td>

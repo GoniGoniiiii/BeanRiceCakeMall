@@ -24,3 +24,7 @@ function changeQuantity(){
     console.log("수량변경 : "+quantity);
     return quantity;
 }
+
+function goPayment(){
+    location.href="/payment";
+}
