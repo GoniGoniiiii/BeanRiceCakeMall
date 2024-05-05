@@ -164,34 +164,34 @@ function useAllPoint() {
 
     }
 }
-    function uncheckOthers(clickedId) {
-        var checkboxes = document.getElementsByName('order_paymethod');
-        checkboxes.forEach(function(checkbox) {
-            if (checkbox.id !== clickedId) {
-                checkbox.checked = false;
-            }
-        });
-    }
+function uncheckOthers(clickedId) {
+    var checkboxes = document.getElementsByName('order_paymethod');
+    checkboxes.forEach(function(checkbox) {
+        if (checkbox.id !== clickedId) {
+            checkbox.checked = false;
+        }
+    });
+}
 
-    document.getElementById('order_paymethod1').onchange = function() {
-        uncheckOthers('order_paymethod1');
-        console.log(document.getElementById('order_paymethod1').value);
-    };
+document.getElementById('order_paymethod1').onchange = function() {
+    uncheckOthers('order_paymethod1');
+    console.log(document.getElementById('order_paymethod1').value);
+};
 
-    document.getElementById('order_paymethod2').onchange = function() {
-        uncheckOthers('order_paymethod2');
-        console.log(document.getElementById('order_paymethod2').value);
-    };
+document.getElementById('order_paymethod2').onchange = function() {
+    uncheckOthers('order_paymethod2');
+    console.log(document.getElementById('order_paymethod2').value);
+};
 
-    document.getElementById('order_paymethod3').onchange = function() {
-        uncheckOthers('order_paymethod3');
-        console.log(document.getElementById('order_paymethod3').value);
-    };
+document.getElementById('order_paymethod3').onchange = function() {
+    uncheckOthers('order_paymethod3');
+    console.log(document.getElementById('order_paymethod3').value);
+};
 
-    document.getElementById('order_paymethod4').onchange = function() {
-        uncheckOthers('order_paymethod4');
-        console.log(document.getElementById('order_paymethod4').value);
-    };
+document.getElementById('order_paymethod4').onchange = function() {
+    uncheckOthers('order_paymethod4');
+    console.log(document.getElementById('order_paymethod4').value);
+};
 
 
 
