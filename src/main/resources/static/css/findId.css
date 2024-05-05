@@ -21,3 +21,6 @@
     width:109px;
 
 }
+.find-content .hidden {
+    display: none !important;
+}

@@ -20,6 +20,6 @@
     padding:5px;
     width:109px;
 }
-.hidden {
+.find-content .hidden {
     display: none !important;
 }
