@@ -165,3 +165,29 @@ function Agree() {
     agree2.checked = !agree2.checked;
     allAgree.checked = agree1.checked && agree2.checked;
 }
+
+// 폼 요소 가져오기
+var form = document.querySelector("form[name='join']");
+
+// 폼 제출 시 실행할 함수
+function handleSubmit(event) {
+    // 입력 요소의 값 가져오기
+    var p_num1 = document.getElementById("p_num1").value;
+    var p_num2 = document.getElementById("p_num2").value;
+    var p_num3 = document.getElementById("p_num3").value;
+
+    var year=document.getElementById("year").value;
+    var month=document.getElementById("month").value;
+    var day=document.getElementById("day").value;
+
+    // 전화번호 값 합치기
+    var telNumber1 = p_num1 + p_num2 + p_num3;
+    var birth=year+month+day;
+
+    // 숨겨진 입력 요소에 값 설정
+    document.getElementById("join_num").value = telNumber1;
+    document.getElementById("join_birth").value=birth;
+}
+
+// 폼 제출 이벤트에 핸들러 등록
+form.addEventListener("submit", handleSubmit);

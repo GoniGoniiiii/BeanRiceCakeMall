@@ -1,0 +1,10 @@
+.payment-content{
+    max-width:500px;
+    width:500px;
+    padding:50px 0px 150px 0px;
+    margin:0 auto;
+}
+.bi-check-circle{
+    color: green;
+    font-size:35px;
+}

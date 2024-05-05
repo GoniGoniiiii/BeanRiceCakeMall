@@ -34,9 +34,22 @@ public class MainController {
     @GetMapping("/orderListDetail")
     public String orderListDetailP(){return "user/orderListDetail";}
 
-    @GetMapping("join")
+    @GetMapping("/join")
     public String joinP(){ return "user/join";}
 
     @GetMapping("/memberInfo")
     public String memberInfoP(){return "user/memberInfo";}
+    
+    @GetMapping("/findId")
+    public String findId(){return "user/findId";}
+
+    @GetMapping("/findPw")
+    public String findPw(){return "user/findPw";}
+
+    @GetMapping("/paymentFailed")
+    public String paymentFailedP(){ return "product/paymentFailed";}
+
+    @GetMapping("/paymentCompleted")
+    public String paymentCompletedP(){ return "product/paymentCompleted";}
 }
+

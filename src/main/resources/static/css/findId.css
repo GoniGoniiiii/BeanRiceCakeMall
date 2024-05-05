@@ -1,0 +1,23 @@
+.find-content{
+    max-width:500px;
+    width:500px;
+    padding:50px 0px 150px 0px;
+    margin:0 auto;
+}
+.find-title{
+    width:125px;
+}
+.find-input{
+    height:40px;
+    padding:5px 10px;
+}
+.find-select{
+    height:40px;
+    padding:5px;
+}
+.tel-input{
+    height:40px;
+    padding:5px;
+    width:109px;
+
+}

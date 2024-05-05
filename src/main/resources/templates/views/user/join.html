@@ -9,37 +9,41 @@
 <header th:include="header"></header>
 <section class="join-content">
     <h2 class="pt-5 mt-2 mb-5 text-center fw-bold">회원가입</h2>
-    <form action="" method="post">
+    <form action="" method="" name="join">
         <table class="table border-top border-bottom align-middle mb-4">
             <tr>
                 <td class="join-title">아이디</td>
                 <td class="join-input">
-                    <input type="text" name="user_id" id="user_id" placeholder="id입력" required>
+                    <input type="text" name="user_id" id="user_id" class="join-inputText" placeholder="id입력" required>
                     <p id="idMessage" style="display:none;" class="m-auto my-1 small"></p>
                 </td>
             </tr>
             <tr>
                 <td class="join-title">비밀번호</td>
                 <td class="join-input">
-                    <input type="password" name="user_pw" id="user_pw" required placeholder="8자리이상/대소문자/특수문자 포함">
+                    <input type="password" name="user_pw" id="user_pw" class="join-inputText" required
+                           placeholder="8자리이상/대소문자/특수문자 포함">
                     <p id="pwMessage" style="display:none;" class="m-auto my-1 small"></p>
                 </td>
             </tr>
             <tr>
                 <td class="join-title">비밀번호 확인</td>
                 <td class="join-input">
-                    <input type="password" name="user_pw2" id="user_pw2" placeholder="비밀번호 재입력" required>
+                    <input type="password" name="user_pw2" id="user_pw2" class="join-inputText" placeholder="비밀번호 재입력"
+                           required>
                     <p id="checkMessage" style="display:none;" class="m-auto my-1 small"></p>
                 </td>
             </tr>
             <tr>
                 <td class="join-title">이름</td>
-                <td class="join-input"><input type="text" name="user_name" id="user_name" placeholder="이름 입력" required></td>
+                <td class="join-input"><input type="text" name="user_name" id="user_name" class="join-inputText"
+                                              placeholder="이름 입력" required></td>
             </tr>
             <tr class="border-white">
                 <td class="join-title border-bottom" rowspan="2">이메일</td>
                 <td class="join-input">
-                    <input type="text" name="join_userId" placeholder="id입력" class="join-email" id="user_emailId" required> @
+                    <input type="text" name="join_userId" placeholder="id입력" class="join-email" id="user_emailId"
+                           required> @
                     <input type="text" name="join-userEmail" class="join-email" id="input_userEmail" required>
                 </td>
             </tr>
@@ -58,42 +62,47 @@
             <tr class="border-white">
                 <td class="join-title border-bottom" rowspan="3">주소</td>
                 <td class="join-input">
-                    <input type="text" name="join_zipcode" value="08616" class="w-25" required>
+                    <input type="text" name="join_zipcode" value="08616" class="w-25 join-inputText" required>
                     <button class="btn btn-outline-secondary zipcode">우편번호</button>
                 </td>
             </tr>
             <tr class="border-white">
                 <td>
-                    <input type="text" name="join_addr" placeholder="주소입력" required>
+                    <input type="text" name="join_addr" placeholder="주소입력" class="join-inputText" required>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <input type="text" name="join_addrDetail" placeholder="상세주소입력" required>
+                    <input type="text" name="join_addrDetail" placeholder="상세주소입력" class="join-inputText" required>
                 </td>
             </tr>
             <tr>
                 <td class="join-title">전화번호</td>
                 <td class="join-input">
-                    <input type="text" name="join_num1" id="p_num1" class="join-num" required> -
-                    <input type="text" name="join_num1" id="p_num2" class="join-num" required> -
-                    <input type="text" name="join_num1" id="p_num3" class="join-num" required></td>
+                    <input type="text" id="p_num1" class="join-num" required> -
+                    <input type="text" id="p_num2" class="join-num" required> -
+                    <input type="text" id="p_num3" class="join-num" required></td>
+                <input type="hidden" id="join_num" name="join_num">
             </tr>
             <tr>
                 <td class="join-title">생년월일</td>
                 <td class="join-input">
-                    <input type="text" name="join-birth1" id="year"class="join-year" required>년
-                    <input type="text" name="join-birth1" id="month" class="join-month" required>월
-                    <input type="text" name="join-birth1" id="day" class="join-day" required>일
+                    <input type="text" id="year" class="join-year" required>년
+                    <input type="text" id="month" class="join-month" required>월
+                    <input type="text" id="day" class="join-day" required>일
+                    <input type="hidden" id="join_birth" name="join_birth">
                 </td>
             </tr>
         </table>
 
         <div class="my-3 mb-5">
-            <div class="d-flex"><input type="radio" id="join-allAgree" class="join-allAgree me-2" onclick="Agree()"><span>전체동의</span></div>
+            <div class="d-flex"><input type="radio" id="join-allAgree" class="join-allAgree me-2"
+                                       onclick="Agree()"><span>전체동의</span></div>
             <p class="small">이용약관 및 개인정보수집 및 이용, 쇼핑정보 수신(선택)에 모두 동의합니다.</p>
-            <div class="d-flex small"><input type="radio" id="join-agree1" class="join-agree me-2"  required><span>[필수] 이용약관에 동의하십니까?</span></div>
-            <div class="d-flex small"><input type="radio" id="join-agree2" class="join-agree me-2"  required><span>[필수] 개인정보 수집 및 이용에 동의하십니까?</span></div>
+            <div class="d-flex small"><input type="radio" id="join-agree1" class="join-agree me-2" required><span>[필수] 이용약관에 동의하십니까?</span>
+            </div>
+            <div class="d-flex small"><input type="radio" id="join-agree2" class="join-agree me-2" required><span>[필수] 개인정보 수집 및 이용에 동의하십니까?</span>
+            </div>
         </div>
         <button class="btn btn-warning w-100 rounded-2 py-2 mt-1" type="submit">회원가입</button>
     </form>
