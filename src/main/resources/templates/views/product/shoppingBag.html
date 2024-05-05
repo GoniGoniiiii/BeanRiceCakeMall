@@ -21,9 +21,11 @@
             <div class="left-content" id="left-content"><!--왼쪽 전체 영역-->
                 <div class="mb-5 border shopping-list">
                     <div class="py-4 m-0 fw-bold row" style="width:850px;">
-                        <div class="col-1 ms-4"><input class="form-check-input" type="checkbox" id="All-choose"
-                                                       value="ischekced"></div>
-                        <div class="col-5"><label class="form-check-label pt-1" for="All-choose">전체 선택</label></div>
+                        <div class="col-1 ms-4">
+                            <input class="form-check-input" type="checkbox" id="All-choose" value="all-choose">
+                        </div>
+                        <div class="col-5">
+                            <label class="form-check-label pt-1" for="All-choose">전체 선택</label></div>
                     </div>
                     <div class="row align-items-center border-top py-3 m-0" style="width:850px;">
                         <div class="col-1 ms-4">
@@ -85,7 +87,7 @@
             </div><!--left content-->
 
             <div class="border-0 right-content" id="right-content"><!--오른쪽 결제 화면-->
-                <div class="border"><!--결제금액 박스-->
+                <div class="border"><!--결제금액 박스-->`
                     <div class="order-items"><p class="fw-bold fs-4 m-0">결제 예정 내역</p></div><!--제목-->
                     <div class="border-top order-items "><!--상품금액,배송비,할인금액,추가금액-->
                         <div class="order-item"><span class="order-title2">총 상품금액</span><strong class="order-price">42000</strong>
@@ -98,7 +100,7 @@
                                 class="order-price text-danger">27300원</strong></div>
                     </div>
                 </div>
-                <button class="btn btn-outline-warning w-100 py-3 mt-4 fs-5">결제하기</button>
+                <button class="btn btn-outline-warning w-100 py-3 mt-4 fs-5" onclick="goPayment()">결제하기</button>
             </div>
         </div>
     </form>

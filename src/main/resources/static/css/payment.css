@@ -1,14 +1,37 @@
-.content{
-    max-width:1280px;
-    width:1280px;
-    margin:auto !important;
+/*.content{*/
+/*    max-width:1280px;*/
+/*    width:1280px;*/
+/*    margin:auto !important;*/
+/*}*/
+/*.left-content{*/
+/*    width:850px;*/
+/*}*/
+/*.right-content{*/
+/*    width:385px;*/
+/*    border:1px solid #ddd;*/
+
+/*}*/
+.content {
+    max-width: 1280px;
+    margin: auto;
+    padding: 20px;
+    position: relative;
 }
-.left-content{
-    width:850px;
+
+.left-content {
+    width: 850px;
+    border: 1px solid #ddd;
+    overflow-y: auto;
+    padding: 20px;
 }
-.right-content{
-    width:385px;
-    border:1px solid #ddd;
+
+.right-content {
+    width: 385px;
+    border: 1px solid #ddd;
+    position: sticky;
+    max-height: 115vh;
+    max-height: calc(100vh - 240px); /* 푸터의 높이 100px 추가 */
+    top: 20px;
 }
 .order-title{
     font-weight: bold;
@@ -92,4 +115,10 @@ textarea{
 }
 .order-agree{
     padding-left:45px !important;
+}
+footer {
+    position:relative;
+    /*margin-top:200px;*/
+    margin-top:200px;
+    padding: 20px;
 }
