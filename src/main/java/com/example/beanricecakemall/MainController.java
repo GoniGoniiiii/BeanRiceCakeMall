@@ -9,12 +9,12 @@ public class MainController {
     @GetMapping("/productList")
     public String productListP(){
         return "product/productList";
-
     }
     @GetMapping("/payment")
     public String paymentP(){
         return "product/payment";
     }
+    
     @GetMapping("/login")
     public String loingP(){
         return "user/login";
@@ -34,16 +34,16 @@ public class MainController {
     @GetMapping("/orderListDetail")
     public String orderListDetailP(){return "user/orderListDetail";}
 
-    @GetMapping("/join")
+    @GetMapping("/user/join")
     public String joinP(){ return "user/join";}
 
     @GetMapping("/memberInfo")
     public String memberInfoP(){return "user/memberInfo";}
     
-    @GetMapping("/findId")
+    @GetMapping("/user/findId")
     public String findId(){return "user/findId";}
 
-    @GetMapping("/findPw")
+    @GetMapping("/user/findPw")
     public String findPw(){return "user/findPw";}
 
     @GetMapping("/paymentFailed")
