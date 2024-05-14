@@ -7,8 +7,6 @@ document.addEventListener('DOMContentLoaded', function() {
     const itemCheckboxes = document.querySelectorAll('.item-checkbox');
 
     minusButtons.forEach(function(minusButton, index) {
-
-    minusButtons.forEach(function(minusButton, index) {
         minusButton.addEventListener('click', function(event) {
             event.preventDefault();
             let currentValue = parseInt(quantityInputs[index].value);
@@ -33,21 +31,21 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log("수량:", quantity);
         });
     });
-});
 
-allChoose.addEventListener('change', function() {
-    if (allChoose.checked) {
-        itemCheckboxes.forEach(function(checkbox) {
-            checkbox.checked = true;
-            console.log("선택된 상품 :"+checkbox.value);
-        });
-    } else {
-        itemCheckboxes.forEach(function(checkbox) {
-            checkbox.checked = false;
-        });
-    }
-});
+    allChoose.addEventListener('change', function() {
+        if (allChoose.checked) {
+            itemCheckboxes.forEach(function(checkbox) {
+                checkbox.checked = true;
+                console.log("선택된 상품 :" + checkbox.value);
+            });
+        } else {
+            itemCheckboxes.forEach(function(checkbox) {
+                checkbox.checked = false;
+            });
+        }
+    });
 });
 function goPayment() {
+    console.log("호출됨");
     location.href = "/payment";
 }

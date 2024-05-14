@@ -1,6 +1,6 @@
 section{
-    max-width:1280px;
-    width:1280px;
+    max-width:1400px;
+    width:1400px;
     margin:0 auto;
 }
 .navbar{
@@ -11,8 +11,8 @@ section{
 .content{
     min-height: calc(100% - (285px + 245px));
     padding : 10px 0 80px 0;
-    max-width: 1280px;
-    width:1280px;
+    max-width: 1400px;
+    width:1400px;
     margin: 0 auto !important;
 }
 @font-face {
@@ -39,18 +39,17 @@ body{
 }
 .nav-item{
     font-size:17px;
-    margin-right:38px;
+    margin-right:45px;
 }
 .nav-item:nth-last-child(1){
     margin:0 !important;
     padding:0 !important;
-    float: right !important;
 }
 .nav-item:nth-last-child(2){
-    margin-right:53px;
+    margin-right:100px!important;
 }
 .search{
-    width:280px;
+    width:305px;
     padding:5px 15px 5px 0px;
 }
 .search :hover{
