@@ -19,26 +19,27 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         this.authenticationManager = authenticationManager;
     }
 
-    //public Authentication authentication(HttpServletRequest request,HttpServletResponse){
+    public Authentication authentication(HttpServletRequest request,HttpServletResponse response){
 
-        //클라이언트 요청해서 username,password 추출
-       //     String userId=obtainUsername(request);
-          //  String userPw=obtainPassword(request);
+//        클라이언트 요청해서 username,password 추출
+            String userId=obtainUsername(request);
+            String userPw=obtainPassword(request);
 
-
-        //꺼낸값으로 인증 진행할것임 UsernamePasswordAuthenticationFilter가 autenticationManager한테  username,password를 던져줌
-        //그냥 던져주는게 아니고 dto라는 바구니에 담아서 던져주는것임
-        //바구니가 UserNamePassowrdauthenticationToken에 username,password를 담아서 최종적으로 authenticationManager한테 전달
-
-        //token객체 생성해서 담음
-
-   // }
+//        token객체 생성해서 담음
+        UsernamePasswordAuthenticationToken authToken=new UsernamePasswordAuthenticationToken(userId,userPw,null);
+        return authenticationManager.authenticate(authToken);
+    }
 
 
 
 
     //로그인 성공시 실행하는 메소드 -> 여기서 jwt 발급하면 됨
+    public void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain,Authentication authentication){
+
+    }
 
     //로그인 실패시 실행하는 메소드
+    public void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed){
 
+    }
 }
