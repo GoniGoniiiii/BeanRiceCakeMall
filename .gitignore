@@ -37,6 +37,7 @@ out/
 .vscode/
 !/.gitignore
 
+src/main/resources/application.properties
 
 # IntelliJ project files
 .idea
@@ -45,4 +46,3 @@ out
 gen
 .gradle
 build
-src/main/resources/application.properties
