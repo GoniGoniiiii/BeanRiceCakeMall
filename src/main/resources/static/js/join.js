@@ -171,22 +171,36 @@ var form = document.querySelector("form[name='join']");
 
 // 폼 제출 시 실행할 함수
 function handleSubmit(event) {
+    event.preventDefault();
     // 입력 요소의 값 가져오기
+    //전화번호 합치기
     var p_num1 = document.getElementById("p_num1").value;
     var p_num2 = document.getElementById("p_num2").value;
     var p_num3 = document.getElementById("p_num3").value;
 
+    //생년월일 합치기
     var year=document.getElementById("year").value;
     var month=document.getElementById("month").value;
     var day=document.getElementById("day").value;
 
-    // 전화번호 값 합치기
-    var telNumber1 = p_num1 + p_num2 + p_num3;
-    var birth=year+month+day;
+    //이메일 합치기
+    var emailId=document.getElementById("user_emailId").value;
+    var domain=document.getElementById("input_userEmail").value;
+
+    // 변수에 저장 시켜주기
+    var telNumber1 = p_num1 +"-"+ p_num2 +"-"+ p_num3;
+    var birth=year+"-"+month+"-"+day;
+    var email=emailId+"@"+domain;
+    console.log(telNumber1);
+    console.log(birth);
+    console.log(email);
 
     // 숨겨진 입력 요소에 값 설정
-    document.getElementById("join_num").value = telNumber1;
-    document.getElementById("join_birth").value=birth;
+    document.getElementById("user_tel").value = telNumber1;
+    document.getElementById("user_birth").value=birth;
+    document.getElementById("user_email").value=email;
+
+    form.submit();
 }
 
 // 폼 제출 이벤트에 핸들러 등록

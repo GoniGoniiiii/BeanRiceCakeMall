@@ -9,7 +9,7 @@
 <header th:include="header"></header>
 <section class="join-content">
     <h2 class="pt-5 mt-2 mb-5 text-center fw-bold">회원가입</h2>
-    <form action="" method="" name="join">
+    <form action="/user/join" method="post" name="join">
         <table class="table border-top border-bottom align-middle mb-4">
             <tr>
                 <td class="join-title">아이디</td>
@@ -57,6 +57,7 @@
                         <option value="daum.net">daum.net</option>
                         <option value="icolud.com">icloud.com</option>
                     </select>
+                    <input type="hidden" name="user_email" id="user_email">
                 </td>
             </tr>
             <tr class="border-white">
@@ -82,7 +83,7 @@
                     <input type="text" id="p_num1" class="join-num" required> -
                     <input type="text" id="p_num2" class="join-num" required> -
                     <input type="text" id="p_num3" class="join-num" required></td>
-                <input type="hidden" id="join_num" name="join_num">
+                    <input type="hidden" id="user_tel" name="user_tel">
             </tr>
             <tr>
                 <td class="join-title">생년월일</td>
@@ -90,7 +91,7 @@
                     <input type="text" id="year" class="join-year" required>년
                     <input type="text" id="month" class="join-month" required>월
                     <input type="text" id="day" class="join-day" required>일
-                    <input type="hidden" id="join_birth" name="join_birth">
+                    <input type="hidden" id="user_birth" name="user_birth">
                 </td>
             </tr>
         </table>
