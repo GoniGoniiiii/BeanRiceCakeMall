@@ -18,7 +18,7 @@ DBEAVER , MySQL
 ### TOOL 
 Notion , Visual Studio , GitHub , IntelliJ IDEA
 ### FRAMEWORK & API
-BootStrap , jQuery , spring boot, Ajax
+BootStrap , spring boot, Ajax
 
 
 ## 주요 기능
