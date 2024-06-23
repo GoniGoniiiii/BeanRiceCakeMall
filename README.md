@@ -14,7 +14,7 @@
 ### Language 
 JAVA , HTML , JS , CSS
 ### DATABASE 
-DBEAVER , MySQL
+MySQL , DBEAVER
 ### TOOL 
 Notion , Visual Studio , GitHub , IntelliJ IDEA
 ### FRAMEWORK & API
