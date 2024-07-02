@@ -20,6 +20,9 @@ public class MainController {
         return "user/login";
     }
 
+    @GetMapping("/admin")
+    public String admin(){return "user/login";}
+
     @GetMapping("/productDetail")
     public String productDeatilP(){
         return "product/productDetail";

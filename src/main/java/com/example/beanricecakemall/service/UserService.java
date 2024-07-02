@@ -4,6 +4,9 @@ import com.example.beanricecakemall.dto.UserDTO;
 import com.example.beanricecakemall.entity.UserEntity;
 import com.example.beanricecakemall.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +15,8 @@ import org.springframework.stereotype.Service;
 public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+
     public void join(UserDTO userDTO){
         boolean exist=userRepository.existsByUserId(userDTO.getUser_id());
         System.out.println(exist);
@@ -24,5 +29,6 @@ public class UserService {
         user.setUserPw(bCryptPasswordEncoder.encode(user.getUserPw()));
         userRepository.save(user);
     }
+
 
 }
