@@ -22,6 +22,7 @@ public class CustomUserDetails implements UserDetails {
         collection.add(new GrantedAuthority() {
             @Override
             public String getAuthority() {
+                System.out.println(userEntity.getUserRole());
                 return userEntity.getUserRole();
             }
         });
@@ -35,6 +36,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
+        System.out.println("CustomUserDetails  user_id가져옴");
         return userEntity.getUserId();
     }
 

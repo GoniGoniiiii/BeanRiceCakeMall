@@ -28,6 +28,7 @@ public class JWTFilter extends OncePerRequestFilter {
 
         //request에서 header를 찾음
         String authorization=request.getHeader("Authorization");
+        System.out.println(authorization);
 
         //Authorization 헤더 검증(null인지 아닌지)
         if(authorization == null || !authorization.startsWith("Bearer ")){
@@ -36,7 +37,7 @@ public class JWTFilter extends OncePerRequestFilter {
             //조건이 해당되면 메소드 종료(필수)
             return ;
         }
-        System.out.println(authorization);
+
 
         //접두사 제거를 위해 띄어쓰기로 앞 뒤 구분하고 뒷부분을 token에 저장
         String token=authorization.split(" ")[1];
@@ -50,8 +51,9 @@ public class JWTFilter extends OncePerRequestFilter {
         }
 
         //토큰에서 user_id와 user_role 얻어오기
-        String user_id= jwtUtil.getUserId(token);
+        String user_id = jwtUtil.getUserId(token);
         String user_role= jwtUtil.getUserRole(token);
+        System.out.println("jwt 필터내 " + user_id + user_role);
 
         //userEntity를 생성하여 값 set
         UserEntity userEntity=new UserEntity();

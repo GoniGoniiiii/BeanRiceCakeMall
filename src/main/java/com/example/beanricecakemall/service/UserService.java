@@ -27,6 +27,8 @@ public class UserService {
         }
         UserEntity user=UserEntity.toSaveEntity(userDTO);
         user.setUserPw(bCryptPasswordEncoder.encode(user.getUserPw()));
+        user.setUserRole("ROLE_USER");
+
         userRepository.save(user);
     }
 
