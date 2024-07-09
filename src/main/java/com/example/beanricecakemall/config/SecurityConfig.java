@@ -65,7 +65,6 @@ public class SecurityConfig{
                                 //백에서 사용자 클라이언트단으로 header를 보내줄때 authorization에 jwt를 넣어서 보내줄거기때문에  authorization header도 허용을 시켜줘야함
                                 configuration.setExposedHeaders(Collections.singletonList("Authorization"));
 
-
                                 return configuration;
                             }
                         }));

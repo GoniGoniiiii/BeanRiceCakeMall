@@ -12,7 +12,7 @@
     <form action="/login" method="post">
         <input type="text" name="username" id="user_id" class="border rounded-1 mb-4 px-2 login-input" placeholder="아이디를 입력해주세요."
                required>
-        <input type="text" name="password" id="user_pw" class="border rounded-1 mb-2 px-2 login-input" placeholder="비밀번호를 입력해주세요."
+        <input type="password" name="password" id="user_pw" class="border rounded-1 mb-2 px-2 login-input" placeholder="비밀번호를 입력해주세요."
                required>
         <div class="form-check text-start mt-2 mb-3">
             <input class="form-check-input" type="checkbox" value="remember-me" id="savedUser" onclick="savedUserId()">
@@ -20,7 +20,7 @@
                 아이디 저장
             </label>
         </div>
-        <button class="btn btn-outline-light text-secondary w-100 py-2 login-button">로그인</button>
+        <button class="btn btn-outline-light text-secondary w-100 py-2 login-button" id="login_button">로그인</button>
     </form>
     <p class="d-flex justify-content-center text-secondary my-4">
         <small><a href="/user/findId">아이디 찾기</a></small><small class="mx-2">|</small><small><a href="/user/findPw">비밀번호 찾기</a></small><small
@@ -34,6 +34,5 @@
 </section>
 <footer th:include="footer"></footer>
 <script src="/js/login.js"></script>
-
 </body>
 </html>

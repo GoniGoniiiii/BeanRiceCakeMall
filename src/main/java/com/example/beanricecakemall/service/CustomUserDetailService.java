@@ -18,11 +18,12 @@ public class CustomUserDetailService implements UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        System.out.println("db에서 조회할 id   : "+ username);
+    public UserDetails loadUserByUsername(String user_id) throws UsernameNotFoundException {
+        System.out.println("db에서 조회할 id   : "+ user_id);
         //db에서 특정 유저를 조회해서 리턴
-        UserEntity user=userRepository.findByUserId(username);
+        UserEntity user=userRepository.findByUserId(user_id);
         System.out.println("db에서 조회한 값 : " +user.getUserRole());
+        System.out.println(user.toString());
         if(user != null){
             System.out.println("user값이 null이 아님");
             return new CustomUserDetails(user);

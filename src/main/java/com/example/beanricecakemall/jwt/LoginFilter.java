@@ -68,7 +68,6 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
 
         //HTTP 인증방식은 RFC 7235의 정의에 따라 아래와 같은 형태를 가져야한대
         response.addHeader("Authorization", "Bearer " + token);
-        response.sendRedirect("/");
     }
 
        //로그인 실패시 실행하는 메소드
