@@ -65,6 +65,7 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
         System.out.println(user_role);
 
         String token = jwtUtil.createJWT(user_id, user_role, 60 * 60 * 1000L);
+        System.out.println(token);
 
         //HTTP 인증방식은 RFC 7235의 정의에 따라 아래와 같은 형태를 가져야한대
         response.addHeader("Authorization", "Bearer " + token);
@@ -74,7 +75,6 @@ public class LoginFilter extends UsernamePasswordAuthenticationFilter {
     @Override
     protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException {
         response.setStatus(401);
-        response.sendRedirect("/login");
     }
 
 }
