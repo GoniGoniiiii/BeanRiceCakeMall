@@ -22,17 +22,23 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/**","/error").permitAll()
+                        .requestMatchers("/**").permitAll()
                         .anyRequest().authenticated()
                 );
 
-        http.formLogin((auth)->auth.loginPage("/user/login")
-                .loginProcessingUrl("/user/login")
+        http.formLogin((auth)->auth.loginPage("/login")
+                .loginProcessingUrl("/loginProc")
+                .defaultSuccessUrl("/")
                 .permitAll()
         );
+        http
+                .logout((auth)->auth.
+                        logoutUrl("/logout")
+                        .logoutSuccessUrl("/")
+                        .deleteCookies("JSESSIONID")
+                        .permitAll());
 
-
-//        http.csrf((auth)->auth.disable());
+        http.csrf((auth)->auth.disable());
 
         http
                 .sessionManagement((auth) -> auth

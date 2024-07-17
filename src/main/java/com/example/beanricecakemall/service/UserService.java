@@ -44,6 +44,6 @@ public class UserService implements  UserDetailsService{
             System.out.println("userService에서 customUserDetails 객체 생성");
             return new CumstomUserDetails(user);
         }
-        return null;
+        throw new UsernameNotFoundException("UsernameNotFoundException : "+ user_id);
     }
 }

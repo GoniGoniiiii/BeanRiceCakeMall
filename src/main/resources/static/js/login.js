@@ -19,34 +19,34 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('user_id').value = savedUserId;
     }
 });
-
-async function submitForm(event) {
-    event.preventDefault(); // 폼 제출 기본 동작을 막습니다.
-
-    const form = document.getElementById('loginForm');
-    const formData = new FormData(form);
-
-    try {
-        const response = await fetch('/login', {
-            method: 'POST',
-            body: formData
-        });
-
-        if (!response.ok) {
-            throw new Error('서버 응답이 실패했습니다.');
-        }
-
-        const token = response.headers.get("Authorization");
-        if (token) {
-            localStorage.setItem('token', token);
-        }
-
-
-    } catch (error) {
-        console.error('에러 발생:', error);
-        alert('로그인 중 문제가 발생했습니다. 나중에 다시 시도해주세요.');
-    }
-}
+//
+// async function submitForm(event) {
+//     event.preventDefault(); // 폼 제출 기본 동작을 막습니다.
+//
+//     const form = document.getElementById('loginForm');
+//     const formData = new FormData(form);
+//
+//     try {
+//         const response = await fetch('/login', {
+//             method: 'POST',
+//             body: formData
+//         });
+//
+//         if (!response.ok) {
+//             throw new Error('서버 응답이 실패했습니다.');
+//         }
+//
+//         const token = response.headers.get("Authorization");
+//         if (token) {
+//             localStorage.setItem('token', token);
+//         }
+//
+//
+//     } catch (error) {
+//         console.error('에러 발생:', error);
+//         alert('로그인 중 문제가 발생했습니다. 나중에 다시 시도해주세요.');
+//     }
+// }
 
 
 // document.getElementById('login_button').addEventListener('click', async function (event) {

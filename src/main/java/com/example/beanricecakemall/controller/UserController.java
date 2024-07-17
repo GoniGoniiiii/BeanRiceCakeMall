@@ -5,6 +5,7 @@ import com.example.beanricecakemall.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -22,11 +23,12 @@ public class UserController {
         return "redirect:/login";
     }
 
-    @PostMapping("/user/login")
-    public String login(UserDTO userDTO){
-        System.out.println("로그인");
-        userService.loadUserByUsername(userDTO.getUser_id());
-        return "redirect:/";
-    }
+//    @PostMapping("/user/login")
+//    public String login(UserDTO userDTO, Model model){
+//        System.out.println("로그인");
+//        userService.loadUserByUsername(userDTO.getUser_id());
+//        model.addAttribute("user",userDTO);
+//        return "redirect:/";
+//    }
 
 }
