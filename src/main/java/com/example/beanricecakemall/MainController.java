@@ -4,6 +4,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.Collection;
@@ -62,8 +63,8 @@ public class MainController {
     public String paymentCompletedP(){ return "product/paymentCompleted";}
 
     @GetMapping("/")
-    public String mainP(){
-        String name= SecurityContextHolder.getContext().getAuthentication().getName();
+    public String mainP(Model model){
+        String id= SecurityContextHolder.getContext().getAuthentication().getName();
 
         Authentication authentication=SecurityContextHolder.getContext().getAuthentication();
 
@@ -73,7 +74,9 @@ public class MainController {
 
         String role=auth.getAuthority();
 
-        System.out.println("main controller :  " +  name +" "+  role);
+         model.addAttribute("id",id);
+         model.addAttribute("role",role);
+        System.out.println("main controller :  " +  id +" "+  role);
         return "index";
 
     }
