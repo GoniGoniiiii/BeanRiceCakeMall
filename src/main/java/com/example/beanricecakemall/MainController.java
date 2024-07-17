@@ -35,10 +35,10 @@ public class MainController {
         return "product/productDetail";
     }
 
-    @GetMapping("/shoppingBag")
+    @GetMapping("/my/shoppingBag")
     public String shoppingBag(){ return "product/shoppingBag";}
 
-    @GetMapping("/orderList")
+    @GetMapping("/my/orderList")
     public String orderListP(){return "user/orderList";}
 
     @GetMapping("/orderListDetail")
@@ -47,7 +47,7 @@ public class MainController {
     @GetMapping("/user/join")
     public String joinP(){ return "user/join";}
 
-    @GetMapping("/memberInfo")
+    @GetMapping("/my/memberInfo")
     public String memberInfoP(){return "user/memberInfo";}
     
     @GetMapping("/user/findId")

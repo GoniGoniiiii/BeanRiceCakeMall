@@ -23,12 +23,5 @@ public class UserController {
         return "redirect:/login";
     }
 
-//    @PostMapping("/user/login")
-//    public String login(UserDTO userDTO, Model model){
-//        System.out.println("로그인");
-//        userService.loadUserByUsername(userDTO.getUser_id());
-//        model.addAttribute("user",userDTO);
-//        return "redirect:/";
-//    }
 
 }

@@ -27,13 +27,13 @@
                           style="position: absolute; top:0; right: 0; font-size:10px; ">1</span> <!-- 숫자 -->
                 </a>
             </li>
-            <li class="pt-2"><a href="/memberInfo">마이페이지</a></li>
-            <li class="pt-2"><a href="/shoppingBag">장바구니</a></li>
+            <li class="pt-2"><a href="/my/memberInfo">마이페이지</a></li>
+            <li class="pt-2"><a href="/my/shoppingBag">장바구니</a></li>
             <li class="pt-2">
                 <a th:if="${#authentication.name != 'anonymousUser'}" href="/logout">로그아웃</a>
                 <a th:if="${#authentication.name == 'anonymousUser'}" href="/login">로그인</a>
             </li>
-            <li class="pt-2"><a href="/orderList">주문내역</a></li>
+            <li class="pt-2"><a href="/my/orderList">주문내역</a></li>
         </ul>
     </div>
     <nav class="navbar ">
