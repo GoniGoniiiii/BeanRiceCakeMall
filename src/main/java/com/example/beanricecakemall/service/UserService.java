@@ -36,11 +36,12 @@ public class UserService implements  UserDetailsService{
 
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String user_id) throws UsernameNotFoundException {
         //주어진 사용자 이름에 해당하는 사용자 정보를 db에서 찾아와서 UserDeatils타입으로 변환
         //사용자 이름을 입력받아 해당하는 사용자의 상세 정보 반환
-        UserEntity user=userRepository.findByUserId(username);
+        UserEntity user=userRepository.findByUserId(user_id);
         if(user!=null){
+            System.out.println("userService에서 customUserDetails 객체 생성");
             return new CumstomUserDetails(user);
         }
         return null;
