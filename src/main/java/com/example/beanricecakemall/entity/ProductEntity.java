@@ -46,7 +46,7 @@ public class ProductEntity {
     private String product_img;
 
     @Column
-    private int product_deliveryFee;
+    private int product_deliveryfee;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_num",insertable = true,updatable = false)
