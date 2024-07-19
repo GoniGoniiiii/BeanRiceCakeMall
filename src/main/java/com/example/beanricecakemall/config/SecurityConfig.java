@@ -33,6 +33,7 @@ public class SecurityConfig {
                 .defaultSuccessUrl("/")
                 .permitAll()
         );
+
         http
                 .logout((auth)->auth.
                         logoutUrl("/logout")

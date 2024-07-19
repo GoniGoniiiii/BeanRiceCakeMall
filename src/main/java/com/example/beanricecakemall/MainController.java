@@ -62,6 +62,12 @@ public class MainController {
     @GetMapping("/paymentCompleted")
     public String paymentCompletedP(){ return "product/paymentCompleted";}
 
+    @GetMapping("/admin/main")
+    public String adminMainP(){return "admin/adminMain";}
+
+    @GetMapping("/admin/uploadProduct")
+    public String uploadProductP(){return "admin/uploadProduct";}
+
     @GetMapping("/")
     public String mainP(Model model){
         String id= SecurityContextHolder.getContext().getAuthentication().getName();

@@ -2,14 +2,34 @@
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-<!--    <link rel="stylesheet" href="/css/login.css">-->
-    <title></title>
+    <!--    <link rel="stylesheet" href="/css/login.css">-->
+    <title>상품 업로드 페이지</title>
+    <style>
+        .product{
+            margin : 10px 0px 10px 0px;
+            display:flex;
+        }
+        .label{
+            width:120px;  
+        }
+    </style>
 </head>
 <body>
 <header th:include="header"></header>
-<form action="" method="post">
-    
-</form>
+<div class="w-50 m-auto py-5 my-2 ">
+    <h2 class="fw-bold text-center py-2 my-2">상품 업로드 페이지</h2>
+    <form action="/admin/uploadProduct" method="post">
+        <div class="product"><div class="label">상품명 </div> <input type="text" name="product_name"/></div>
+        <div class="product"><div class="label">상품원가  </div><input type="number" name="product_oprice"/></div>
+        <div class="product"><div class="label">상품판매가  </div><input type="number" name="product_sprice"/></div>
+        <div class="product"><div class="label">배송비 </div> <input type="text" name="product_content"></div>
+        <div class="product"><div class="label">상품수량  </div><input type="number" name="product_cnt"/></div>
+        <div class="product"><div class="label">상품 대표 이미지 </div> <input type="file" name="product_img"></div>
+        <div class="product"><div class="label">상품 설명 </div> <textarea name="product_content" class="py-5  w-75"></textarea></div>
+        <button type="submit" class="btn btn-outline-secondary float-end my-3 mx-5">업로드</button>
+    </form>
+
+</div>
 </body>
 <footer th:include="footer"></footer>
 </html>
