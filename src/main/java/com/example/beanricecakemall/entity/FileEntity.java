@@ -25,4 +25,16 @@ public class FileEntity {
     @JoinColumn(name="review_num",insertable = true,updatable = false)
     private ReviewEntity reviewEntity;
 
+    public static FileEntity toFileEntity(ProductEntity productEntity,String file_url){
+        FileEntity fileEntity=new FileEntity();
+        fileEntity.setFile_url(file_url);
+        fileEntity.setProductEntity(productEntity);
+        return fileEntity;
+    }
+    public static String getProduct_mainImg(ProductEntity productEntity,String file_url){
+        FileEntity fileEntity=new FileEntity();
+        fileEntity.setFile_url(file_url);
+        fileEntity.setProductEntity(productEntity);
+        return file_url;
+    }
 }
