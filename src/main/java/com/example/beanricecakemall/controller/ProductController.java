@@ -30,8 +30,14 @@ public class ProductController {
 
     @GetMapping("/productList")
     public String productList(Model model){
-        List<ProductDTO> productList=productService.productDTOList();
-        model.addAttribute("productList",productList);
+        List<ProductDTO> product=productService.productDTOList();
+//        model.addAttribute("productList",productList);
+     // 5개씩 묶기
+        List<List<ProductDTO>> productList = new ArrayList<>();
+        for (int i = 0; i < product.size(); i += 5) {
+            productList.add(product.subList(i, Math.min(i + 5, product.size())));
+        }
+        model.addAttribute("productList", productList);
         return "product/productList";
     }
 }

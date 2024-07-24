@@ -1,14 +1,23 @@
+.container-fluid{
+    padding: 0px !important;
+}
+
 .postHeader{
     height:70px;
 }
 .All-product-img{
     width:232px;
     height:232px;
+    margin-right:60px;
+}
+.All-product-img:nth-last-child(1){
+    margin-right:0;
 }
 .price{
     height:30px;
     font-size:14px;
 }
+
 a{
     text-decoration: none !important;
     color: inherit !important   ; /* 부모 요소의 텍스트 색상을 상속 */
