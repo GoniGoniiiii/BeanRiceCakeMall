@@ -60,6 +60,7 @@ public class ProductDTO {
         productDTO.setProduct_cnt(productEntity.getProduct_cnt());
         productDTO.setProduct_delete(productEntity.getProduct_delete());
         productDTO.setProduct_deleveryfee(productEntity.getProduct_deliveryfee());
+        productDTO.setProduct_img(productEntity.getProduct_img());
         List<String> fileList=new ArrayList<>();
         for(FileEntity fileEntity:productEntity.getFileEntityList()){
             fileList.add(fileEntity.getFile_url());

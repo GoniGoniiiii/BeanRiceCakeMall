@@ -67,10 +67,10 @@ public class ProductEntity {
     @JoinColumn(name="order_num",updatable = false)
     private OrderEntity orderEntity;
 
-    @OneToMany(mappedBy = "productEntity",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "productEntity",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<FileEntity> fileEntityList=new ArrayList<>();
 
-    @OneToMany(mappedBy = "productEntity", cascade=CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "productEntity", cascade=CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ReviewEntity> reviewEntityList=new ArrayList<>();
 
     public static ProductEntity toProductEntity(ProductDTO productDTO){
