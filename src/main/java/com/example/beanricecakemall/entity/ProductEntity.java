@@ -7,6 +7,7 @@ import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -22,7 +23,7 @@ public class ProductEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int product_num;
 
-    @Column(unique = true)
+    @Column(nullable = false)
     private String product_name;
 
     @Column(nullable = false)
@@ -41,7 +42,7 @@ public class ProductEntity {
     @Column(nullable = false)
     private int product_cnt;
 
-    @Column(length=1, columnDefinition = "default 'N' ")
+    @Column(length=1)
     private String product_delete;
 
     @Column
@@ -79,8 +80,7 @@ public class ProductEntity {
         productEntity.setProduct_oprice(productDTO.getProduct_oprice());
         productEntity.setProduct_sprice(productDTO.getProduct_sprice());
         productEntity.setProduct_cnt(productDTO.getProduct_cnt());
-        productEntity.setProduct_delete(productDTO.getProduct_delete());
-//        productEntity.setProduct_img(productDTO.getProduct_img());
+        productEntity.setProduct_delete("N");
         productEntity.setProduct_deliveryfee(productDTO.getProduct_deleveryfee());
         return productEntity;
     }
