@@ -13,10 +13,7 @@ import java.util.Iterator;
 @Controller
 public class MainController {
 
-    @GetMapping("/productList")
-    public String productListP(){
-        return "product/productList";
-    }
+
     @GetMapping("/payment")
     public String paymentP(){
         return "product/payment";

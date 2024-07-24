@@ -81,6 +81,7 @@ public class ProductEntity {
         productEntity.setProduct_sprice(productDTO.getProduct_sprice());
         productEntity.setProduct_cnt(productDTO.getProduct_cnt());
         productEntity.setProduct_delete("N");
+        productEntity.setProduct_img(productEntity.getProduct_img());
         productEntity.setProduct_deliveryfee(productDTO.getProduct_deleveryfee());
         return productEntity;
     }

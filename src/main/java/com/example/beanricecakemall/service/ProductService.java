@@ -10,6 +10,9 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class ProductService {
@@ -21,7 +24,7 @@ public class ProductService {
         this.fileRepository = fileRepository;
     }
 
-    public void upload(ProductDTO productDTO) throws IOException {
+    public void upload(ProductDTO productDTO){
         ProductEntity productEntity=ProductEntity.toProductEntity(productDTO);
         int save_id=productRepository.save(productEntity).getProduct_num();
 
@@ -65,5 +68,20 @@ public class ProductService {
                 }
             }
         }
+        Optional<FileEntity> mainImg=fileRepository.findByProductEntityAndFile_urlStartingWith(productEntity,"MainImg");
+        mainImg.ifPresent( fileEntity -> {
+            productEntity.setProduct_img(fileEntity.getFile_url());
+            productRepository.save(productEntity);
+        });
     }
+
+    public List<ProductDTO>  productDTOList(){
+        List<ProductDTO> productDTOList=new ArrayList<>();
+        List<ProductEntity> productEntities =productRepository.findAll();
+        for(ProductEntity productEntity : productEntities){
+            productDTOList.add(ProductDTO.toProductDTO(productEntity));
+        }
+        return productDTOList;
+    }
+
 }
