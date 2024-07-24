@@ -25,13 +25,12 @@ public class ProductController {
     public String upload(@ModelAttribute  ProductDTO productDTO){
         System.out.println(productDTO);
         productService.upload(productDTO);
-        return "redirect: product/productList";
+        return "redirect:/productList";
     }
 
     @GetMapping("/productList")
     public String productList(Model model){
         List<ProductDTO> product=productService.productDTOList();
-//        model.addAttribute("productList",productList);
      // 5개씩 묶기
         List<List<ProductDTO>> productList = new ArrayList<>();
         for (int i = 0; i < product.size(); i += 5) {

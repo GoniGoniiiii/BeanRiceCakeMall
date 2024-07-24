@@ -10,6 +10,8 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -22,6 +24,16 @@ public class ProductService {
     public ProductService(ProductRepository productRepository, FileRepository fileRepository) {
         this.productRepository = productRepository;
         this.fileRepository = fileRepository;
+    }
+
+    //할인율 구해주는 코드
+    private void setDiscountRate(ProductEntity product) {
+        if (product.getProduct_oprice() > 0 && product.getProduct_oprice() > product.getProduct_sprice()) {
+            int discountRate = (int) ((product.getProduct_oprice() - product.getProduct_sprice()) / (double) product.getProduct_oprice() * 100);
+            product.setProduct_rate(discountRate);
+        } else {
+            product.setProduct_rate(0);
+        }
     }
 
     public void upload(ProductDTO productDTO){
@@ -68,6 +80,10 @@ public class ProductService {
                 }
             }
         }
+        //할인율 설정
+        setDiscountRate(productEntity);
+        
+        //fileEntity에서 file_url 가져와서 대표이미지 product_img에 경로넣어주기
         Optional<FileEntity> mainImg=fileRepository.findByProductEntityAndFile_urlStartingWith(productEntity,"MainImg");
         mainImg.ifPresent( fileEntity -> {
             productEntity.setProduct_img(fileEntity.getFile_url());

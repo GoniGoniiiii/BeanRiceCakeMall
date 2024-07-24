@@ -51,6 +51,9 @@ public class ProductEntity {
     @Column
     private int product_deliveryfee;
 
+    @Column(nullable = false)
+    private int product_rate;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_num",insertable = true,updatable = false)
     private UserEntity userEntity;
@@ -83,6 +86,7 @@ public class ProductEntity {
         productEntity.setProduct_delete("N");
         productEntity.setProduct_img(productEntity.getProduct_img());
         productEntity.setProduct_deliveryfee(productDTO.getProduct_deleveryfee());
+        productEntity.setProduct_rate(productDTO.getProduct_rate());
         return productEntity;
     }
 

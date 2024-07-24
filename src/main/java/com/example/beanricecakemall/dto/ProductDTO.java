@@ -29,6 +29,8 @@ public class ProductDTO {
 
     public int product_sprice;
 
+    public int product_rate;
+
     public Timestamp product_rdate;
 
     public int product_cnt;
@@ -61,6 +63,7 @@ public class ProductDTO {
         productDTO.setProduct_delete(productEntity.getProduct_delete());
         productDTO.setProduct_deleveryfee(productEntity.getProduct_deliveryfee());
         productDTO.setProduct_img(productEntity.getProduct_img());
+        productDTO.setProduct_rate(productEntity.getProduct_rate());
         List<String> fileList=new ArrayList<>();
         for(FileEntity fileEntity:productEntity.getFileEntityList()){
             fileList.add(fileEntity.getFile_url());

@@ -55,8 +55,8 @@
                             <img th:src="@{|/upload/${product.product_img}|}" class="All-product-img" alt="상품이미지">
                             <h5 class="fw-bold my-2" th:text="${product.product_name}"></h5>
                             <div class="d-flex price">
-                                <p class="fw-bold text-danger">90%</p>
-                                <p class="fw-bold mx-3" th:text="${product.product_sprice}"></p>
+                                <p class="fw-bold text-danger" th:text="${product.product_rate}+'%'"></p>
+                                <p class="fw-bold mx-2" th:text="${product.product_sprice}"></p>
                                 <del class="text-secondary small" th:text="${product.product_oprice}">500,000원</del>
                             </div>
                             <small class="text-secondary" th:text="${product.product_content}"></small>

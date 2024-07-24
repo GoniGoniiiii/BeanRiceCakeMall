@@ -6,9 +6,10 @@
     height:70px;
 }
 .All-product-img{
-    width:232px;
-    height:232px;
-    margin-right:59.5px;
+    width:240px;
+    height:240px;
+    margin:0px 50px 10px 0px;
+
 }
 .All-product-img:nth-last-child(1){
     margin-right:0;
