@@ -1,8 +1,10 @@
 package com.example.beanricecakemall.service;
 
 import com.example.beanricecakemall.dto.ProductDTO;
+import com.example.beanricecakemall.entity.CategoryEntity;
 import com.example.beanricecakemall.entity.FileEntity;
 import com.example.beanricecakemall.entity.ProductEntity;
+import com.example.beanricecakemall.repository.CategoryRepository;
 import com.example.beanricecakemall.repository.FileRepository;
 import com.example.beanricecakemall.repository.ProductRepository;
 import org.springframework.stereotype.Service;
@@ -21,9 +23,12 @@ public class ProductService {
     private final ProductRepository productRepository;
     private final FileRepository fileRepository;
 
-    public ProductService(ProductRepository productRepository, FileRepository fileRepository) {
+    private final CategoryRepository categoryRepository;
+
+    public ProductService(ProductRepository productRepository, FileRepository fileRepository,CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
         this.fileRepository = fileRepository;
+        this.categoryRepository=categoryRepository;
     }
 
     //할인율 구해주는 코드
@@ -37,7 +42,10 @@ public class ProductService {
     }
 
     public void upload(ProductDTO productDTO){
-        ProductEntity productEntity=ProductEntity.toProductEntity(productDTO);
+        Optional<CategoryEntity> category=categoryRepository.findById(productDTO.getCategory_num());
+        CategoryEntity categoryEntity=category.get();
+
+        ProductEntity productEntity=ProductEntity.toProductEntity(productDTO,categoryEntity);
         int save_id=productRepository.save(productEntity).getProduct_num();
 
         if (productDTO.getProduct_imgfile() != null && !productDTO.getProduct_imgfile().isEmpty()) {
@@ -82,6 +90,7 @@ public class ProductService {
         }
         //할인율 설정
         setDiscountRate(productEntity);
+;
         
         //fileEntity에서 file_url 가져와서 대표이미지 product_img에 경로넣어주기
         Optional<FileEntity> mainImg=fileRepository.findByProductEntityAndFile_urlStartingWith(productEntity,"MainImg");

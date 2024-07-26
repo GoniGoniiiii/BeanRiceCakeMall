@@ -76,7 +76,7 @@ public class ProductEntity {
     @OneToMany(mappedBy = "productEntity", cascade=CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ReviewEntity> reviewEntityList=new ArrayList<>();
 
-    public static ProductEntity toProductEntity(ProductDTO productDTO){
+    public static ProductEntity toProductEntity(ProductDTO productDTO,CategoryEntity categoryEntity){
         ProductEntity productEntity=new ProductEntity();
         productEntity.setProduct_name(productDTO.getProduct_name());
         productEntity.setProduct_content(productDTO.getProduct_content());
@@ -84,9 +84,10 @@ public class ProductEntity {
         productEntity.setProduct_sprice(productDTO.getProduct_sprice());
         productEntity.setProduct_cnt(productDTO.getProduct_cnt());
         productEntity.setProduct_delete("N");
-        productEntity.setProduct_img(productEntity.getProduct_img());
-        productEntity.setProduct_deliveryfee(productDTO.getProduct_deleveryfee());
+        productEntity.setProduct_img(productDTO.getProduct_img());
+        productEntity.setProduct_deliveryfee(productDTO.getProduct_deliveryfee());
         productEntity.setProduct_rate(productDTO.getProduct_rate());
+        productEntity.setCategoryEntity(categoryEntity);
         return productEntity;
     }
 

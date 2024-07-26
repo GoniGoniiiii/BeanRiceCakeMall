@@ -1,5 +1,6 @@
 package com.example.beanricecakemall.dto;
 
+import com.example.beanricecakemall.entity.CategoryEntity;
 import com.example.beanricecakemall.entity.FileEntity;
 import com.example.beanricecakemall.entity.ProductEntity;
 import lombok.AllArgsConstructor;
@@ -39,7 +40,7 @@ public class ProductDTO {
 
     public String product_img; //단일 이미지 url
 
-    public int product_deleveryfee;
+    public int product_deliveryfee;
 
     public MultipartFile product_imgfile; //단일 이미지 파일
 
@@ -49,6 +50,7 @@ public class ProductDTO {
 
     public List<String> file_url; // 다중 이미지 url 리스트
 
+    public int category_num;
 
 
     public static ProductDTO toProductDTO(ProductEntity productEntity){
@@ -61,7 +63,7 @@ public class ProductDTO {
         productDTO.setProduct_rdate(productEntity.getProduct_rdate());
         productDTO.setProduct_cnt(productEntity.getProduct_cnt());
         productDTO.setProduct_delete(productEntity.getProduct_delete());
-        productDTO.setProduct_deleveryfee(productEntity.getProduct_deliveryfee());
+        productDTO.setProduct_deliveryfee(productEntity.getProduct_deliveryfee());
         productDTO.setProduct_img(productEntity.getProduct_img());
         productDTO.setProduct_rate(productEntity.getProduct_rate());
         List<String> fileList=new ArrayList<>();

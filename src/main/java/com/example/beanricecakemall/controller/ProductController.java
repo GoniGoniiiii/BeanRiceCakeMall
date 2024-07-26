@@ -37,6 +37,8 @@ public class ProductController {
             productList.add(product.subList(i, Math.min(i + 5, product.size())));
         }
         model.addAttribute("productList", productList);
+        System.out.println(productList.toString());
         return "product/productList";
     }
+
 }

@@ -16,10 +16,11 @@ public class CategoryEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int category_num;
 
-    @Column(nullable = false)
+    @Column(nullable = false,unique = true)
     private String category_name;
 
     @OneToMany(mappedBy = "categoryEntity",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<ProductEntity> productEntityList=new ArrayList<>();
+
 
 }
