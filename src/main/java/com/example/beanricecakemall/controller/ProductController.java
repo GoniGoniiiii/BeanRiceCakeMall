@@ -1,6 +1,9 @@
 package com.example.beanricecakemall.controller;
 
+import com.example.beanricecakemall.dto.CategoryDTO;
 import com.example.beanricecakemall.dto.ProductDTO;
+import com.example.beanricecakemall.entity.CategoryEntity;
+import com.example.beanricecakemall.service.CategoryService;
 import com.example.beanricecakemall.service.ProductService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,8 +21,11 @@ public class ProductController {
 
     private final ProductService productService;
 
-    public ProductController(ProductService productService) {
+    private final CategoryService categoryService;
+
+    public ProductController(ProductService productService, CategoryService categoryService) {
         this.productService = productService;
+        this.categoryService = categoryService;
     }
 
     @PostMapping("/admin/uploadProduct")
@@ -32,12 +38,14 @@ public class ProductController {
     @GetMapping("/productList/{category_num}")
     public String productList(@PathVariable int category_num, Model model) {
         List<ProductDTO> product = productService.productDTOList(category_num);
+        String category=categoryService.categoryName(category_num);
         // 5개씩 묶기
         List<List<ProductDTO>> productList = new ArrayList<>();
         for (int i = 0; i < product.size(); i += 5) {
             productList.add(product.subList(i, Math.min(i + 5, product.size())));
         }
         model.addAttribute("productList", productList);
+        model.addAttribute("category",category);
         System.out.println(productList.toString());
         return "product/productList";
     }

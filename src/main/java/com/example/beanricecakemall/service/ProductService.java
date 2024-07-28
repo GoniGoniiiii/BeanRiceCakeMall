@@ -104,7 +104,7 @@ public class ProductService {
         List<ProductDTO> productDTOList = new ArrayList<>();
         List<ProductEntity> productEntities;
 
-        if (category_num == 0) { //전체 상품 출력
+        if (category_num == 13) { //전체 상품 출력
             productEntities = productRepository.findAll();
         } else {
             productEntities = productRepository.findAllByCategoryEntity_Category_num(category_num);

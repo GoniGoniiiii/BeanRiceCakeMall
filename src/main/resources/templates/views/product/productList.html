@@ -9,11 +9,11 @@
 <header th:include="header"></header>
 <section class="content">
     <div class="d-flex justify-content-between align-items-center border-bottom border-black postHeader">
-        <h3 class="my-5">베스트</h3>
+        <h3 class="my-5" th:if="${category!=null}" th:text="${category}"></h3>
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb pt-4">
                 <li class="breadcrumb-item small"><a href="#" class="text-black">Home</a></li>
-                <li class="breadcrumb-item active small" aria-current="page">베스트</li>
+                <li class="breadcrumb-item active small" aria-current="page" th:text="${category}"></li>
             </ol>
         </nav>
     </div>
