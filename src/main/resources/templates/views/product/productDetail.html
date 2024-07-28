@@ -19,7 +19,7 @@
     </div>
     <div class="d-flex justify-content-between productDetail-content" th:each="product:${product}">
         <div class="left-content">
-            <img th:src="@{|/upload/${product.product_img}|}" class="w-100 h-75"alt="상품 이미지"/>
+            <img th:src="@{|/upload/${product.product_img}|}" class="product-mainImg"alt="상품 이미지"/>
         </div>
         <div class="right-content ">
             <h5 class="pt-3 mb-3 fw-bold" th:text="${product.product_name}"></h5>
@@ -53,7 +53,7 @@
             </div>
         </div>
     </div>  <!--productDetail.css-content끝(left content+right content)-->
-    <div class="product-review my-2 mb-5">
+    <div class="product-review my-1 mb-5">
         <p class="py-2 pb-3"><span class="fs-5">상품리뷰</span><span class="text-secondary small px-1">가장 최신 2건만 노출됩니다!</span></p>
         <span name="review-title py-1 pb-2">완전 귀엽구 강아지가 좋아해요!</span>
         <div class="d-flex text-secondary mb-2">
@@ -84,7 +84,7 @@
         <div class="py-4" th:each="img:${product.file_url}">
             <img th:if="${!img.contains('MainImg')}" th:src="@{|/upload/${img}|}" th:text="${imgl}" />
         </div>
-        <span class="product-content">귀여운 강아지입니다~^^</span>
+        <span class="product-content" th:text="${product.product_content}"></span>
     </div>
 
     <h5 class="mt-5 pb-3 border-bottom">상품리뷰</h5>
