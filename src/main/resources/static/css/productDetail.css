@@ -5,6 +5,11 @@
 .left-content{
     width:500px;
 }
+.product-mainImg{
+    padding-top:10px;
+    width:500px;
+    height:470px;
+}
 .right-content{
     padding-left:50px;
     width:600px;
