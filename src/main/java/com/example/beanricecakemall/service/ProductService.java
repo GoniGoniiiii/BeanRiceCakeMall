@@ -25,10 +25,10 @@ public class ProductService {
 
     private final CategoryRepository categoryRepository;
 
-    public ProductService(ProductRepository productRepository, FileRepository fileRepository,CategoryRepository categoryRepository) {
+    public ProductService(ProductRepository productRepository, FileRepository fileRepository, CategoryRepository categoryRepository) {
         this.productRepository = productRepository;
         this.fileRepository = fileRepository;
-        this.categoryRepository=categoryRepository;
+        this.categoryRepository = categoryRepository;
     }
 
     //할인율 구해주는 코드
@@ -41,12 +41,12 @@ public class ProductService {
         }
     }
 
-    public void upload(ProductDTO productDTO){
-        Optional<CategoryEntity> category=categoryRepository.findById(productDTO.getCategory_num());
-        CategoryEntity categoryEntity=category.get();
+    public void upload(ProductDTO productDTO) {
+        Optional<CategoryEntity> category = categoryRepository.findById(productDTO.getCategory_num());
+        CategoryEntity categoryEntity = category.get();
 
-        ProductEntity productEntity=ProductEntity.toProductEntity(productDTO,categoryEntity);
-        int save_id=productRepository.save(productEntity).getProduct_num();
+        ProductEntity productEntity = ProductEntity.toProductEntity(productDTO, categoryEntity);
+        int save_id = productRepository.save(productEntity).getProduct_num();
 
         if (productDTO.getProduct_imgfile() != null && !productDTO.getProduct_imgfile().isEmpty()) {
             MultipartFile imgfile = productDTO.getProduct_imgfile();
@@ -74,7 +74,7 @@ public class ProductService {
 
                 if (original_file != null && !original_file.isEmpty()) {
                     String file_url = System.currentTimeMillis() + "_" + original_file;
-                    String savePath = "D:/goni/image" + file_url;
+                    String savePath = "D:/goni/image/" + file_url;
                     System.out.println("상품 설명 이미지 url " + savePath);
                     try {
                         productFile.transferTo(new File(savePath));
@@ -90,23 +90,40 @@ public class ProductService {
         }
         //할인율 설정
         setDiscountRate(productEntity);
-;
-        
+        ;
+
         //fileEntity에서 file_url 가져와서 대표이미지 product_img에 경로넣어주기
-        Optional<FileEntity> mainImg=fileRepository.findByProductEntityAndFile_urlStartingWith(productEntity,"MainImg");
-        mainImg.ifPresent( fileEntity -> {
+        Optional<FileEntity> mainImg = fileRepository.findByProductEntityAndFile_urlStartingWith(productEntity, "MainImg");
+        mainImg.ifPresent(fileEntity -> {
             productEntity.setProduct_img(fileEntity.getFile_url());
             productRepository.save(productEntity);
         });
     }
 
-    public List<ProductDTO>  productDTOList(){
-        List<ProductDTO> productDTOList=new ArrayList<>();
-        List<ProductEntity> productEntities =productRepository.findAll();
-        for(ProductEntity productEntity : productEntities){
+    public List<ProductDTO> productDTOList(int category_num) {
+        List<ProductDTO> productDTOList = new ArrayList<>();
+        List<ProductEntity> productEntities;
+
+        if (category_num == 0) { //전체 상품 출력
+            productEntities = productRepository.findAll();
+        } else {
+            productEntities = productRepository.findAllByCategoryEntity_Category_num(category_num);
+        }
+        for (ProductEntity productEntity : productEntities) {
             productDTOList.add(ProductDTO.toProductDTO(productEntity));
         }
         return productDTOList;
+    }
+
+    public ProductDTO productDetail(int product_num) {
+        Optional<ProductEntity> productEntities = productRepository.findById(product_num);
+
+        if (productEntities.isPresent()) {
+            ProductEntity productEntity = productEntities.get();
+            ProductDTO productDTO = ProductDTO.toProductDTO(productEntity);
+            return productDTO;
+        }
+        return null;
     }
 
 }

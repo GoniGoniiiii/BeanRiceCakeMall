@@ -36,7 +36,7 @@
             <div th:each="row : ${productList}">
                 <div class="d-flex my-4">
                     <div class="product" th:each="product : ${row}">
-                        <a href="/productDetail">
+                        <a th:href="@{|/productDetail/${product.product_num}|}">
                             <img th:src="@{|/upload/${product.product_img}|}" class="All-product-img" alt="상품이미지">
                             <h5 class="fw-bold my-2" th:text="${product.product_name}"></h5>
                             <div class="d-flex price">
