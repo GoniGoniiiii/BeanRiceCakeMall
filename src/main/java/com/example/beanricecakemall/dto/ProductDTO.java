@@ -20,37 +20,38 @@ import java.util.List;
 @AllArgsConstructor
 public class ProductDTO {
 
-    public int product_num;
+    private int product_num;
 
-    public String product_name;
+    private String product_name;
 
-    public String product_content;
+    private String product_content;
 
-    public int product_oprice;
+    private int product_oprice;
 
-    public int product_sprice;
+    private int product_sprice;
 
-    public int product_rate;
+    private int product_rate;
 
-    public Timestamp product_rdate;
+    private Timestamp product_rdate;
 
-    public int product_cnt;
+    private int product_cnt;
 
-    public String product_delete;
+    private String product_delete;
 
-    public String product_img; //단일 이미지 url
+    private String product_img; //단일 이미지 url
 
-    public int product_deliveryfee;
+    private int product_deliveryfee;
 
-    public MultipartFile product_imgfile; //단일 이미지 파일
+    private MultipartFile product_imgfile; //단일 이미지 파일
 
     private List<MultipartFile> product_images; //다중 이미지 파일
 
-    public List<String> original_file; //원본파일 이름
+    private List<String> original_file; //원본파일 이름
 
-    public List<String> file_url; // 다중 이미지 url 리스트
+    private List<String> file_url; // 다중 이미지 url 리스트
 
-    public int category_num;
+    private int category_num;
+
 
 
     public static ProductDTO toProductDTO(ProductEntity productEntity){
@@ -71,6 +72,7 @@ public class ProductDTO {
             fileList.add(fileEntity.getFile_url());
         }
         productDTO.setFile_url(fileList);
+        productDTO.setCategory_num(productEntity.getCategoryEntity().getCategory_num());
         return productDTO;
     }
 
