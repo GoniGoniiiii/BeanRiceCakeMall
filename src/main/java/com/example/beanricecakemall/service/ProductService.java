@@ -33,11 +33,11 @@ public class ProductService {
 
     //할인율 구해주는 코드
     private void setDiscountRate(ProductEntity product) {
-        if (product.getProduct_oprice() > 0 && product.getProduct_oprice() > product.getProduct_sprice()) {
-            int discountRate = (int) ((product.getProduct_oprice() - product.getProduct_sprice()) / (double) product.getProduct_oprice() * 100);
-            product.setProduct_rate(discountRate);
+        if (product.getProductOprice() > 0 && product.getProductOprice() > product.getProductSprice()) {
+            int discountRate = (int) ((product.getProductOprice() - product.getProductSprice()) / (double) product.getProductOprice() * 100);
+            product.setProductRate(discountRate);
         } else {
-            product.setProduct_rate(0);
+            product.setProductRate(0);
         }
     }
 
@@ -46,7 +46,7 @@ public class ProductService {
         CategoryEntity categoryEntity = category.get();
 
         ProductEntity productEntity = ProductEntity.toProductEntity(productDTO, categoryEntity);
-        int save_id = productRepository.save(productEntity).getProduct_num();
+        int save_id = productRepository.save(productEntity).getProductNum();
 
         if (productDTO.getProduct_imgfile() != null && !productDTO.getProduct_imgfile().isEmpty()) {
             MultipartFile imgfile = productDTO.getProduct_imgfile();
@@ -93,9 +93,9 @@ public class ProductService {
         ;
 
         //fileEntity에서 file_url 가져와서 대표이미지 product_img에 경로넣어주기
-        Optional<FileEntity> mainImg = fileRepository.findByProductEntityAndFile_urlStartingWith(productEntity, "MainImg");
+        Optional<FileEntity> mainImg = fileRepository.findByProductEntityAndFileUrlStartingWith(productEntity, "MainImg");
         mainImg.ifPresent(fileEntity -> {
-            productEntity.setProduct_img(fileEntity.getFile_url());
+            productEntity.setProductImg(fileEntity.getFileUrl());
             productRepository.save(productEntity);
         });
     }
@@ -107,7 +107,7 @@ public class ProductService {
         if (category_num == 13) { //전체 상품 출력
             productEntities = productRepository.findAll();
         } else {
-            productEntities = productRepository.findAllByCategoryEntity_Category_num(category_num);
+            productEntities = productRepository.findAllByCategoryEntityCategoryNum(category_num);
         }
         for (ProductEntity productEntity : productEntities) {
             productDTOList.add(ProductDTO.toProductDTO(productEntity));

@@ -15,15 +15,16 @@ import java.util.List;
 @Table(name="cart")
 public class CartEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int cart_num;
+    @GeneratedValue(strategy = GenerationType.IDENTITY )
+    @Column(name="cart_num")
+    private int cartNum;
 
-    @Column
+    @Column(name="cart_date")
     @CreationTimestamp
-    private Timestamp cart_date;
+    private Timestamp cartDate;
 
-    @Column(nullable = false)
-    private int cart_cnt;
+    @Column(nullable = false , name="cart_cnt")
+    private int cartCnt;
 
     @OneToMany(mappedBy = "cartEntity",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<ProductEntity> productEntityList=new ArrayList<>();

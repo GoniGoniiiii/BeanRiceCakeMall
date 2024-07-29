@@ -56,23 +56,23 @@ public class ProductDTO {
 
     public static ProductDTO toProductDTO(ProductEntity productEntity){
         ProductDTO productDTO = new ProductDTO();
-        productDTO.setProduct_num(productEntity.getProduct_num());
-        productDTO.setProduct_name(productEntity.getProduct_name());
-        productDTO.setProduct_content(productEntity.getProduct_content());
-        productDTO.setProduct_oprice(productEntity.getProduct_oprice());
-        productDTO.setProduct_sprice(productEntity.getProduct_sprice());
-        productDTO.setProduct_rdate(productEntity.getProduct_rdate());
-        productDTO.setProduct_cnt(productEntity.getProduct_cnt());
-        productDTO.setProduct_delete(productEntity.getProduct_delete());
-        productDTO.setProduct_deliveryfee(productEntity.getProduct_deliveryfee());
-        productDTO.setProduct_img(productEntity.getProduct_img());
-        productDTO.setProduct_rate(productEntity.getProduct_rate());
+        productDTO.setProduct_num(productEntity.getProductNum());
+        productDTO.setProduct_name(productEntity.getProductName());
+        productDTO.setProduct_content(productEntity.getProductContent());
+        productDTO.setProduct_oprice(productEntity.getProductOprice());
+        productDTO.setProduct_sprice(productEntity.getProductSprice());
+        productDTO.setProduct_rdate(productEntity.getProductRdate());
+        productDTO.setProduct_cnt(productEntity.getProductCnt());
+        productDTO.setProduct_delete(productEntity.getProductDelete());
+        productDTO.setProduct_deliveryfee(productEntity.getProductDeliveryfee());
+        productDTO.setProduct_img(productEntity.getProductImg());
+        productDTO.setProduct_rate(productEntity.getProductRate());
         List<String> fileList=new ArrayList<>();
         for(FileEntity fileEntity:productEntity.getFileEntityList()){
-            fileList.add(fileEntity.getFile_url());
+            fileList.add(fileEntity.getFileUrl());
         }
         productDTO.setFile_url(fileList);
-        productDTO.setCategory_num(productEntity.getCategoryEntity().getCategory_num());
+        productDTO.setCategory_num(productEntity.getCategoryEntity().getCategoryNum());
         return productDTO;
     }
 

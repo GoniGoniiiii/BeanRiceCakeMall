@@ -13,10 +13,11 @@ import java.io.File;
 public class FileEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int file_num;
+    @Column(name="file_num")
+    private int fileNum;
 
-    @Column
-    private String file_url;
+    @Column(name="file_url")
+    private String fileUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="product_num",insertable = true)
@@ -29,7 +30,7 @@ public class FileEntity {
 
     public static FileEntity toFileEntity(ProductEntity productEntity,String file_url){
         FileEntity fileEntity=new FileEntity();
-        fileEntity.setFile_url(file_url);
+        fileEntity.setFileUrl(file_url);
         fileEntity.setProductEntity(productEntity);
         return fileEntity;
     }

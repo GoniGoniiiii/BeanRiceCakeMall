@@ -22,7 +22,7 @@ public class CategoryService {
 
             if(categoryEntities.isPresent()) {
                 CategoryEntity category = categoryEntities.get();
-                return category.getCategory_name();
+                return category.getCategoryName();
             }
             return null;
         }

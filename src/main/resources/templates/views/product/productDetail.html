@@ -10,12 +10,12 @@
 <header th:include="header"></header>
 <section class="product-content">
     <div class="productDetail-breadcrumb">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb">
-                <li class="breadcrumb-item small"><a href="#" class="text-black">Home</a></li>
-                <li class="breadcrumb-item active small" aria-current="page">베스트</li>
-            </ol>
-        </nav>
+<!--        <nav aria-label="breadcrumb">-->
+<!--            <ol class="breadcrumb">-->
+<!--                <li class="breadcrumb-item small"><a href="#" class="text-black">Home</a></li>-->
+<!--                <li class="breadcrumb-item active small" aria-current="page">베스트</li>-->
+<!--            </ol>-->
+<!--        </nav>-->
     </div>
     <div class="d-flex justify-content-between productDetail-content" th:each="product:${product}">
         <div class="left-content">
@@ -25,12 +25,12 @@
             <h5 class="pt-3 mb-3 fw-bold" th:text="${product.product_name}"></h5>
             <div class="d-flex justify-content-between product-price">
                 <div><span class="text-danger fs-4" th:text="${product.product_rate}+'%' "></span></div>
-                <div><del class="text-secondary" th:text="${product.product_oprice}"></del><span class="fw-bold fs-4  text-danger" th:text="${product.product_sprice}"></span></div>
+                <div><del class="text-secondary me-2" th:text="${product.product_oprice}"></del><span class="fw-bold fs-4  text-danger" th:text="${product.product_sprice}"></span></div>
             </div>
             <div class="product-box">
                 <p class="text-secondary">Information</p>
                 <p th:text="${product.product_content}"></p>
-                <p class="m-0 small"><span>배송비</span><span class="mx-2" th:text="${product.product_deliveryfee}"></span><span>|</span><span class="mx-2">리뷰</span><span>4 건</span></p>
+                <p class="m-0 small"><span>배송비</span><span class="mx-3  " th:text="${product.product_deliveryfee}"></span><span>|</span><span class="mx-2">리뷰</span><span>4 건</span></p>
             </div>
             <div class="product-box">
                 <!-- <p class="m-0"><span class="product-item">배송비</span><span>3000원</span></p>

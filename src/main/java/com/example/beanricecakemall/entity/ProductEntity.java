@@ -21,38 +21,39 @@ public class ProductEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int product_num;
+    @Column(name="product_num")
+    private int productNum;
 
-    @Column(nullable = false)
-    private String product_name;
+    @Column(nullable = false,name="product_name")
+    private String productName;
 
-    @Column(nullable = false)
-    private String product_content;
+    @Column(nullable = false,name="product_content")
+    private String productContent;
 
-    @Column(nullable = false)
-    private int product_oprice;
+    @Column(nullable = false,name="product_oprice")
+    private int productOprice;
 
-    @Column(nullable = false)
-    private int product_sprice;
+    @Column(nullable = false,name="product_sprice")
+    private int productSprice;
 
-    @Column
+    @Column(name="product_rdate")
     @CreationTimestamp
-    private Timestamp product_rdate;
+    private Timestamp productRdate;
 
-    @Column(nullable = false)
-    private int product_cnt;
+    @Column(nullable = false,name="product_cnt")
+    private int productCnt;
 
-    @Column(length=1)
-    private String product_delete;
+    @Column(length=1, name="product_delete")
+    private String productDelete;
 
-    @Column
-    private String product_img;
+    @Column(name="product_img")
+    private String productImg;
 
-    @Column
-    private int product_deliveryfee;
+    @Column(name="product_deliveryfee")
+    private int productDeliveryfee;
 
-    @Column(nullable = false)
-    private int product_rate;
+    @Column(nullable = false,name="product_rate")
+    private int productRate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_num",insertable = true,updatable = false)
@@ -78,15 +79,15 @@ public class ProductEntity {
 
     public static ProductEntity toProductEntity(ProductDTO productDTO,CategoryEntity categoryEntity){
         ProductEntity productEntity=new ProductEntity();
-        productEntity.setProduct_name(productDTO.getProduct_name());
-        productEntity.setProduct_content(productDTO.getProduct_content());
-        productEntity.setProduct_oprice(productDTO.getProduct_oprice());
-        productEntity.setProduct_sprice(productDTO.getProduct_sprice());
-        productEntity.setProduct_cnt(productDTO.getProduct_cnt());
-        productEntity.setProduct_delete("N");
-        productEntity.setProduct_img(productDTO.getProduct_img());
-        productEntity.setProduct_deliveryfee(productDTO.getProduct_deliveryfee());
-        productEntity.setProduct_rate(productDTO.getProduct_rate());
+        productEntity.setProductName(productDTO.getProduct_name());
+        productEntity.setProductContent(productDTO.getProduct_content());
+        productEntity.setProductOprice(productDTO.getProduct_oprice());
+        productEntity.setProductSprice(productDTO.getProduct_sprice());
+        productEntity.setProductCnt(productDTO.getProduct_cnt());
+        productEntity.setProductDelete("N");
+        productEntity.setProductImg(productDTO.getProduct_img());
+        productEntity.setProductDeliveryfee(productDTO.getProduct_deliveryfee());
+        productEntity.setProductRate(productDTO.getProduct_rate());
         productEntity.setCategoryEntity(categoryEntity);
         return productEntity;
     }

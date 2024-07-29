@@ -12,34 +12,35 @@ import lombok.Setter;
 public class DeliveryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int delivery_num;
+    @Column(name="delivery_num")
+    private int deliveryNum;
 
-    @Column(nullable = false)
-    private String delivery_userName;
+    @Column(nullable = false,name="delivery_userName")
+    private String deliveryUserName;
 
-    @Column(nullable = false)
-    private String delivery_userEmail;
+    @Column(nullable = false,name="delivery_userEmail")
+    private String deliveryUserEmail;
 
-    @Column(nullable = false)
-    private String delivery_userTel1;
+    @Column(nullable = false,name="delivery_userTel1")
+    private String deliveryUserTel1;
 
-    @Column
-    private String delivery_userTel2;
+    @Column(name="delivery_userTel2")
+    private String deliveryUserTel2;
 
-    @Column(nullable = false)
-    private String delivery_zipcode;
+    @Column(nullable = false,name="delivery_zipcode")
+    private String deliveryZipcode;
 
-    @Column(nullable = false)
-    private String delivery_addr;
+    @Column(nullable = false,name="delivery_addr")
+    private String deliveryAddr;
 
-    @Column(nullable = false)
-    private String delivery_addrDetail;
+    @Column(nullable = false,name="delivery_addrDetail")
+    private String deliveryAddrDetail;
 
-    @Column
-    private String delivery_req;
+    @Column(name="delivery_req")
+    private String deliveryReq;
 
-    @Column(length=1)
-    private String delivery_def;
+    @Column(length=1,name="delivery_def")
+    private String deliveryDef;
 
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="order_num")

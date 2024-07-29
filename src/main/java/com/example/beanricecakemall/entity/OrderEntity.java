@@ -16,20 +16,21 @@ import java.util.List;
 public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int order_num;
+    @Column(name="order_num")
+    private int orderNum;
 
-    @Column(nullable = false)
-    private String order_userName;
+    @Column(nullable = false,name="order_userName")
+    private String orderUserName;
 
-    @Column(nullable = false)
-    private String order_userEmail;
+    @Column(nullable = false,name="order_userEmail")
+    private String orderUserEmail;
 
-    @Column(nullable = false)
-    private String order_userTel;
+    @Column(nullable = false,name="order_userTel")
+    private String orderUserTel;
 
-    @Column(updatable = false)
+    @Column(updatable = false,name="order_date")
     @CreationTimestamp
-    private Timestamp order_date;
+    private Timestamp orderDate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_num",insertable = true,updatable = false)

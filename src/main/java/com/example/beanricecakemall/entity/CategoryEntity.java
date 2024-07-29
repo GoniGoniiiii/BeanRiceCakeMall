@@ -14,10 +14,11 @@ import java.util.List;
 public class CategoryEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY )
-    private int category_num;
+    @Column(name="category_num")
+    private int categoryNum;
 
-    @Column(nullable = false,unique = true)
-    private String category_name;
+    @Column(nullable = false,unique = true,name="category_name")
+    private String categoryName;
 
     @OneToMany(mappedBy = "categoryEntity",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<ProductEntity> productEntityList=new ArrayList<>();
