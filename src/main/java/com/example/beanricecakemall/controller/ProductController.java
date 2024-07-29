@@ -32,7 +32,7 @@ public class ProductController {
     public String upload(@ModelAttribute ProductDTO productDTO) {
         System.out.println(productDTO);
         productService.upload(productDTO);
-        return "redirect:/productList/0";
+        return "redirect:/productList/13";
     }
 
     @GetMapping("/productList/{category_num}")
