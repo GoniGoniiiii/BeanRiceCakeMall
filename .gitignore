@@ -46,3 +46,4 @@ out
 gen
 .gradle
 build
+src/main/java/com/example/beanricecakemall/oauth2/SocialClientRegistration.java

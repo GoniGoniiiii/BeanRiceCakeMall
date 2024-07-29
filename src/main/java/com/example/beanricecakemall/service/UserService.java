@@ -1,6 +1,6 @@
 package com.example.beanricecakemall.service;
 
-import com.example.beanricecakemall.dto.CumstomUserDetails;
+import com.example.beanricecakemall.customDTO.*;
 import com.example.beanricecakemall.dto.UserDTO;
 import com.example.beanricecakemall.entity.UserEntity;
 import com.example.beanricecakemall.repository.UserRepository;
@@ -9,11 +9,15 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserService implements  UserDetailsService{
+public class UserService  implements UserDetailsService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
@@ -34,7 +38,6 @@ public class UserService implements  UserDetailsService{
         userRepository.save(user);
     }
 
-
     @Override
     public UserDetails loadUserByUsername(String user_id) throws UsernameNotFoundException {
         //주어진 사용자 이름에 해당하는 사용자 정보를 db에서 찾아와서 UserDeatils타입으로 변환
@@ -46,4 +49,6 @@ public class UserService implements  UserDetailsService{
         }
         throw new UsernameNotFoundException("UsernameNotFoundException : "+ user_id);
     }
+
+
 }

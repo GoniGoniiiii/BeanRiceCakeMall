@@ -1,5 +1,8 @@
 package com.example.beanricecakemall.config;
 
+import com.example.beanricecakemall.oauth2.CustomClientRegistrationRepository;
+import com.example.beanricecakemall.service.CustomOAuth2UserService;
+import com.example.beanricecakemall.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -13,6 +16,14 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
+    private final CustomOAuth2UserService customOAuth2UserService;
+    private final CustomClientRegistrationRepository customClientRegistrationRepository;
+
+    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService, CustomClientRegistrationRepository customClientRegistrationRepository) {
+        this.customOAuth2UserService = customOAuth2UserService;
+        this.customClientRegistrationRepository = customClientRegistrationRepository;
+    }
+
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         //사용자 비밀번호 해시화
@@ -21,14 +32,8 @@ public class SecurityConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-                .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/upload/**").permitAll()
-                        .requestMatchers("/my/**").hasRole("USER")
-                        .requestMatchers("/admin/**").hasRole("ADMIN")
-                        .requestMatchers("/**").permitAll()
-                        .anyRequest().authenticated()
-                );
+
+        http.csrf((auth)->auth.disable());
 
         http.formLogin((auth)->auth.loginPage("/login")
                 .loginProcessingUrl("/loginProc")
@@ -37,13 +42,29 @@ public class SecurityConfig {
         );
 
         http
+                .oauth2Login((oauth2)-> oauth2
+                        .loginPage("/login")
+                        .clientRegistrationRepository(customClientRegistrationRepository.clientRegistrationRepository())
+                        .userInfoEndpoint(userInfoEndpointConfig ->
+                                userInfoEndpointConfig.userService(customOAuth2UserService)));
+
+        http
                 .logout((auth)->auth.
                         logoutUrl("/logout")
                         .logoutSuccessUrl("/")
                         .deleteCookies("JSESSIONID")
                         .permitAll());
 
-        http.csrf((auth)->auth.disable());
+
+
+        http
+                .authorizeHttpRequests((auth) -> auth
+                        .requestMatchers("/upload/**").permitAll()
+                        .requestMatchers("/my/**").hasRole("USER")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/**").permitAll()
+                        .anyRequest().authenticated()
+                );
 
         http
                 .sessionManagement((auth) -> auth
@@ -54,6 +75,7 @@ public class SecurityConfig {
         http
                 .sessionManagement((auth)->auth
                         .sessionFixation().changeSessionId());
+
         return http.build();
     }
 }

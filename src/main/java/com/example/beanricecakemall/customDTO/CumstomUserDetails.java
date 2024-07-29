@@ -1,4 +1,4 @@
-package com.example.beanricecakemall.dto;
+package com.example.beanricecakemall.customDTO;
 
 import com.example.beanricecakemall.entity.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
