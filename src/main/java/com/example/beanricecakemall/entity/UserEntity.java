@@ -23,35 +23,35 @@ public class UserEntity{
     @Column(name="user_num")
     private int userNum;
 
-    @Column(unique = true)
+    @Column(unique = true,name="user_id")
     private String userId;
 
-    @Column
+    @Column(name="user_pw")
     private String userPw;
 
-    @Column(nullable = false)
+    @Column(nullable = false,name="user_name")
     private String userName;
 
-    @Column
+    @Column(name="user_email")
     private String userEmail;
 
-    @Column
+    @Column(name="user_tel")
     private String userTel;
 
-    @Column
+    @Column(name="user_birth")
     private String userBirth;
 
-    @Column(length = 1,columnDefinition = "DEFAULT 'N'")
+    @Column(length = 1,name="user_registration")
     private String userRegistration;
 
-    @Column(updatable = true)
+    @Column(updatable = true,name="user_joindate")
     @CreationTimestamp
     private Timestamp userJoindate;
 
-    @Column(columnDefinition = "DEFAULT 0")
+    @Column(columnDefinition = "DEFAULT 0",name="user_point")
     private int userPoint;
 
-    @Column(columnDefinition = "DEFAULT 'ROLE_USER'")
+    @Column(name="user_role")
     private String userRole;
 
     @OneToMany(mappedBy = "userEntity",cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)

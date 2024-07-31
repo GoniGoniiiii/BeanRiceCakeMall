@@ -18,17 +18,18 @@ public class ReviewEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int review_num;
+    @Column(name="review_num")
+    private int reviewNum;
 
-    @Column(nullable = false)
-    private String review_title;
+    @Column(nullable = false,name="review_title")
+    private String reviewTitle;
 
-    @Column(nullable = false)
-    private String review_content;
+    @Column(nullable = false,name="review_content")
+    private String reviewContent;
 
-    @Column(updatable = false)
+    @Column(updatable = false,name="review_rdate")
     @CreationTimestamp
-    private Timestamp review_rdate;
+    private Timestamp reviewRdate;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_num",insertable = true,updatable = false)
