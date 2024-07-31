@@ -40,6 +40,12 @@ public class UserDTO implements OAuth2User {
 
     private String user_tel;
 
+    private int user_zipcode;
+
+    private String user_addr;
+
+    private String user_addrDetail;
+
     public static UserDTO toUserDTO(UserEntity userEntity){
         UserDTO userDTO=new UserDTO();
         userDTO.setUser_num(userEntity.getUserNum());
@@ -53,6 +59,9 @@ public class UserDTO implements OAuth2User {
         userDTO.setUser_point(userEntity.getUserPoint());
         userDTO.setUser_role(userEntity.getUserRole());
         userDTO.setUser_tel(userEntity.getUserTel());
+        userDTO.setUser_zipcode(userEntity.getUserZipcode());
+        userDTO.setUser_addr(userEntity.getUserAddr());
+        userDTO.setUser_addrDetail(userEntity.getUserAddrdetail());
         return userDTO;
     }
 

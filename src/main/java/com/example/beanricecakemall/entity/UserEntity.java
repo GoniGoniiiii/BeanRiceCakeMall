@@ -44,7 +44,7 @@ public class UserEntity{
     @Column(length = 1,name="user_registration")
     private String userRegistration;
 
-    @Column(updatable = true,name="user_joindate")
+    @Column(updatable = false,name="user_joindate")
     @CreationTimestamp
     private Timestamp userJoindate;
 
@@ -53,6 +53,15 @@ public class UserEntity{
 
     @Column(name="user_role")
     private String userRole;
+
+    @Column(name="user_zipcode")
+    private int userZipcode;
+
+    @Column(name="user_addr")
+    private String userAddr;
+
+    @Column(name="user_addrdetail")
+    private String userAddrdetail;
 
     @OneToMany(mappedBy = "userEntity",cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ProductEntity> productEntityList=new ArrayList<>();
@@ -74,6 +83,27 @@ public class UserEntity{
         userEntity.setUserRole(userDTO.getUser_role());
         userEntity.setUserRegistration(userDTO.getUser_registraion());
         userEntity.setUserTel(userDTO.getUser_tel());
+        userEntity.setUserZipcode(userDTO.getUser_zipcode());
+        userEntity.setUserAddr(userDTO.getUser_addr());
+        userEntity.setUserAddrdetail(userDTO.getUser_addrDetail());
+        return userEntity;
+    }
+
+    public static UserEntity toUpdateEntity(UserDTO userDTO){
+        UserEntity userEntity=new UserEntity();
+        userEntity.setUserNum(userDTO.getUser_num());
+        userEntity.setUserId(userDTO.getUser_id());
+        userEntity.setUserPw(userDTO.getUser_pw());
+        userEntity.setUserName(userDTO.getUser_name());
+        userEntity.setUserEmail(userDTO.getUser_email());
+        userEntity.setUserBirth(userDTO.getUser_birth());
+        userEntity.setUserPoint(userDTO.getUser_point());
+        userEntity.setUserRole(userDTO.getUser_role());
+        userEntity.setUserRegistration(userDTO.getUser_registraion());
+        userEntity.setUserTel(userDTO.getUser_tel());
+        userEntity.setUserZipcode(userDTO.getUser_zipcode());
+        userEntity.setUserAddr(userDTO.getUser_addr());
+        userEntity.setUserAddrdetail(userDTO.getUser_addrDetail());
         return userEntity;
     }
 }

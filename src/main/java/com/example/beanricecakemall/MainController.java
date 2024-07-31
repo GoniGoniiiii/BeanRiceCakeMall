@@ -44,9 +44,6 @@ public class MainController {
     @GetMapping("/user/join")
     public String joinP(){ return "user/join";}
 
-    @GetMapping("/my/memberInfo")
-    public String memberInfoP(){return "user/memberInfo";}
-    
     @GetMapping("/user/findId")
     public String findId(){return "user/findId";}
 
