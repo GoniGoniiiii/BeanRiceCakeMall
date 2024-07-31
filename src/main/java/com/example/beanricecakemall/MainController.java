@@ -73,16 +73,20 @@ public class MainController {
 
         Collection<? extends GrantedAuthority> authorities=authentication.getAuthorities();
         Iterator<? extends GrantedAuthority> iterator=authorities.iterator();
-        GrantedAuthority auth=iterator.next();
 
-        String role=auth.getAuthority();
+        String role=null;
+
+        if(iterator.hasNext()){
+            GrantedAuthority auth=iterator.next();
+            role=auth.getAuthority();
+        }else{
+            role="no_role";
+        }
 
          model.addAttribute("id",id);
          model.addAttribute("role",role);
         System.out.println("main controller :  " +  id +" "+  role);
         return "index";
-
     }
-
 }
 

@@ -26,7 +26,7 @@ public class UserEntity{
     @Column(unique = true)
     private String userId;
 
-    @Column(nullable = false)
+    @Column
     private String userPw;
 
     @Column(nullable = false)
@@ -38,7 +38,7 @@ public class UserEntity{
     @Column
     private String userTel;
 
-    @Column(nullable = false)
+    @Column
     private String userBirth;
 
     @Column(length = 1,columnDefinition = "DEFAULT 'N'")

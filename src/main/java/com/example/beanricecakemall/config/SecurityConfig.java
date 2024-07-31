@@ -60,8 +60,8 @@ public class SecurityConfig {
         http
                 .authorizeHttpRequests((auth) -> auth
                         .requestMatchers("/upload/**").permitAll()
-                        .requestMatchers("/my/**").hasRole("USER")
                         .requestMatchers("/admin/**").hasRole("ADMIN")
+                        .requestMatchers("/my/**").hasRole("USER")
                         .requestMatchers("/**").permitAll()
                         .anyRequest().authenticated()
                 );

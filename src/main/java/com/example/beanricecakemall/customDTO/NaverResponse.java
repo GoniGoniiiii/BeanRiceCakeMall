@@ -2,12 +2,12 @@ package com.example.beanricecakemall.customDTO;
 
 import java.util.Map;
 
-public class NaverResponse implements  OAuth2Response{
+public class NaverResponse implements OAuth2Response {
 
-    private final Map<String,Object> attribute;
+    private final Map<String, Object> attribute;
 
-    public NaverResponse(Map<String,Object> attribute){
-        this.attribute=(Map<String, Object>) attribute.get("response");
+    public NaverResponse(Map<String, Object> attribute) {
+        this.attribute = (Map<String, Object>) attribute.get("response");
     }
 
     @Override
@@ -28,5 +28,20 @@ public class NaverResponse implements  OAuth2Response{
     @Override
     public String getName() {
         return attribute.get("name").toString();
+    }
+
+    @Override
+    public String getBirthYear() {
+        return attribute.get("birthyear").toString();
+    }
+
+    @Override
+    public String getBirthDay() {
+        return attribute.get("birthday").toString();
+    }
+
+    @Override
+    public String getPhone() {
+        return attribute.get("mobile").toString();
     }
 }
