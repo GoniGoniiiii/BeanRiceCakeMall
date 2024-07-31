@@ -63,18 +63,18 @@
             <tr class="border-white">
                 <td class="join-title border-bottom" rowspan="3">주소</td>
                 <td class="join-input">
-                    <input type="text" name="join_zipcode" value="08616" class="w-25 join-inputText" required>
-                    <button class="btn btn-outline-secondary zipcode">우편번호</button>
+                    <input type="text" name="user_zipcode" id="user_zipcode" class="w-25 join-inputText" required>
+                    <button type="button" class="btn btn-outline-secondary zipcode" onclick="zipcode()">우편번호</button>
                 </td>
             </tr>
             <tr class="border-white">
                 <td>
-                    <input type="text" name="join_addr" placeholder="주소입력" class="join-inputText" required>
+                    <input type="text" name="user_addr" placeholder="주소입력" id="user_address" class="join-inputText" required>
                 </td>
             </tr>
             <tr>
                 <td>
-                    <input type="text" name="join_addrDetail" placeholder="상세주소입력" class="join-inputText" required>
+                    <input type="text" name="user_addrDetail" placeholder="상세주소입력"  id="user_addrDetail" class="join-inputText" required>
                 </td>
             </tr>
             <tr>
@@ -111,4 +111,5 @@
 <footer th:include="footer"></footer>
 </body>
 <script src="/js/join.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </html>
