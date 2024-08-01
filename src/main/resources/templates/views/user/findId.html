@@ -10,7 +10,7 @@
 <section class="find-content">
     <h3 class="pb-2 text-center fw-bold">아이디 찾기</h3>
     <p class="small text-secondary text-center mb-5">가입하신 방법에 따라 아이디 찾기가 가능합니다.</p>
-    <form action="/user/findId" method="post" name="findId">
+<!--    <form action="/user/findId" method="post" name="findId">-->
         <div class="d-flex my-2">
             <span class="pt-2 find-title">인증방법</span>
             <select class="find-select w-75 border rounded-2" name="" id="select-value" required>
@@ -34,25 +34,25 @@
             <input type="hidden" name="user_tel" id="user_tel">
         </div>
         <button type ="button" class="btn btn-success w-100 my-4 py-2" data-bs-toggle="modal" data-bs-target="#findIdModal" onclick="search()">확인</button>
+<!--    </form>-->
         <!-- Modal -->
         <div class="modal fade" id="findIdModal" tabindex="-1" aria-labelledby="idModal" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="idModal"> 아이디 찾기 </h5>
-                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" ></button>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="redirect()"></button>
                     </div>
                     <div class="modal-body">
                         아이디는 <h3 id="user_id" ></h3> 입니다.
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" onclick="redirect()">다시 조회하기</button>
                         <button type="button" class="btn btn-outline-success" onclick="goLogin()">로그인페이지로</button>
                     </div>
                 </div>
             </div>
         </div>
-    </form>
 </section>
 <footer th:include="footer"></footer>
 <script src="/js/findId.js"></script>
