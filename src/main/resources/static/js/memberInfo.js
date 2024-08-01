@@ -104,14 +104,12 @@ p_num3.addEventListener("change", function () {
 // 회원 탈퇴
 function unRegister() {
     var confirmation = confirm("정말 회원탈퇴를 하시겠습니까?");
+    event.preventDefault();
     if (confirmation) {
-        var password = prompt("비밀번호를 입력하세요");
-        var user_pw = 'Qq1234567!';
-        if (password !== null && password === user_pw) {
-            alert("회원탈퇴가 완료되었습니다.");
-        } else {
-            alert("비밀번호가 틀렸습니다. 다시 시도해주세요.");
-        }
+        alert("회원탈퇴가 완료되었습니다.");
+        var user_num = document.getElementById("user_num").value;
+        console.log(user_num);
+        window.location = "/user/unregister/" + user_num;
     } else {
         alert("회원탈퇴가 취소되었습니다.");
     }
@@ -128,28 +126,35 @@ function split() {
     var month = document.getElementById('month');
     var day = document.getElementById('day');
 
+    //이메일을 통째로 받아서 @를 기준으로 분리해줌
     var emailValue = emailId.value;
-    emailId.value = emailValue.split("@")[0];
-    email.value = emailValue.split("@")[1];
+    var emailParts = emailValue.split("@");
 
+        emailId.value = emailParts[0];
+        email.value = emailParts[1];
+
+    //전화번호 전체를 받아서 - 기준으로 분리
     var pValue = p_num1.value;
-    if (pValue) {
-        p_num1.value = pValue.split("-")[0];
-        p_num2.value = pValue.split("-")[1];
-        p_num3.value = pValue.split("-")[2];
-    }
+    var pParts = pValue.split("-");
 
+        p_num1.value = pParts[0];
+        p_num2.value = pParts[1];
+        p_num3.value = pParts[2];
+
+    //생일도 전체 받아서 - 기준 분리
     var bValue = year.value;
-    if (bValue) {
-        year.value = bValue.split("-")[0];
-        month.value = bValue.split("-")[1];
-        day.value = bValue.split("-")[2];
-    }
+    var bParts = bValue.split("-");
+
+    year.value = bParts[0];
+    month.value = bParts[1];
+    day.value = bParts[2];
 }
+
 // 페이지 로드 시 split() 함수 호출
 window.onload = function () {
     split();
 }
+
 function zipcode() {
     new daum.Postcode({
         oncomplete: function (data) {
@@ -198,9 +203,14 @@ function handleSubmit(event) {
     document.getElementById("user_birth").value = birth;
     document.getElementById("user_email").value = email;
 
+    alert("성공적으로 정보가 수정되었습니다!^ㅇ^");
     form.submit();
 }
 
 // 폼 제출 이벤트에 핸들러 등록
 form.addEventListener("submit", handleSubmit);
+
+function home() {
+    window.location = "/";
+}
 

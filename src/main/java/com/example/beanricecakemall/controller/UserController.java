@@ -45,4 +45,12 @@ public class UserController {
         userService.update(userDTO);
         return "redirect:/my/memberInfo";
     }
+
+    @GetMapping("/user/unregister/{user_num}")
+    public String unregister(@PathVariable int user_num){
+        System.out.println("user_num : " + user_num);
+        System.out.println("회원 탈퇴");
+        userService.delete(user_num);
+        return "redirect:/";
+    }
 }

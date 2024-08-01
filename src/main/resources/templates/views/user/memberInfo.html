@@ -12,7 +12,7 @@
     <form action="/my/memberInfo" method="post" name="info">
         <table class="table border-top border-bottom align-middle mb-4">
             <tr>
-                <input type="hidden" name="user_num" th:value="${member.user_num}">
+                <input type="hidden" name="user_num" id="user_num" th:value="${member.user_num}" >
                 <td class="update-title">아이디</td>
                 <td class="update-input">
                     <input type="hidden" name="user_name" th:value="${member.user_name}">
@@ -24,7 +24,7 @@
             <tr>
                 <td class="update-title">비밀번호</td>
                 <td class="update-input">
-                    <input type="password" name="user_pw" id="user_pw" required placeholder="8자리이상/대소문자/특수문자 포함"
+                    <input type="password" name="user_pw"  id="user_pw" required placeholder="8자리이상/대소문자/특수문자 포함"
                            class="input">
                     <p id="pwMessage" style="display:none;" class="m-auto my-1 small"></p>
                 </td>
@@ -46,7 +46,7 @@
                 <td class="update-title border-bottom" rowspan="2">이메일</td>
                 <td class="update-input">
                     <input type="text" placeholder="id입력" class="update-email" id="user_emailId"
-                           th:value="${member.user_email}" required oninput="split()"> @
+                           th:value="${member.user_email}" required> @
                     <input type="text" name="update-userEmail" class="update-email" id="input_userEmail"
                            th:value="${member.user_email}" required>
                 </td>
@@ -110,7 +110,7 @@
         </table>
         <div class="text-center my-5">
             <button class="btn btn-warning rounded-2 py-2 mt-1 update-button" type="submit">회원정보수정</button>
-            <button type="reset" class="btn btn-outline-secondary rounded-2 py-2 mt-1 update-button" href="/">취소</button>
+            <button type="button" class="btn btn-outline-secondary rounded-2 py-2 mt-1 update-button" onclick="home()">홈으로</button>
             <button class="btn btn-light rounded-2 py-2 mt-1 update-button float-end" onclick="unRegister()">회원탈퇴
             </button>
         </div>
