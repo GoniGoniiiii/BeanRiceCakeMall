@@ -3,16 +3,16 @@ package com.example.beanricecakemall.controller;
 import com.example.beanricecakemall.dto.UserDTO;
 import com.example.beanricecakemall.service.UserService;
 import jakarta.servlet.http.Cookie;
+import lombok.Getter;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 //@ResponseBody
@@ -40,17 +40,26 @@ public class UserController {
     }
 
     @PostMapping("/my/memberInfo")
-    public String memberUpdate(@ModelAttribute UserDTO userDTO){
+    public String memberUpdate(@ModelAttribute UserDTO userDTO) {
         System.out.println("마이페이지 - 회원 정보 수정");
         userService.update(userDTO);
         return "redirect:/my/memberInfo";
     }
 
     @GetMapping("/user/unregister/{user_num}")
-    public String unregister(@PathVariable int user_num){
+    public String unregister(@PathVariable int user_num) {
         System.out.println("user_num : " + user_num);
         System.out.println("회원 탈퇴");
         userService.delete(user_num);
         return "redirect:/";
+    }
+
+    @PostMapping("/user/findId")
+    public ResponseEntity<String> findId(@RequestBody UserDTO userDTO) {
+        System.out.println("아이디 찾기");
+        System.out.println(userDTO.getUser_name() + userDTO.getUser_email() + userDTO.getUser_tel());
+        String user_id = userService.findId(userDTO);
+        System.out.println(user_id);
+        return ResponseEntity.ok(user_id);
     }
 }

@@ -72,4 +72,26 @@ public class UserService implements UserDetailsService {
         userRepository.deleteById(user_num);
     }
 
-}
+    public String findId(UserDTO userDTO) {
+        UserEntity userEntity = new UserEntity();
+        String user_id = null;
+        String user_name = userDTO.getUser_name();
+        String user_tel = userDTO.getUser_tel();
+        String user_email = userDTO.getUser_email();
+        System.out.println("user_name :" + user_name + "user_tel : " + user_tel + "user_email :" + user_email);
+
+        if (user_tel != null && !user_tel.equals("--")) {
+            userEntity = userRepository.findByUserNameAndUserTel(user_name, user_tel);
+        } else if (user_email != null && !user_email.equals("--")) {
+            userEntity = userRepository.findByUserNameAndUserEmail(user_name, user_email);
+        }
+
+        if (userEntity != null) {
+            user_id = userEntity.getUserId();
+        } else {
+            user_id = "찾을수 없음";
+        }
+        return user_id;
+        }
+
+    }
