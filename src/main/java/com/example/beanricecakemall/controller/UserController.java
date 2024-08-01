@@ -62,4 +62,13 @@ public class UserController {
         System.out.println(user_id);
         return ResponseEntity.ok(user_id);
     }
+
+    @PostMapping("/user/findPw")
+    public ResponseEntity<String> findPw(@RequestBody UserDTO userDTO){
+        System.out.println("비밀번호 찾기");
+        System.out.println(userDTO.getUser_name() + userDTO.getUser_email() + userDTO.getUser_tel()+userDTO.getUser_id());
+        String user_pw=userService.findPw(userDTO);
+        System.out.println(user_pw);
+        return ResponseEntity.ok(user_pw);
+    }
 }
