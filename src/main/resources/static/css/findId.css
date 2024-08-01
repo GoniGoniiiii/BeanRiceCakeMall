@@ -24,3 +24,7 @@
 .find-content .hidden {
     display: none !important;
 }
+.modal-body{
+    height:200px !important;
+    text-align: center;
+}
