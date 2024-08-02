@@ -30,6 +30,9 @@ public class ProductEntity {
     @Column(nullable = false,name="product_content")
     private String productContent;
 
+    @Column(nullable = false, name="product_info")
+    private String productInfo;
+
     @Column(nullable = false,name="product_oprice")
     private int productOprice;
 
@@ -81,6 +84,7 @@ public class ProductEntity {
         ProductEntity productEntity=new ProductEntity();
         productEntity.setProductName(productDTO.getProduct_name());
         productEntity.setProductContent(productDTO.getProduct_content());
+        productEntity.setProductInfo(productDTO.getProduct_info());
         productEntity.setProductOprice(productDTO.getProduct_oprice());
         productEntity.setProductSprice(productDTO.getProduct_sprice());
         productEntity.setProductCnt(productDTO.getProduct_cnt());
@@ -92,4 +96,20 @@ public class ProductEntity {
         return productEntity;
     }
 
+    public static ProductEntity updateEntity(ProductDTO productDTO, CategoryEntity categoryEntity){
+        ProductEntity productEntity=new ProductEntity();
+        productEntity.setProductNum(productDTO.getProduct_num());
+        productEntity.setProductName(productDTO.getProduct_name());
+        productEntity.setProductContent(productDTO.getProduct_content());
+        productEntity.setProductInfo(productDTO.getProduct_info());
+        productEntity.setProductOprice(productDTO.getProduct_oprice());
+        productEntity.setProductSprice(productDTO.getProduct_sprice());
+        productEntity.setProductCnt(productDTO.getProduct_cnt());
+        productEntity.setProductDelete("N");
+        productEntity.setProductImg(productDTO.getProduct_img());
+        productEntity.setProductDeliveryfee(productDTO.getProduct_deliveryfee());
+        productEntity.setProductRate(productDTO.getProduct_rate());
+        productEntity.setCategoryEntity(categoryEntity);
+        return productEntity;
+    }
 }

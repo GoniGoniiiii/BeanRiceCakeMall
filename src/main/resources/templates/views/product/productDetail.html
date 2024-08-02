@@ -21,6 +21,7 @@
         <div class="left-content">
             <img th:src="@{|/upload/${product.product_img}|}" class="product-mainImg"alt="상품 이미지"/>
         </div>
+        <input type="hidden" th:value="${product.product_num}" id="product_num">
         <div class="right-content ">
             <h5 class="pt-3 mb-3 fw-bold" th:text="${product.product_name}"></h5>
             <div class="d-flex justify-content-between product-price">
@@ -29,7 +30,7 @@
             </div>
             <div class="product-box">
                 <p class="text-secondary">Information</p>
-                <p th:text="${product.product_content}"></p>
+                <p th:utext="${product.product_info}"></p>
                 <p class="m-0 small"><span>배송비</span><span class="mx-3  " th:text="${product.product_deliveryfee}"></span><span>|</span><span class="mx-2">리뷰</span><span>4 건</span></p>
             </div>
             <div class="product-box">
@@ -48,8 +49,10 @@
                 <div><span class="fw-bold fs-4 text-danger"  th:data-value="${product.product_sprice}" id="all-price"></span></div>
             </div>
             <div class="d-flex justify-content-between">
-                <button class="btn btn-light product-button">장바구니 담기</button>
-                <button class="btn btn-warning product-button">바로 구매</button>
+                <button  th:if="${user_id!='admin'}"  class="btn btn-light product-button">장바구니 담기</button>
+                <button  th:if="${user_id!='admin'}" class="btn btn-warning product-button">바로 구매</button>
+                <button th:if="${user_id=='admin'}" class="btn btn-light product-button" onclick="updateProduct()">수정</button>
+                <button th:if="${user_id=='admin'}" class="btn btn-warning product-button" onclick="deleteProduct()">삭제</button>
             </div>
         </div>
     </div>  <!--productDetail.css-content끝(left content+right content)-->
@@ -79,12 +82,12 @@
         <div class="flex-fill border-end py-3" onclick="scrollToElement('product-img')">상세정보</div>
         <div class="flex-fill border-start py-3" onclick="scrollToElement('product-review')">리뷰</div>
     </div>
-    <h5>상품이미지</h5>
+    <h5 class="py-3">상품이미지</h5>
     <div class="product-explain mb-5 pb-5" id="product-img">
-        <div class="py-4" th:each="img:${product.file_url}">
+        <div th:each="img:${product.file_url}">
             <img th:if="${!img.contains('MainImg')}" th:src="@{|/upload/${img}|}" th:text="${imgl}" />
         </div>
-        <span class="product-content" th:text="${product.product_content}"></span>
+        <p class="product-content mt-3" id="product_content" th:utext="${product.product_content}"></p>
     </div>
 
     <h5 class="mt-5 pb-3 border-bottom">상품리뷰</h5>

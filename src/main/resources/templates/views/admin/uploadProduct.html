@@ -10,7 +10,10 @@
             display:flex;
         }
         .label{
-            width:120px;  
+            width:140px;
+        }
+        .product_content{
+            white-space: pre-wrap;
         }
     </style>
 </head>
@@ -18,14 +21,15 @@
 <header th:include="header"></header>
 <div class="w-50 m-auto py-5 my-2 ">
     <h2 class="fw-bold text-center py-2 my-2">상품 업로드 페이지</h2>
-    <form action="/admin/uploadProduct" method="post" enctype="multipart/form-data">
+    <form action="/admin/uploadProduct" method="post" enctype="multipart/form-data" onsubmit="convertNewlineToBr()">
         <div class="product"><div class="label">상품명</div> <input type="text" name="product_name"/></div>
+        <div class="product"><div class="label">한 줄 설명</div> <input type="text" name="product_info"/></div>
         <div class="product"><div class="label">상품원가  </div><input type="number" name="product_oprice"/></div>
         <div class="product"><div class="label">상품판매가  </div><input type="number" name="product_sprice"/></div>
         <div class="product"><div class="label">배송비 </div> <input type="text" name="product_deliveryfee"></div>
         <div class="product"><div class="label">상품수량  </div><input type="number" name="product_cnt"/></div>
-        <div class="product"><div class="label">상품 대표 이미지 </div> <input type="file" name="product_imgfile" ></div>
-        <div class="product"><div class="label">상품 설명 </div> <textarea name="product_content" class="py-5  w-75"></textarea></div>
+        <div class="product"><div class="label">상품 대표 이미지 </div> <input type="file" name="product_imgfile"></div>
+        <div class="product"><div class="label">상품 설명 </div> <textarea name="product_content" id="product_content" class="py-5  w-75" ></textarea></div>
         <div class="product"><div class="label">상품 설명 이미지 </div> <input type="file" name="product_images" multiple></div>
         <div class="product"><div class="label">카테고리</div>
             <select name="category_num">
@@ -47,4 +51,12 @@
 </div>
 </body>
 <footer th:include="footer"></footer>
+<script>
+    function convertNewlineToBr() {
+        var content = document.getElementById("product_content").value; // 텍스트 에어리어에서 입력된 내용 가져오기
+        var convertedContent = content.replace(/\n/g, "<br>"); // \n을 <br>로 변환하기
+
+        document.getElementById("product_content").value = convertedContent; // 변환된 내용을 다시 텍스트 에어리어에 설정하기
+    }
+</script>
 </html>

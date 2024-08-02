@@ -21,7 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // '-' 버튼 클릭 시
     minusButton.addEventListener('click', function() {
-        let currentValue = parseInt(quantityInput.value);
+        const currentValue = parseInt(quantityInput.value);
         if (currentValue > 1) {
             quantityInput.value = currentValue - 1;
             // 가격 업데이트
@@ -31,7 +31,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // '+' 버튼 클릭 시
     plusButton.addEventListener('click', function() {
-        let currentValue = parseInt(quantityInput.value);
+        const currentValue = parseInt(quantityInput.value);
         quantityInput.value = currentValue + 1;
         // 가격 업데이트
         updateTotalPrice();
@@ -39,8 +39,24 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function scrollToElement(elementId) {
-    var element = document.getElementById(elementId);
+    const element = document.getElementById(elementId);
     if (element) {
         element.scrollIntoView({ behavior: 'smooth', block: 'start' });
     }
+}
+
+function updateProduct(){
+    const user_num=document.getElementById("product_num").value;
+    window.location="/admin/updateProduct/"+user_num;
+}
+
+document.addEventListener("DOMContentLoaded", function() {
+    replaceEnter();
+});
+
+function replaceEnter() {
+    const spanElement = document.getElementById("product_content");
+    const text = spanElement.innerText || spanElement.textContent;  // 텍스트 콘텐츠를 가져옴
+    const formattedText = text.replace(/\n/g, '<br>');  // 줄바꿈 문자를 <br> 태그로 변환
+    spanElement.innerHTML = formattedText;  // 변환된 HTML을 삽입
 }

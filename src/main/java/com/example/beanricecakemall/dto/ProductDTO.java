@@ -26,6 +26,8 @@ public class ProductDTO {
 
     private String product_content;
 
+    private String product_info;
+
     private int product_oprice;
 
     private int product_sprice;
@@ -54,11 +56,13 @@ public class ProductDTO {
 
 
 
+
     public static ProductDTO toProductDTO(ProductEntity productEntity){
         ProductDTO productDTO = new ProductDTO();
         productDTO.setProduct_num(productEntity.getProductNum());
         productDTO.setProduct_name(productEntity.getProductName());
         productDTO.setProduct_content(productEntity.getProductContent());
+        productDTO.setProduct_info(productEntity.getProductInfo());
         productDTO.setProduct_oprice(productEntity.getProductOprice());
         productDTO.setProduct_sprice(productEntity.getProductSprice());
         productDTO.setProduct_rdate(productEntity.getProductRdate());

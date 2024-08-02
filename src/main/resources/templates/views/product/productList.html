@@ -33,7 +33,7 @@
     <div class="container-fluid">
         <div class="d-flex flex-wrap">
             <!-- 상품 리스트 반복 -->
-            <div th:each="row : ${productList}">
+            <div th:each="row : ${productList}" class="productLine">
                 <div class="d-flex my-4">
                     <div class="product" th:each="product : ${row}">
                         <a th:href="@{|/productDetail/${product.product_num}|}">
@@ -44,7 +44,7 @@
                                 <p class="fw-bold mx-2" th:text="${product.product_sprice}"></p>
                                 <del class="text-secondary small" th:text="${product.product_oprice}">500,000원</del>
                             </div>
-                            <small class="text-secondary" th:text="${product.product_content}"></small>
+                            <small class="text-secondary" th:utext="${product.product_info}"></small>
                         </a>
                     </div>
                 </div>
@@ -54,4 +54,12 @@
 </section>
 <footer th:include="footer"></footer>
 </body>
+<script>
+    function replaceEnter() {
+        const spanElement = document.getElementById("product_content");
+        const text = spanElement.innerText || spanElement.textContent;  // 텍스트 콘텐츠를 가져옴
+        const formattedText = text.replace(/\n/g, '<br>');  // 줄바꿈 문자를 <br> 태그로 변환
+        spanElement.innerHTML = formattedText;  // 변환된 HTML을 삽입
+    }
+</script>
 </html>
