@@ -10,4 +10,6 @@ import java.util.Optional;
 
 public interface FileRepository extends JpaRepository<FileEntity, Integer> {
     Optional<FileEntity> findByProductEntityAndFileUrlStartingWith(@Param("productEntity") ProductEntity productEntity, @Param("mainImg") String mainImg);
+
+    FileEntity findByFileUrl(String file_url);
 }

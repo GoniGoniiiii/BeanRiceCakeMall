@@ -90,7 +90,6 @@ public class ProductService {
         }
         //할인율 설정
         setDiscountRate(productEntity);
-        ;
 
         //fileEntity에서 file_url 가져와서 대표이미지 product_img에 경로넣어주기
         Optional<FileEntity> mainImg = fileRepository.findByProductEntityAndFileUrlStartingWith(productEntity, "MainImg");
@@ -124,6 +123,77 @@ public class ProductService {
             return productDTO;
         }
         return null;
+    }
+
+    public ProductDTO updateProduct(ProductDTO productDTO) {
+        Optional<CategoryEntity> category = categoryRepository.findById(productDTO.getCategory_num());
+        CategoryEntity categoryEntity = category.get();
+
+        ProductEntity productEntity = ProductEntity.updateEntity(productDTO, categoryEntity);
+        int save_id = productRepository.save(productEntity).getProductNum();
+
+        if (productDTO.getProduct_imgfile() != null && !productDTO.getProduct_imgfile().isEmpty()) {
+            MultipartFile imgfile = productDTO.getProduct_imgfile();
+            String origianl_file = imgfile.getOriginalFilename();
+            String file_url = "MainImg_" + System.currentTimeMillis() + "_" + origianl_file;
+            String savePath = "D:/goni/image/" + file_url;
+            System.out.println("대표 이미지 url : " + savePath);
+            try {
+                imgfile.transferTo(new File(savePath));
+                ProductEntity product = productRepository.findById(save_id).get();
+
+                FileEntity file = FileEntity.toFileEntity(productEntity, file_url);
+                fileRepository.save(file);
+            } catch (IOException e) {
+                System.err.println("파일 저장 중 오류 발생: " + e.getMessage());
+            }
+        } else {
+            System.out.println("대표 이미지가 등록되지 않았습니다.");
+        }
+        if (productDTO.getProduct_images() != null && !productDTO.getProduct_images().isEmpty()) {
+            ProductEntity product = productRepository.findById(save_id).get();
+
+            for (MultipartFile productFile : productDTO.getProduct_images()) {
+                String original_file = productFile.getOriginalFilename();
+
+                if (original_file != null && !original_file.isEmpty()) {
+                    String file_url = System.currentTimeMillis() + "_" + original_file;
+                    String savePath = "D:/goni/image/" + file_url;
+                    System.out.println("상품 설명 이미지 url " + savePath);
+                    try {
+                        productFile.transferTo(new File(savePath));
+                        FileEntity file = FileEntity.toFileEntity(product, file_url);
+                        fileRepository.save(file);
+                    } catch (IOException e) {
+                        System.err.println("파일 저장 중 오류 발생: " + e.getMessage());
+                    }
+                } else {
+                    System.out.println("상품 설명 이미지가 입력되지 않았습니다!");
+                }
+            }
+        }
+        //할인율 설정
+        setDiscountRate(productEntity);
+
+        //fileEntity에서 file_url 가져와서 대표이미지 product_img에 경로넣어주기
+        Optional<FileEntity> mainImg = fileRepository.findByProductEntityAndFileUrlStartingWith(productEntity, "MainImg");
+        mainImg.ifPresent(fileEntity -> {
+            productEntity.setProductImg(fileEntity.getFileUrl());
+            productRepository.save(productEntity);
+        });
+        ProductDTO product= ProductDTO.toProductDTO(productEntity);
+        return productDTO;
+    }
+
+    public void imgDelete(String file_url){ //상품 업로드,업데이트 할때 이미지 삭제할 수 있게!
+        // 데이터베이스에서 파일 엔티티 조회
+        FileEntity file = fileRepository.findByFileUrl(file_url);
+
+        if (file != null) {
+            fileRepository.delete(file);
+        }else{
+            System.out.println("삭제할 파일이 없음");
+        }
     }
 
 }

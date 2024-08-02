@@ -17,6 +17,9 @@
 .productLine{
     max-height: 400px;
 }
+.product{
+    width:290px;
+}
 .price{
     height:30px;
     font-size:14px;
