@@ -51,6 +51,7 @@
             <input type="number" name="product_cnt" th:value="${product.product_cnt}"/></div>
         <div class="product">
             <div class="label">상품 대표 이미지</div>
+            <input type="hidden" th:value="${product.product_img}" name="product_img"/>
             <span th:text="${product.product_img}"></span>
             <button onclick="imgDelete(this)" th:value="${product.product_img}" class="ms-3">이미지 삭제</button>
         </div>
@@ -59,7 +60,7 @@
             <input type="file" name="product_imgfile"></div>
         <div class="product">
             <div class="label">상품 설명</div>
-            <textarea name="product_content" class="w-75" rows="5" th:text="${product.product_content}"></textarea>
+            <textarea name="product_content" class="w-75" rows="5" th:utext="${product.product_content}"></textarea>
         </div>
         <div class="product">
             <div class="label">카테고리</div>
@@ -83,6 +84,7 @@
         <div class="product">
             <div class="label">현재 이미지</div>
             <div th:each="file_url : ${product.file_url}" class="imagebox">
+                <input type="hidden" name="file_url" th:value="${file_url}">
                 <img th:src="@{|/upload/${file_url}|}" alt="Product Image" class="img">
                 <button th:value="${file_url}" class="my-2" onclick="imgDelete(this)">삭제</button>
             </div>
@@ -105,7 +107,6 @@
                 if (response.ok) {
                     console.log("파일 삭제 완료");
                     alert("이미지 삭제 완료");
-                    window.location.reload(); // 페이지 새로 고침
                 } else {
                     console.log("파일 삭제 실패");
                 }

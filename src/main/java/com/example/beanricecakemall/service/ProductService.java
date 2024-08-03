@@ -59,6 +59,7 @@ public class ProductService {
                 ProductEntity product = productRepository.findById(save_id).get();
 
                 FileEntity file = FileEntity.toFileEntity(productEntity, file_url);
+                productEntity.setProductImg(file_url);
                 fileRepository.save(file);
             } catch (IOException e) {
                 System.err.println("파일 저장 중 오류 발생: " + e.getMessage());
@@ -91,12 +92,7 @@ public class ProductService {
         //할인율 설정
         setDiscountRate(productEntity);
 
-        //fileEntity에서 file_url 가져와서 대표이미지 product_img에 경로넣어주기
-        Optional<FileEntity> mainImg = fileRepository.findByProductEntityAndFileUrlStartingWith(productEntity, "MainImg");
-        mainImg.ifPresent(fileEntity -> {
-            productEntity.setProductImg(fileEntity.getFileUrl());
-            productRepository.save(productEntity);
-        });
+        productRepository.save(productEntity);
     }
 
     public List<ProductDTO> productDTOList(int category_num) {
@@ -131,6 +127,13 @@ public class ProductService {
 
         ProductEntity productEntity = ProductEntity.updateEntity(productDTO, categoryEntity);
         int save_id = productRepository.save(productEntity).getProductNum();
+//
+//        if(productDTO.getProduct_imgfile() ==null || productDTO.getProduct_imgfile().isEmpty()){
+//            String mainImg=productDTO.getProduct_img();
+//            productEntity.setProductImg(mainImg);
+//            FileEntity file=FileEntity.toFileEntity(productEntity,mainImg);
+//            fileRepository.save(file);
+//        }
 
         if (productDTO.getProduct_imgfile() != null && !productDTO.getProduct_imgfile().isEmpty()) {
             MultipartFile imgfile = productDTO.getProduct_imgfile();
@@ -143,13 +146,17 @@ public class ProductService {
                 ProductEntity product = productRepository.findById(save_id).get();
 
                 FileEntity file = FileEntity.toFileEntity(productEntity, file_url);
+                productEntity.setProductImg(file_url);
                 fileRepository.save(file);
             } catch (IOException e) {
                 System.err.println("파일 저장 중 오류 발생: " + e.getMessage());
             }
-        } else {
-            System.out.println("대표 이미지가 등록되지 않았습니다.");
-        }
+        }else if (productDTO.getProduct_img() != null && !productDTO.getProduct_img().isEmpty()) {
+                // 유지할 이미지가 이미 설정되어 있는 경우
+                productEntity.setProductImg(productDTO.getProduct_img());
+                System.out.println("대표 이미지는 유지됩니다.");
+            }
+
         if (productDTO.getProduct_images() != null && !productDTO.getProduct_images().isEmpty()) {
             ProductEntity product = productRepository.findById(save_id).get();
 
@@ -175,23 +182,17 @@ public class ProductService {
         //할인율 설정
         setDiscountRate(productEntity);
 
-        //fileEntity에서 file_url 가져와서 대표이미지 product_img에 경로넣어주기
-        Optional<FileEntity> mainImg = fileRepository.findByProductEntityAndFileUrlStartingWith(productEntity, "MainImg");
-        mainImg.ifPresent(fileEntity -> {
-            productEntity.setProductImg(fileEntity.getFileUrl());
-            productRepository.save(productEntity);
-        });
-        ProductDTO product= ProductDTO.toProductDTO(productEntity);
+        ProductDTO product = ProductDTO.toProductDTO(productEntity);
         return productDTO;
     }
 
-    public void imgDelete(String file_url){ //상품 업로드,업데이트 할때 이미지 삭제할 수 있게!
+    public void imgDelete(String file_url) { //상품 업로드,업데이트 할때 이미지 삭제할 수 있게!
         // 데이터베이스에서 파일 엔티티 조회
         FileEntity file = fileRepository.findByFileUrl(file_url);
 
         if (file != null) {
             fileRepository.delete(file);
-        }else{
+        } else {
             System.out.println("삭제할 파일이 없음");
         }
     }
