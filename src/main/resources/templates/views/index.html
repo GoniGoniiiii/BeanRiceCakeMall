@@ -36,7 +36,7 @@
         </button>
     </div>
 
-    <h2 class="fw-bold text-center pt-3 pb-5">인기상품</h2>
+    <h2 class="fw-bold text-center pt-5 pb-5 ">인기상품</h2>
     <div class="d-flex justify-content-between" th:each="product:${best}"><!--상품 한 줄-->
         <div class="product" th:each="best:${product}"><!--상품1-->
             <a th:href="@{|/productDetail/${best.product_num}|}">
@@ -53,12 +53,12 @@
     </div>
 
     <!--인기상품 끝 , 신상품 시작-->
-    <h2 class="fw-bold text-center py-5 my-3">신상품</h2>
+    <h2 class="fw-bold text-center py-5 mt-3 mb-3">신상품</h2>
     <div class="d-flex justify-content-between my-4" th:each="newProduct : ${newPro}"><!--상품 한 줄-->
         <div class="product" th:each="newPro : ${newProduct}"><!--상품1-->
             <a th:href="@{|/productDetail/${newPro.product_num}|}">
                 <img th:src="@{|upload/${newPro.product_img}|}" class="product-img">
-                <h5 class="fw-bold my-2" th:text="${newPro.product_name}"></h5>
+                <h5 class="fw-bold mt-3 mb-2" th:text="${newPro.product_name}"></h5>
                 <div class="d-flex mb-2"><!--상품 가격, 원래 가격, 할인율-->
                     <p class="fw-bold m-0" th:text="${newPro.product_sprice}"></p><!--상품 가격-->
                     <del class="px-2 text-secondary small" th:text="${newPro.product_oprice}"></del><!-- 원래 가격 -->
@@ -70,7 +70,7 @@
     </div>
 
     <h2 class="fw-bold text-center pt-5 mt-5">상품전체</h2>
-    <div class="d-flex justify-content-center mb-5 text-secondary">
+    <div class="d-flex justify-content-center mb-5  text-secondary">
         <small>인기도순</small>
         <small class="px-2">|</small>
         <small>최신등록순</small>
