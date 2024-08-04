@@ -41,6 +41,7 @@ public class ProductController {
     public String productList(@PathVariable int category_num, Model model) {
         List<ProductDTO> product = productService.productDTOList(category_num);
         String category = categoryService.categoryName(category_num);
+
         // 5개씩 묶기
         List<List<ProductDTO>> productList = new ArrayList<>();
         for (int i = 0; i < product.size(); i += 5) {
