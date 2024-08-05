@@ -1,7 +1,9 @@
 package com.example.beanricecakemall.config;
 
+import com.example.beanricecakemall.customDTO.CustomUserDetails;
 import com.example.beanricecakemall.oauth2.CustomClientRegistrationRepository;
 import com.example.beanricecakemall.service.CustomOAuth2UserService;
+import com.example.beanricecakemall.service.CustomUserDetailsService;
 import com.example.beanricecakemall.service.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,6 +11,8 @@ import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfiguration;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
@@ -18,10 +22,12 @@ public class SecurityConfig {
 
     private final CustomOAuth2UserService customOAuth2UserService;
     private final CustomClientRegistrationRepository customClientRegistrationRepository;
+    private final CustomUserDetailsService customUserDetailsService;
 
-    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService, CustomClientRegistrationRepository customClientRegistrationRepository) {
+    public SecurityConfig(CustomOAuth2UserService customOAuth2UserService, CustomClientRegistrationRepository customClientRegistrationRepository, CustomUserDetailsService customUserDetailsService) {
         this.customOAuth2UserService = customOAuth2UserService;
         this.customClientRegistrationRepository = customClientRegistrationRepository;
+        this.customUserDetailsService = customUserDetailsService;
     }
 
     @Bean

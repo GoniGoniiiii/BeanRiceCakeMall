@@ -14,10 +14,15 @@ import org.springframework.stereotype.Service;
 import java.util.Random;
 
 @Service
-@RequiredArgsConstructor
-public class UserService implements UserDetailsService {
+public class UserService {
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+
+
+    public UserService(UserRepository userRepository,BCryptPasswordEncoder bCryptPasswordEncoder){
+        this.userRepository=userRepository;
+        this.bCryptPasswordEncoder=bCryptPasswordEncoder;
+    }
 
     public void join(UserDTO userDTO) {
         boolean exist = userRepository.existsByUserId(userDTO.getUser_id());
@@ -36,17 +41,6 @@ public class UserService implements UserDetailsService {
         userRepository.save(user);
     }
 
-    @Override
-    public UserDetails loadUserByUsername(String user_id) throws UsernameNotFoundException {
-        //주어진 사용자 이름에 해당하는 사용자 정보를 db에서 찾아와서 UserDeatils타입으로 변환
-        //사용자 이름을 입력받아 해당하는 사용자의 상세 정보 반환
-        UserEntity user = userRepository.findByUserId(user_id);
-        if (user != null) {
-            System.out.println("userService에서 customUserDetails 객체 생성");
-            return new CustomUserDetails(user);
-        }
-        throw new UsernameNotFoundException("UsernameNotFoundException : " + user_id);
-    }
 
     public UserDTO memberInfo(String user_id) {
         UserEntity userEntity = userRepository.findByUserId(user_id);
