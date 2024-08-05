@@ -28,4 +28,7 @@ public class CartEntity {
 
     @OneToMany(mappedBy = "cartEntity",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<ProductEntity> productEntityList=new ArrayList<>();
+
+    @OneToMany(mappedBy = "cartEntity" , cascade =CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<UserEntity> userEntityList=new ArrayList<>();
 }
