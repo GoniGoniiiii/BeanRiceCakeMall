@@ -9,14 +9,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.client.userinfo.DefaultOAuth2UserService;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
-import org.springframework.security.oauth2.core.OAuth2AuthenticationException;
-import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Service;
 
-import javax.swing.text.html.Option;
-import java.util.Optional;
 import java.util.Random;
 
 @Service
@@ -49,7 +43,7 @@ public class UserService implements UserDetailsService {
         UserEntity user = userRepository.findByUserId(user_id);
         if (user != null) {
             System.out.println("userService에서 customUserDetails 객체 생성");
-            return new CumstomUserDetails(user);
+            return new CustomUserDetails(user);
         }
         throw new UsernameNotFoundException("UsernameNotFoundException : " + user_id);
     }

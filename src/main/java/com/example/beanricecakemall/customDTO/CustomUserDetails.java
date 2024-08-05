@@ -7,13 +7,13 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.util.ArrayList;
 import java.util.Collection;
 
-public class CumstomUserDetails implements UserDetails {
+public class CustomUserDetails implements UserDetails {
     //UserDetails 인터페이스를 구현한 클래스 , UserEntity를 기반으로 사용자의 상세 정보 제공
 
     public UserEntity userEntity;
 
     //UserEntity 객체를 필드로 가짐 -> UserEntity 정보에 접근 가능
-    public CumstomUserDetails(UserEntity userEntity){
+    public CustomUserDetails(UserEntity userEntity){
         this.userEntity=userEntity;
     }
 
@@ -29,6 +29,10 @@ public class CumstomUserDetails implements UserDetails {
             }
         });
         return collection;
+    }
+
+    public int getUserNum(){
+        return userEntity.getUserNum();
     }
 
     @Override
