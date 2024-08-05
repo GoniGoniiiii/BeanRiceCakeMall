@@ -72,6 +72,11 @@ public class UserEntity{
     @OneToMany(mappedBy ="userEntity" ,cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<ReviewEntity> reviewEntityList=new ArrayList<>();
 
+    @ManyToOne(fetch= FetchType.LAZY)
+    @JoinColumn(name="cart_num")
+    public CartEntity cartEntity;
+
+
     public static UserEntity toSaveEntity(UserDTO userDTO){
         UserEntity userEntity=new UserEntity();
         userEntity.setUserId(userDTO.getUser_id());
