@@ -153,7 +153,6 @@ public class ProductService {
             }
         }else if (productDTO.getProduct_img() != null && !productDTO.getProduct_img().isEmpty()) {
                 // 유지할 이미지가 이미 설정되어 있는 경우
-                productEntity.setProductImg(productDTO.getProduct_img());
                 System.out.println("대표 이미지는 유지됩니다.");
             }
 

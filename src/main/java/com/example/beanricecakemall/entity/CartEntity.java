@@ -1,9 +1,11 @@
 package com.example.beanricecakemall.entity;
 
+import com.example.beanricecakemall.dto.CartDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.springframework.security.core.parameters.P;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -26,9 +28,17 @@ public class CartEntity {
     @Column(nullable = false , name="cart_cnt")
     private int cartCnt;
 
-    @OneToMany(mappedBy = "cartEntity",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<ProductEntity> productEntityList=new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="product_num")
+    private ProductEntity productEntity;
 
-    @OneToMany(mappedBy = "cartEntity" , cascade =CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<UserEntity> userEntityList=new ArrayList<>();
+    @ManyToOne(fetch = FetchType.LAZY )
+    @JoinColumn(name = "user_num")
+    private UserEntity userEntity;
+    public static CartEntity toSaveEntity(CartDTO cartDTO){
+        CartEntity cartEntity=new CartEntity();
+        cartEntity.setCartCnt(cartDTO.getCart_cnt());
+        return cartEntity;
+    }
+
 }

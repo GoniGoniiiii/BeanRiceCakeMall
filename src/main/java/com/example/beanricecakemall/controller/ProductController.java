@@ -1,12 +1,15 @@
 package com.example.beanricecakemall.controller;
 
+import com.example.beanricecakemall.customDTO.CustomUserDetails;
 import com.example.beanricecakemall.dto.CategoryDTO;
 import com.example.beanricecakemall.dto.ProductDTO;
 import com.example.beanricecakemall.entity.CategoryEntity;
 import com.example.beanricecakemall.service.CategoryService;
+import com.example.beanricecakemall.service.CustomUserDetailsService;
 import com.example.beanricecakemall.service.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -56,9 +59,22 @@ public class ProductController {
     @GetMapping("/productDetail/{product_num}")
     public String productDetail(@PathVariable int product_num, Model model) {
         ProductDTO product = productService.productDetail(product_num);
-        String id = SecurityContextHolder.getContext().getAuthentication().getName();
-        model.addAttribute("product", product);
-        model.addAttribute("user_id", id);
+        Object principal= SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String id=SecurityContextHolder.getContext().getAuthentication().getName();
+        if (principal instanceof CustomUserDetails) {
+            CustomUserDetails userDetails = (CustomUserDetails) principal;
+            int userNum = userDetails.getUserNum();
+            id = userDetails.getUsername();
+
+            model.addAttribute("product", product);
+            model.addAttribute("user_id", id);
+            model.addAttribute("user_num", userNum);
+        } else {
+            // principal이 CustomUserDetails가 아닌 경우의 처리
+            model.addAttribute("product", product);
+            model.addAttribute("user_id", id);
+            model.addAttribute("user_num", -1);
+        }
         return "product/productDetail";
     }
 
@@ -86,4 +102,5 @@ public class ProductController {
         System.out.println(file_url + "이미지 삭제 완료 ");
         return ResponseEntity.ok("이미지 삭제 완료");
     }
+
 }

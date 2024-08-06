@@ -39,18 +39,33 @@
                 <span th:text="${product.product_name}"></span>
                 <div class="quantity">
                     <button class="minus border">-</button>
-                    <input type="text" class="quantity-input" value="1">
+                    <input type="text" class="quantity-input" id="cart_cnt" value="1">
                     <button class="plus border" >+</button>
                 </div>
-
             </div>
             <div class="d-flex justify-content-between my-4 mb-5">
                 <div><span>총합계</span></div>
                 <div><span class="fw-bold fs-4 text-danger"  th:data-value="${product.product_sprice}" id="all-price"></span></div>
             </div>
             <div class="d-flex justify-content-between">
-                <button  th:if="${user_id!='admin'}"  class="btn btn-light product-button">장바구니 담기</button>
-                <button  th:if="${user_id!='admin'}" class="btn btn-warning product-button">바로 구매</button>
+                <button  th:if="${user_id!='admin'}"  class="btn btn-light product-button" id="cart_id" th:value="${user_num}" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="cart()">장바구니 담기</button>
+                <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cart" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="keep()"></button>
+                            </div>
+                            <div class="modal-body pt-5">
+                                <h3 id="modal-content" class="my-3"></h3>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" onclick="goCart()">장바구니로 이동</button>
+                                <button type="button" class="btn btn-outline-success" onclick="keep()">쇼핑 계속하기</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <button  th:if="${user_id!='admin'}" class="btn btn-warning product-button"  th:value="${user_num}" onclick="pay()">바로 구매</button>
                 <button th:if="${user_id=='admin'}" class="btn btn-light product-button" onclick="updateProduct()">수정</button>
                 <button th:if="${user_id=='admin'}" class="btn btn-warning product-button" onclick="deleteProduct()">삭제</button>
             </div>

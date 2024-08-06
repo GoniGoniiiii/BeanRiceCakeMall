@@ -66,13 +66,12 @@ public class ProductEntity {
     @JoinColumn(name="category_num", insertable = true,updatable = false)
     private CategoryEntity categoryEntity;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="cart_num",insertable = true,updatable = false)
-    private CartEntity cartEntity;
-
     @ManyToOne(fetch=FetchType.LAZY)
     @JoinColumn(name="order_num",updatable = false)
     private OrderEntity orderEntity;
+
+    @OneToMany(mappedBy = "productEntity",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<CartEntity> cartEntityList=new ArrayList<>();
 
     @OneToMany(mappedBy = "productEntity",cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<FileEntity> fileEntityList=new ArrayList<>();

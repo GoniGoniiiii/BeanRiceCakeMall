@@ -60,3 +60,49 @@ function replaceEnter() {
     const formattedText = text.replace(/\n/g, '<br>');  // 줄바꿈 문자를 <br> 태그로 변환
     spanElement.innerHTML = formattedText;  // 변환된 HTML을 삽입
 }
+
+function cart(){
+    const userNum= document.getElementById("cart_id").value;
+    const productNum=document.getElementById("product_num").value;
+    const cartCnt=document.getElementById("cart_cnt").value;
+    console.log(cartCnt);
+    console.log(userNum);
+    var data={
+        user_num :userNum,
+        product_num :productNum,
+        cart_cnt : cartCnt
+    };
+
+    if(userNum==='-1'){
+        alert("로그인이 필요합니다!");
+        window.location="/login";
+    }else{
+        fetch("/cart",{
+            method:'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response =>response.text())
+            .then(result=>{
+                document.getElementById("modal-content").textContent=result;
+                var modal=new bootstrap.Modal(document.getElementById('cartModal'));
+                modal.show();
+            })
+            .catch(error =>{
+                console.error('Error :' +error);
+            })
+    }
+}
+function goCart(){
+    //장바구니로 이동
+    const user_num= document.getElementById("cart_id").value;
+    console.log(user_num);
+    window.location="/cart/"+user_num;
+
+}
+function keep(){
+    //쇼핑 계속하기
+    window.location.reload();
+}
