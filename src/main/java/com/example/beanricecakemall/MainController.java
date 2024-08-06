@@ -139,7 +139,6 @@ public class MainController {
         model.addAttribute("newPro", newProductList);
         model.addAttribute("all", allProductList);
         System.out.println("main controller :  " + id + " " + role);
-        System.out.println("new" + newProductList.toString());
         return "index";
     }
 }
