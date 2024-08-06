@@ -8,4 +8,7 @@ import java.util.List;
 
 public interface ProductRepository extends JpaRepository<ProductEntity, Integer> {
     List<ProductEntity> findAllByCategoryEntityCategoryNum(int category_num);
+
+    ProductEntity findAllByProductNum(int product_num);
+
 }

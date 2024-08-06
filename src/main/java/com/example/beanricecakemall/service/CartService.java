@@ -7,6 +7,9 @@ import com.example.beanricecakemall.entity.UserEntity;
 import com.example.beanricecakemall.repository.CartRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class CartService {
 
@@ -22,6 +25,7 @@ public class CartService {
         UserEntity userEntity = new UserEntity();
 
         productEntity.setProductNum(cartDTO.getProduct_num());
+        productEntity.setProductImg(cartDTO.getProduct_img());
         userEntity.setUserNum(cartDTO.getUser_num());
 
         cart.setProductEntity(productEntity);
@@ -35,5 +39,19 @@ public class CartService {
             result = "장바구니에 추가되지 않았음";
         }
         return result;
+    }
+
+    public List<CartDTO>  cartList(int user_num){
+        List<CartEntity> cartEntityList=cartRepository.findAllByUserEntityUserNum(user_num);
+        List<CartDTO> cartDTOS=new ArrayList<>();
+
+        if(cartEntityList!=null){
+            for(CartEntity cartEntity:cartEntityList){
+                cartDTOS.add(CartDTO.toCartDTO(cartEntity));
+            }
+        }else{
+            System.out.println("조회된 내용이 없습니다.");
+        }
+        return cartDTOS;
     }
 }

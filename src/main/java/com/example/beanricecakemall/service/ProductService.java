@@ -196,4 +196,20 @@ public class ProductService {
         }
     }
 
+    public String findProductName(int product_num){
+        ProductEntity product=productRepository.findAllByProductNum(product_num);
+        if(product!=null){
+            return product.getProductName();
+        }
+        return null;
+    }
+
+    public int findProductSprice(int product_num){
+        ProductEntity product=productRepository.findAllByProductNum(product_num);
+        if(product!=null){
+            return product.getProductSprice();
+        }
+        return 0;
+    }
+
 }
