@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,7 +28,6 @@ public class CartController {
         this.userService = userService;
     }
 
-
     @PostMapping("/cart")
     public ResponseEntity<String> cart(@RequestBody CartDTO cartDTO) {
         System.out.println("장바구니에 전달" );
@@ -35,34 +35,30 @@ public class CartController {
         return ResponseEntity.ok(result);
     }
 
-    @GetMapping ("/my/shopping/{user_id}")
-    public String myPageCart(@PathVariable String user_id){
-        System.out.println("user_id" +  user_id);
+    @GetMapping("/my/shoppingBag")
+    public String cartP(Model model, Principal principal) {
+        String user_id = principal.getName();
+        if ("anonymousUser".equals(user_id)) {
+            // 비로그인 상태일 때 로그인 페이지로 리다이렉트
+            return "redirect:/login";
+        }
 
-        int user_num=userService.findUserNum(user_id);
-        return  "redirect:/my/shoppingBag/"+user_num;
-    }
+        //user_id값으로 user_num찾아와서 장바구니 리스트 뿌리기
+        int user_num = userService.findUserNum(user_id);
+        List<CartDTO> cartDTOList = cartService.cartList(user_num);
+        List<String> product_name = new ArrayList<>();
+        List<Integer> product_sprice = new ArrayList<>();
 
-    @GetMapping("/my/shoppingBag/{user_num}")
-    public String cartP(@PathVariable int user_num, Model model) {
-        System.out.println("장바구니 내용 출력");
-        
-        //장바구니 리스트 얻어오기
-        List<CartDTO> cartDTOList=cartService.cartList(user_num);
-        //product_name 가져오기
-        List<String> product_name=new ArrayList<>();
-        List<Integer> product_sprice=new ArrayList<>();
-            for (CartDTO cartDTO : cartDTOList) {
-                String product= productService.findProductName(cartDTO.getProduct_num());
-                product_name.add(product);
-                int price= productService.findProductSprice(cartDTO.getProduct_num());
-                product_sprice.add(price);
-            }
-        System.out.println(product_name);
-        System.out.println("cart:"+cartDTOList);
-        model.addAttribute("cart",cartDTOList);
-        model.addAttribute("product_name",product_name);
-        model.addAttribute("product_sprice",product_sprice);
+        for (CartDTO cartDTO : cartDTOList) {
+            String product = productService.findProductName(cartDTO.getProduct_num());
+            product_name.add(product);
+            int price = productService.findProductSprice(cartDTO.getProduct_num());
+            product_sprice.add(price);
+        }
+
+        model.addAttribute("cart", cartDTOList);
+        model.addAttribute("product_name", product_name);
+        model.addAttribute("product_sprice", product_sprice);
         return "product/shoppingBag";
     }
 

@@ -100,9 +100,9 @@ function cart(){
 }
 function goCart(){
     //장바구니로 이동
-    const user_num= document.getElementById("user_num").value;
+    // const user_num= document.getElementById("user_num").value;
     console.log(user_num);
-    window.location="/my/shoppingBag/"+user_num;
+    window.location="/my/shoppingBag";
 }
 
 function keep(){

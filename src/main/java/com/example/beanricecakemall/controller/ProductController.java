@@ -106,6 +106,7 @@ public class ProductController {
 
     @GetMapping("/product/deleteProduct/{product_num}")
     public String deleteProudct(@PathVariable int product_num){
+        //상품 삭제
         productService.deleteProduct(product_num);
         return "redirect:/productList/13";
     }
