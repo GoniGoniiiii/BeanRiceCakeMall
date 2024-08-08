@@ -62,15 +62,18 @@ function replaceEnter() {
 }
 
 function cart(){
-    const userNum= document.getElementById("cart_id").value;
+    const userNum= document.getElementById("user_num").value;
     const productNum=document.getElementById("product_num").value;
     const cartCnt=document.getElementById("cart_cnt").value;
+    const productImg=document.getElementById("product_img").value;
+
     console.log(cartCnt);
     console.log(userNum);
     var data={
         user_num :userNum,
         product_num :productNum,
-        cart_cnt : cartCnt
+        cart_cnt : cartCnt,
+        product_img : productImg
     };
 
     if(userNum==='-1'){
@@ -97,11 +100,11 @@ function cart(){
 }
 function goCart(){
     //장바구니로 이동
-    const user_num= document.getElementById("cart_id").value;
+    const user_num= document.getElementById("user_num").value;
     console.log(user_num);
-    window.location="/cart/"+user_num;
-
+    window.location="/my/shoppingBag/"+user_num;
 }
+
 function keep(){
     //쇼핑 계속하기
     window.location.reload();

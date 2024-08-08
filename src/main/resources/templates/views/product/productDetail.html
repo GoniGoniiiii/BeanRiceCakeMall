@@ -19,7 +19,7 @@
     </div>
     <div class="d-flex justify-content-between productDetail-content" th:each="product:${product}">
         <div class="left-content">
-            <img th:src="@{|/upload/${product.product_img}|}" class="product-mainImg"alt="상품 이미지"/>
+            <img th:src="@{|/upload/${product.product_img}|}" th:value="${product.product_img}"  id="product_img" class="product-mainImg"alt="상품 이미지"/>
         </div>
         <input type="hidden" th:value="${product.product_num}" id="product_num">
         <div class="right-content ">
@@ -48,7 +48,7 @@
                 <div><span class="fw-bold fs-4 text-danger"  th:data-value="${product.product_sprice}" id="all-price"></span></div>
             </div>
             <div class="d-flex justify-content-between">
-                <button  th:if="${user_id!='admin'}"  class="btn btn-light product-button" id="cart_id" th:value="${user_num}" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="cart()">장바구니 담기</button>
+                <button  th:if="${user_id!='admin'}"  class="btn btn-light product-button" id="user_num" th:value="${user_num}" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="cart()">장바구니 담기</button>
                 <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cart" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
