@@ -19,26 +19,31 @@ public class UserService {
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
 
-    public UserService(UserRepository userRepository,BCryptPasswordEncoder bCryptPasswordEncoder){
-        this.userRepository=userRepository;
-        this.bCryptPasswordEncoder=bCryptPasswordEncoder;
+    public UserService(UserRepository userRepository, BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.userRepository = userRepository;
+        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
     }
 
-    public void join(UserDTO userDTO) {
-        boolean exist = userRepository.existsByUserId(userDTO.getUser_id());
-        System.out.println(exist);
+    public boolean exist(String user_id) {
+        System.out.println(user_id);
+        boolean exist = userRepository.existsByUserId(user_id);
+        System.out.println("id 존재 여부 : " + exist);
 
         if (exist) {
             System.out.println("id가 이미 존재함");
-            return;
+            return true;
         }
+        return false;
+    }
 
+    public String join(UserDTO userDTO) {
         UserEntity user = UserEntity.toSaveEntity(userDTO);
         user.setUserPw(bCryptPasswordEncoder.encode(user.getUserPw()));
         user.setUserRole("ROLE_USER");
         user.setUserRegistration("N");
 
         userRepository.save(user);
+        return "사용 가능한 아이디 입니다!";
     }
 
 
@@ -100,7 +105,7 @@ public class UserService {
 
         if (userEntity != null) {
             int user_num = userEntity.getUserNum();
-            System.out.println("service user_num : " +user_num);
+            System.out.println("service user_num : " + user_num);
 
             //비밀번호는 암호화 되어있기때문에 랜덤으로 초기화 해준후 사용자에게 뿌려주기
             Random random = new Random();
@@ -110,7 +115,7 @@ public class UserService {
             userEntity.setUserPw(bCryptPasswordEncoder.encode(String.valueOf(secret)));
             userRepository.save(userEntity);
 
-            user_pw =String.valueOf(secret);
+            user_pw = String.valueOf(secret);
         } else {
             user_pw = "찾을 수 없음";
         }

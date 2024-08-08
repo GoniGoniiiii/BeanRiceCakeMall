@@ -16,10 +16,20 @@ import org.springframework.web.bind.annotation.*;
 
 @Controller
 //@ResponseBody
-@RequiredArgsConstructor
 public class UserController {
 
     private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @PostMapping("/user/check-id")
+    public ResponseEntity<Boolean> checkId (@RequestBody UserDTO userDTO){
+        System.out.println("받아온 user_id : "  +userDTO.getUser_id());
+        boolean check=userService.exist(userDTO.getUser_id());
+        return ResponseEntity.ok(check);
+    }
 
     @PostMapping("/user/join")
     public String join(UserDTO userDTO) {
