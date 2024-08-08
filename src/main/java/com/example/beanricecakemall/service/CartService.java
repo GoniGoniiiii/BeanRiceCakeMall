@@ -5,6 +5,7 @@ import com.example.beanricecakemall.entity.CartEntity;
 import com.example.beanricecakemall.entity.ProductEntity;
 import com.example.beanricecakemall.entity.UserEntity;
 import com.example.beanricecakemall.repository.CartRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -53,5 +54,11 @@ public class CartService {
             System.out.println("조회된 내용이 없습니다.");
         }
         return cartDTOS;
+    }
+
+
+    @Transactional
+    public void delete(int product_num,int user_num){
+        cartRepository.deleteByProductEntityProductNumAndUserEntityUserNum(product_num,user_num);
     }
 }

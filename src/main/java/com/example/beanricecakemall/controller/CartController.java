@@ -5,6 +5,7 @@ import com.example.beanricecakemall.dto.ProductDTO;
 import com.example.beanricecakemall.entity.ProductEntity;
 import com.example.beanricecakemall.service.CartService;
 import com.example.beanricecakemall.service.ProductService;
+import com.example.beanricecakemall.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,9 +19,12 @@ public class CartController {
     private final CartService cartService;
     private final ProductService productService;
 
-    public CartController(CartService cartService, ProductService productService) {
+    private final UserService userService;
+
+    public CartController(CartService cartService, ProductService productService, UserService userService) {
         this.cartService = cartService;
         this.productService = productService;
+        this.userService = userService;
     }
 
 
@@ -29,6 +33,14 @@ public class CartController {
         System.out.println("장바구니에 전달" );
         String result= cartService.insert(cartDTO);
         return ResponseEntity.ok(result);
+    }
+
+    @GetMapping ("/my/shopping/{user_id}")
+    public String myPageCart(@PathVariable String user_id){
+        System.out.println("user_id" +  user_id);
+
+        int user_num=userService.findUserNum(user_id);
+        return  "redirect:/my/shoppingBag/"+user_num;
     }
 
     @GetMapping("/my/shoppingBag/{user_num}")
@@ -47,10 +59,16 @@ public class CartController {
                 product_sprice.add(price);
             }
         System.out.println(product_name);
+        System.out.println("cart:"+cartDTOList);
         model.addAttribute("cart",cartDTOList);
         model.addAttribute("product_name",product_name);
         model.addAttribute("product_sprice",product_sprice);
         return "product/shoppingBag";
     }
 
+    @DeleteMapping("/cart/delete")
+    public ResponseEntity<Void> deleteCart(@RequestBody CartDTO cartDTO){
+        cartService.delete(cartDTO.getProduct_num(),cartDTO.getUser_num());
+        return ResponseEntity.ok().build();
+    }
 }
