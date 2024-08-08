@@ -38,16 +38,6 @@ public class MainController {
         return "user/login";
     }
 
-    @GetMapping("/productDetail")
-    public String productDeatilP() {
-        return "product/productDetail";
-    }
-
-    @GetMapping("/my/shoppingBag")
-    public String shoppingBag() {
-        return "product/shoppingBag";
-    }
-
     @GetMapping("/my/orderList")
     public String orderListP() {
         return "user/orderList";
