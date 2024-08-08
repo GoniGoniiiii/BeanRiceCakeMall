@@ -122,4 +122,12 @@ public class UserService {
 
         return user_pw;
     }
+
+
+    //유저 id값을 넣어서 유저 일련번호 가져오기
+    public int findUserNum(String user_id){
+        UserEntity userEntity=userRepository.findUserNumByUserId(user_id);
+        int user_num=userEntity.getUserNum();
+        return user_num;
+    }
 }

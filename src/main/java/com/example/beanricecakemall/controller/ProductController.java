@@ -64,6 +64,7 @@ public class ProductController {
         if (principal instanceof CustomUserDetails) {
             CustomUserDetails userDetails = (CustomUserDetails) principal;
             int userNum = userDetails.getUserNum();
+            System.out.println(userNum);
             id = userDetails.getUsername();
 
             model.addAttribute("product", product);
