@@ -109,3 +109,8 @@ function keep(){
     //쇼핑 계속하기
     window.location.reload();
 }
+
+function deleteProduct(){
+    const product_num=document.getElementById("product_num").value;
+    window.location="/product/deleteProduct/"+product_num;
+}

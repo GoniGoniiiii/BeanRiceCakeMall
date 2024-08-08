@@ -7,6 +7,7 @@ import com.example.beanricecakemall.entity.ProductEntity;
 import com.example.beanricecakemall.repository.CategoryRepository;
 import com.example.beanricecakemall.repository.FileRepository;
 import com.example.beanricecakemall.repository.ProductRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -210,6 +211,11 @@ public class ProductService {
             return product.getProductSprice();
         }
         return 0;
+    }
+
+    @Transactional
+    public void deleteProduct(int product_num){
+        productRepository.deleteAllByProductNum(product_num);
     }
 
 }

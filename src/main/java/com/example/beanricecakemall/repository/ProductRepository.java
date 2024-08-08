@@ -11,4 +11,6 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
 
     ProductEntity findAllByProductNum(int product_num);
 
+    void deleteAllByProductNum(int product_num);
+
 }

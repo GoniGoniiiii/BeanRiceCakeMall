@@ -104,4 +104,9 @@ public class ProductController {
         return ResponseEntity.ok("이미지 삭제 완료");
     }
 
+    @GetMapping("/product/deleteProduct/{product_num}")
+    public String deleteProudct(@PathVariable int product_num){
+        productService.deleteProduct(product_num);
+        return "redirect:/productList/13";
+    }
 }
