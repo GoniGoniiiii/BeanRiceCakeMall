@@ -27,8 +27,9 @@
                           style="position: absolute; top:0; right: 0; font-size:10px; ">1</span> <!-- 숫자 -->
                 </a>
             </li>
+            <input type="hidden" th:value="${#authentication.name}" id="user_id"/>
             <li class="pt-2"><a href="/my/memberInfo">마이페이지</a></li>
-            <li class="pt-2"><a href="/my/shoppingBag">장바구니</a></li>
+            <li class="pt-2"><a href="#" onclick="goCart()">장바구니</a></li>
             <li class="pt-2">
                 <a th:if="${#authentication.name != 'anonymousUser'}" href="/logout">로그아웃</a>
                 <a th:if="${#authentication.name == 'anonymousUser'}" href="/login">로그인</a>
@@ -100,4 +101,11 @@
     <p class="border-top pb-4"></p>
 </header>
 </body>
+<script>
+    function goCart(){
+        const user_id= document.getElementById("user_id").value;
+        console.log(user_id);
+        window.location.href="/my/shoppingBag/"+user_id;
+    }
+</script>
 </html>
