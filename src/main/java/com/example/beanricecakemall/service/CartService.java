@@ -34,31 +34,45 @@ public class CartService {
 
         String result = null;
         if (cart != null) {
-            cartRepository.save(cart);
-            result = "장바구니에 추가되었습니다!";
+            boolean exist = cartRepository.existsByProductEntityProductNum(cartDTO.getProduct_num());
+            if (exist) {
+                int addCnt=cartDTO.getCart_cnt();
+                System.out.println("추가 되는 수량 : " +addCnt);
+                CartEntity cartEntity= cartRepository.findCartCntByProductEntityProductNum(cartDTO.getProduct_num());
+                int existCnt=cartEntity.getCartCnt();
+                System.out.println("기존  수량 : " +existCnt);
+                cart.setCartCnt(existCnt+addCnt);
+                cart.setCartNum(cartEntity.getCartNum());
+                cartRepository.save(cart);
+                result="기존 장바구니에 있던 상품의 수량이 변경되었습니다!";
+            } else {
+                cartRepository.save(cart);
+                result = "장바구니에 추가되었습니다!";
+            }
         } else {
             result = "장바구니에 추가되지 않았음";
         }
         return result;
     }
 
-    public List<CartDTO>  cartList(int user_num){
-        List<CartEntity> cartEntityList=cartRepository.findAllByUserEntityUserNum(user_num);
-        List<CartDTO> cartDTOS=new ArrayList<>();
+    public List<CartDTO> cartList(int user_num) {
+        List<CartEntity> cartEntityList = cartRepository.findAllByUserEntityUserNum(user_num);
+        List<CartDTO> cartDTOS = new ArrayList<>();
 
-        if(cartEntityList!=null){
-            for(CartEntity cartEntity:cartEntityList){
+        if (cartEntityList != null) {
+            for (CartEntity cartEntity : cartEntityList) {
                 cartDTOS.add(CartDTO.toCartDTO(cartEntity));
             }
-        }else{
+        } else {
             System.out.println("조회된 내용이 없습니다.");
         }
         return cartDTOS;
     }
-    public void update(CartDTO cartDTO){
-        CartEntity cartEntity=CartEntity.toUpdateEntity(cartDTO);
-        ProductEntity productEntity=new ProductEntity();
-        UserEntity userEntity=new UserEntity();
+
+    public void update(CartDTO cartDTO) {
+        CartEntity cartEntity = CartEntity.toUpdateEntity(cartDTO);
+        ProductEntity productEntity = new ProductEntity();
+        UserEntity userEntity = new UserEntity();
 
         userEntity.setUserNum(cartDTO.getUser_num());
         productEntity.setProductImg(cartDTO.getProduct_img());
@@ -70,7 +84,7 @@ public class CartService {
     }
 
     @Transactional
-    public void delete(int product_num,int user_num){
-        cartRepository.deleteByProductEntityProductNumAndUserEntityUserNum(product_num,user_num);
+    public void delete(int product_num, int user_num) {
+        cartRepository.deleteByProductEntityProductNumAndUserEntityUserNum(product_num, user_num);
     }
 }

@@ -21,6 +21,15 @@ document.addEventListener('DOMContentLoaded', function () {
     const totalPriceElement = document.getElementById('total-price');
 
 
+    // 각 상품의 가격을 초기화하는 함수
+    function initializePrices() {
+        quantityInputs.forEach((input, index) => {
+            let quantity = parseInt(input.value);
+            let priceElement = productPrices[index];
+            let pricePerItem = parseInt(priceElement.getAttribute("data-value"));
+            priceElement.textContent = (pricePerItem * quantity).toLocaleString() + '원';
+        });
+    }
 
     // 수량 감소 버튼
     minusButtons.forEach(function (minusButton, index) {
@@ -66,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log("현재수량 : " + quantity);
     }
 
-// 총합계 금액 업데이트 함수
+    // 총합계 금액 업데이트 함수
     function updateTotalPrice() {
         let totalPrice = 0;
         productPrices.forEach((priceElement, index) => {
@@ -78,7 +87,7 @@ document.addEventListener('DOMContentLoaded', function () {
         totalPriceElement.textContent = totalPrice.toLocaleString() + '원';
     }
 
-// 배송비 업데이트 함수
+    // 배송비 업데이트 함수
     function updateDeliveryFee() {
         let totalDeliveryFee = 0;
 
@@ -98,6 +107,7 @@ document.addEventListener('DOMContentLoaded', function () {
         console.log(totalDeliveryFee);
     }
 
+    //총 결제금액 계산
     function updateFinalPrice() {
         let totalElement = document.getElementById('total-price');
         let deliveryFeeElement = document.getElementById('delivery-fee');
@@ -114,9 +124,11 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // 페이지 로드시 초기 총합계 금액 표시
+    initializePrices();
     updateTotalPrice(); // 페이지 로드 시 총합계 초기화
     updateDeliveryFee(); // 배송비 업데이트
     updateFinalPrice(); //결제금액 업데이트
+    // 페이지가 로드될 때 가격 초기화
 
     // 전체 선택 체크박스
     allChoose.addEventListener('change', function () {
@@ -132,20 +144,18 @@ function goPayment() {
     location.href = "/payment";
 }
 
+//장바구니 상품 삭제
 function cartDelete(index) {
     const product_num = document.getElementById(`product_num[${index}]`).value;
     const user_num = document.getElementById("user_num").value;
     console.log(user_num, product_num);
 
     fetch('/cart/delete', {
-        method: 'DELETE',
-        headers: {
+        method: 'DELETE', headers: {
             'Content-Type': 'application/json'
-        }, body: JSON.stringify(
-            {
-                product_num: product_num,
-                user_num: user_num
-            })
+        }, body: JSON.stringify({
+            product_num: product_num, user_num: user_num
+        })
     }).then(response => {
         if (response.ok) {
             // 요청이 성공했을 경우, DOM에서 해당 항목을 삭제
@@ -162,6 +172,7 @@ function cartDelete(index) {
     });
 }
 
+//장바구니 상품 수정(수량 수정)
 function cartUpdate(index) {
     const product_num = document.getElementById(`product_num[${index}]`).value;
     const user_num = document.getElementById('user_num').value;
@@ -171,11 +182,9 @@ function cartUpdate(index) {
     console.log("user_num: ", user_num, "product_num : ", product_num, "cart_num : ", cart_num, "product_img: ", product_img, "cart_cnt:", cart_cnt);
 
     fetch('/cart/update', {
-        method: 'POST',
-        headers: {
+        method: 'POST', headers: {
             'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
+        }, body: JSON.stringify({
             product_num: product_num,
             user_num: user_num,
             cart_num: cart_num,
