@@ -91,7 +91,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // 텍스트 콘텐츠에서 숫자를 추출
         let total = parseInt(totalElement.textContent.replace(/[^0-9]/g, ''), 10);
         let deliveryFee = parseInt(deliveryFeeElement.textContent.replace(/[^0-9]/g, ''), 10);
-        let finalPrice=0;
+        let finalPrice = 0;
 
         finalPrice = total + deliveryFee;
         const finalElement = document.getElementById('final-price');
@@ -118,8 +118,8 @@ function goPayment() {
     location.href = "/payment";
 }
 
-function cartDelete() {
-    const product_num = document.getElementById("product_num").value;
+function cartDelete(index) {
+    const product_num = document.getElementById(`product_num[${index}]`).value;
     const user_num = document.getElementById("user_num").value;
     console.log(user_num, product_num);
 
@@ -132,28 +132,41 @@ function cartDelete() {
                 product_num: product_num,
                 user_num: user_num
             })
-    }).then(response => response.text())
+    }).then(response => {
+        if (response.ok) {
+            // 요청이 성공했을 경우, DOM에서 해당 항목을 삭제
+            const cartItem = document.getElementById(`cart-item[${index}]`);
+            if (cartItem) {
+                cartItem.remove();
+            }
+            console.log("삭제 완료:", "user_num:", user_num, "product_num:", product_num);
+        } else {
+            console.error('삭제 실패');
+        }
+    }).catch(error => {
+        console.error('요청 중 오류 발생:', error);
+    });
 }
 
-    function cartUpdate(index) {
+function cartUpdate(index) {
     const product_num = document.getElementById(`product_num[${index}]`).value;
     const user_num = document.getElementById('user_num').value;
-    const cart_num=document.getElementById(`cart_num[${index}]`).value;
-    const product_img=document.getElementById(`product_img[${index}]`).value;
-    const cart_cnt=document.getElementById(`cart_cnt[${index}]`).value;
-    console.log( "user_num: " , user_num, "product_num : ", product_num, "cart_num : " , cart_num,"product_img: ",product_img,"cart_cnt:",cart_cnt);
+    const cart_num = document.getElementById(`cart_num[${index}]`).value;
+    const product_img = document.getElementById(`product_img[${index}]`).value;
+    const cart_cnt = document.getElementById(`cart_cnt[${index}]`).value;
+    console.log("user_num: ", user_num, "product_num : ", product_num, "cart_num : ", cart_num, "product_img: ", product_img, "cart_cnt:", cart_cnt);
 
-    fetch('/cart/update',{
-        method:'POST',
-        headers:{
-            'Content-Type':'application/json'
+    fetch('/cart/update', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
         },
-        body:JSON.stringify({
-            product_num:product_num,
-            user_num:user_num,
-            cart_num:cart_num,
-            product_img:product_img,
-            cart_cnt:cart_cnt
+        body: JSON.stringify({
+            product_num: product_num,
+            user_num: user_num,
+            cart_num: cart_num,
+            product_img: product_img,
+            cart_cnt: cart_cnt
         })
-    }).then(response=> response.text())
-    }
+    }).then(response => response.text())
+}
