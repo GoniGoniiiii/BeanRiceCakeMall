@@ -1,4 +1,16 @@
 document.addEventListener('DOMContentLoaded', function () {
+    //left-content와 right-content 설정
+    var rightContent = document.querySelector(".right-content");
+    var leftContent = document.querySelector(".left-content");
+
+    // left-content 요소를 만났을 때 오른쪽 박스의 바닥이 보이게 함
+    leftContent.addEventListener("mouseenter", function () {
+        // 오른쪽 박스의 scrollTop을 최대값으로 설정하여 바닥이 보이게 함
+        rightContent.scrollTop = rightContent.scrollHeight;
+    });
+
+
+    //수량관련 설정
     const minusButtons = document.querySelectorAll('.minus');
     const plusButtons = document.querySelectorAll('.plus');
     const quantityInputs = document.querySelectorAll('.quantity-input');
@@ -7,6 +19,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const itemCheckboxes = document.querySelectorAll('.item-checkbox');
     const productPrices = document.querySelectorAll('.product-sprice');
     const totalPriceElement = document.getElementById('total-price');
+
+
 
     // 수량 감소 버튼
     minusButtons.forEach(function (minusButton, index) {

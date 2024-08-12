@@ -4,6 +4,10 @@
 .right-content{
     width:385px;
     border:1px solid #ddd;
+    position: sticky;
+    top: 20px;
+    max-height: 50vh;
+    min-height: 0vh;
 }
 .shopping-list{
     width:950px;
