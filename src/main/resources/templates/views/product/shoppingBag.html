@@ -16,7 +16,7 @@
         </ol>
     </nav>
     <h3 class="pt-5 mb-5 text-center fw-bold">장바구니</h3>
-    <form action="" method="">
+    <form action="/my/payment" method="POST">
         <div class="d-flex justify-content-between">
             <div class="left-content" id="left-content"><!--왼쪽 전체 영역-->
                 <div class="mb-5 border shopping-list">
@@ -28,12 +28,20 @@
                             <label class="form-check-label pt-1" for="All-choose">전체 선택</label>
                         </div>
                     </div>
-                    <div class="row align-items-center border-top py-3 m-0 shopping-product"  th:each="cart, iterStat : ${cart}" >
+                    <div class="row align-items-center border-top py-3 m-0 shopping-product"
+                         th:each="cart, iterStat : ${cart}">
                         <div class="col-1 ms-4">
-                            <input class="form-check-input item-checkbox" type="checkbox" id="item-[[${iterStat.index}]]" value="checked">
+                            <input class="form-check-input item-checkbox" type="checkbox"
+                                   id="item-[[${iterStat.index}]]" value="checked">
                         </div>
                         <div class="col-2">
-                            <img th:src="@{|/upload/${cart.product_img}|}" class="img">
+                            <a th:href="@{|/productDetail/${cart.product_num}|}">
+                                <img th:src="@{|/upload/${cart.product_img}|}" class="img">
+                                <input type="hidden" th:value="${cart.product_num}" name="product_num" th:id="'product_num[' + ${iterStat.index} + ']'">
+                                <input type="hidden" th:value="${cart.cart_num}" name="cart_cnt" th:id="'cart_num[' + ${iterStat.index} + ']'"/>
+                                <input type="hidden" th:value="${cart.product_img}"  th:id="'product_img[' + ${iterStat.index} + ']'">
+                                <input type="hidden" th:value="${cart.user_num}" name="user_num" id="user_num">
+                            </a>
                         </div>
                         <div class="col-6">
                             <div class="d-inline-block">
@@ -43,7 +51,7 @@
                                     <div class="quantity d-flex align-items-center">
                                         <button class="minus border me-1">-</button>
                                         <input type="text" class="quantity-input me-1 rounded border-0 text-center"
-                                               style="width:30px;" th:value="${cart.cart_cnt}">
+                                               style="width:30px;" th:value="${cart.cart_cnt}" name="cart_cnt" th:id="'cart_cnt[' + ${iterStat.index} + ']'">
                                         <button class="plus border me-2">+</button>
                                         <button class="btn btn-outline-secondary btn-sm apply-btn">수량 적용</button>
                                     </div>
@@ -52,10 +60,11 @@
                         </div>
                         <div class="col text-end me-3">
                             <div class="d-inline-block">
-                                <button type="button" class="btn-close" aria-label="Close"  th:value="${cart.product_num}" id="product_num" onclick="cartDelete()"></button>
-                                <div class="my-2 mt-3 product-sprice" th:data-value="${product_sprice[iterStat.index]}" th:text="${product_sprice[iterStat.index]}" id="product-sprice-${iterStat.index}"></div>
-                                <div  class="delivery-fee" th:data-fee="${product_deliveryFee[iterStat.index]}" style="display: none;"></div>
-                                <input type="hidden" th:value="${cart.user_num}" id="user_num">
+                                <button type="button" class="btn-close" aria-label="Close"
+                                        th:value="${cart.product_num}" th:id="'product_num[' + ${iterStat.index} + ']'" onclick="cartDelete()"></button>
+                                <div class="my-2 mt-3 product-sprice" th:data-value="${product_sprice[iterStat.index]}"
+                                     th:text="${product_sprice[iterStat.index]}" th:id="'product_sprice[' + ${iterStat.index} + ']'"></div>
+                                <div class="delivery-fee" th:data-fee="${product_deliveryFee[iterStat.index]}" style="display: none;"></div>
                             </div>
                         </div>
                     </div><!--장바구니 상품1-->
@@ -66,10 +75,11 @@
                 <div class="border"><!--결제금액 박스-->
                     <div class="order-items"><p class="fw-bold fs-4 m-0">결제 예정 내역</p></div><!--제목-->
                     <div class="border-top order-items "><!--상품금액,배송비,할인금액,추가금액-->
-                        <div class="order-item"><span class="order-title2">총 상품금액</span><strong class="order-price" id="total-price">42000</strong>
+                        <div class="order-item"><span class="order-title2">총 상품금액</span><strong class="order-price"
+                                                                                                id="total-price">42000</strong>
                         </div>
-                        <div class="order-item"><span class="order-title2" >배송비</span><strong
-                                class="order-price"  id="delivery-fee"></strong></div>
+                        <div class="order-item"><span class="order-title2">배송비</span><strong
+                                class="order-price" id="delivery-fee"></strong></div>
                     </div>
                     <div class="border-top order-items"><!--최종 결제 금액-->
                         <div class="order-item fs-5 fw-bold"><span class="order-title2">결제 예정 금액</span><strong

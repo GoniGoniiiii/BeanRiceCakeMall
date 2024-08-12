@@ -55,7 +55,19 @@ public class CartService {
         }
         return cartDTOS;
     }
+    public void update(CartDTO cartDTO){
+        CartEntity cartEntity=CartEntity.toUpdateEntity(cartDTO);
+        ProductEntity productEntity=new ProductEntity();
+        UserEntity userEntity=new UserEntity();
 
+        userEntity.setUserNum(cartDTO.getUser_num());
+        productEntity.setProductImg(cartDTO.getProduct_img());
+        productEntity.setProductNum(cartDTO.getProduct_num());
+
+        cartEntity.setUserEntity(userEntity);
+        cartEntity.setProductEntity(productEntity);
+        cartRepository.save(cartEntity);
+    }
 
     @Transactional
     public void delete(int product_num,int user_num){

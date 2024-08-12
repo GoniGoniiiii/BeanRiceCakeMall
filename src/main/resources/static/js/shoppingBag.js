@@ -7,7 +7,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const itemCheckboxes = document.querySelectorAll('.item-checkbox');
     const productPrices = document.querySelectorAll('.product-sprice');
     const totalPriceElement = document.getElementById('total-price');
-    const finalPrice = document.getElementById('final-price');
 
     // 수량 감소 버튼
     minusButtons.forEach(function (minusButton, index) {
@@ -39,6 +38,7 @@ document.addEventListener('DOMContentLoaded', function () {
             updateTotalPrice(); // 총합계 업데이트
             updateDeliveryFee(); // 배송비 업데이트
             updateFinalPrice();//총 결제금액 업데이트
+            cartUpdate(index); // 해당 인덱스를 cartUpdate 함수에 전달
         });
     });
 
@@ -134,3 +134,26 @@ function cartDelete() {
             })
     }).then(response => response.text())
 }
+
+    function cartUpdate(index) {
+    const product_num = document.getElementById(`product_num[${index}]`).value;
+    const user_num = document.getElementById('user_num').value;
+    const cart_num=document.getElementById(`cart_num[${index}]`).value;
+    const product_img=document.getElementById(`product_img[${index}]`).value;
+    const cart_cnt=document.getElementById(`cart_cnt[${index}]`).value;
+    console.log( "user_num: " , user_num, "product_num : ", product_num, "cart_num : " , cart_num,"product_img: ",product_img,"cart_cnt:",cart_cnt);
+
+    fetch('/cart/update',{
+        method:'POST',
+        headers:{
+            'Content-Type':'application/json'
+        },
+        body:JSON.stringify({
+            product_num:product_num,
+            user_num:user_num,
+            cart_num:cart_num,
+            product_img:product_img,
+            cart_cnt:cart_cnt
+        })
+    }).then(response=> response.text())
+    }

@@ -21,7 +21,7 @@ public class CartEntity {
     @Column(name="cart_num")
     private int cartNum;
 
-    @Column(name="cart_date")
+    @Column(name="cart_date",updatable = false)
     @CreationTimestamp
     private Timestamp cartDate;
 
@@ -37,6 +37,13 @@ public class CartEntity {
     private UserEntity userEntity;
     public static CartEntity toSaveEntity(CartDTO cartDTO){
         CartEntity cartEntity=new CartEntity();
+        cartEntity.setCartCnt(cartDTO.getCart_cnt());
+        return cartEntity;
+    }
+
+    public static CartEntity toUpdateEntity(CartDTO cartDTO){
+        CartEntity cartEntity=new CartEntity();
+        cartEntity.setCartNum(cartDTO.getCart_num());
         cartEntity.setCartCnt(cartDTO.getCart_cnt());
         return cartEntity;
     }

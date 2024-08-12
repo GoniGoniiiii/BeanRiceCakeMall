@@ -66,6 +66,12 @@ public class CartController {
         return "product/shoppingBag";
     }
 
+    @PostMapping("/cart/update")
+    public ResponseEntity<Void> updateCart(@RequestBody CartDTO cartDTO){
+        cartService.update(cartDTO);
+        return ResponseEntity.ok().build();
+    }
+
     @DeleteMapping("/cart/delete")
     public ResponseEntity<Void> deleteCart(@RequestBody CartDTO cartDTO){
         cartService.delete(cartDTO.getProduct_num(),cartDTO.getUser_num());
