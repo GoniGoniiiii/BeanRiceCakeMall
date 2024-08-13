@@ -152,10 +152,10 @@ public class ProductService {
             } catch (IOException e) {
                 System.err.println("파일 저장 중 오류 발생: " + e.getMessage());
             }
-        }else if (productDTO.getProduct_img() != null && !productDTO.getProduct_img().isEmpty()) {
-                // 유지할 이미지가 이미 설정되어 있는 경우
-                System.out.println("대표 이미지는 유지됩니다.");
-            }
+        } else if (productDTO.getProduct_img() != null && !productDTO.getProduct_img().isEmpty()) {
+            // 유지할 이미지가 이미 설정되어 있는 경우
+            System.out.println("대표 이미지는 유지됩니다.");
+        }
 
         if (productDTO.getProduct_images() != null && !productDTO.getProduct_images().isEmpty()) {
             ProductEntity product = productRepository.findById(save_id).get();
@@ -197,33 +197,48 @@ public class ProductService {
         }
     }
 
-    public String findProductName(int product_num){
-        ProductEntity product=productRepository.findAllByProductNum(product_num);
-        if(product!=null){
+    public String findProductName(int product_num) {
+        ProductEntity product = productRepository.findAllByProductNum(product_num);
+        if (product != null) {
             return product.getProductName();
         }
         return null;
     }
 
-    public int findProductSprice(int product_num){
-        ProductEntity product=productRepository.findAllByProductNum(product_num);
-        if(product!=null){
+    public int findProductSprice(int product_num) {
+        ProductEntity product = productRepository.findAllByProductNum(product_num);
+        if (product != null) {
             return product.getProductSprice();
         }
         return 0;
     }
 
-    public int findProductDeliveryFee(int product_num){
-        ProductEntity product=productRepository.findAllByProductNum(product_num);
-        if(product!=null){
+    public int findProductDeliveryFee(int product_num) {
+        ProductEntity product = productRepository.findAllByProductNum(product_num);
+        if (product != null) {
             return product.getProductDeliveryfee();
         }
         return 0;
     }
 
     @Transactional
-    public void deleteProduct(int product_num){
+    public void deleteProduct(int product_num) {
         productRepository.deleteAllByProductNum(product_num);
     }
 
+    public ProductDTO findProductInfo(int product_num) {
+//       List<ProductEntity> productEntities= productRepository.findByProductNum(product_num);
+//       List<ProductDTO> productDTOList=new ArrayList<>();
+//       for(ProductEntity product: productEntities){
+//           productDTOList.add(ProductDTO.toProductDTO(product));
+//       }
+//       for(ProductDTO dto: productDTOList){
+//           System.out.println(dto.getProduct_num());
+//       }
+//       return productDTOList;
+//    }
+        ProductEntity product = productRepository.findByProductNum(product_num);
+        ProductDTO productDTO = ProductDTO.toProductDTO(product);
+        return productDTO;
+    }
 }
