@@ -22,12 +22,6 @@ public class MainController {
         this.productService = productService;
     }
 
-
-    @GetMapping("/payment")
-    public String paymentP() {
-        return "product/payment";
-    }
-
     @GetMapping("/login")
     public String loingP() {
         return "user/login";
