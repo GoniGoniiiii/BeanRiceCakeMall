@@ -137,12 +137,50 @@ document.addEventListener('DOMContentLoaded', function () {
             checkbox.checked = isChecked;
         });
     });
-});
 
-function goPayment() {
-    console.log("호출됨");
-    location.href = "/payment";
-}
+    // 결제하기 버튼 클릭 이벤트
+    const submitButton = document.getElementById('submit_button');
+    submitButton.addEventListener('click', function (event) {
+        event.preventDefault();  // 폼 기본 제출 방지
+
+        // 체크된 장바구니 아이템들 수집
+        const checkedItems = document.querySelectorAll('.item-checkbox:checked');
+        const orderData = [];
+
+        checkedItems.forEach((item, index) => {
+            const cartNum = item.value;
+            const productNum = document.getElementById(`product_num[${index}]`).value;
+            const cartCnt = document.getElementById(`cart_cnt[${index}]`).value;
+            const userNum = document.getElementById('user_num').value;
+
+            orderData.push({
+                cart_num: cartNum,
+                product_num: productNum,
+                cart_cnt: cartCnt,
+                user_num: userNum
+            });
+        });
+
+        // 서버에 데이터 전송
+        fetch('/my/payment', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(orderData)
+        })
+            .then(response => response.text())
+            .then(data => {
+                console.log('Success:', data);
+                // 성공적인 응답 후 결제 페이지로 리다이렉트
+                window.location.href = "/payment";
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                alert('주문 처리 중 오류가 발생했습니다.');
+            });
+    });
+});
 
 //장바구니 상품 삭제
 function cartDelete(index) {
@@ -192,4 +230,4 @@ function cartUpdate(index) {
             cart_cnt: cart_cnt
         })
     }).then(response => response.text())
-}
+}g

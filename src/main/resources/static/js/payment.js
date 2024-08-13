@@ -1,7 +1,6 @@
 document.addEventListener("DOMContentLoaded", function () {
     var rightContent = document.querySelector(".right-content");
     var orderProduct = document.querySelector(".order-product");
-    ``
 
     // order-product 요소를 만났을 때 오른쪽 박스의 바닥이 보이게 함
     orderProduct.addEventListener("mouseenter", function () {
@@ -194,6 +193,86 @@ document.getElementById('order_paymethod4').onchange = function() {
 };
 
 
+
+// 전화번호 및 생년월일, 이메일 분리 함수
+function split() {
+    var emailId = document.getElementById('user_emailId');
+    var email = document.getElementById('input_userEmail');
+    var p_num1 = document.getElementById('p_num1');
+    var p_num2 = document.getElementById('p_num2');
+    var p_num3 = document.getElementById('p_num3');
+
+    //이메일을 통째로 받아서 @를 기준으로 분리해줌
+    var emailValue = emailId.value;
+    var emailParts = emailValue.split("@");
+
+    emailId.value = emailParts[0];
+    email.value = emailParts[1];
+
+    //전화번호 전체를 받아서 - 기준으로 분리
+    var pValue = p_num1.value;
+    var pParts = pValue.split("-");
+
+    p_num1.value = pParts[0];
+    p_num2.value = pParts[1];
+    p_num3.value = pParts[2];
+
+}
+
+// 페이지 로드 시 split() 함수 호출
+window.onload = function () {
+    split();
+}
+
+function zipcode() {
+    new daum.Postcode({
+        oncomplete: function (data) {
+// 팝업에서 검색결과 항목을 클릭했을때 실행할 코드를 작성하는 부분.
+
+// 각 주소의 노출 규칙에 따라 주소를 조합한다.
+// 내려오는 변수가 값이 없는 경우엔 공백('')값을 가지므로, 이를 참고하여 분기 한다.
+            var addr = ''; // 주소 변수
+
+//사용자가 선택한 주소 타입에 따라 해당 주소 값을 가져온다.
+            if (data.userSelectedType === 'R') { // 사용자가 도로명 주소를 선택했을 경우
+                addr = data.roadAddress;
+            } else { // 사용자가 지번 주소를 선택했을 경우(J)
+                addr = data.jibunAddress;
+            }
+
+// 우편번호와 주소 정보를 해당 필드에 넣는다.
+            document.getElementById('user_zipcode').value = data.zonecode;
+            document.getElementById('user_address').value = addr;
+// 커서를 상세주소 필드로 이동한다.
+            document.getElementById('user_addrDetail').focus();
+        }
+    }).open();
+}
+
+// 폼 제출 시 값 조합
+var form = document.querySelector("form[name='info']");
+
+function handleSubmit(event) {
+    event.preventDefault();
+
+    var p_num1 = document.getElementById("p_num1").value;
+    var p_num2 = document.getElementById("p_num2").value;
+    var p_num3 = document.getElementById("p_num3").value;
+    var emailId = document.getElementById("user_emailId").value;
+    var domain = document.getElementById("input_userEmail").value;
+
+    var telNumber1 = p_num1 + "-" + p_num2 + "-" + p_num3;
+    var email = emailId + "@" + domain;
+
+    document.getElementById("user_tel").value = telNumber1;
+    document.getElementById("user_email").value = email;
+
+    alert("성공적으로 정보가 수정되었습니다!^ㅇ^");
+    form.submit();
+}
+
+// 폼 제출 이벤트에 핸들러 등록
+form.addEventListener("submit", handleSubmit);
 
 
 

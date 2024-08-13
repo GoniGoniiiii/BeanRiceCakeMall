@@ -22,18 +22,19 @@
                 <table class="table align-middle mb-5"><!--첫번째 주문자 정보 테이블-->
                     <tr>
                         <th>이름</th>
-                        <td><input type="text" name="order_userName" value="유고운" id="order_userName" required></td>
+                        <td><input type="text" name="order_userName" th:value="${user.user_name}" id="order_userName" required></td>
                     </tr>
                     <tr class="border-white">
                         <th rowspan="2" class="border-bottom">이메일</th>
                         <td class="email">
-                            <input type="text" name="order_userId" value="gonigoni1216" class="email" id="order_id" required> @
-                            <input type="text" name="order_userEmail" class="email" id="input_userEmail" required>
+                            <input type="text" name="order_userId" th:value="${user.user_email}" class="email" id="user_emailId" required> @
+                            <input type="text" class="email" id="input_userEmail" required>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <select class="form-select" name="order_userEmail" id="select_userEmail">
+                            <input type="hidden" name="order_userEmail" >
+                            <select class="form-select"  id="select_userEmail">
                                 <option value="직접 입력" selected>직접 입력</option> <!--직접입력 누르면 위에 입력하는 칸에 입력할 수 있게-->
                                 <option value="naver.com">naver.com</option>
                                 <option value="gmail.com">gmail.com</option>
@@ -45,10 +46,10 @@
                     </tr>
                     <tr class="tr-last">
                         <th>연락처</th>
-                        <td><input type="text"  id="p_num1" value="010" class="order-num" required> -
+                        <td><input type="text"  th:value="${user.user_tel}" id="p_num1" class="order-num" required> -
                             <input type="text"   id="p_num2" class="order-num" required> -
                             <input type="text"  id="p_num3" class="order-num" required></td>
-                        <input type="hidden" id="order_userTel" name="order_userTel1">
+                        <input type="hidden" id="user_tel" name="order_userTel">
                     </tr>
                 </table><!--주문자 정보 테이블 끝-->
 
@@ -99,18 +100,18 @@
                     <tr class="border-white">
                         <th rowspan="3" class="border-bottom">주소</th>
                         <td class="delivery">
-                            <input type="text" name="delivery_zipcode" value="08616" class="w-25" required>
-                            <button class="btn btn-outline-secondary align-middle zipcode">우편번호</button>
+                            <input type="text" name="delivery_zipcode" id="user_zipcode"  class="w-25" required>
+                            <button class="btn btn-outline-secondary align-middle zipcode" onclick="zipcode()">우편번호</button>
                         </td>
                     </tr>
                     <tr class="border-white">
                         <td>
-                            <input type="text" name="delivery_addr" value="독산동" class="address" required>
+                            <input type="text" name="delivery_addr"  id="user_address" class="address" required>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" name="delivery_addrdetail" value="독산2동" class="address" required>
+                            <input type="text" name="delivery_addrdetail" id="user_addrDetail"  class="address" required>
                         </td>
                     </tr>
                     <tr>
@@ -132,13 +133,13 @@
                             <td>적립</td>
                             <td>주문금액</td>
                         </tr>
-                        <tr>
-                            <td class="text-end"><img src="img//img1.png" class="img"></td>
-                            <td class="text-start">상품명 - 귀여운 강아지 인형</td>
+                        <tr th:each="product:${product}">
+                            <td class="text-end"><img th:src="@{|/upload/${product.product_img}|}" class="img"></td>
+                            <td class="text-start" th:text="${product.product_name}"></td>
                             <td class="text-danger">-450000원</td>
                             <td></td>
                             <td>0</td>
-                            <td><del><small class="text-secondary">48,000원</small></del><br><strong>24,000원</strong></td>
+                            <td><del><small class="text-secondary" th:text="${product.product_oprice}">48,000원</small></del><br><strong th:text="${product.product_sprice}"></strong></td>
                         </tr>
                         <tr>
                             <td colspan="6">
@@ -242,4 +243,5 @@
 <footer th:include="footer"></footer>
 </body>
 <script src="/js/payment.js"></script>
+<script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 </html>

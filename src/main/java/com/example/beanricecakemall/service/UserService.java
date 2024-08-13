@@ -130,4 +130,9 @@ public class UserService {
         int user_num=userEntity.getUserNum();
         return user_num;
     }
+
+    public UserDTO findUserInfo(int user_num) {
+        UserEntity userEntity=userRepository.findByUserNum(user_num);
+        return UserDTO.toUserDTO(userEntity);
+    }
 }

@@ -12,20 +12,20 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Table(name="orderList")
+@Table(name="orderlist")
 public class OrderEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name="order_num")
     private int orderNum;
 
-    @Column(nullable = false,name="order_userName")
+    @Column(nullable = false,name="order_username")
     private String orderUserName;
 
-    @Column(nullable = false,name="order_userEmail")
+    @Column(nullable = false,name="order_useremail")
     private String orderUserEmail;
 
-    @Column(nullable = false,name="order_userTel")
+    @Column(nullable = false,name="order_usertel")
     private String orderUserTel;
 
     @Column(updatable = false,name="order_date")

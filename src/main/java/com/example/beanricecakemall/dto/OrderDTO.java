@@ -26,7 +26,7 @@ public class OrderDTO {
     private String product_num;
 
     public static OrderDTO toOrderDTO(OrderEntity orderEntity){
-        OrderDTO orderDTO=new OrderDTO()
+        OrderDTO orderDTO=new OrderDTO();
         orderDTO.setOrder_num(orderEntity.getOrderNum());
         orderDTO.setOrder_date(orderEntity.getOrderDate());
         orderDTO.setOrder_userTel(orderEntity.getOrderUserTel());

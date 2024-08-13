@@ -1,10 +1,7 @@
 package com.example.beanricecakemall.dto;
 
 import com.example.beanricecakemall.entity.UserEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
@@ -16,6 +13,7 @@ import java.util.Map;
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
+@ToString
 public class UserDTO implements OAuth2User {
 
     private int user_num;

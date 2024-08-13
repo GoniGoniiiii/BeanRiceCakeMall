@@ -16,7 +16,7 @@
         </ol>
     </nav>
     <h3 class="pt-5 mb-5 text-center fw-bold">장바구니</h3>
-    <form action="/my/payment" method="POST">
+    <form action="/my/payment" method="POST" id="cart-form">
         <div class="d-flex justify-content-between">
             <div class="left-content" id="left-content"><!--왼쪽 전체 영역-->
                 <div class="mb-5 border shopping-list">
@@ -32,15 +32,15 @@
                          th:each="cart, iterStat : ${cart}" th:id="'cart-item['+${iterStat.index}+']'">
                         <div class="col-1 ms-4">
                             <input class="form-check-input item-checkbox" type="checkbox"
-                                   id="item-[[${iterStat.index}]]" value="checked">
+                                   th:id="'cart_num[' + ${iterStat.index} + ']'" th:value="${cart.cart_num}">
                         </div>
                         <div class="col-2">
                             <a th:href="@{|/productDetail/${cart.product_num}|}">
                                 <img th:src="@{|/upload/${cart.product_img}|}" class="img">
-                                <input type="hidden" th:value="${cart.product_num}" name="product_num" th:id="'product_num[' + ${iterStat.index} + ']'">
-                                <input type="hidden" th:value="${cart.cart_num}" name="cart_cnt" th:id="'cart_num[' + ${iterStat.index} + ']'"/>
-                                <input type="hidden" th:value="${cart.product_img}"  th:id="'product_img[' + ${iterStat.index} + ']'">
-                                <input type="hidden" th:value="${cart.user_num}" name="user_num" id="user_num">
+                                <input type="hidden" th:value="${cart.product_num}" data-product-num="${cart.}" th:id="'product_num[' + ${iterStat.index} + ']'">
+<!--                                <input type="hidden" th:value="${cart.cart_num}" name="cart_num" />-->
+                                <input type="hidden" th:value="${cart.product_img}"   th:id="'product_img[' + ${iterStat.index} + ']'">
+                                <input type="hidden" th:value="${cart.user_num}" id="user_num">
                             </a>
                         </div>
                         <div class="col-6">
@@ -51,7 +51,7 @@
                                     <div class="quantity d-flex align-items-center">
                                         <button class="minus border me-1">-</button>
                                         <input type="text" class="quantity-input me-1 rounded border-0 text-center"
-                                               style="width:30px;" th:value="${cart.cart_cnt}" name="cart_cnt" th:id="'cart_cnt[' + ${iterStat.index} + ']'">
+                                               style="width:30px;" th:value="${cart.cart_cnt}" th:name="|cartList[${iterStat.index}].cart_cnt|" th:id="'cart_cnt[' + ${iterStat.index} + ']'">
                                         <button class="plus border me-2">+</button>
                                         <button class="btn btn-outline-secondary btn-sm apply-btn">수량 적용</button>
                                     </div>
@@ -86,7 +86,7 @@
                                 class="order-price text-danger" id="final-price">27300원</strong></div>
                     </div>
                 </div>
-                <button class="btn btn-outline-warning w-100 py-3 mt-4 fs-5" onclick="goPayment()">결제하기</button>
+                <button class="btn btn-outline-warning w-100 py-3 mt-4 fs-5" id="submit_button">결제하기</button>
             </div>
         </div>
     </form>
