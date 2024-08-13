@@ -1,10 +1,7 @@
 package com.example.beanricecakemall.dto;
 
 import com.example.beanricecakemall.entity.CartEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -13,6 +10,7 @@ import java.sql.Timestamp;
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
+@ToString
 public class CartDTO{
 
     private int cart_num;
@@ -26,6 +24,7 @@ public class CartDTO{
     private int product_num;
 
     private String product_img;
+
 
     public static CartDTO toCartDTO(CartEntity cartEntity){
         CartDTO cartDTO=new CartDTO();
