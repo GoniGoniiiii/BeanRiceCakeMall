@@ -15,17 +15,17 @@ public class DeliveryEntity {
     @Column(name="delivery_num")
     private int deliveryNum;
 
-    @Column(nullable = false,name="delivery_userName")
-    private String deliveryUserName;
+    @Column(nullable = false,name="delivery_username")
+    private String deliveryUsername;
 
-    @Column(nullable = false,name="delivery_userEmail")
-    private String deliveryUserEmail;
+    @Column(nullable = false,name="delivery_useremail")
+    private String deliveryUseremail;
 
-    @Column(nullable = false,name="delivery_userTel1")
-    private String deliveryUserTel1;
+    @Column(nullable = false,name="delivery_usertel1")
+    private String deliveryUsertel1;
 
-    @Column(name="delivery_userTel2")
-    private String deliveryUserTel2;
+    @Column(name="delivery_usertel2")
+    private String deliveryUsertel2;
 
     @Column(nullable = false,name="delivery_zipcode")
     private String deliveryZipcode;
@@ -33,8 +33,8 @@ public class DeliveryEntity {
     @Column(nullable = false,name="delivery_addr")
     private String deliveryAddr;
 
-    @Column(nullable = false,name="delivery_addrDetail")
-    private String deliveryAddrDetail;
+    @Column(nullable = false,name="delivery_addrdetail")
+    private String deliveryAddrdetail;
 
     @Column(name="delivery_req")
     private String deliveryReq;
