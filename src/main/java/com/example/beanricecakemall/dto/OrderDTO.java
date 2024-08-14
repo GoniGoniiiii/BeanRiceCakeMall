@@ -1,10 +1,7 @@
 package com.example.beanricecakemall.dto;
 
 import com.example.beanricecakemall.entity.OrderEntity;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.sql.Timestamp;
 
@@ -12,6 +9,7 @@ import java.sql.Timestamp;
 @Setter
 @RequiredArgsConstructor
 @AllArgsConstructor
+@ToString
 public class OrderDTO {
     private int order_num;
 
