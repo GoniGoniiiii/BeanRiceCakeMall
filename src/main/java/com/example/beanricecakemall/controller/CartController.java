@@ -49,6 +49,7 @@ public class CartController {
         List<String> product_name = new ArrayList<>();
         List<Integer> product_sprice = new ArrayList<>();
         List<Integer> product_deliveryFee=new ArrayList<>();
+        List<Integer> product_oprice=new ArrayList<>();
 
         for (CartDTO cartDTO : cartDTOList) {
             String product = productService.findProductName(cartDTO.getProduct_num());
@@ -57,11 +58,14 @@ public class CartController {
             product_sprice.add(price);
             int deliveryFee=productService.findProductDeliveryFee(cartDTO.getProduct_num());
             product_deliveryFee.add(deliveryFee);
+            int oPrice=productService.findProductOprice(cartDTO.getProduct_num());
+            product_oprice.add(oPrice);
         }
 
         model.addAttribute("cart", cartDTOList);
         model.addAttribute("product_name", product_name);
         model.addAttribute("product_sprice", product_sprice);
+        model.addAttribute("product_oprice",product_oprice);
         model.addAttribute("product_deliveryFee",product_deliveryFee);
         return "product/shoppingBag";
     }

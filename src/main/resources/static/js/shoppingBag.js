@@ -18,8 +18,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const allChoose = document.getElementById('All-choose');
     const itemCheckboxes = document.querySelectorAll('.item-checkbox');
     const productPrices = document.querySelectorAll('.product-sprice');
+    const productoPrices=document.querySelectorAll('.product-oprice');
+    const deliveryFeeElements = document.querySelectorAll('.delivery-fee');
     const totalPriceElement = document.getElementById('total-price');
-
+    const deliveryFeeElement = document.getElementById('delivery-fee');
+    const finalPriceElement = document.getElementById('final-price');
+    const totalSaleElement = document.getElementById('total-sale');
 
     // 각 상품의 가격을 초기화하는 함수
     function initializePrices() {
@@ -58,10 +62,8 @@ document.addEventListener('DOMContentLoaded', function () {
         applyButton.addEventListener('click', function (event) {
             event.preventDefault();
             updatePrice(index); // 개별 가격 업데이트
-            updateTotalPrice(); // 총합계 업데이트
-            updateDeliveryFee(); // 배송비 업데이트
-            updateFinalPrice();//총 결제금액 업데이트
-            cartUpdate(index); // 해당 인덱스를 cartUpdate 함수에 전달
+            updateTotals(); // 총합계 업데이트
+            cartUpdate(index);
         });
     });
 
@@ -76,67 +78,68 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // 총합계 금액 업데이트 함수
-    function updateTotalPrice() {
+    function updateTotals() {
         let totalPrice = 0;
-        productPrices.forEach((priceElement, index) => {
-            const pricePerItem = parseInt(priceElement.getAttribute("data-value"));
-            const quantity = parseInt(quantityInputs[index].value);
-            totalPrice += pricePerItem * quantity;
-        });
-        console.log(totalPrice);
-        totalPriceElement.textContent = totalPrice.toLocaleString() + '원';
-    }
-
-    // 배송비 업데이트 함수
-    function updateDeliveryFee() {
         let totalDeliveryFee = 0;
+        let totalOprice = 0;
+        let totalSprice = 0;
 
-        // 배송비를 가진 모든 요소를 선택
-        const deliveryFeeElements = document.querySelectorAll('.delivery-fee');
+        itemCheckboxes.forEach((checkbox, index) => {
+            if (checkbox.checked) {
+                let quantity = parseInt(quantityInputs[index].value);
+                let priceElement = productPrices[index];
+                let priceElement2 = productoPrices[index];
+                let pricePerItem = parseInt(priceElement.getAttribute("data-value"));
+                totalPrice += pricePerItem * quantity;
 
-        // 각 요소의 배송비를 더함
-        deliveryFeeElements.forEach((element) => {
-            const feePerItem = parseInt(element.getAttribute("data-fee")) || 0;
-            totalDeliveryFee += feePerItem;
+                // 배송비 계산
+                let deliveryFee = parseInt(deliveryFeeElements[index].getAttribute("data-fee")) || 0;
+                totalDeliveryFee += deliveryFee;
+
+                // oprice와 sprice 계산
+                let oprice = parseInt(priceElement2.getAttribute("data-oprice")) || 0;
+                let sprice = parseInt(priceElement.getAttribute("data-sprice")) || 0;
+                console.log(oprice);
+                console.log(sprice);
+                totalOprice += oprice * quantity;
+                totalSprice += sprice * quantity;
+            }
         });
 
-        // 계산된 총 배송비를 id="delivery-fee"에 표시
-        const deliveryFeeElement = document.getElementById('delivery-fee');
+        // 총 상품 금액 및 배송비 업데이트
+        totalPriceElement.textContent = totalPrice.toLocaleString() + '원';
         deliveryFeeElement.textContent = totalDeliveryFee.toLocaleString() + '원';
 
-        console.log(totalDeliveryFee);
+        // 결제 금액 업데이트
+        const finalPrice = totalPrice + totalDeliveryFee;
+        finalPriceElement.textContent = finalPrice.toLocaleString() + '원';
+
+        // oprice와 sprice의 총합 차액 계산
+        const totalSale = totalOprice - totalSprice;
+        totalSaleElement.textContent = totalSale.toLocaleString() + '원';
+        console.log("세일된 금액 : " ,totalSale);
     }
 
-    //총 결제금액 계산
-    function updateFinalPrice() {
-        let totalElement = document.getElementById('total-price');
-        let deliveryFeeElement = document.getElementById('delivery-fee');
-
-        // 텍스트 콘텐츠에서 숫자를 추출
-        let total = parseInt(totalElement.textContent.replace(/[^0-9]/g, ''), 10);
-        let deliveryFee = parseInt(deliveryFeeElement.textContent.replace(/[^0-9]/g, ''), 10);
-        let finalPrice = 0;
-
-        finalPrice = total + deliveryFee;
-        const finalElement = document.getElementById('final-price');
-        finalElement.textContent = finalPrice.toLocaleString() + '원';
-
-    }
-
-    // 페이지 로드시 초기 총합계 금액 표시
+    // 초기화
     initializePrices();
-    updateTotalPrice(); // 페이지 로드 시 총합계 초기화
-    updateDeliveryFee(); // 배송비 업데이트
-    updateFinalPrice(); //결제금액 업데이트
-    // 페이지가 로드될 때 가격 초기화
+    updateTotals(); // 페이지 로드 시 총합계 초기화
 
     // 전체 선택 체크박스
     allChoose.addEventListener('change', function () {
-        const isChecked = allChoose.checked;
-        itemCheckboxes.forEach(function (checkbox) {
-            checkbox.checked = isChecked;
+        itemCheckboxes.forEach((checkbox) => {
+            checkbox.checked = allChoose.checked;
         });
+        updateTotals(); // 전체 선택 시 총합계 업데이트
     });
+
+    // 개별 체크박스 변경 시 총합계 업데이트
+    itemCheckboxes.forEach((checkbox) => {
+        checkbox.addEventListener('change', updateTotals);
+    });
+
+
+
+
 
     // 결제하기 버튼 클릭 이벤트
     const submitButton = document.getElementById('submit_button');

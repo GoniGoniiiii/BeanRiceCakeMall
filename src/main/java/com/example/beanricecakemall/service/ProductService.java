@@ -221,6 +221,14 @@ public class ProductService {
         return 0;
     }
 
+    public int findProductOprice(int product_num){
+        ProductEntity product = productRepository.findAllByProductNum(product_num);
+        if (product != null) {
+            return product.getProductOprice();
+        }
+        return 0;
+    }
+
     @Transactional
     public void deleteProduct(int product_num) {
         productRepository.deleteAllByProductNum(product_num);
