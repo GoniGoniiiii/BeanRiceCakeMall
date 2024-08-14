@@ -230,4 +230,4 @@ function cartUpdate(index) {
             cart_cnt: cart_cnt
         })
     }).then(response => response.text())
-}g
+}
