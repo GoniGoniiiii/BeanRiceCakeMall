@@ -8,8 +8,10 @@ document.addEventListener("DOMContentLoaded", function () {
         rightContent.scrollTop = rightContent.scrollHeight;
     });
 
+    //주문자 정보 
     var select = document.getElementById("select_userEmail");
     var input = document.getElementById("input_userEmail");
+
 
     select.addEventListener("change", function () {
         var selectValue = select.value;
@@ -23,7 +25,24 @@ document.addEventListener("DOMContentLoaded", function () {
             input.value = selectValue;
         }
     })
+    
+    //배송자 정보
+    var delivery_select = document.getElementById("select_deliveryEmail");
+    var delivery_input = document.getElementById("input_deliveryEmail");
 
+
+    delivery_select.addEventListener("change", function () {
+        var selectValue = delivery_select.value;
+
+        if (selectValue === '직접 입력') {
+            delivery_input.removeAttribute('readonly');
+            delivery_input.focus(); // 포커스를 input 요소로 이동
+            delivery_input.value = ''; // 내용을 빈 문자열로 설정하여 내용을 지움
+        } else {
+            delivery_input.setAttribute('readonly', 'readonly');
+            delivery_input.value = selectValue;
+        }
+    })
 
     //전화번호 체크
     var p_num1 = document.getElementById("p_num1");
@@ -87,42 +106,30 @@ document.addEventListener("DOMContentLoaded", function () {
         validatePhoneNumber(p_num9, 4, 4);
     });
 
+
+    // 상품의 모든 행을 가져옴
+    const productRows = document.querySelectorAll('tr[data-index]');
+
+    productRows.forEach((row) => {
+        // 행의 인덱스를 가져옴
+        const index = row.getAttribute('data-index');
+
+        // 각 상품의 원래 가격과 할인된 가격 요소를 찾음
+        const opriceElement = document.getElementById(`product_oprice_${index}`);
+        const spriceElement = document.getElementById(`product_sprice_${index}`);
+
+        // `oprice`와 `sprice` 값을 숫자로 변환
+        const oprice = parseInt(opriceElement.textContent.replace(/[^0-9]/g, ''), 10);
+        const sprice = parseInt(spriceElement.textContent.replace(/[^0-9]/g, ''), 10);
+
+        // 할인 금액 계산
+        const discountAmount = oprice - sprice;
+
+        // 원래 가격을 할인된 가격으로 업데이트
+        spriceElement.innerText = `${discountAmount.toLocaleString()}원`;
+    });
 });
 
-// 폼 요소 가져오기
-var form = document.querySelector("form[name='payment']");
-
-// 폼 제출 시 실행할 함수
-function handleSubmit(event) {
-    // 입력 요소의 값 가져오기
-    var p_num1 = document.getElementById("p_num1").value;
-    var p_num2 = document.getElementById("p_num2").value;
-    var p_num3 = document.getElementById("p_num3").value;
-    var p_num4 = document.getElementById("p_num4").value;
-    var p_num5 = document.getElementById("p_num5").value;
-    var p_num6 = document.getElementById("p_num6").value;
-    var p_num7 = document.getElementById("p_num7").value;
-    var p_num8 = document.getElementById("p_num8").value;
-    var p_num9 = document.getElementById("p_num9").value;
-
-    // 전화번호 값 합치기
-    var telNumber1 = p_num1 + p_num2 + p_num3;
-    var telNumber2 = p_num4 + p_num5 + p_num6;
-    var telNumber3 = p_num7 + p_num8 + p_num9;
-
-    // 숨겨진 입력 요소에 값 설정
-    document.getElementById("order_userTel").value = telNumber1;
-    document.getElementById("order_deliveryTel1").value = telNumber2;
-    if (p_num7 && p_num8 && p_num9) {
-        document.getElementById("order_deliveryTel2").value = telNumber3;
-    }
-    console.log("주문자 연락처 :" + telNumber1);
-    console.log("배송지 연락처 :" + telNumber2);
-    console.log("배송지 연락처 :" + telNumber3);
-}
-
-// 폼 제출 이벤트에 핸들러 등록
-form.addEventListener("submit", handleSubmit);
 
 //위 정보와 동일 누르면 배송정보에 주문자 정보 입력
 function Check() {
@@ -134,13 +141,20 @@ function Check() {
         var p_num2 = document.getElementById("p_num2").value;
         var p_num3 = document.getElementById("p_num3").value;
 
+        var emailId=document.getElementById("user_emailId").value;
+        var domain=document.getElementById("input_userEmail").value;
+
         //배송정보칸에 출력
         var userName = document.getElementById("delivery_userName");
+        var d_emailId=document.getElementById("delivery_emailId");
+        var d_domain=document.getElementById("input_deliveryEmail");
         var p_num4 = document.getElementById("p_num4");
         var p_num5 = document.getElementById("p_num5");
         var p_num6 = document.getElementById("p_num6");
 
         userName.value = order_userName;
+        d_emailId.value=emailId;
+        d_domain.value=domain;
         p_num4.value = p_num1;
         p_num5.value = p_num2;
         p_num6.value = p_num3;
@@ -163,35 +177,35 @@ function useAllPoint() {
 
     }
 }
+
 function uncheckOthers(clickedId) {
     var checkboxes = document.getElementsByName('order_paymethod');
-    checkboxes.forEach(function(checkbox) {
+    checkboxes.forEach(function (checkbox) {
         if (checkbox.id !== clickedId) {
             checkbox.checked = false;
         }
     });
 }
 
-document.getElementById('order_paymethod1').onchange = function() {
+document.getElementById('order_paymethod1').onchange = function () {
     uncheckOthers('order_paymethod1');
     console.log(document.getElementById('order_paymethod1').value);
 };
 
-document.getElementById('order_paymethod2').onchange = function() {
+document.getElementById('order_paymethod2').onchange = function () {
     uncheckOthers('order_paymethod2');
     console.log(document.getElementById('order_paymethod2').value);
 };
 
-document.getElementById('order_paymethod3').onchange = function() {
+document.getElementById('order_paymethod3').onchange = function () {
     uncheckOthers('order_paymethod3');
     console.log(document.getElementById('order_paymethod3').value);
 };
 
-document.getElementById('order_paymethod4').onchange = function() {
+document.getElementById('order_paymethod4').onchange = function () {
     uncheckOthers('order_paymethod4');
     console.log(document.getElementById('order_paymethod4').value);
 };
-
 
 
 // 전화번호 및 생년월일, 이메일 분리 함수
@@ -249,31 +263,52 @@ function zipcode() {
     }).open();
 }
 
-// 폼 제출 시 값 조합
-var form = document.querySelector("form[name='info']");
+// 폼 요소 가져오기
+var form = document.querySelector("form[name='payment']");
 
+//폼 제출시 실행할 함수
 function handleSubmit(event) {
-    event.preventDefault();
-
+    // 입력 요소의 값 가져오기
     var p_num1 = document.getElementById("p_num1").value;
     var p_num2 = document.getElementById("p_num2").value;
     var p_num3 = document.getElementById("p_num3").value;
+    var p_num4 = document.getElementById("p_num4").value;
+    var p_num5 = document.getElementById("p_num5").value;
+    var p_num6 = document.getElementById("p_num6").value;
+    var p_num7 = document.getElementById("p_num7").value;
+    var p_num8 = document.getElementById("p_num8").value;
+    var p_num9 = document.getElementById("p_num9").value;
+
+    //주문자 정보 이메일
     var emailId = document.getElementById("user_emailId").value;
     var domain = document.getElementById("input_userEmail").value;
 
-    var telNumber1 = p_num1 + "-" + p_num2 + "-" + p_num3;
-    var email = emailId + "@" + domain;
+    //배송자 정보 이메일
+    var d_emailId=document.getElementById("delivery_emailId").value;
+    var d_domain=document.getElementById("input_deliveryEmail").value;
 
+    var email = emailId + "@" + domain;
+    var d_email=d_emailId + "@"+d_domain;
+
+    // 전화번호 값 합치기
+    var telNumber1 = p_num1 + p_num2 + p_num3;
+    var telNumber2 = p_num4 + p_num5 + p_num6;
+    var telNumber3 = p_num7 + p_num8 + p_num9;
+
+    // 숨겨진 입력 요소에 값 설정
     document.getElementById("user_tel").value = telNumber1;
     document.getElementById("user_email").value = email;
+    document.getElementById("delivery_email").value=d_email;
+    document.getElementById("order_deliveryTel1").value = telNumber2;
 
-    alert("성공적으로 정보가 수정되었습니다!^ㅇ^");
-    form.submit();
+
+    if (p_num7 && p_num8 && p_num9) {
+        document.getElementById("order_deliveryTel2").value = telNumber3;
+    }
+    console.log("주문자 연락처 :" + telNumber1);
+    console.log("배송지 연락처 :" + telNumber2);
+    console.log("배송지 연락처 :" + telNumber3);
 }
 
 // 폼 제출 이벤트에 핸들러 등록
 form.addEventListener("submit", handleSubmit);
-
-
-
-

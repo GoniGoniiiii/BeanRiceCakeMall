@@ -16,7 +16,7 @@
     </nav>
     <h3 class="pt-5 mt-2 mb-3 text-center">주문/결제</h3>
     <h5 class="order-title">주문자 정보</h5>
-    <form action="" name="payment">
+    <form action="/order" method="post" name="payment">
         <div class="d-flex justify-content-between">
             <div class="left-content" id="left-content"><!--왼쪽 전체 영역-->
                 <table class="table align-middle mb-5"><!--첫번째 주문자 정보 테이블-->
@@ -33,7 +33,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type="hidden" name="order_userEmail" >
+                            <input type="hidden" id="user_email" name="order_userEmail" >
                             <select class="form-select"  id="select_userEmail">
                                 <option value="직접 입력" selected>직접 입력</option> <!--직접입력 누르면 위에 입력하는 칸에 입력할 수 있게-->
                                 <option value="naver.com">naver.com</option>
@@ -65,6 +65,26 @@
                         <th>이름</th>
                         <td><input type="text" name="delivery_userName"  id="delivery_userName" required></td>
                     </tr>
+                    <tr class="border-white">
+                        <th rowspan="2" class="border-bottom">이메일</th>
+                        <td class="email">
+                            <input type="text" name="delivery_userId" class="email" id="delivery_emailId" required> @
+                            <input type="text" class="email" id="input_deliveryEmail" required>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="hidden" id="delivery_email" name="delivery_userEmail" >
+                            <select class="form-select"  id="select_deliveryEmail">
+                                <option value="직접 입력" selected>직접 입력</option> <!--직접입력 누르면 위에 입력하는 칸에 입력할 수 있게-->
+                                <option value="naver.com">naver.com</option>
+                                <option value="gmail.com">gmail.com</option>
+                                <option value="nate.com">nate.com</option>
+                                <option value="daum.net">daum.net</option>
+                                <option value="icolud.com">icloud.com</option>
+                            </select>
+                        </td>
+                    </tr>
                     <tr>
                         <th>연락처1</th>
                         <td><input type="text" id="p_num4" value="" class="order-num" required> -
@@ -79,24 +99,6 @@
                             <input type="text" id="p_num9" value="" class="order-num"></td>
                         <input type="hidden" id="order_deliveryTel2" name="delivery_userTel2">
                     </tr>
-                    <!--                    <tr>-->
-                    <!--                        <th>배송지 선택</th>-->
-                    <!--                        <td>-->
-                    <!--                            <div class="form-check form-check-inline py-2 px-3">-->
-                    <!--                                <input class="form-check-input" type="radio" name="delivery_address1" id="delivery_address1" value="option1">-->
-                    <!--                                <label class="form-check-label" for="delivery_address1">집</label>-->
-                    <!--                            </div>-->
-                    <!--                            <div class="form-check form-check-inline px-3">-->
-                    <!--                                <input class="form-check-input" type="radio" name="delivery_address2" id="delivery_address2" value="option2">-->
-                    <!--                                <label class="form-check-label" for="delivery_address2">직장</label>-->
-                    <!--                            </div>-->
-                    <!--                            <div class="form-check form-check-inline px-3">-->
-                    <!--                                <input class="form-check-input" type="radio" name="delivery_address3" id="delivery_address3" value="option3">-->
-                    <!--                                <label class="form-check-label" for="delivery_address3">콩떡집</label>-->
-                    <!--                            </div>-->
-                    <!--                            <button class="btn btn-outline-secondary">주소록</button>-->
-                    <!--                        </td>-->
-                    <!--                    </tr>-->
                     <tr class="border-white">
                         <th rowspan="3" class="border-bottom">주소</th>
                         <td class="delivery">
@@ -111,7 +113,7 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" name="delivery_addrdetail" id="user_addrDetail"  class="address" required>
+                            <input type="text" name="delivery_addrDetail" id="user_addrDetail"  class="address" required>
                         </td>
                     </tr>
                     <tr>
@@ -119,10 +121,6 @@
                         <td><textarea name="delivery_req" rows="5"></textarea></td>
                     </tr>
                 </table>
-                <div class="form-check mb-5">
-                    <input class="form-check-input" type="checkbox" id="myDelivery" name="myDelivery" value="ischekced">
-                    <label class="form-check-label" for="myCheckbox">해당 배송지 정보를 나의 정보로 등록합니다.</label>
-                </div>
                 <div class="order-product">
                     <h5 class="order-title">주문 상품</h5>
                     <table class="table align-middle text-center mb-5">
@@ -133,19 +131,22 @@
                             <td>적립</td>
                             <td>주문금액</td>
                         </tr>
-                        <tr th:each="product:${product}">
+                        <tr th:each="product,iterStat:${product}" th:data-index="${iterStat.index}">
+                            <input type="hidden" name="product_num" th:value="${product.product_num}">
                             <td class="text-end"><img th:src="@{|/upload/${product.product_img}|}" class="img"></td>
                             <td class="text-start" th:text="${product.product_name}"></td>
-                            <td class="text-danger">-450000원</td>
+                            <td class="text-danger" th:text="${product.product_rate}+'%'"></td>
                             <td></td>
-                            <td>0</td>
-                            <td><del><small class="text-secondary" th:text="${product.product_oprice}">48,000원</small></del><br><strong th:text="${product.product_sprice}"></strong></td>
+                            <td>
+                            </td>
+                            <td><del><small class="text-secondary" th:value="${product.product_oprice}" th:id="'product_oprice_' + ${iterStat.index}" >48,000원</small></del>
+                                <br><strong th:text="${product.product_sprice}" th:id="'product_sprice_' + ${iterStat.index}"></strong></td>
                         </tr>
                         <tr>
                             <td colspan="6">
                                 <p class="fs-5 pt-3 ">
-                                    주문금액 <strong>48,000원</strong><strong class="text-danger"> -상품할인 24,000원</strong>
-                                    +배송비<strong>0원</strong> =<strong> 주문금액 24,000원</strong></p>
+                                    주문금액 <strong id="oprice" th:text="${total_oprice}+'원'"></strong><strong class="text-danger" id="sprice" th:text="' -상품할인 '+${total_sale}+'원'"></strong>
+                                    +배송비<strong id="total_delivery" th:text=" ${total_delivery}+'원'"></strong> =<strong id="total_price" th:text="' 최종 결제금액 '+${total_price}+'원'"></strong></p>
                             </td>
                         </tr>
                     </table>
@@ -206,16 +207,16 @@
             </div>
 
             <div class="border-0 right-content" id="right-content"><!--오른쪽 결제 화면-->
-                <div class="border"><!--결제금액 박스-->
+                <div class="border" ><!--결제금액 박스-->
                     <div class="order-items"><p class="fw-bold fs-4 m-0">주문 예정 금액</p></div><!--제목-->
                     <div class="border-top order-items"><!--상품금액,배송비,할인금액,추가금액-->
-                        <div class="order-item"><span class="order-title2">총 상품금액</span><strong class="order-price">42000</strong></div>
-                        <div class="order-item"><span class="order-title2">배송비</span><strong class="order-price">0</strong></div>
-                        <div class="order-item"><span class="order-title2">할인금액</span><strong class="order-price text-danger">13000</strong></div>
+                        <div class="order-item"><span class="order-title2">총 상품금액</span><strong class="order-price" th:text="${total_oprice}"></strong></div>
+                        <div class="order-item"><span class="order-title2">배송비</span><strong class="order-price" th:text="${total_delivery}">0</strong></div>
+                        <div class="order-item"><span class="order-title2">할인금액</span><strong class="order-price text-danger" th:text="${total_sale}"></strong></div>
                         <div class="order-item"><span class="order-title2">추가금액</span><strong class="order-price">0</strong></div>
                     </div>
                     <div class="border-top order-items "><!--최종 결제 금액-->
-                        <div class="order-item fs-5 fw-bold mb-2"><span class="order-title2">최종 결제 금액</span><strong class="order-price text-danger">27300원</strong></div>
+                        <div class="order-item fs-5 fw-bold mb-2"><span class="order-title2">최종 결제 금액</span><strong class="order-price text-danger" th:text="${total_price}"></strong></div>
                         <p>(적립예정:819원)<br><!--적립예정금액은 최종결제금액 0.5%?-->
                             (적립 예정금액과 최종 적립금액은 상이할 수 있습니다. 주문 완료 시 지급되는 적립금을 확인해주시기 바랍니다.)</p>
                     </div>
