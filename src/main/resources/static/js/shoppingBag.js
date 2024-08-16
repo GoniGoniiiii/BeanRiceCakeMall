@@ -99,24 +99,35 @@ document.addEventListener('DOMContentLoaded', function () {
                 // oprice와 sprice 계산
                 let oprice = parseInt(priceElement2.getAttribute("data-oprice")) || 0;
                 let sprice = parseInt(priceElement.getAttribute("data-sprice")) || 0;
-                console.log(oprice);
-                console.log(sprice);
+
+                console.log(`Index ${index}:`);
+                console.log(`oprice: ${oprice}, sprice: ${sprice}`);
+                console.log(`Quantity: ${quantity}`);
+
                 totalOprice += oprice * quantity;
                 totalSprice += sprice * quantity;
+
+                console.log("total: " + totalOprice + "  "+totalSprice);
             }
         });
+        console.log(`Total oprice: ${totalOprice}`);
+        console.log(`Total sprice: ${totalSprice}`);
 
         // 총 상품 금액 및 배송비 업데이트
         totalPriceElement.textContent = totalPrice.toLocaleString() + '원';
         deliveryFeeElement.textContent = totalDeliveryFee.toLocaleString() + '원';
+        document.getElementById("total-price").value=totalPrice;
+        document.getElementById("delivery-fee").value=totalDeliveryFee;
 
         // 결제 금액 업데이트
         const finalPrice = totalPrice + totalDeliveryFee;
         finalPriceElement.textContent = finalPrice.toLocaleString() + '원';
+        document.getElementById('final-price').value=finalPrice;
 
         // oprice와 sprice의 총합 차액 계산
         const totalSale = totalOprice - totalSprice;
         totalSaleElement.textContent = totalSale.toLocaleString() + '원';
+        document.getElementById("total-sale").value=totalSale;
         console.log("세일된 금액 : " ,totalSale);
     }
 
@@ -155,12 +166,20 @@ document.addEventListener('DOMContentLoaded', function () {
             const productNum = document.getElementById(`product_num[${index}]`).value;
             const cartCnt = document.getElementById(`cart_cnt[${index}]`).value;
             const userNum = document.getElementById('user_num').value;
+            const totalOprice=document.getElementById('total-price').value;
+            const totalSale=document.getElementById('total-sale').value;
+            const deliveryFee=document.getElementById('delivery-fee').value;
+            const finalPrice=document.getElementById('final-price').value;
 
             orderData.push({
                 cart_num: cartNum,
                 product_num: productNum,
                 cart_cnt: cartCnt,
-                user_num: userNum
+                user_num: userNum,
+                total_oprice : totalOprice,
+                total_sale:totalSale,
+                total_delivery:deliveryFee,
+                total_price : finalPrice
             });
         });
 
