@@ -87,4 +87,5 @@ public class CartService {
     public void delete(int product_num, int user_num) {
         cartRepository.deleteByProductEntityProductNumAndUserEntityUserNum(product_num, user_num);
     }
+
 }
