@@ -25,7 +25,7 @@ document.addEventListener("DOMContentLoaded", function () {
             input.value = selectValue;
         }
     })
-    
+
     //배송자 정보
     var delivery_select = document.getElementById("select_deliveryEmail");
     var delivery_input = document.getElementById("input_deliveryEmail");
@@ -141,20 +141,20 @@ function Check() {
         var p_num2 = document.getElementById("p_num2").value;
         var p_num3 = document.getElementById("p_num3").value;
 
-        var emailId=document.getElementById("user_emailId").value;
-        var domain=document.getElementById("input_userEmail").value;
+        var emailId = document.getElementById("user_emailId").value;
+        var domain = document.getElementById("input_userEmail").value;
 
         //배송정보칸에 출력
         var userName = document.getElementById("delivery_userName");
-        var d_emailId=document.getElementById("delivery_emailId");
-        var d_domain=document.getElementById("input_deliveryEmail");
+        var d_emailId = document.getElementById("delivery_emailId");
+        var d_domain = document.getElementById("input_deliveryEmail");
         var p_num4 = document.getElementById("p_num4");
         var p_num5 = document.getElementById("p_num5");
         var p_num6 = document.getElementById("p_num6");
 
         userName.value = order_userName;
-        d_emailId.value=emailId;
-        d_domain.value=domain;
+        d_emailId.value = emailId;
+        d_domain.value = domain;
         p_num4.value = p_num1;
         p_num5.value = p_num2;
         p_num6.value = p_num3;
@@ -284,21 +284,21 @@ function handleSubmit(event) {
     var domain = document.getElementById("input_userEmail").value;
 
     //배송자 정보 이메일
-    var d_emailId=document.getElementById("delivery_emailId").value;
-    var d_domain=document.getElementById("input_deliveryEmail").value;
+    var d_emailId = document.getElementById("delivery_emailId").value;
+    var d_domain = document.getElementById("input_deliveryEmail").value;
 
     var email = emailId + "@" + domain;
-    var d_email=d_emailId + "@"+d_domain;
+    var d_email = d_emailId + "@" + d_domain;
 
     // 전화번호 값 합치기
-    var telNumber1 = p_num1 + p_num2 + p_num3;
-    var telNumber2 = p_num4 + p_num5 + p_num6;
-    var telNumber3 = p_num7 + p_num8 + p_num9;
+    var telNumber1 = p_num1 + "-" + p_num2 + "-" + p_num3;
+    var telNumber2 = p_num4 + "-" + p_num5 + "-" + p_num6;
+    var telNumber3 = p_num7 + "-" + p_num8 + "-" + p_num9;
 
     // 숨겨진 입력 요소에 값 설정
     document.getElementById("user_tel").value = telNumber1;
     document.getElementById("user_email").value = email;
-    document.getElementById("delivery_email").value=d_email;
+    document.getElementById("delivery_email").value = d_email;
     document.getElementById("order_deliveryTel1").value = telNumber2;
 
 
