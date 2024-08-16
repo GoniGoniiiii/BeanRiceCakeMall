@@ -25,6 +25,14 @@ public class CartDTO{
 
     private String product_img;
 
+    private int total_oprice;
+
+    private int total_sale;
+
+    private int total_delivery;
+
+    private int total_price;
+
 
     public static CartDTO toCartDTO(CartEntity cartEntity){
         CartDTO cartDTO=new CartDTO();
