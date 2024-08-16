@@ -50,6 +50,7 @@
                             <input type="text"   id="p_num2" class="order-num" required> -
                             <input type="text"  id="p_num3" class="order-num" required></td>
                         <input type="hidden" id="user_tel" name="order_userTel">
+                        <input type="hidden" name="user_num" th:value="${user.user_num}">
                     </tr>
                 </table><!--주문자 정보 테이블 끝-->
 
@@ -132,7 +133,7 @@
                             <td>주문금액</td>
                         </tr>
                         <tr th:each="product,iterStat:${product}" th:data-index="${iterStat.index}">
-                            <input type="hidden" name="product_num" th:value="${product.product_num}">
+                            <input type="hidden" th:name="'product_num['+${iterStat.index}+']'" th:value="${product.product_num}">
                             <td class="text-end"><img th:src="@{|/upload/${product.product_img}|}" class="img"></td>
                             <td class="text-start" th:text="${product.product_name}"></td>
                             <td class="text-danger" th:text="${product.product_rate}+'%'"></td>

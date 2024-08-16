@@ -4,6 +4,7 @@ import com.example.beanricecakemall.entity.OrderEntity;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Getter
 @Setter
@@ -21,7 +22,9 @@ public class OrderDTO {
 
     private Timestamp order_date;
 
-    private String product_num;
+    private List<Integer> product_num;
+
+    private int user_num;
 
     public static OrderDTO toOrderDTO(OrderEntity orderEntity){
         OrderDTO orderDTO=new OrderDTO();

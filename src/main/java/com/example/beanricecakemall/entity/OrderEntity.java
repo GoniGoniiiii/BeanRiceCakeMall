@@ -1,9 +1,11 @@
 package com.example.beanricecakemall.entity;
 
+import com.example.beanricecakemall.dto.OrderDTO;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.query.Order;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
@@ -39,4 +41,17 @@ public class OrderEntity {
     @OneToMany(mappedBy = "orderEntity",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<ProductEntity> productEntityList=new ArrayList<>();
 
+
+    @OneToOne(mappedBy = "orderEntity",cascade = CascadeType.ALL)
+    private DeliveryEntity deliveryEntity;
+
+
+    public static OrderEntity toSave(OrderDTO orderDTO,UserEntity userEntity){
+        OrderEntity orderEntity=new OrderEntity();
+        orderEntity.setOrderUserTel(orderDTO.getOrder_userTel());
+        orderEntity.setOrderUserEmail(orderDTO.getOrder_userEmail());
+        orderEntity.setOrderUserName(orderDTO.getOrder_userName());
+        orderEntity.setUserEntity(userEntity);
+        return orderEntity;
+    }
 }

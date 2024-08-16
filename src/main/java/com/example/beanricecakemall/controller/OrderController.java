@@ -1,6 +1,7 @@
 package com.example.beanricecakemall.controller;
 
 import com.example.beanricecakemall.dto.*;
+import com.example.beanricecakemall.service.CartService;
 import com.example.beanricecakemall.service.OrderService;
 import com.example.beanricecakemall.service.ProductService;
 import com.example.beanricecakemall.service.UserService;
@@ -24,10 +25,13 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    public OrderController(UserService userService, ProductService productService, OrderService orderService) {
+    private final CartService cartService;
+
+    public OrderController(UserService userService, ProductService productService, OrderService orderService, CartService cartService) {
         this.userService = userService;
         this.productService = productService;
         this.orderService = orderService;
+        this.cartService = cartService;
     }
 
 
@@ -106,7 +110,15 @@ public class OrderController {
     public String order(@ModelAttribute OrderDTO orderDTO, @ModelAttribute DeliveryDTO deliveryDTO) {
         System.out.println(orderDTO.toString());
         System.out.println(deliveryDTO.toString());
-
-        return "product/paymentCompleted";
+        boolean order=orderService.insertOrder(orderDTO,deliveryDTO);
+        System.out.println("컨트롤러 product_num : " + orderDTO.getProduct_num());
+        if(order){
+            for(int product_num:orderDTO.getProduct_num()) {
+                cartService.delete(product_num, orderDTO.getUser_num());
+            }
+            return "product/paymentCompleted";
+        }else{
+            return "product/paymentFailed";
+        }
     }
 }
