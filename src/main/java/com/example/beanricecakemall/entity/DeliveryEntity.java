@@ -1,5 +1,6 @@
 package com.example.beanricecakemall.entity;
 
+import com.example.beanricecakemall.dto.DeliveryDTO;
 import jakarta.persistence.*;
 import lombok.Generated;
 import lombok.Getter;
@@ -45,6 +46,20 @@ public class DeliveryEntity {
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="order_num")
     private OrderEntity orderEntity;
+
+    public static DeliveryEntity toSave(DeliveryDTO deliveryDTO,OrderEntity orderEntity){
+        DeliveryEntity deliveryEntity=new DeliveryEntity();
+        deliveryEntity.setDeliveryUsername(deliveryDTO.getDelivery_userName());
+        deliveryEntity.setDeliveryUseremail(deliveryDTO.getDelivery_userEmail());
+        deliveryEntity.setDeliveryUsertel1(deliveryDTO.getDelivery_userTel1());
+        deliveryEntity.setDeliveryUsertel2(deliveryDTO.getDelivery_userTel2());
+        deliveryEntity.setDeliveryZipcode(deliveryDTO.getDelivery_zipcode());
+        deliveryEntity.setDeliveryAddr(deliveryDTO.getDelivery_addr());
+        deliveryEntity.setDeliveryAddrdetail(deliveryDTO.getDelivery_addrDetail());
+        deliveryEntity.setDeliveryReq(deliveryDTO.getDelivery_req());
+        deliveryEntity.setOrderEntity(orderEntity);
+        return deliveryEntity;
+    }
 
 
 }
