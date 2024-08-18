@@ -135,4 +135,13 @@ public class UserService {
         UserEntity userEntity=userRepository.findByUserNum(user_num);
         return UserDTO.toUserDTO(userEntity);
     }
+
+    public void plusPoint(int user_num, int plus_point){
+        UserEntity userEntity=userRepository.findByUserNum(user_num);
+        int point= userEntity.getUserPoint();
+        point+=plus_point;
+        userEntity.setUserPoint(point);
+        userEntity.setUserNum(user_num);
+        userRepository.save(userEntity);
+    }
 }

@@ -26,6 +26,8 @@ public class OrderDTO {
 
     private int user_num;
 
+    private int plus_point;
+
     public static OrderDTO toOrderDTO(OrderEntity orderEntity){
         OrderDTO orderDTO=new OrderDTO();
         orderDTO.setOrder_num(orderEntity.getOrderNum());

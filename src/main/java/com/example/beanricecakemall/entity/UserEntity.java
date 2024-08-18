@@ -63,6 +63,7 @@ public class UserEntity{
     @Column(name="user_addrdetail")
     private String userAddrdetail;
 
+
     @OneToMany(mappedBy = "userEntity",cascade = CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ProductEntity> productEntityList=new ArrayList<>();
 

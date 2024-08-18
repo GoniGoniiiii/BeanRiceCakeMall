@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", function () {
         rightContent.scrollTop = rightContent.scrollHeight;
     });
 
-    //주문자 정보 
+    //주문자 정보
     var select = document.getElementById("select_userEmail");
     var input = document.getElementById("input_userEmail");
 
@@ -106,28 +106,15 @@ document.addEventListener("DOMContentLoaded", function () {
         validatePhoneNumber(p_num9, 4, 4);
     });
 
+    //포인트 적립
+    const price=document.getElementById("final-price").innerText;
+    const point=Number(price);
 
-    // 상품의 모든 행을 가져옴
-    const productRows = document.querySelectorAll('tr[data-index]');
+    const plus_point=document.getElementById("plus_point");
+    plus_point.value=Math.round(point*0.05);
 
-    productRows.forEach((row) => {
-        // 행의 인덱스를 가져옴
-        const index = row.getAttribute('data-index');
+    document.getElementById("point").innerText="적립예정 " + plus_point.value+"원";
 
-        // 각 상품의 원래 가격과 할인된 가격 요소를 찾음
-        const opriceElement = document.getElementById(`product_oprice_${index}`);
-        const spriceElement = document.getElementById(`product_sprice_${index}`);
-
-        // `oprice`와 `sprice` 값을 숫자로 변환
-        const oprice = parseInt(opriceElement.textContent.replace(/[^0-9]/g, ''), 10);
-        const sprice = parseInt(spriceElement.textContent.replace(/[^0-9]/g, ''), 10);
-
-        // 할인 금액 계산
-        const discountAmount = oprice - sprice;
-
-        // 원래 가격을 할인된 가격으로 업데이트
-        spriceElement.innerText = `${discountAmount.toLocaleString()}원`;
-    });
 });
 
 
@@ -301,10 +288,10 @@ function handleSubmit(event) {
     document.getElementById("delivery_email").value = d_email;
     document.getElementById("order_deliveryTel1").value = telNumber2;
 
-
     if (p_num7 && p_num8 && p_num9) {
         document.getElementById("order_deliveryTel2").value = telNumber3;
     }
+
     console.log("주문자 연락처 :" + telNumber1);
     console.log("배송지 연락처 :" + telNumber2);
     console.log("배송지 연락처 :" + telNumber3);

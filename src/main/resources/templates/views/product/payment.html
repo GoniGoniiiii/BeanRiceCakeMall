@@ -22,19 +22,21 @@
                 <table class="table align-middle mb-5"><!--첫번째 주문자 정보 테이블-->
                     <tr>
                         <th>이름</th>
-                        <td><input type="text" name="order_userName" th:value="${user.user_name}" id="order_userName" required></td>
+                        <td><input type="text" name="order_userName" th:value="${user.user_name}" id="order_userName"
+                                   required></td>
                     </tr>
                     <tr class="border-white">
                         <th rowspan="2" class="border-bottom">이메일</th>
                         <td class="email">
-                            <input type="text" name="order_userId" th:value="${user.user_email}" class="email" id="user_emailId" required> @
+                            <input type="text" name="order_userId" th:value="${user.user_email}" class="email"
+                                   id="user_emailId" required> @
                             <input type="text" class="email" id="input_userEmail" required>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="hidden" id="user_email" name="order_userEmail" >
-                            <select class="form-select"  id="select_userEmail">
+                            <input type="hidden" id="user_email" name="order_userEmail">
+                            <select class="form-select" id="select_userEmail">
                                 <option value="직접 입력" selected>직접 입력</option> <!--직접입력 누르면 위에 입력하는 칸에 입력할 수 있게-->
                                 <option value="naver.com">naver.com</option>
                                 <option value="gmail.com">gmail.com</option>
@@ -46,9 +48,9 @@
                     </tr>
                     <tr class="tr-last">
                         <th>연락처</th>
-                        <td><input type="text"  th:value="${user.user_tel}" id="p_num1" class="order-num" required> -
-                            <input type="text"   id="p_num2" class="order-num" required> -
-                            <input type="text"  id="p_num3" class="order-num" required></td>
+                        <td><input type="text" th:value="${user.user_tel}" id="p_num1" class="order-num" required> -
+                            <input type="text" id="p_num2" class="order-num" required> -
+                            <input type="text" id="p_num3" class="order-num" required></td>
                         <input type="hidden" id="user_tel" name="order_userTel">
                         <input type="hidden" name="user_num" th:value="${user.user_num}">
                     </tr>
@@ -57,14 +59,15 @@
                 <div class="d-flex justify-content-between align-items-center"><!--배송 정보 테이블 타이틀-->
                     <span class="order-title fs-5">배송 정보</span>
                     <div class="form-check">
-                        <input class="form-check-input" type="checkbox" id="myCheckbox" name="myCheckbox" value="isChecked"  onchange="Check()">
+                        <input class="form-check-input" type="checkbox" id="myCheckbox" name="myCheckbox"
+                               value="isChecked" onchange="Check()">
                         <label class="form-check-label" for="myCheckbox">위 정보와 동일</label>
                     </div>
                 </div>
                 <table class="table align-middle"><!--배송 정보 테이블-->
                     <tr>
                         <th>이름</th>
-                        <td><input type="text" name="delivery_userName"  id="delivery_userName" required></td>
+                        <td><input type="text" name="delivery_userName" id="delivery_userName" required></td>
                     </tr>
                     <tr class="border-white">
                         <th rowspan="2" class="border-bottom">이메일</th>
@@ -75,8 +78,8 @@
                     </tr>
                     <tr>
                         <td>
-                            <input type="hidden" id="delivery_email" name="delivery_userEmail" >
-                            <select class="form-select"  id="select_deliveryEmail">
+                            <input type="hidden" id="delivery_email" name="delivery_userEmail">
+                            <select class="form-select" id="select_deliveryEmail">
                                 <option value="직접 입력" selected>직접 입력</option> <!--직접입력 누르면 위에 입력하는 칸에 입력할 수 있게-->
                                 <option value="naver.com">naver.com</option>
                                 <option value="gmail.com">gmail.com</option>
@@ -89,32 +92,33 @@
                     <tr>
                         <th>연락처1</th>
                         <td><input type="text" id="p_num4" value="" class="order-num" required> -
-                            <input type="text"  id="p_num5" value="" class="order-num" required> -
-                            <input type="text"  id="p_num6" value="" class="order-num" required></td>
+                            <input type="text" id="p_num5" value="" class="order-num" required> -
+                            <input type="text" id="p_num6" value="" class="order-num" required></td>
                         <input type="hidden" id="order_deliveryTel1" name="delivery_userTel1">
                     </tr>
                     <tr>
                         <th>연락처2</th>
-                        <td><input type="text"  id="p_num7"  value="010" class="order-num"> -
-                            <input type="text"  id="p_num8" value="" class="order-num"> -
+                        <td><input type="text" id="p_num7" value="010" class="order-num"> -
+                            <input type="text" id="p_num8" value="" class="order-num"> -
                             <input type="text" id="p_num9" value="" class="order-num"></td>
                         <input type="hidden" id="order_deliveryTel2" name="delivery_userTel2">
                     </tr>
                     <tr class="border-white">
                         <th rowspan="3" class="border-bottom">주소</th>
                         <td class="delivery">
-                            <input type="text" name="delivery_zipcode" id="user_zipcode"  class="w-25" required>
-                            <button class="btn btn-outline-secondary align-middle zipcode" onclick="zipcode()">우편번호</button>
+                            <input type="text" name="delivery_zipcode" id="user_zipcode" class="w-25" required>
+                            <button class="btn btn-outline-secondary align-middle zipcode" onclick="zipcode()">우편번호
+                            </button>
                         </td>
                     </tr>
                     <tr class="border-white">
                         <td>
-                            <input type="text" name="delivery_addr"  id="user_address" class="address" required>
+                            <input type="text" name="delivery_addr" id="user_address" class="address" required>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <input type="text" name="delivery_addrDetail" id="user_addrDetail"  class="address" required>
+                            <input type="text" name="delivery_addrDetail" id="user_addrDetail" class="address" required>
                         </td>
                     </tr>
                     <tr>
@@ -133,21 +137,27 @@
                             <td>주문금액</td>
                         </tr>
                         <tr th:each="product,iterStat:${product}" th:data-index="${iterStat.index}">
-                            <input type="hidden" th:name="'product_num['+${iterStat.index}+']'" th:value="${product.product_num}">
+                            <input type="hidden" th:name="'product_num['+${iterStat.index}+']'"
+                                   th:value="${product.product_num}">
                             <td class="text-end"><img th:src="@{|/upload/${product.product_img}|}" class="img"></td>
                             <td class="text-start" th:text="${product.product_name}"></td>
                             <td class="text-danger" th:text="${product.product_rate}+'%'"></td>
                             <td></td>
                             <td>
                             </td>
-                            <td><del><small class="text-secondary" th:value="${product.product_oprice}" th:id="'product_oprice_' + ${iterStat.index}" >48,000원</small></del>
-                                <br><strong th:text="${product.product_sprice}" th:id="'product_sprice_' + ${iterStat.index}"></strong></td>
+                            <td>
+                                <del><small class="text-secondary" th:value="${product.product_oprice}"
+                                            th:id="'product_oprice_' + ${iterStat.index}" th:text="${product.product_oprice}+'원'"></small></del>
+                                <br><strong th:text="${product.product_sprice}+'원'"
+                                            th:id="'product_sprice_' + ${iterStat.index}"></strong></td>
                         </tr>
                         <tr>
                             <td colspan="6">
                                 <p class="fs-5 pt-3 ">
-                                    주문금액 <strong id="oprice" th:text="${total_oprice}+'원'"></strong><strong class="text-danger" id="sprice" th:text="' -상품할인 '+${total_sale}+'원'"></strong>
-                                    +배송비<strong id="total_delivery" th:text=" ${total_delivery}+'원'"></strong> =<strong id="total_price" th:text="' 최종 결제금액 '+${total_price}+'원'"></strong></p>
+                                    주문금액 <strong id="oprice" th:text="${total_oprice}+'원'"></strong><strong
+                                        class="text-danger" id="sprice" th:text="' -상품할인 '+${total_sale}+'원'"></strong>
+                                    +배송비 <strong id="total_delivery" th:text=" ${total_delivery}+'원'"></strong> =<strong
+                                        id="total_price" th:text="' 최종 결제금액 '+${total_price}+'원'"></strong></p>
                             </td>
                         </tr>
                     </table>
@@ -156,14 +166,18 @@
                 <table class="table align-middle mb-5">
                     <tr>
                         <td class="point">적립금 사용</td>
-                        <td class="d-flex justify-content-center border-white w-100"><input type="text" name="user_point"  id="user_point" value="0">
+                        <td class="d-flex justify-content-center border-white w-100"><input type="text"
+                                                                                            name="user_point"
+                                                                                            id="user_point">
+                            <input type="hidden" name="plus_point" id="plus_point">
                             <div class="form-check pt-3 mx-1">
-                                <input class="form-check-input" type="checkbox" id="user_allPoint" name="user_point" onchange="useAllPoint()">
+                                <input class="form-check-input" type="checkbox" id="user_allPoint" name="user_point"
+                                       onchange="useAllPoint()">
                                 <label class="form-check-label" for="user_allPoint">전액 사용</label>
                             </div>
                         </td>
                         <td class="w-25">
-                            (사용가능:<input type="text" value="640" class="w-50" id="pointAll" readonly>원)
+                            (사용가능:<input type="text" th:value="${user.user_point}" class="w-50" id="pointAll" readonly>원)
                         </td>
                     </tr>
                 </table>
@@ -171,10 +185,11 @@
                 <h5 class="order-title">결제 수단 선택</h5>
                 <table class="table align-middle border">
                     <tr>
-                        <th rowspan="4" >결제수단</th>
+                        <th rowspan="4">결제수단</th>
                         <td class="payment">
                             <div class="form-check mx-1 pt-1 mt-1">
-                                <input class="form-check-input" type="checkbox" id="order_paymethod1" name="order_paymethod" value="card" onchange="uncheckOthers(this.id)">
+                                <input class="form-check-input" type="checkbox" id="order_paymethod1"
+                                       name="order_paymethod" value="card" onchange="uncheckOthers(this.id)">
                                 <label class="form-check-label" for="order_paymethod1">카드 결제</label>
                             </div>
                         </td>
@@ -182,7 +197,8 @@
                     <tr class="border-white">
                         <td>
                             <div class="form-check  mx-1  pt-1">
-                                <input class="form-check-input" type="checkbox" id="order_paymethod2" name="order_paymethod" value="kakaopay" onchange="uncheckOthers(this.id)">
+                                <input class="form-check-input" type="checkbox" id="order_paymethod2"
+                                       name="order_paymethod" value="kakaopay" onchange="uncheckOthers(this.id)">
                                 <label class="form-check-label" for="order_paymethod2">카카오페이</label>
                             </div>
                         </td>
@@ -190,7 +206,8 @@
                     <tr class="border-white">
                         <td>
                             <div class="form-check  mx-1 pt-1">
-                                <input class="form-check-input" type="checkbox" id="order_paymethod3" name="order_paymethod" value="." onchange="uncheckOthers(this.id)">
+                                <input class="form-check-input" type="checkbox" id="order_paymethod3"
+                                       name="order_paymethod" value="." onchange="uncheckOthers(this.id)">
                                 <label class="form-check-label" for="order_paymethod3">가상 계좌</label>
                             </div>
                         </td>
@@ -198,7 +215,8 @@
                     <tr>
                         <td>
                             <div class="form-check  mx-1 pt-1 mb-1">
-                                <input class="form-check-input" type="checkbox" id="order_paymethod4" name="order_paymethod" value="toss" onchange="uncheckOthers(this.id)">
+                                <input class="form-check-input" type="checkbox" id="order_paymethod4"
+                                       name="order_paymethod" value="toss" onchange="uncheckOthers(this.id)">
                                 <label class="form-check-label" for="order_paymethod4">토스</label>
                             </div>
                         </td>
@@ -208,34 +226,44 @@
             </div>
 
             <div class="border-0 right-content" id="right-content"><!--오른쪽 결제 화면-->
-                <div class="border" ><!--결제금액 박스-->
+                <div class="border"><!--결제금액 박스-->
                     <div class="order-items"><p class="fw-bold fs-4 m-0">주문 예정 금액</p></div><!--제목-->
                     <div class="border-top order-items"><!--상품금액,배송비,할인금액,추가금액-->
-                        <div class="order-item"><span class="order-title2">총 상품금액</span><strong class="order-price" th:text="${total_oprice}"></strong></div>
-                        <div class="order-item"><span class="order-title2">배송비</span><strong class="order-price" th:text="${total_delivery}">0</strong></div>
-                        <div class="order-item"><span class="order-title2">할인금액</span><strong class="order-price text-danger" th:text="${total_sale}"></strong></div>
-                        <div class="order-item"><span class="order-title2">추가금액</span><strong class="order-price">0</strong></div>
+                        <div class="order-item"><span class="order-title2">총 상품금액</span><strong class="order-price"
+                                                                                                th:text="${total_oprice}"></strong>
+                        </div>
+                        <div class="order-item"><span class="order-title2">배송비</span><strong class="order-price"
+                                                                                             th:text="${total_delivery}">0</strong>
+                        </div>
+                        <div class="order-item"><span class="order-title2">할인금액</span><strong
+                                class="order-price text-danger" th:text="${total_sale}"></strong></div>
+                        <div class="order-item"><span class="order-title2">추가금액</span><strong
+                                class="order-price">0</strong></div>
                     </div>
                     <div class="border-top order-items "><!--최종 결제 금액-->
-                        <div class="order-item fs-5 fw-bold mb-2"><span class="order-title2">최종 결제 금액</span><strong class="order-price text-danger" th:text="${total_price}"></strong></div>
-                        <p>(적립예정:819원)<br><!--적립예정금액은 최종결제금액 0.5%?-->
-                            (적립 예정금액과 최종 적립금액은 상이할 수 있습니다. 주문 완료 시 지급되는 적립금을 확인해주시기 바랍니다.)</p>
+                        <div class="order-item fs-5 fw-bold mb-2"><span class="order-title2">최종 결제 금액</span><strong
+                                class="order-price text-danger" id="final-price" th:text="${total_price}"></strong>
+                        </div>
+                        <p id="point"></p>
+                        <p>(적립 예정금액과 최종 적립금액은 상이할 수 있습니다. 주문 완료 시 지급되는 적립금을 확인해주시기 바랍니다.)</p>
                     </div>
                 </div>
                 <hr class="mt-5 mb-5">
                 <div>
                     <h5 class="order-title">주문동의</h5>
                     <div class="form-check my-1 order-agree">
-                        <input class="form-check-input" type="checkbox" id="order_agree1" name="order_agree" value="agree" required>
+                        <input class="form-check-input" type="checkbox" id="order_agree1" name="order_agree"
+                               value="agree" required>
                         <label class="form-check-label px-1" for="order_agree1">위 상품의 판매조건을 명확히 확인하였으며, 구매 진행에 동의합니다.
                             <br> (전자상거래법 제8조 2항)</label>
                     </div>
                     <div class="form-check my-1  order-agree">
-                        <input class="form-check-input" type="checkbox" id="order_agree2" name="order_agree" value="agree" required>
+                        <input class="form-check-input" type="checkbox" id="order_agree2" name="order_agree"
+                               value="agree" required>
                         <label class="form-check-label px-1" for="order_agree2">반품 시 결제금액에서 배송비를 차감한 금액이 환불되는 것에 동의합니다.
                         </label>
                     </div>
-                    <button class="btn btn-outline-warning w-100 py-3 mt-4 fs-5" >결제하기</button>
+                    <button class="btn btn-outline-warning w-100 py-3 mt-4 fs-5">결제하기</button>
                     <a href="/paymentCompleted">결제성공</a><a href="/paymentFailed">결제실패</a>
                 </div>
             </div>

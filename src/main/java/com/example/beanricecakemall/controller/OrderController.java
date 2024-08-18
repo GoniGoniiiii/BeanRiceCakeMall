@@ -103,7 +103,7 @@ public class OrderController {
         model.addAttribute("user", userDTO);
         model.addAttribute("product", productDTOList);
 
-        return "product/payment"; // Thymeleaf 템플릿 이름
+        return "product/payment";
     }
 
     @PostMapping("/order")
@@ -116,6 +116,9 @@ public class OrderController {
             for(int product_num:orderDTO.getProduct_num()) {
                 cartService.delete(product_num, orderDTO.getUser_num());
             }
+            userService.plusPoint(orderDTO.getUser_num(),orderDTO.getPlus_point());
+
+            System.out.println("user_num , 포인트 :" + orderDTO.getUser_num() + orderDTO.getPlus_point());
             return "product/paymentCompleted";
         }else{
             return "product/paymentFailed";
