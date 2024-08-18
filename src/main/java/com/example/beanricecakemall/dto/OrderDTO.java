@@ -22,6 +22,8 @@ public class OrderDTO {
 
     private Timestamp order_date;
 
+    private String order_paymethod;
+
     private List<Integer> product_num;
 
     private int user_num;
@@ -35,6 +37,7 @@ public class OrderDTO {
         orderDTO.setOrder_userTel(orderEntity.getOrderUserTel());
         orderDTO.setOrder_userEmail(orderEntity.getOrderUserEmail());
         orderDTO.setOrder_userName(orderEntity.getOrderUserName());
+        orderDTO.setOrder_paymethod(orderEntity.getOrderPaymethod());
         return orderDTO;
     }
 }

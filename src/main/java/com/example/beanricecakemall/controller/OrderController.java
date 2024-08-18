@@ -118,7 +118,6 @@ public class OrderController {
             }
             userService.plusPoint(orderDTO.getUser_num(),orderDTO.getPlus_point());
 
-            System.out.println("user_num , 포인트 :" + orderDTO.getUser_num() + orderDTO.getPlus_point());
             return "product/paymentCompleted";
         }else{
             return "product/paymentFailed";

@@ -34,6 +34,9 @@ public class OrderEntity {
     @CreationTimestamp
     private Timestamp orderDate;
 
+    @Column(name="order_paymethod")
+    private String orderPaymethod;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_num",insertable = true,updatable = false)
     private UserEntity userEntity;
@@ -51,6 +54,7 @@ public class OrderEntity {
         orderEntity.setOrderUserTel(orderDTO.getOrder_userTel());
         orderEntity.setOrderUserEmail(orderDTO.getOrder_userEmail());
         orderEntity.setOrderUserName(orderDTO.getOrder_userName());
+        orderEntity.setOrderPaymethod(orderDTO.getOrder_paymethod());
         orderEntity.setUserEntity(userEntity);
         return orderEntity;
     }
