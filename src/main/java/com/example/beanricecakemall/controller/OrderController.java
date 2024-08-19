@@ -35,6 +35,27 @@ public class OrderController {
     }
 
 
+    @PostMapping("/pay")
+    public ResponseEntity<String> paymentP(@RequestBody CartDTO cartDTO, HttpSession session) {
+        //cartList에서 user_num 뽑아오기(user_num은 어차피 하나라서 아무거나 뽑아오면 됨)
+        System.out.println("cartDTO : " +cartDTO);
+        int user_num = cartDTO.getUser_num();
+        System.out.println("뽑아온 user_num: " + user_num);
+
+        UserDTO userDTO = userService.findUserInfo(user_num);
+        System.out.println(userDTO.toString());
+
+        int product_num=cartDTO.getProduct_num();
+
+        //뽑아온 product_num이용해서 필요한 정보들 가져오기
+            ProductDTO productDTO = productService.findProductInfo(product_num);
+
+        session.setAttribute("cart", cartDTO);
+        session.setAttribute("user", userDTO);
+        session.setAttribute("product", productDTO);
+        return ResponseEntity.ok("뿡");
+    }
+
     @PostMapping("/my/payment")
     public ResponseEntity<String> paymentP(@RequestBody List<CartDTO> cartList, HttpSession session) {
         //cartList에서 user_num 뽑아오기(user_num은 어차피 하나라서 아무거나 뽑아오면 됨)
@@ -70,8 +91,39 @@ public class OrderController {
         return ResponseEntity.ok("뿡");
     }
 
+    @GetMapping("/payment2") //바로구매 했을때 ( 장바구니 거치지 않음)
+    public String getPaymentPage2(HttpSession session, Model model) {
+        CartDTO cart= (CartDTO)session.getAttribute("cart");
+        UserDTO userDTO = (UserDTO) session.getAttribute("user");
+        ProductDTO productDTO = (ProductDTO) session.getAttribute("product");
 
-    @GetMapping("/payment")
+        int total_oprice = 0;
+        int total_sale = 0;
+        int total_delivery = 0;
+        int total_price=0;
+
+            total_oprice=cart.getTotal_oprice();
+            total_sale=cart.getTotal_sale();
+            System.out.println("총 세일값 : "+total_sale);
+            total_delivery=cart.getTotal_delivery();
+            System.out.println("총 배달료 : "+total_delivery);
+            total_price=cart.getTotal_price();
+            System.out.println("총 결제금액 : "+total_price);
+
+
+//        model.addAttribute("cart", cart);
+        model.addAttribute("total_oprice",total_oprice);
+        model.addAttribute("total_sale",total_sale);
+        model.addAttribute("total_delivery",total_delivery);
+        model.addAttribute("total_price",total_price);
+        model.addAttribute("user", userDTO);
+        model.addAttribute("product", productDTO);
+
+        return "product/payment";
+    }
+
+
+    @GetMapping("/payment") //장바구니 거쳐서 구매할때
     public String getPaymentPage(HttpSession session, Model model) {
         List<CartDTO> cartList = (List<CartDTO>) session.getAttribute("cart");
         UserDTO userDTO = (UserDTO) session.getAttribute("user");
@@ -123,4 +175,11 @@ public class OrderController {
             return "product/paymentFailed";
         }
     }
+
+//    @GetMapping("/my/orderList")
+//    public String orderListP(int order_num,Model model){
+//        List<OrderDTO> orderDTOS = orderService.orderList(order_num);
+//        for(OrderDTO order:orderDTOS){
+//        }
+//    }
 }

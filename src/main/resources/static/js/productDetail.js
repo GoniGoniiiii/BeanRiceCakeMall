@@ -98,6 +98,61 @@ function cart(){
             })
     }
 }
+function goPay(){
+    const userNum= document.getElementById("user_num").value;
+    const productNum=document.getElementById("product_num").value;
+    const cartCnt=document.getElementById("cart_cnt").value;
+    const productImg=document.getElementById("product_img").value;
+    const oprice=document.getElementById("product_oprice").textContent;
+    const sprice=document.getElementById("product_sprice").textContent;
+    const delivery = Number(document.getElementById("product_delivery").textContent.replace(/[^0-9.-]+/g,""));
+    const total_sprice = Number(document.getElementById("all-price").textContent.replace(/[^0-9.-]+/g,""));
+
+    const total_sale=Number(oprice - sprice)*cartCnt;
+    const total_price=total_sprice+delivery;
+
+    console.log(total_sale);
+
+    console.log(oprice);
+    console.log(delivery);
+    console.log(sprice);
+    console.log(total_sprice);
+    console.log(cartCnt);
+    console.log(userNum);
+    console.log(total_price);
+
+
+    var data={
+        user_num :userNum,
+        product_num :productNum,
+        cart_cnt : cartCnt,
+        product_img : productImg,
+        total_oprice:total_sprice,
+        total_delivery:delivery,
+        total_sale:total_sale,
+        total_price:total_price
+    };
+
+    if(userNum==='-1'){
+        alert("로그인이 필요합니다!");
+        window.location="/login";
+    }else{
+        fetch("/pay",{
+            method:'Post',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(data)
+        })
+            .then(response =>response.text())
+            .then(data=>{
+                window.location.href="/payment2";
+            })
+            .catch(error =>{
+                console.error('Error :' +error);
+            })
+        }
+}
 function goCart(){
     //장바구니로 이동
     // const user_num= document.getElementById("user_num").value;
