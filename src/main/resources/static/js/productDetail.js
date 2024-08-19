@@ -127,7 +127,7 @@ function goPay(){
         product_num :productNum,
         cart_cnt : cartCnt,
         product_img : productImg,
-        total_oprice:total_sprice,
+        total_oprice:oprice,
         total_delivery:delivery,
         total_sale:total_sale,
         total_price:total_price
