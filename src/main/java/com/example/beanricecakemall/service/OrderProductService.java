@@ -9,6 +9,7 @@ import com.example.beanricecakemall.repository.OrderProductRepository;
 import com.example.beanricecakemall.repository.OrderRepository;
 import com.example.beanricecakemall.repository.ProductRepository;
 import com.example.beanricecakemall.repository.UserRepository;
+import org.aspectj.weaver.ast.Or;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
@@ -35,33 +36,46 @@ public class OrderProductService {
     }
 
     public void insertOrder(OrderDTO orderDTO) {
-        ProductEntity productEntity=null;
-        OrderEntity orderEntity=null;
-        UserEntity userEntity=null;
+        List<ProductEntity> productEntities = new ArrayList<>();
+        OrderEntity orderEntity = null;
+        UserEntity userEntity = null;
 
         //product
-        List<Integer> product_num = orderDTO.getProduct_num();
+        List<Integer> order_cnt = orderDTO.getOrder_cnt();
 
-        for (int product : product_num) {
-           productEntity=productRepository.findByProductNum(product);
-           productEntity.toString();
+        // product_num을 기반으로 각 상품 엔티티를 가져와서 리스트에 추가
+        for (int productNum : orderDTO.getProduct_num()) {
+            ProductEntity productEntity = productRepository.findByProductNum(productNum);
+            if (productEntity != null) {
+                productEntities.add(productEntity);
+            }
         }
+
         //order
-        int order_num=orderDTO.getOrder_num();
-        Optional<OrderEntity>  order=orderRepository.findById(order_num);
-        if(order.isPresent()){
-            orderEntity=order.get();
-            orderEntity.toString();
+        int order_num = orderDTO.getOrder_num();
+        Optional<OrderEntity> order = orderRepository.findById(order_num);
+        if (order.isPresent()) {
+            orderEntity = order.get();
         }
 
         //user
-        int user_num=orderDTO.getUser_num();
+        int user_num = orderDTO.getUser_num();
         Optional<UserEntity> user = userRepository.findById(user_num);
-        if(user.isPresent()) {
+        if (user.isPresent()) {
             userEntity = user.get();
-            userEntity.toString();
         }
-        OrderProductEntity orderProductEntity = OrderProductEntity.toSave(orderDTO,orderEntity,productEntity,userEntity);
-        orderProductRepository.save(orderProductEntity);
+
+        for (int i = 0; i < orderDTO.getProduct_num().size(); i++) {
+            int productNum = orderDTO.getProduct_num().get(i);
+            int orderCnt = orderDTO.getOrder_cnt().get(i);
+
+            ProductEntity productEntity = productEntities.get(i);
+
+            OrderProductEntity orderProductEntity = OrderProductEntity.toSave(orderDTO, orderEntity, productEntity, userEntity);
+            orderProductEntity.setOrderCnt(orderCnt);
+            orderProductRepository.save(orderProductEntity);
+        }
+
     }
+
 }

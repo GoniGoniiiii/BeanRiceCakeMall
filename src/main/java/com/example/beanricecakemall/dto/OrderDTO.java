@@ -32,7 +32,7 @@ public class OrderDTO {
 
     private int plus_point;
 
-    private int order_cnt;
+    private List<Integer> order_cnt;
 
     private int order_oprice;
 
@@ -48,7 +48,6 @@ public class OrderDTO {
         orderDTO.setOrder_userEmail(orderEntity.getOrderUserEmail());
         orderDTO.setOrder_userName(orderEntity.getOrderUserName());
         orderDTO.setOrder_paymethod(orderEntity.getOrderPaymethod());
-        orderDTO.setOrder_cnt(orderProductEntity.getOrderCnt());
         orderDTO.setOrder_oprice(orderProductEntity.getOrderOprice());
         orderDTO.setOrder_price(orderProductEntity.getOrderPrice());
         orderDTO.setOrder_status(orderProductEntity.getOrderStatus());

@@ -42,12 +42,8 @@ public class OrderEntity {
     @JoinColumn(name="user_num",insertable = true,updatable = false)
     private UserEntity userEntity;
 
-//    @OneToMany(mappedBy = "orderEntity",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
-//    private List<ProductEntity> productEntityList=new ArrayList<>();
-//
-
     @OneToMany(mappedBy = "orderEntity",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<OrderProductEntity> orderProductEntityList=new ArrayList<>();
+    private List<OrderProductEntity> orderProductEntity=new ArrayList<>();
 
     @OneToOne(mappedBy = "orderEntity",cascade = CascadeType.ALL)
     private DeliveryEntity deliveryEntity;

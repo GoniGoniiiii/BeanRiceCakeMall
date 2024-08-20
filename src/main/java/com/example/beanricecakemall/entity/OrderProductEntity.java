@@ -41,9 +41,8 @@ public class OrderProductEntity {
     private UserEntity userEntity;
 
 
-    public static OrderProductEntity toSave(OrderDTO orderDTO,OrderEntity orderEntity,ProductEntity productEntity, UserEntity userEntity){
+    public static OrderProductEntity toSave(OrderDTO orderDTO, OrderEntity orderEntity,ProductEntity productEntity, UserEntity userEntity){
         OrderProductEntity orderProductEntity=new OrderProductEntity();
-        orderProductEntity.setOrderCnt(orderDTO.getOrder_cnt());
         orderProductEntity.setOrderStatus("처리중");
         orderProductEntity.setOrderOprice(orderDTO.getOrder_oprice());
         orderProductEntity.setOrderPrice(orderDTO.getOrder_price());

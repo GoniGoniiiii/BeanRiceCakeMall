@@ -9,14 +9,6 @@
 <body>
 <header th:include="header"></header>
 <section class="product-content">
-    <div class="productDetail-breadcrumb">
-<!--        <nav aria-label="breadcrumb">-->
-<!--            <ol class="breadcrumb">-->
-<!--                <li class="breadcrumb-item small"><a href="#" class="text-black">Home</a></li>-->
-<!--                <li class="breadcrumb-item active small" aria-current="page">베스트</li>-->
-<!--            </ol>-->
-<!--        </nav>-->
-    </div>
     <div class="d-flex justify-content-between productDetail-content" th:each="product:${product}">
         <div class="left-content">
             <img th:src="@{|/upload/${product.product_img}|}" th:value="${product.product_img}"  id="product_img" class="product-mainImg"alt="상품 이미지"/>

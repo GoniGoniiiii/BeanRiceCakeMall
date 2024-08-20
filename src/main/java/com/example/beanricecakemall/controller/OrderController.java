@@ -1,10 +1,8 @@
 package com.example.beanricecakemall.controller;
 
 import com.example.beanricecakemall.dto.*;
-import com.example.beanricecakemall.service.CartService;
-import com.example.beanricecakemall.service.OrderService;
-import com.example.beanricecakemall.service.ProductService;
-import com.example.beanricecakemall.service.UserService;
+import com.example.beanricecakemall.entity.OrderProductEntity;
+import com.example.beanricecakemall.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
@@ -27,28 +25,31 @@ public class OrderController {
 
     private final CartService cartService;
 
-    public OrderController(UserService userService, ProductService productService, OrderService orderService, CartService cartService) {
+    private final OrderProductService orderProductService;
+
+    public OrderController(UserService userService, ProductService productService, OrderService orderService, CartService cartService, OrderProductService orderProductService) {
         this.userService = userService;
         this.productService = productService;
         this.orderService = orderService;
         this.cartService = cartService;
+        this.orderProductService = orderProductService;
     }
 
 
     @PostMapping("/pay")
     public ResponseEntity<String> paymentP(@RequestBody CartDTO cartDTO, HttpSession session) {
         //cartList에서 user_num 뽑아오기(user_num은 어차피 하나라서 아무거나 뽑아오면 됨)
-        System.out.println("cartDTO : " +cartDTO);
+        System.out.println("cartDTO : " + cartDTO);
         int user_num = cartDTO.getUser_num();
         System.out.println("뽑아온 user_num: " + user_num);
 
         UserDTO userDTO = userService.findUserInfo(user_num);
         System.out.println(userDTO.toString());
 
-        int product_num=cartDTO.getProduct_num();
+        int product_num = cartDTO.getProduct_num();
 
         //뽑아온 product_num이용해서 필요한 정보들 가져오기
-            ProductDTO productDTO = productService.findProductInfo(product_num);
+        ProductDTO productDTO = productService.findProductInfo(product_num);
 
         session.setAttribute("cart", cartDTO);
         session.setAttribute("user", userDTO);
@@ -93,29 +94,36 @@ public class OrderController {
 
     @GetMapping("/payment2") //바로구매 했을때 ( 장바구니 거치지 않음)
     public String getPaymentPage2(HttpSession session, Model model) {
-        CartDTO cart= (CartDTO)session.getAttribute("cart");
+        CartDTO cart = (CartDTO) session.getAttribute("cart");
         UserDTO userDTO = (UserDTO) session.getAttribute("user");
         ProductDTO productDTO = (ProductDTO) session.getAttribute("product");
 
         int total_oprice = 0;
         int total_sale = 0;
         int total_delivery = 0;
-        int total_price=0;
+        int total_price = 0;
+        int order_cnt = 0;
 
-            total_oprice=cart.getTotal_oprice();
-            total_sale=cart.getTotal_sale();
-            System.out.println("총 세일값 : "+total_sale);
-            total_delivery=cart.getTotal_delivery();
-            System.out.println("총 배달료 : "+total_delivery);
-            total_price=cart.getTotal_price();
-            System.out.println("총 결제금액 : "+total_price);
 
+        total_oprice = cart.getTotal_oprice();
+        total_sale = cart.getTotal_sale();
+        System.out.println("총 세일값 : " + total_sale);
+
+        total_delivery = cart.getTotal_delivery();
+        System.out.println("총 배달료 : " + total_delivery);
+
+        total_price = cart.getTotal_price();
+        System.out.println("총 결제금액 : " + total_price);
+
+        order_cnt=cart.getCart_cnt();
+        System.out.println("주문 수량 : " + order_cnt);
 
 //        model.addAttribute("cart", cart);
-        model.addAttribute("total_oprice",total_oprice);
-        model.addAttribute("total_sale",total_sale);
-        model.addAttribute("total_delivery",total_delivery);
-        model.addAttribute("total_price",total_price);
+        model.addAttribute("total_oprice", total_oprice);
+        model.addAttribute("total_sale", total_sale);
+        model.addAttribute("total_delivery", total_delivery);
+        model.addAttribute("total_price", total_price);
+        model.addAttribute("order_cnt",order_cnt);
         model.addAttribute("user", userDTO);
         model.addAttribute("product", productDTO);
 
@@ -133,25 +141,31 @@ public class OrderController {
         int total_oprice = 0;
         int total_sale = 0;
         int total_delivery = 0;
-        int total_price=0;
+        int total_price = 0;
+        List<Integer> order_cnt=new ArrayList<>();
 
         for (CartDTO cart : cartList) {
-            total_oprice=cart.getTotal_oprice();
+            total_oprice = cart.getTotal_oprice();
             System.out.println("총 원가 : " + total_oprice);
-            total_sale=cart.getTotal_sale();
-            System.out.println("총 세일값 : "+total_sale);
-            total_delivery=cart.getTotal_delivery();
-            System.out.println("총 배달료 : "+total_delivery);
-            total_price=cart.getTotal_price();
-            System.out.println("총 결제금액 : "+total_price);
 
+            total_sale = cart.getTotal_sale();
+            System.out.println("총 세일값 : " + total_sale);
+
+            total_delivery = cart.getTotal_delivery();
+            System.out.println("총 배달료 : " + total_delivery);
+
+            total_price = cart.getTotal_price();
+            System.out.println("총 결제금액 : " + total_price);
+
+            order_cnt.add(cart.getCart_cnt());
         }
 
 //        model.addAttribute("cart", cartList);
-        model.addAttribute("total_oprice",total_oprice);
-        model.addAttribute("total_sale",total_sale);
-        model.addAttribute("total_delivery",total_delivery);
-        model.addAttribute("total_price",total_price);
+        model.addAttribute("total_oprice", total_oprice);
+        model.addAttribute("total_sale", total_sale);
+        model.addAttribute("total_delivery", total_delivery);
+        model.addAttribute("total_price", total_price);
+        model.addAttribute("order_cnt",order_cnt);
         model.addAttribute("user", userDTO);
         model.addAttribute("product", productDTOList);
 
@@ -162,16 +176,24 @@ public class OrderController {
     public String order(@ModelAttribute OrderDTO orderDTO, @ModelAttribute DeliveryDTO deliveryDTO) {
         System.out.println(orderDTO.toString());
         System.out.println(deliveryDTO.toString());
-        boolean order=orderService.insertOrder(orderDTO,deliveryDTO);
+        int order_num = orderService.insertOrder(orderDTO, deliveryDTO);
+
         System.out.println("컨트롤러 product_num : " + orderDTO.getProduct_num());
-        if(order){
-            for(int product_num:orderDTO.getProduct_num()) {
+        if (order_num!=0) {
+            for (int product_num : orderDTO.getProduct_num()) {
+                //주문이 성공하면 장바구니에서 상품 삭제
                 cartService.delete(product_num, orderDTO.getUser_num());
+
+                orderDTO.setOrder_num(order_num);
             }
-            userService.plusPoint(orderDTO.getUser_num(),orderDTO.getPlus_point());
+            //주문 상세 테이블에 추가
+            orderProductService.insertOrder(orderDTO);
+            // 적립금 추가
+            userService.plusPoint(orderDTO.getUser_num(), orderDTO.getPlus_point());
+
 
             return "product/paymentCompleted";
-        }else{
+        } else {
             return "product/paymentFailed";
         }
     }
