@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.Fetch;
 import org.hibernate.query.Order;
 
 import java.sql.Timestamp;
@@ -41,9 +42,12 @@ public class OrderEntity {
     @JoinColumn(name="user_num",insertable = true,updatable = false)
     private UserEntity userEntity;
 
-    @OneToMany(mappedBy = "orderEntity",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
-    private List<ProductEntity> productEntityList=new ArrayList<>();
+//    @OneToMany(mappedBy = "orderEntity",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
+//    private List<ProductEntity> productEntityList=new ArrayList<>();
+//
 
+    @OneToMany(mappedBy = "orderEntity",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<OrderProductEntity> orderProductEntityList=new ArrayList<>();
 
     @OneToOne(mappedBy = "orderEntity",cascade = CascadeType.ALL)
     private DeliveryEntity deliveryEntity;

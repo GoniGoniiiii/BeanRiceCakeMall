@@ -1,6 +1,8 @@
 package com.example.beanricecakemall.dto;
 
 import com.example.beanricecakemall.entity.OrderEntity;
+import com.example.beanricecakemall.entity.OrderProductEntity;
+import com.example.beanricecakemall.entity.ProductEntity;
 import lombok.*;
 
 import java.sql.Timestamp;
@@ -30,7 +32,15 @@ public class OrderDTO {
 
     private int plus_point;
 
-    public static OrderDTO toOrderDTO(OrderEntity orderEntity){
+    private int order_cnt;
+
+    private int order_oprice;
+
+    private int order_price;
+
+    private int order_status;
+
+    public static OrderDTO toOrderDTO(OrderEntity orderEntity, OrderProductEntity orderProductEntity){
         OrderDTO orderDTO=new OrderDTO();
         orderDTO.setOrder_num(orderEntity.getOrderNum());
         orderDTO.setOrder_date(orderEntity.getOrderDate());
@@ -38,6 +48,10 @@ public class OrderDTO {
         orderDTO.setOrder_userEmail(orderEntity.getOrderUserEmail());
         orderDTO.setOrder_userName(orderEntity.getOrderUserName());
         orderDTO.setOrder_paymethod(orderEntity.getOrderPaymethod());
+        orderDTO.setOrder_cnt(orderProductEntity.getOrderCnt());
+        orderDTO.setOrder_oprice(orderProductEntity.getOrderOprice());
+        orderDTO.setOrder_price(orderProductEntity.getOrderPrice());
+        orderDTO.setOrder_status(orderDTO.getOrder_status());
         return orderDTO;
     }
 }
