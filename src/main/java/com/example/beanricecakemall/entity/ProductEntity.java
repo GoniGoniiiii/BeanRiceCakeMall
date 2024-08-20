@@ -66,10 +66,6 @@ public class ProductEntity {
     @JoinColumn(name="category_num", insertable = true,updatable = false)
     private CategoryEntity categoryEntity;
 
-    @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="order_num",updatable = false)
-    private OrderEntity orderEntity;
-
     @OneToMany(mappedBy = "productEntity",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
     private List<CartEntity> cartEntityList=new ArrayList<>();
 
@@ -78,6 +74,10 @@ public class ProductEntity {
 
     @OneToMany(mappedBy = "productEntity", cascade=CascadeType.REMOVE, orphanRemoval = true, fetch = FetchType.LAZY)
     private List<ReviewEntity> reviewEntityList=new ArrayList<>();
+
+    @OneToMany(mappedBy = "productEntity",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
+    private List<OrderProductEntity> orderProductEntityList=new ArrayList<>();
+
 
     public static ProductEntity toProductEntity(ProductDTO productDTO,CategoryEntity categoryEntity){
         ProductEntity productEntity=new ProductEntity();

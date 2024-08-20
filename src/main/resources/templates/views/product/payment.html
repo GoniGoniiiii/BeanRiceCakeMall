@@ -53,6 +53,7 @@
                             <input type="text" id="p_num3" class="order-num" required></td>
                         <input type="hidden" id="user_tel" name="order_userTel">
                         <input type="hidden" name="user_num" th:value="${user.user_num}">
+                        <input type="hidden" name="order_cnt" th:value="${order_cnt}">
                     </tr>
                 </table><!--주문자 정보 테이블 끝-->
 
@@ -154,10 +155,12 @@
                         <tr>
                             <td colspan="6">
                                 <p class="fs-5 pt-3 ">
-                                    주문금액 <strong id="oprice" th:text="${total_oprice}+'원'"></strong><strong
-                                        class="text-danger" id="sprice" th:text="' -상품할인 '+${total_sale}+'원'"></strong>
+                                    주문금액 <strong id="oprice" th:text="${total_oprice}+'원'" th:value="${total_oprice}"></strong><strong
+                                        class="text-danger" id="sprice" th:text="' -상품할인 '+${total_sale}+'원'" ></strong>
                                     +배송비 <strong id="total_delivery" th:text=" ${total_delivery}+'원'"></strong> =<strong
-                                        id="total_price" th:text="' 최종 결제금액 '+${total_price}+'원'"></strong></p>
+                                        id="total_price" th:text="' 최종 결제금액 '+${total_price}+'원'" th:value="${total_price}" name="order_price"></strong></p>
+                                <input type="hidden" name="order_oprice" th:value="${total_oprice}">
+                                <input type="hidden" name="order_price" th:value="${total_price}">
                             </td>
                         </tr>
                     </table>

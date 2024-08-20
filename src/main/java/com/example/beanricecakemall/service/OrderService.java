@@ -26,7 +26,7 @@ public class OrderService {
         this.userRepository = userRepository;
     }
 
-    public boolean insertOrder(OrderDTO orderDTO, DeliveryDTO deliveryDTO){
+    public int insertOrder(OrderDTO orderDTO, DeliveryDTO deliveryDTO){
         if(orderDTO!=null && deliveryDTO!=null){
             System.out.println("service단 getUserNum : "+orderDTO.getUser_num());
             UserEntity userEntity=userRepository.findByUserNum(orderDTO.getUser_num());
@@ -36,8 +36,8 @@ public class OrderService {
             DeliveryEntity deliveryEntity2=DeliveryEntity.toSave(deliveryDTO,orderEntity);
             deliveryRepository.save(deliveryEntity2);
 
-            return true;
+            return orderEntity.getOrderNum();
         }
-        return false;
+        return 0;
     }
 }

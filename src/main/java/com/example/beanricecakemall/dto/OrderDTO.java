@@ -38,7 +38,7 @@ public class OrderDTO {
 
     private int order_price;
 
-    private int order_status;
+    private String order_status;
 
     public static OrderDTO toOrderDTO(OrderEntity orderEntity, OrderProductEntity orderProductEntity){
         OrderDTO orderDTO=new OrderDTO();
@@ -51,7 +51,7 @@ public class OrderDTO {
         orderDTO.setOrder_cnt(orderProductEntity.getOrderCnt());
         orderDTO.setOrder_oprice(orderProductEntity.getOrderOprice());
         orderDTO.setOrder_price(orderProductEntity.getOrderPrice());
-        orderDTO.setOrder_status(orderDTO.getOrder_status());
+        orderDTO.setOrder_status(orderProductEntity.getOrderStatus());
         return orderDTO;
     }
 }

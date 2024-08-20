@@ -52,7 +52,7 @@ public class ProductDTO {
 
     private int category_num;
 
-
+    private int order_cnt;
 
 
     public static ProductDTO toProductDTO(ProductEntity productEntity){

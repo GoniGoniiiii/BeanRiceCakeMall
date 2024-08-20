@@ -76,6 +76,9 @@ public class UserEntity{
     @OneToMany(mappedBy = "userEntity" , cascade =CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
     public List<CartEntity> cartEntityList=new ArrayList<>();
 
+    @OneToMany(mappedBy = "userEntity",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
+    public List<OrderProductEntity> orderProductEntityList=new ArrayList<>();
+
 
     public static UserEntity toSaveEntity(UserDTO userDTO){
         UserEntity userEntity=new UserEntity();
