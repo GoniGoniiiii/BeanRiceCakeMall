@@ -6,10 +6,12 @@ import com.example.beanricecakemall.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -198,10 +200,16 @@ public class OrderController {
         }
     }
 
-//    @GetMapping("/my/orderList")
-//    public String orderListP(int order_num,Model model){
-//        List<OrderDTO> orderDTOS = orderService.orderList(order_num);
-//        for(OrderDTO order:orderDTOS){
-//        }
-//    }
+    @GetMapping("/my/orderList")
+    public String orderListP(Model model){
+        String user_id=SecurityContextHolder.getContext().getAuthentication().getName();
+        List<OrderDTO> orderDTOS = orderService.orderList(user_id);
+        OrderDTO orderDTO=new OrderDTO();
+        for(OrderDTO order:orderDTOS){
+            orderDTO=order;
+        }
+        model.addAttribute("order",orderDTO);
+        return "user/orderList";
+    }
+
 }
