@@ -117,7 +117,7 @@ public class OrderController {
         total_price = cart.getTotal_price();
         System.out.println("총 결제금액 : " + total_price);
 
-        order_cnt=cart.getCart_cnt();
+        order_cnt = cart.getCart_cnt();
         System.out.println("주문 수량 : " + order_cnt);
 
 //        model.addAttribute("cart", cart);
@@ -125,7 +125,7 @@ public class OrderController {
         model.addAttribute("total_sale", total_sale);
         model.addAttribute("total_delivery", total_delivery);
         model.addAttribute("total_price", total_price);
-        model.addAttribute("order_cnt",order_cnt);
+        model.addAttribute("order_cnt", order_cnt);
         model.addAttribute("user", userDTO);
         model.addAttribute("product", productDTO);
 
@@ -144,7 +144,7 @@ public class OrderController {
         int total_sale = 0;
         int total_delivery = 0;
         int total_price = 0;
-        List<Integer> order_cnt=new ArrayList<>();
+        List<Integer> order_cnt = new ArrayList<>();
 
         for (CartDTO cart : cartList) {
             total_oprice = cart.getTotal_oprice();
@@ -167,7 +167,7 @@ public class OrderController {
         model.addAttribute("total_sale", total_sale);
         model.addAttribute("total_delivery", total_delivery);
         model.addAttribute("total_price", total_price);
-        model.addAttribute("order_cnt",order_cnt);
+        model.addAttribute("order_cnt", order_cnt);
         model.addAttribute("user", userDTO);
         model.addAttribute("product", productDTOList);
 
@@ -181,7 +181,7 @@ public class OrderController {
         int order_num = orderService.insertOrder(orderDTO, deliveryDTO);
 
         System.out.println("컨트롤러 product_num : " + orderDTO.getProduct_num());
-        if (order_num!=0) {
+        if (order_num != 0) {
             for (int product_num : orderDTO.getProduct_num()) {
                 //주문이 성공하면 장바구니에서 상품 삭제
                 cartService.delete(product_num, orderDTO.getUser_num());
@@ -201,14 +201,41 @@ public class OrderController {
     }
 
     @GetMapping("/my/orderList")
-    public String orderListP(Model model){
-        String user_id=SecurityContextHolder.getContext().getAuthentication().getName();
+    public String orderListP(Model model) {
+        //security를 이용해서 user_id가져오기
+        String user_id = SecurityContextHolder.getContext().getAuthentication().getName();
+        //가져온 user_id값으로 orderDTO뽑아주기
         List<OrderDTO> orderDTOS = orderService.orderList(user_id);
-        OrderDTO orderDTO=new OrderDTO();
-        for(OrderDTO order:orderDTOS){
-            orderDTO=order;
+        OrderDTO orderDTO = new OrderDTO();
+        List<String> product_img = new ArrayList<>();
+        List<String> product_name = new ArrayList<>();
+        List<OrderDTO> orderDTOList = new ArrayList<>();
+        int count = 0;
+
+        for (OrderDTO order : orderDTOS) {
+            orderDTO = order;
+            System.out.println(orderDTO.toString());
+            if (orderDTO.getOrder_num() != 0) {
+                count++;
+            }
+            orderDTOList.add(orderDTO);
+
+            //product_img,product_name 가져오기
+            List<Integer> product_num = orderDTO.getProduct_num();
+
+            for (int product : product_num) {
+                product_img.add(productService.findProductImg(product));
+                product_name.add(productService.findProductName(product));
+            }
+            System.out.println(product_img.toString());
+            System.out.println(product_name.toString());
         }
-        model.addAttribute("order",orderDTO);
+        model.addAttribute("order", orderDTOList);
+        model.addAttribute("product_img", product_img);
+        model.addAttribute("product_name", product_name);
+        model.addAttribute("rowspan", count);
+        System.out.println(count);
+        System.out.println();
         return "user/orderList";
     }
 
