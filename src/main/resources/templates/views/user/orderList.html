@@ -35,24 +35,18 @@
             <th class="order-process">주문처리상태</th>
             <th class="order-cancle">취소/교환/반품</th>
         </tr>
-        <tr>
-            <td rowspan="2" class="order-date">
-                <span>2024-04-23</span><br>
+        <tr th:each="order,iterStat :${orderDTOList}">
+            <td th:rowspan="${rowspan}" class="order-date">
+                <span th:text="${order_list}"></span><br>
                 <span><a href="/orderListDetail" >[2024-04-23]</a></span>
             </td>
-            <td><img src="/img/img1.png" class="table-img"></td>
-            <td class="text-start ps-3">귀여운 강아지 인형</td>
-            <td>1</td>
-            <td>50,000원</td>
-            <td>입금전</td>
-            <td>-</td>
         </tr>
-        <tr>
+        <tr th:each="orderDTO:${orderDTO}">
             <td><img src="/img/img1.png" class="table-img"></td>
-            <td class="text-start ps-3">귀여운 강아지 인형</td>
-            <td>1</td>
-            <td>50,000원</td>
-            <td>입금전</td>
+            <td class="text-start ps-3" th:text="${product_name}"></td>
+            <td th:text="${orderDTO.order_cnt}"></td>
+            <td th:text="${orderDTO.order_oprice}">50,000원</td>
+            <td th:text="${orderDTO.order_status}">입금전</td>
             <td>-</td>
         </tr>
     </table>
