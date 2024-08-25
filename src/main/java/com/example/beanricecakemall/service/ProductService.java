@@ -221,7 +221,7 @@ public class ProductService {
         return 0;
     }
 
-    public int findProductOprice(int product_num){
+    public int findProductOprice(int product_num) {
         ProductEntity product = productRepository.findAllByProductNum(product_num);
         if (product != null) {
             return product.getProductOprice();
@@ -235,18 +235,16 @@ public class ProductService {
     }
 
     public ProductDTO findProductInfo(int product_num) {
-//       List<ProductEntity> productEntities= productRepository.findByProductNum(product_num);
-//       List<ProductDTO> productDTOList=new ArrayList<>();
-//       for(ProductEntity product: productEntities){
-//           productDTOList.add(ProductDTO.toProductDTO(product));
-//       }
-//       for(ProductDTO dto: productDTOList){
-//           System.out.println(dto.getProduct_num());
-//       }
-//       return productDTOList;
-//    }
         ProductEntity product = productRepository.findByProductNum(product_num);
         ProductDTO productDTO = ProductDTO.toProductDTO(product);
         return productDTO;
     }
+
+    public String findProductImg(int product_num){
+        ProductEntity productEntity=productRepository.findByProductNum(product_num);
+        String product_img=productEntity.getProductImg();
+        System.out.println("Service내 product_img : " + product_img);
+        return product_img;
+    }
+
 }
