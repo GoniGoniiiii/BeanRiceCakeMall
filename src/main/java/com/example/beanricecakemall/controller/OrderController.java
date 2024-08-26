@@ -12,10 +12,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Controller
 public class OrderController {
@@ -210,15 +208,27 @@ public class OrderController {
         List<String> product_img = new ArrayList<>();
         List<String> product_name = new ArrayList<>();
         List<OrderDTO> orderDTOList = new ArrayList<>();
+        List<Integer> orderNumList = new ArrayList<>();
         int count = 0;
+        int num=0;
+        int rowspan=0;
 
         for (OrderDTO order : orderDTOS) {
             orderDTO = order;
             System.out.println(orderDTO.toString());
-            if (orderDTO.getOrder_num() != 0) {
+            if (num != orderDTO.getOrder_num() &num!=0) {
                 count++;
+                orderNumList.add(num);
+                System.out.println(count +"orderDTO.getOrder_num : "+  orderDTO.getOrder_num());
             }
+            rowspan++;
+            num=orderDTO.getOrder_num();
             orderDTOList.add(orderDTO);
+
+            // 마지막 주문 번호를 리스트에 추가
+            if (num != 0) {
+                orderNumList.add(num);
+            }
 
             //product_img,product_name 가져오기
             List<Integer> product_num = orderDTO.getProduct_num();
@@ -226,16 +236,21 @@ public class OrderController {
             for (int product : product_num) {
                 product_img.add(productService.findProductImg(product));
                 product_name.add(productService.findProductName(product));
+                System.out.println( " product : " +product);
             }
             System.out.println(product_img.toString());
             System.out.println(product_name.toString());
         }
-        model.addAttribute("order", orderDTOList);
+
+        model.addAttribute("orderDTO",orderDTO);
+        model.addAttribute("orderDTOList", orderDTOList);
         model.addAttribute("product_img", product_img);
         model.addAttribute("product_name", product_name);
-        model.addAttribute("rowspan", count);
+        model.addAttribute("order_list", orderNumList);
+        model.addAttribute("rowspan",rowspan);
+
         System.out.println(count);
-        System.out.println();
+        System.out.println(rowspan);
         return "user/orderList";
     }
 
