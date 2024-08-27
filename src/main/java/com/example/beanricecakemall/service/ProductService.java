@@ -232,6 +232,7 @@ public class ProductService {
     @Transactional
     public void deleteProduct(int product_num) {
         productRepository.deleteAllByProductNum(product_num);
+
     }
 
     public ProductDTO findProductInfo(int product_num) {

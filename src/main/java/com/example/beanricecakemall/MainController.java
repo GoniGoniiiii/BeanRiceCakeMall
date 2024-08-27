@@ -32,11 +32,6 @@ public class MainController {
         return "user/login";
     }
 
-    @GetMapping("/orderListDetail")
-    public String orderListDetailP() {
-        return "user/orderListDetail";
-    }
-
     @GetMapping("/user/join")
     public String joinP() {
         return "user/join";
