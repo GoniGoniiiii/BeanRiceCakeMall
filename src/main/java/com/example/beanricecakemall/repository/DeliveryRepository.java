@@ -5,4 +5,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface DeliveryRepository extends JpaRepository<DeliveryEntity, Integer> {
 
+    public DeliveryEntity findByOrderEntityOrderNum(int order_num);
 }
