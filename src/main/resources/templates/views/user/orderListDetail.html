@@ -19,43 +19,43 @@
     <h3 class="pt-5 mt-2 mb-5 text-center fw-bold">주문상세조회</h3>
 
     <p class="small">주문정보</p>
-    <table class="table border-top border-bottom mb-5 align-middle">
+    <table class="table border-top border-bottom mb-5 align-middle" th:each="order : ${orderDTO}">
         <tr>
             <td class="w-25 border-end ps-3">주문번호</td>
-            <td class="w-75 ps-2"><small>20230424-1</small></td>
+            <td class="w-75 ps-2"><small th:text="${order.order_num}">20230424-1</small></td>
         </tr>
         <tr>
             <td class="w-25 border-end ps-3">주문일자</td>
-            <td class="w-75 ps-2"><small>2024-04-24 </small></td>
+            <td class="w-75 ps-2"><small  th:text="${#dates.format(order.order_date, 'yyyy-MM-dd')}">2024-04-24 </small></td>
         </tr>
         <tr>
             <td class="w-25 border-end ps-3">주문자</td>
-            <td class="w-75 ps-2"><small>유고운</small></td>
+            <td class="w-75 ps-2"><small th:text="${order.order_userName}">유고운</small></td>
         </tr>
         <tr>
             <td class="w-25 border-end ps-3">주문처리상태</td>
-            <td class="w-75 ps-2"><small>입금전</small></td>
+            <td class="w-75 ps-2"><small th:text="${order.order_status[0]}"></small></td>
         </tr>
     </table>
 
     <p class="small">결제정보</p>
-    <table class="table border-top border-bottom align-middle mb-5">
+    <table class="table border-top border-bottom align-middle mb-5" th:each="order :${orderDTO}">
         <tr>
             <td class="w-25 border-end ps-3 fw-bold">총 주문금액</td>
-            <td class="w-75 ps-2"><small>55,000원</small></td>
+            <td class="w-75 ps-2"><small th:text="${order.order_oprice}">55,000원</small></td>
         </tr>
         <tr>
             <td class="w-25 border-end ps-3 fw-bold">총 결제금액</td>
-            <td class="w-75 ps-2 fw-bold">55,000<small>원</small></td>
+            <td class="w-75 ps-2 fw-bold" th:text="${order.order_price[0]}">55,000<small>원</small></td>
         </tr>
         <tr>
             <td class="w-25 border-end ps-3">결제 수단</td>
-            <td class="w-75 ps-2"><small>무통장입금</small><br><small>입금자 : 유고운 , 계좌번호 : 1002-463-744172</small></td>
+            <td class="w-75 ps-2"><small th:text="${order.order_paymethod}"></small><br></td>
         </tr>
     </table>
 
     <p class="small">주문 상품 정보</p>
-    <table class="table border-top border-bottom align-middle text-center product-info mb-5">
+    <table class="table border-top border-bottom align-middle text-center product-info mb-5" th:each="order,iterStat:${orderDTO}">
         <tr>
             <td class="order-img">이미지</td>
             <td class="order-info">상품정보</td>
@@ -64,49 +64,44 @@
             <td class="order-process">주문처리상태</td>
             <td class="order-cancle">취소/교환/반품</td>
         </tr>
-        <tr>
-            <td><img src="/img/img1.png" class="table-img"></td>
-            <td class="text-start ps-3">귀여운 강아지 인형</td>
-            <td>1</td>
-            <td>50,000원</td>
-            <td>입금전</td>
+        <tr th:each="orderPro,iterStat:${orderProductList}">
+            <td><img th:src="@{|/upload/${product_img[iterStat.index]}|}" class="table-img"></td>
+            <td class="text-start ps-3" th:text="${product_name[iterStat.index]}">귀여운 강아지 인형</td>
+            <td th:text="${order.order_cnt[iterStat.index]}">1</td>
+            <td th:text="${order.order_oprice[0]}">50,000원</td>
+            <td  th:text="${order.order_status[0]}">입금전</td>
             <td>-</td>
         </tr>
         <tr>
-            <td><img src="/img/img1.png" class="table-img"></td>
-            <td class="text-start ps-3">귀여운 강아지 인형</td>
-            <td>1</td>
-            <td>50,000원</td>
-            <td>입금전</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td colspan="6" class="text-end">상품구매금액 <span>46,220</span> + 배송비 <span>11,000</span> + 지역별배송비 <span>0</span> = 합계 :<span class="fw-bold fs-5"> 57,220원</span></td>
+            <td colspan="6" class="text-end">상품구매금액 <span th:text="${order.order_oprice}">46,220</span> + 배송비 <span >11,000</span> + 지역별배송비 <span>0</span> = 합계 :<span class="fw-bold fs-5"> 57,220원</span></td>
         </tr>
     </table>
 
 
     <p class="small">배송지정보</p>
-    <table class="table border-top border-bottom align-middle mb-5">
+    <table class="table border-top border-bottom align-middle mb-5" th:each="delivery:${deliveryDTO}">
         <tr>
             <td class="w-25 border-end ps-3">받으시는 분</td>
-            <td class="w-75 ps-2"><small>유고운</small></td>
+            <td class="w-75 ps-2"><small th:text="${delivery.delivery_userName}">유고운</small></td>
         </tr>
         <tr>
             <td class="w-25 border-end ps-3">우편번호</td>
-            <td class="w-75 ps-2">01000</small></td>
+            <td class="w-75 ps-2" th:text="${delivery.delivery_zipcode}">01000</small></td>
         </tr>
         <tr>
             <td class="w-25 border-end ps-3">주소</td>
-            <td class="w-75 ps-2"><small>서울시 금천구 독산동</small></td>
+            <td class="w-75 ps-2"><small th:text="${delivery.delivery_addr}+${delivery.delivery_addrDetail}">서울시 금천구 독산동</small></td>
         </tr>
         <tr>
             <td class="w-25 border-end ps-3">전화번호</td>
-            <td class="w-75 ps-2"><small>010-3394-8775</small></td>
+            <td class="w-75 ps-2">
+                <small th:text="${delivery.delivery_userTel1}">010-3394-8775</small>
+                <small th:if="${delivery.delivery_userTel2}!=null" th:text="${delivery.delivery_userTel2}">010-3394-8775</small>
+            </td>
         </tr>
         <tr>
             <td class="w-25 border-end ps-3">배송메세지</td>
-            <td class="w-75 ps-2"><small>조심히 안전하게 와주세요~^ㅇ^</small></td>
+            <td class="w-75 ps-2"><small th:text="${delivery.delivery_req}">조심히 안전하게 와주세요~^ㅇ^</small></td>
         </tr>
     </table>
     <button class="btn btn-outline-success float-end"  type="button" onclick="orderList()">주문목록보기</button>
