@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class OrderService {
@@ -63,16 +64,71 @@ public class OrderService {
             orderProductEntities = orderProductRepository.findByOrderEntityOrderNum(order_num);
 
             List<Integer> productNums = new ArrayList<>();
-            List<Integer> orderCnts = new ArrayList<>();
+            List<Integer> orderDetailNums = new ArrayList<>();
+            List<Integer> orderOprices = new ArrayList<>();
+            List<Integer> orderPrices = new ArrayList<>();
+            List<String> orderStatuses = new ArrayList<>();
+            List<Integer> orderCnts=new ArrayList<>();
 
             for (OrderProductEntity orderProduct : orderProductEntities) {
-                System.out.println(orderProduct.toString());
+                //orderProductEntity 뽑아내서
                 productNums.add(orderProduct.getProductEntity().getProductNum());
+                orderDetailNums.add(orderProduct.getOrderDetailNum());
+                orderOprices.add(orderProduct.getOrderOprice());
+                orderPrices.add(orderProduct.getOrderPrice());
+                orderStatuses.add(orderProduct.getOrderStatus());
                 orderCnts.add(orderProduct.getOrderCnt());
-                OrderDTO orderDTO=new OrderDTO();
-                orderDTOS.add(OrderDTO.toOrderDTO(order, orderProduct,productNums,orderCnts));
+
+                //orderDTO에 담아서 보내주기
+                OrderDTO orderDTO = OrderDTO.toOrderDTO(order, productNums);
+                orderDTO.setOrder_detail_num(orderDetailNums);
+                orderDTO.setOrder_oprice(orderOprices);
+                orderDTO.setOrder_price(orderPrices);
+                orderDTO.setOrder_status(orderStatuses);
+                orderDTO.setOrder_cnt(orderCnts);
+
+                System.out.println("orderDTO :" +orderDTO);
+                orderDTOS.add(orderDTO);
             }
+
         }
         return orderDTOS;
+    }
+
+    public OrderDTO orderDetail(int order_num){
+
+        Optional<OrderEntity> orderEntity= orderRepository.findById(order_num);
+        List<OrderProductEntity> orderProductEntity=orderProductRepository.findByOrderEntityOrderNum(order_num);
+
+        List<Integer> productNums = new ArrayList<>();
+        List<Integer> orderDetailNums = new ArrayList<>();
+        List<Integer> orderOprices = new ArrayList<>();
+        List<Integer> orderPrices = new ArrayList<>();
+        List<String> orderStatuses = new ArrayList<>();
+        List<Integer> orderCnts=new ArrayList<>();
+
+        OrderEntity order=new OrderEntity();
+        OrderDTO orderDTO=new OrderDTO();
+
+        if(orderEntity.isPresent()){
+            order=orderEntity.get();
+
+            for(OrderProductEntity orderProduct: orderProductEntity){
+                productNums.add(orderProduct.getProductEntity().getProductNum());
+                orderDetailNums.add(orderProduct.getOrderDetailNum());
+                orderOprices.add(orderProduct.getOrderOprice());
+                orderPrices.add(orderProduct.getOrderPrice());
+                orderStatuses.add(orderProduct.getOrderStatus());
+                orderCnts.add(orderProduct.getOrderCnt());
+            }
+            orderDTO=OrderDTO.toOrderDTO(order,productNums);
+            orderDTO.setOrder_detail_num(orderDetailNums);
+            orderDTO.setOrder_oprice(orderOprices);
+            orderDTO.setOrder_price(orderPrices);
+            orderDTO.setOrder_status(orderStatuses);
+            orderDTO.setOrder_cnt(orderCnts);
+            System.out.println("orderDTO : " +orderDTO.toString());
+        }
+        return orderDTO;
     }
 }

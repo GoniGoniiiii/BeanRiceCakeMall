@@ -78,4 +78,25 @@ public class OrderProductService {
 
     }
 
+
+    public List<OrderDTO> findOrderProductList(int order_num){
+        List<OrderProductEntity> orderProductEntities=orderProductRepository.findByOrderEntityOrderNum(order_num);
+        List<OrderDTO> orderDTOS=new ArrayList<>();
+        List<Integer> orderCnts=new ArrayList<>();
+        List<Integer> orderOprices=new ArrayList<>();
+
+
+        for(OrderProductEntity orderProduct: orderProductEntities){
+            orderCnts.add(orderProduct.getOrderCnt());
+            orderOprices.add(orderProduct.getOrderOprice());
+
+            OrderDTO orderDTO=new OrderDTO();
+            orderDTO.setOrder_cnt(orderCnts);
+            orderDTO.setOrder_oprice(orderOprices);
+            orderDTO.setOrder_num(order_num);
+
+            orderDTOS.add(orderDTO);
+        }
+        return orderDTOS;
+    }
 }
