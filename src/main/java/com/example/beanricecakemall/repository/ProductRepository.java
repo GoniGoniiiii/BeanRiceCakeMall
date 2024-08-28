@@ -15,4 +15,6 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
 
     ProductEntity  findByProductNum(int product_num);
 
+    List<ProductEntity> findByProductNameContaining(String keyword);
+
 }

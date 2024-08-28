@@ -110,4 +110,25 @@ public class ProductController {
         productService.deleteProduct(product_num);
         return "redirect:/productList/13";
     }
+
+    //검색
+    @GetMapping("/product/search")
+    public String search(String keyword, Model model){
+        List<ProductDTO> searchList = new ArrayList<>();
+        String category = "검색";
+
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            // 키워드가 있을 경우에만 검색 실행
+            searchList = productService.search(keyword);
+        }
+        // 5개씩 묶기
+        List<List<ProductDTO>> productList = new ArrayList<>();
+        for (int i = 0; i < searchList.size(); i += 5) {
+            productList.add(searchList.subList(i, Math.min(i + 5, searchList.size())));
+        }
+
+        model.addAttribute("productList",productList);
+        model.addAttribute("category",category);
+        return "product/productList";
+    }
 }
