@@ -121,7 +121,6 @@ public class OrderController {
         order_cnt = cart.getCart_cnt();
         System.out.println("주문 수량 : " + order_cnt);
 
-//        model.addAttribute("cart", cart);
         model.addAttribute("total_oprice", total_oprice);
         model.addAttribute("total_sale", total_sale);
         model.addAttribute("total_delivery", total_delivery);
@@ -211,8 +210,7 @@ public class OrderController {
         List<String> product_img = new ArrayList<>();
         List<String> product_name = new ArrayList<>();
         List<OrderDTO> orderDTOList = new ArrayList<>();
-//        List<Integer> orderNumList = new ArrayList<>();?
-        int num=0;
+        List<Integer> product_num=new ArrayList<>();
 
         for (OrderDTO order : orderDTOS) {
             orderDTO = order;
@@ -221,17 +219,17 @@ public class OrderController {
           // 마지막 주문 번호를 리스트에 추가
 
             //product_img,product_name 가져오기
-            List<Integer> product_num = orderDTO.getProduct_num();
+            List<Integer> productNum = orderDTO.getProduct_num();
 
-            for (int product : product_num) {
+            for (int product : productNum) {
                 product_img.add(productService.findProductImg(product));
                 product_name.add(productService.findProductName(product));
+                product_num.add(product);
                 System.out.println( " product : " +product);
             }
             System.out.println(product_img.toString());
             System.out.println(product_name.toString());
         }
-
         // 주문 번호로 그룹화하고 각 그룹의 크기를 계산
         Map<Integer, List<OrderDTO>> groupedOrders = orderDTOS.stream()
                 .collect(Collectors.groupingBy(OrderDTO::getOrder_num));
@@ -241,7 +239,7 @@ public class OrderController {
 
         System.out.println(orderDTOList.toString());
         model.addAttribute("orderDTOList", orderDTOList);
-//        model.addAttribute("orderNumList",orderNumList);
+        model.addAttribute("product_num",product_num);
         model.addAttribute("product_img", product_img);
         model.addAttribute("product_name", product_name);
         model.addAttribute("rowspanMap", rowspanMap);
