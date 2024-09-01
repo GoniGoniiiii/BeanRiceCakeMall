@@ -20,7 +20,9 @@
     <div class="d-flex justify-content-around mt-5 mb-2 pb-2 ">
         <span>주문내역조회</span>
         <span>취소내역</span>
-        <div><input type="date" name=""><span class="mx-3">~</span><input type="date"><button class="btn btn-outline-secondary btn-sm ms-1">조회</button></div>
+        <div><input type="date" name=""><span class="mx-3">~</span><input type="date">
+            <button class="btn btn-outline-secondary btn-sm ms-1">조회</button>
+        </div>
     </div>
     <small class="text-secondary">- 주문번호를 클릭하시면 해당주문에 대한 상세내역을 확인하실 수 있습니다.</small><br>
     <small class="text-secondary">- 취소/교환/반품 신청은 배송완료일 기준 7일까지 가능합니다.</small>
@@ -35,24 +37,82 @@
             <th class="order-process">주문처리상태</th>
             <th class="order-cancle">취소/교환/반품</th>
         </tr>
-        <tr th:each="order, iterStat : ${orderDTOList}">
-            <!-- 첫 번째 상품의 경우에만 rowspan과 주문번호, 주문일자를 표시 -->
+
+        <tr th:each="order,iterStat :${orderDTOList}">
+            <input type="hidden" id="user_num" th:value="${order.user_num}">
+            <!-- 첫 번째 상품의 경우에만  rowspan과 주문번호, 주문일자를 표시 -->
             <td th:if="${iterStat.index == 0 || order.order_num != (iterStat.index > 0 ? orderDTOList[iterStat.index - 1].order_num : '')}"
                 th:rowspan="${rowspanMap[order.order_num]}"
                 class="order-date">
                 <span th:text="${order.order_num}"></span><br>
-                <span><a th:href="@{|/my/orderListDetail/${order.order_num}|}"  th:text="'['+${#dates.format(order.order_date, 'yyyy-MM-dd')}+'-'+${order.order_num}+']'"></a></span>
+                <span><a th:href="@{|/my/orderListDetail/${order.order_num}|}"
+                         th:text="'['+${#dates.format(order.order_date, 'yyyy-MM-dd')}+'-'+${order.order_num}+']'"></a></span>
             </td>
-            <td><img th:src="@{|/upload/${product_img[iterStat.index]}|}"  class="table-img"></td>
-            <td class="text-start ps-3"  th:text="${product_name[iterStat.index]}" ></td>
-            <td th:if="${iterStat.index < order.order_cnt.size()}" th:text="${order.order_cnt[iterStat.index]}" ></td>
+            <td><img th:src="@{|/upload/${product_img[iterStat.index]}|}" class="table-img product_img"
+                     th:value="${product_img[iterStat.index]}"></td>
+            <td class="text-start ps-3 product_name" th:text="${product_name[iterStat.index]}"
+                th:value="${product_name[iterStat.index]}"></td>
+            <td th:if="${iterStat.index < order.order_cnt.size()}" th:text="${order.order_cnt[iterStat.index]}"></td>
             <td th:text="'Index: ' + ${iterStat.index} + ', Size: ' + ${order.order_cnt.size()}" class="order-cnt"></td>
-            <td th:if="${iterStat.index < order.order_cnt.size()}" th:text="${order.order_oprice[iterStat.index]+'원'}" class="order-price"></td>
-            <td th:if="${iterStat.index < order.order_cnt.size()}"  th:text="${order.order_status[iterStat.index]}" class="order-status">입금전</td>
+            <td th:if="${iterStat.index < order.order_cnt.size()}" th:text="${order.order_oprice[iterStat.index]+'원'}"
+                class="order-price"></td>
+            <td th:if="${iterStat.index < order.order_cnt.size()}" th:text="${order.order_status[iterStat.index]}"
+                class="order-status">입금전
+            </td>
             <td>-</td>
         </tr>
     </table>
-    <div class="d-flex justify-content-center">
+    <input type="hidden" th:value="${product_num}" id="product_num">
+    <button type="button" class="btn btn-outline-secondary  mb-2" th:if="${product_num}!='null' " data-bs-toggle="modal"
+            data-bs-target="#reviewModal" onclick="review()">리뷰 쓰기
+    </button>
+    <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="cart" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    리뷰 작성^ㅇ^
+                    <button type="button" class="btn-close"/></button>
+                </div>
+                <div class="modal-body p-3 ">
+                    <p class="bold">리뷰할 상품을 선택해주세요!</p>
+                    <div id="modal-content" class="my-2 py-1" th:each="review,iterStat:${orderDTOList}">
+                        <input type="checkbox" name="select_product" th:value="${product_num[iterStat.index]}">
+                        <img th:src="@{|/upload/${product_img[iterStat.index]}|}"
+                             th:value="${product_img[iterStat.index]}">
+                        <span th:text="${product_name[iterStat.index]}"></span>
+                        <span th:text="${product_num[iterStat.index]}"></span>
+                    </div>
+                    <p class="bold my-1">리뷰제목</p>
+                    <input type="text" id="review_title" class="w-100 py-1" required>
+                    <p class="bold mt-2 my-1">리뷰내용</p>
+                    <textarea rows="5" id="review_content" class="w-100" required></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+                            onclick="addReview()">리뷰 작성
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="review" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close"></button>
+                </div>
+                <div class="modal-body p-3 text-center">
+                    <p class="bold fs-5" id="result"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" onclick="checkReview()">작성한 리뷰 확인
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center pt-5">
         <ul class="pagination">
             <li class="page-item"><i class="bi bi-chevron-double-left"></i></li>
             <li class="page-item"><i class="bi bi-chevron-left"></i></li>
@@ -64,7 +124,6 @@
 
 </section>
 <footer th:include="footer"></footer>
-<script>
-</script>
+<script src="/js/orderList.js"></script>
 </body>
 </html>

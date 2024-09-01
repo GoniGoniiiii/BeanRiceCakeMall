@@ -29,13 +29,16 @@ public class OrderController {
 
     private final DeliveryService deliveryService;
 
-    public OrderController(UserService userService, ProductService productService, OrderService orderService, CartService cartService, OrderProductService orderProductService, DeliveryService deliveryService) {
+    private final ReviewService reviewService;
+
+    public OrderController(UserService userService, ProductService productService, OrderService orderService, CartService cartService, OrderProductService orderProductService, DeliveryService deliveryService, ReviewService reviewService) {
         this.userService = userService;
         this.productService = productService;
         this.orderService = orderService;
         this.cartService = cartService;
         this.orderProductService = orderProductService;
         this.deliveryService = deliveryService;
+        this.reviewService = reviewService;
     }
 
 
@@ -297,4 +300,10 @@ public class OrderController {
         return "user/orderListDetail";
     }
 
+    @PostMapping("/my/addReview")
+    public ResponseEntity<String> addReview(@RequestBody ReviewDTO reviewDTO){
+        System.out.println("reviewDTO : " + reviewDTO);
+        String result=reviewService.insertReview(reviewDTO);
+        return ResponseEntity.ok(result);
+    }
 }
