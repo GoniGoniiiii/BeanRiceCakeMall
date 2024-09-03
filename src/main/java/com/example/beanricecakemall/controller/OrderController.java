@@ -310,6 +310,7 @@ public class OrderController {
     @PostMapping("/my/updateReview")
     public ResponseEntity<Void> updateReview(@RequestBody ReviewDTO reviewDTO){
         System.out.println("reviewDTO  : " +reviewDTO);
+        reviewService.updateReview(reviewDTO);
         return ResponseEntity.ok().build();
     }
     

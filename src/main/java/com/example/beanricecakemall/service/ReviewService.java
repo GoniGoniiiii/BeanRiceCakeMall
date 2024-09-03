@@ -59,4 +59,28 @@ public class ReviewService {
             return "리뷰가 정상적으로 추가되지 않았습니다! 다시 시도해주세요.";
         }
     }
+
+
+    public String updateReview(ReviewDTO reviewDTO) {
+
+        ProductEntity productEntity = productRepository.findAllByProductNum(reviewDTO.getProduct_num());
+        UserEntity userEntity = userRepository.findByUserNum(reviewDTO.getUser_num());
+
+
+        ReviewEntity reviewEntity = new ReviewEntity();
+        reviewEntity.setReviewNum(reviewDTO.getReview_num());
+        reviewEntity.setReviewTitle(reviewDTO.getReview_title());
+        reviewEntity.setReviewContent(reviewDTO.getReview_content());
+        reviewEntity.setProductEntity(productEntity);
+        reviewEntity.setUserEntity(userEntity);
+
+        ReviewEntity review = reviewRepository.save(reviewEntity);
+        
+        if (review != null) {
+            return "리뷰가 정상적으로 수정되었습니다!";
+        } else {
+            return "리뷰가 정상적으로 수정되지 않았습니다! 다시 시도해주세요.";
+        }
+    }
 }
+
