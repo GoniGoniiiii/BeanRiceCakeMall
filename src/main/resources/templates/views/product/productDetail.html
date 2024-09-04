@@ -87,6 +87,7 @@
         <p th:if="${review == null || #lists.isEmpty(review)}" class="text-secondary">아직 작성된 리뷰가 없어요 ㅠ.ㅠ</p>
         <div th:each="review:${recent}"  class="py-1 pt-2"><!--리뷰 반복 구간-->
             <span name="review-title py-1 pb-2" th:text="${review.review_title}">완전 귀엽구 강아지가 좋아해요!</span>
+            <div class="float-end" th:if="${user_id}== ${review.user_id}"><button class="btn btn-outline-success mx-2 py-1 px-2">수정</button><button class="btn btn-outline-secondary py-1 px-2">삭제</button></div>
             <div class="d-flex text-secondary mb-2">
                 <small name="user_id" th:text="${review.user_id}">gonigoni1216</small><small class="px-1">-</small>
                 <small name="review-rdate" th:text="${#dates.format(review.review_rdate, 'yyyy-MM-dd')}">2024.04.22</small><small
@@ -114,6 +115,7 @@
     <p th:if="${review == null || #lists.isEmpty(review)}" class="py-2 text-secondary">아직 작성된 리뷰가 없어요 ㅠ.ㅠ</p>
     <div class="all-review my-3  pb-3 border-bottom" th:each="review:${review}">
         <span name="review-title" th:text="${review.review_title}">완전 귀엽구 강아지가 좋아해요!</span>
+        <div class="float-end" th:if="${user_id}== ${review.user_id}"><button class="btn btn-outline-success mx-2 py-1 px-2">수정</button><button class="btn btn-outline-secondary py-1 px-2">삭제</button></div>
         <div class="d-flex text-secondary mb-2 small">
             <small name="user_id" th:text="${review.user_id}">gonigoni1216</small><small class="px-1">-</small>
             <small name="review-rdate" th:text="${#dates.format(review.review_rdate, 'yyyy-MM-dd')}">2024.04.22</small>
