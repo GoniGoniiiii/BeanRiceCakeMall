@@ -23,4 +23,6 @@ public class ReviewDTO {
     private int user_num;
 
     private int product_num;
+
+    private String user_id;
 }
