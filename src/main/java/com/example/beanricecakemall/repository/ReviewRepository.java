@@ -8,5 +8,7 @@ import java.util.List;
 public interface ReviewRepository extends JpaRepository<ReviewEntity,Integer> {
     List<ReviewEntity> findByProductEntityProductNum(int product_num);
 
+    List<ReviewEntity> findTop2ByProductEntityProductNumOrderByReviewRdateDesc(int product_num);
+
 
 }

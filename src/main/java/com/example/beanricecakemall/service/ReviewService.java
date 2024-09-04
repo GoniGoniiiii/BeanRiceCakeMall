@@ -98,13 +98,37 @@ public class ReviewService {
                 reviewDTO.setReview_content(review.getReviewContent());
                 reviewDTO.setReview_rdate(review.getReviewRdate());
                 reviewDTO.setProduct_num(review.getProductEntity().getProductNum());
+                reviewDTO.setUser_id(review.getUserEntity().getUserId());
 
+                System.out.println("reviewUserID :" +reviewDTO.getUser_id());
                 reviewDTOList.add(reviewDTO);
                 System.out.println("[service] reviewDTO : "+reviewDTO.toString());
             }
         }
         return reviewDTOList;
     }
+
+    public List<ReviewDTO> RecentListReview(int product_num){
+        List<ReviewDTO> reviewDTOList=new ArrayList<>();
+        List<ReviewEntity> reviewEntities=reviewRepository.findTop2ByProductEntityProductNumOrderByReviewRdateDesc(product_num);
+        if(reviewEntities!=null){
+            for(ReviewEntity review:reviewEntities){
+                ReviewDTO reviewDTO=new ReviewDTO();
+
+                reviewDTO.setReview_num(review.getReviewNum());
+                reviewDTO.setReview_title(review.getReviewTitle());
+                reviewDTO.setReview_content(review.getReviewContent());
+                reviewDTO.setReview_rdate(review.getReviewRdate());
+                reviewDTO.setProduct_num(review.getProductEntity().getProductNum());
+                reviewDTO.setUser_id(review.getUserEntity().getUserId());
+
+                reviewDTOList.add(reviewDTO);
+                System.out.println("[service] 최근 2개 리뷰 reviewDTO : "+reviewDTO.toString());
+            }
+        }
+        return reviewDTOList;
+    }
+
 
 
 

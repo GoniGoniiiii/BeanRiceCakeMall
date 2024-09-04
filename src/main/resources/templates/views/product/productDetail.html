@@ -11,19 +11,25 @@
 <section class="product-content">
     <div class="d-flex justify-content-between productDetail-content" th:each="product:${product}">
         <div class="left-content">
-            <img th:src="@{|/upload/${product.product_img}|}" th:value="${product.product_img}"  id="product_img" class="product-mainImg"alt="상품 이미지"/>
+            <img th:src="@{|/upload/${product.product_img}|}" th:value="${product.product_img}" id="product_img"
+                 class="product-mainImg" alt="상품 이미지"/>
         </div>
         <input type="hidden" th:value="${product.product_num}" id="product_num">
         <div class="right-content ">
             <h5 class="pt-3 mb-3 fw-bold" th:text="${product.product_name}"></h5>
             <div class="d-flex justify-content-between product-price">
                 <div><span class="text-danger fs-4" th:text="${product.product_rate}+'%' "></span></div>
-                <div><del class="text-secondary me-2" th:text="${product.product_oprice}" id="product_oprice"></del><span class="fw-bold fs-4  text-danger" th:text="${product.product_sprice}" id="product_sprice"></span></div>
+                <div>
+                    <del class="text-secondary me-2" th:text="${product.product_oprice}" id="product_oprice"></del>
+                    <span class="fw-bold fs-4  text-danger" th:text="${product.product_sprice}"
+                          id="product_sprice"></span></div>
             </div>
             <div class="product-box">
                 <p class="text-secondary">Information</p>
                 <p th:utext="${product.product_info}"></p>
-                <p class="m-0 small"><span>배송비</span><span class="mx-3  " th:text="${product.product_deliveryfee}" id="product_delivery"></span><span>|</span><span class="mx-2">리뷰</span><span>4 건</span></p>
+                <p class="m-0 small"><span>배송비</span><span class="mx-3  " th:text="${product.product_deliveryfee}"
+                                                           id="product_delivery"></span><span>|</span><span
+                        class="mx-2">리뷰</span><span>4 건</span></p>
             </div>
             <div class="product-box">
                 <!-- <p class="m-0"><span class="product-item">배송비</span><span>3000원</span></p>
@@ -32,59 +38,66 @@
                 <div class="quantity">
                     <button class="minus border">-</button>
                     <input type="text" class="quantity-input" id="cart_cnt" value="1">
-                    <button class="plus border" >+</button>
+                    <button class="plus border">+</button>
                 </div>
             </div>
             <div class="d-flex justify-content-between my-4 mb-5">
                 <div><span>총합계</span></div>
-                <div><span class="fw-bold fs-4 text-danger"  th:data-value="${product.product_sprice}" id="all-price"></span></div>
+                <div><span class="fw-bold fs-4 text-danger" th:data-value="${product.product_sprice}"
+                           id="all-price"></span></div>
             </div>
             <div class="d-flex justify-content-between">
-                <button  th:if="${user_id!='admin'}"  class="btn btn-light product-button" id="user_num" th:value="${user_num}" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="cart()">장바구니 담기</button>
+                <button th:if="${user_id!='admin'}" class="btn btn-light product-button" id="user_num"
+                        th:value="${user_num}" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="cart()">장바구니
+                    담기
+                </button>
                 <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cart" aria-hidden="true">
                     <div class="modal-dialog">
                         <div class="modal-content">
                             <div class="modal-header">
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" onclick="keep()"></button>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal"
+                                        onclick="keep()"></button>
                             </div>
                             <div class="modal-body pt-5">
                                 <h3 id="modal-content" class="my-3"></h3>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal" onclick="goCart()">장바구니로 이동</button>
+                                <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+                                        onclick="goCart()">장바구니로 이동
+                                </button>
                                 <button type="button" class="btn btn-outline-success" onclick="keep()">쇼핑 계속하기</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <button  th:if="${user_id!='admin'}" class="btn btn-warning product-button"  th:value="${user_num}" onclick="goPay()">바로 구매</button>
-                <button th:if="${user_id=='admin'}" class="btn btn-light product-button" onclick="updateProduct()">수정</button>
-                <button th:if="${user_id=='admin'}" class="btn btn-warning product-button" onclick="deleteProduct()">삭제</button>
+                <button th:if="${user_id!='admin'}" class="btn btn-warning product-button" th:value="${user_num}"
+                        onclick="goPay()">바로 구매
+                </button>
+                <button th:if="${user_id=='admin'}" class="btn btn-light product-button" onclick="updateProduct()">수정
+                </button>
+                <button th:if="${user_id=='admin'}" class="btn btn-warning product-button" onclick="deleteProduct()">
+                    삭제
+                </button>
             </div>
         </div>
     </div>  <!--productDetail.css-content끝(left content+right content)-->
     <div class="product-review my-1 mb-5">
-        <p class="py-2 pb-3"><span class="fs-5">상품리뷰</span><span class="text-secondary small px-1">가장 최신 2건만 노출됩니다!</span></p>
-        <span name="review-title py-1 pb-2">완전 귀엽구 강아지가 좋아해요!</span>
-        <div class="d-flex text-secondary mb-2">
-            <small name="user_id">gonigoni1216</small><small class="px-1">-</small>
-            <small name="review-rdate">2024.04.22</small><small class="px-1">-</small>
-            <small name="product_name" th:text="${product.product_name}"></small>
-        </div>
-        <div class="w-50 mb-4">
-            <small> 내구성은 물론 디자인도 너무너무 예뻐요 ㅠㅠ 다음에 또 재구매할게요!!</small>
-        </div>
-        <span name="review-title py-1 pb-2">완전 귀엽구 강아지가 좋아해요!</span>
-        <div class="d-flex text-secondary mb-2">
-            <small name="user_id">gonigoni1216</small><small class="px-1">-</small>
-            <small name="review-rdate">2024.04.22</small><small class="px-1">-</small>
-            <small name="product_name" th:text="${product.product_name}"></small>
-        </div>
-        <div class="w-50">
-            <small> 내구성은 물론 디자인도 너무너무 예뻐요 ㅠㅠ 다음에 또 재구매할게요!!</small>
+        <p class="py-2"><span class="fs-5">상품리뷰</span><span
+                class="text-secondary small px-1">가장 최신 2건만 노출됩니다!</span></p>
+        <p th:if="${review == null || #lists.isEmpty(review)}" class="text-secondary">아직 작성된 리뷰가 없어요 ㅠ.ㅠ</p>
+        <div th:each="review:${recent}"  class="py-1 pt-2"><!--리뷰 반복 구간-->
+            <span name="review-title py-1 pb-2" th:text="${review.review_title}">완전 귀엽구 강아지가 좋아해요!</span>
+            <div class="d-flex text-secondary mb-2">
+                <small name="user_id" th:text="${review.user_id}">gonigoni1216</small><small class="px-1">-</small>
+                <small name="review-rdate" th:text="${#dates.format(review.review_rdate, 'yyyy-MM-dd')}">2024.04.22</small><small
+                    class="px-1">-</small>
+                <small name="product_name" th:text="${product.product_name}"></small>
+            </div>
+            <div class="w-50 mb-4">
+                <small th:text="${review.review_content}"> 내구성은 물론 디자인도 너무너무 예뻐요 ㅠㅠ 다음에 또 재구매할게요!!</small>
+            </div>
         </div>
     </div>
-
     <div class="d-flex text-center my-5  border-bottom border-top">
         <div class="flex-fill border-end py-3" onclick="scrollToElement('product-img')">상세정보</div>
         <div class="flex-fill border-start py-3" onclick="scrollToElement('product-review')">리뷰</div>
@@ -92,36 +105,27 @@
     <h5 class="py-3">상품이미지</h5>
     <div class="product-explain mb-5 pb-5" id="product-img">
         <div th:each="img:${product.file_url}">
-            <img th:if="${!img.contains('MainImg')}" th:src="@{|/upload/${img}|}" th:text="${imgl}" />
+            <img th:if="${!img.contains('MainImg')}" th:src="@{|/upload/${img}|}" th:text="${imgl}"/>
         </div>
         <p class="product-content mt-3" id="product_content" th:utext="${product.product_content}"></p>
     </div>
 
     <h5 class="mt-5 pb-3 border-bottom">상품리뷰</h5>
-    <div class="all-review my-3  pb-3 border-bottom">
-        <span name="review-title">완전 귀엽구 강아지가 좋아해요!</span>
+    <p th:if="${review == null || #lists.isEmpty(review)}" class="py-2 text-secondary">아직 작성된 리뷰가 없어요 ㅠ.ㅠ</p>
+    <div class="all-review my-3  pb-3 border-bottom" th:each="review:${review}">
+        <span name="review-title" th:text="${review.review_title}">완전 귀엽구 강아지가 좋아해요!</span>
         <div class="d-flex text-secondary mb-2 small">
-            <small name="user_id">gonigoni1216</small><small class="px-1">-</small>
-            <small name="review-rdate">2024.04.22</small>
+            <small name="user_id" th:text="${review.user_id}">gonigoni1216</small><small class="px-1">-</small>
+            <small name="review-rdate" th:text="${#dates.format(review.review_rdate, 'yyyy-MM-dd')}">2024.04.22</small>
         </div>
         <div class="w-100">
-            <p class="m-0"><small class="text-secondary">제품명:<span th:text="${product.product_name}"> </span></small></p>
-            <small> 내구성은 물론 디자인도 너무너무 예뻐요 ㅠㅠ 다음에 또 재구매할게요!!</small>
-        </div>
-    </div>
-    <div class="all-review my-3 pb-3 border-bottom" id="product-review">
-        <span name="review-title">완전 귀엽구 강아지가 좋아해요!</span>
-        <div class="d-flex text-secondary mb-2 small">
-            <small name="user_id">gonigoni1216</small><small class="px-1">-</small>
-            <small name="review-rdate">2024.04.22</small>
-        </div>
-        <div class="w-100">
-            <p class="m-0"><small class="text-secondary">제품명:<span> 퍼플락 핸드메이드 강아지 버클 목줄 20mm 강아지 목줄</span></small></p>
-            <small> 내구성은 물론 디자인도 너무너무 예뻐요 ㅠㅠ 다음에 또 재구매할게요!!</small>
+            <p class="m-0"><small class="text-secondary">제품명:<span th:text="${product.product_name}"> </span></small>
+            </p>
+            <small th:text="${review.review_content}"> 내구성은 물론 디자인도 너무너무 예뻐요 ㅠㅠ 다음에 또 재구매할게요!!</small>
         </div>
     </div>
 </section>
 <footer th:include="footer"></footer>
-<script  src="/js/productDetail.js"></script>
+<script src="/js/productDetail.js"></script>
 </body>
 </html>

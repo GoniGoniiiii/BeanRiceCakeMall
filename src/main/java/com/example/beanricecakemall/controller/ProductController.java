@@ -68,6 +68,8 @@ public class ProductController {
         String id=SecurityContextHolder.getContext().getAuthentication().getName();
 
         List<ReviewDTO> reviewList=reviewService.ListReview(product_num);
+        List<ReviewDTO> recentReviewList=reviewService.RecentListReview(product_num);
+
         System.out.println(reviewList.toString());
         if (principal instanceof CustomUserDetails) {
             CustomUserDetails userDetails = (CustomUserDetails) principal;
@@ -78,12 +80,14 @@ public class ProductController {
             model.addAttribute("product", product);
             model.addAttribute("user_id", id);
             model.addAttribute("user_num", userNum);
+            model.addAttribute("recent",recentReviewList);
             model.addAttribute("review",reviewList);
         } else {
             // principal이 CustomUserDetails가 아닌 경우의 처리
             model.addAttribute("product", product);
             model.addAttribute("user_id", id);
             model.addAttribute("user_num", -1);
+            model.addAttribute("recent",recentReviewList);
             model.addAttribute("review",reviewList);
         }
         return "product/productDetail";
