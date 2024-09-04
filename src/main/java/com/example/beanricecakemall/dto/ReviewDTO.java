@@ -3,6 +3,8 @@ package com.example.beanricecakemall.dto;
 import lombok.*;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import java.sql.Timestamp;
+
 @Getter
 @Setter
 @ToString
@@ -16,7 +18,7 @@ public class ReviewDTO {
 
     private String review_content;
 
-    private String review_rdate;
+    private Timestamp review_rdate;
 
     private int user_num;
 
