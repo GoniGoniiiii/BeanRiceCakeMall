@@ -9,6 +9,9 @@ import com.example.beanricecakemall.repository.ReviewRepository;
 import com.example.beanricecakemall.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class ReviewService {
 
@@ -82,5 +85,28 @@ public class ReviewService {
             return "리뷰가 정상적으로 수정되지 않았습니다! 다시 시도해주세요.";
         }
     }
+
+    public List<ReviewDTO> ListReview(int product_num){
+        List<ReviewDTO> reviewDTOList=new ArrayList<>();
+        List<ReviewEntity> reviewEntities=reviewRepository.findByProductEntityProductNum(product_num);
+        if(reviewEntities!=null){
+            for(ReviewEntity review:reviewEntities){
+                ReviewDTO reviewDTO=new ReviewDTO();
+
+                reviewDTO.setReview_num(review.getReviewNum());
+                reviewDTO.setReview_title(review.getReviewTitle());
+                reviewDTO.setReview_content(review.getReviewContent());
+                reviewDTO.setReview_rdate(review.getReviewRdate());
+                reviewDTO.setProduct_num(review.getProductEntity().getProductNum());
+
+                reviewDTOList.add(reviewDTO);
+                System.out.println("[service] reviewDTO : "+reviewDTO.toString());
+            }
+        }
+        return reviewDTOList;
+    }
+
+
+
 }
 

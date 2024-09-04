@@ -3,10 +3,12 @@ package com.example.beanricecakemall.controller;
 import com.example.beanricecakemall.customDTO.CustomUserDetails;
 import com.example.beanricecakemall.dto.CategoryDTO;
 import com.example.beanricecakemall.dto.ProductDTO;
+import com.example.beanricecakemall.dto.ReviewDTO;
 import com.example.beanricecakemall.entity.CategoryEntity;
 import com.example.beanricecakemall.service.CategoryService;
 import com.example.beanricecakemall.service.CustomUserDetailsService;
 import com.example.beanricecakemall.service.ProductService;
+import com.example.beanricecakemall.service.ReviewService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -28,9 +30,12 @@ public class ProductController {
 
     private final CategoryService categoryService;
 
-    public ProductController(ProductService productService, CategoryService categoryService) {
+    private final ReviewService reviewService;
+
+    public ProductController(ProductService productService, CategoryService categoryService, ReviewService reviewService) {
         this.productService = productService;
         this.categoryService = categoryService;
+        this.reviewService = reviewService;
     }
 
     @PostMapping("/admin/uploadProduct")
@@ -61,6 +66,9 @@ public class ProductController {
         ProductDTO product = productService.productDetail(product_num);
         Object principal= SecurityContextHolder.getContext().getAuthentication().getPrincipal();
         String id=SecurityContextHolder.getContext().getAuthentication().getName();
+
+        List<ReviewDTO> reviewList=reviewService.ListReview(product_num);
+        System.out.println(reviewList.toString());
         if (principal instanceof CustomUserDetails) {
             CustomUserDetails userDetails = (CustomUserDetails) principal;
             int userNum = userDetails.getUserNum();
@@ -70,11 +78,13 @@ public class ProductController {
             model.addAttribute("product", product);
             model.addAttribute("user_id", id);
             model.addAttribute("user_num", userNum);
+            model.addAttribute("review",reviewList);
         } else {
             // principal이 CustomUserDetails가 아닌 경우의 처리
             model.addAttribute("product", product);
             model.addAttribute("user_id", id);
             model.addAttribute("user_num", -1);
+            model.addAttribute("review",reviewList);
         }
         return "product/productDetail";
     }
