@@ -28,14 +28,14 @@ function addReview() {
     const reviewContent = document.getElementById('review_content').value;
     const userNum = document.getElementById('user_num').value;
 
-    if(reviewTitle!=null || reviewTitle===''){
-        alert('리뷰 제목을 입력하세요!');
+    if (reviewTitle == null || reviewTitle === '') {
+        alert('리뷰 제을 입력하세요!');
         document.getElementById('review_title').focus();
         return;
     }
 
-    if(reviewContent!=null || reviewContent===''){
-        alert('리뷰 제목을 입력하세요!');
+    if (reviewContent == null || reviewContent === '') {
+        alert('리뷰 내용을 입력하세요!');
         document.getElementById('review_content').focus();
         return;
     }
@@ -59,7 +59,7 @@ function addReview() {
         .then(result => {
             console.log(result);
             document.getElementById("result").textContent = result;
-            document.getElementById("product_num").value=productNum;
+            document.getElementById("product_num").value = productNum;
 
             var modal = new bootstrap.Modal(document.getElementById('resultModal'));
             modal.show();
@@ -71,7 +71,8 @@ function addReview() {
             }
         })
 }
-function checkReview(){
-    const productNum=document.getElementById('product_num').value;
-    window.location="/productDetail/"+productNum;
+
+function checkReview() {
+    const productNum = document.getElementById('product_num').value;
+    window.location = "/productDetail/" + productNum;
 }

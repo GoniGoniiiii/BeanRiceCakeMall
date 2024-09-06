@@ -7,6 +7,7 @@ import com.example.beanricecakemall.entity.UserEntity;
 import com.example.beanricecakemall.repository.ProductRepository;
 import com.example.beanricecakemall.repository.ReviewRepository;
 import com.example.beanricecakemall.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -78,7 +79,7 @@ public class ReviewService {
         reviewEntity.setUserEntity(userEntity);
 
         ReviewEntity review = reviewRepository.save(reviewEntity);
-        
+
         if (review != null) {
             return "리뷰가 정상적으로 수정되었습니다!";
         } else {
@@ -86,12 +87,12 @@ public class ReviewService {
         }
     }
 
-    public List<ReviewDTO> ListReview(int product_num){
-        List<ReviewDTO> reviewDTOList=new ArrayList<>();
-        List<ReviewEntity> reviewEntities=reviewRepository.findByProductEntityProductNum(product_num);
-        if(reviewEntities!=null){
-            for(ReviewEntity review:reviewEntities){
-                ReviewDTO reviewDTO=new ReviewDTO();
+    public List<ReviewDTO> ListReview(int product_num) {
+        List<ReviewDTO> reviewDTOList = new ArrayList<>();
+        List<ReviewEntity> reviewEntities = reviewRepository.findByProductEntityProductNum(product_num);
+        if (reviewEntities != null) {
+            for (ReviewEntity review : reviewEntities) {
+                ReviewDTO reviewDTO = new ReviewDTO();
 
                 reviewDTO.setReview_num(review.getReviewNum());
                 reviewDTO.setReview_title(review.getReviewTitle());
@@ -100,20 +101,20 @@ public class ReviewService {
                 reviewDTO.setProduct_num(review.getProductEntity().getProductNum());
                 reviewDTO.setUser_id(review.getUserEntity().getUserId());
 
-                System.out.println("reviewUserID :" +reviewDTO.getUser_id());
+                System.out.println("reviewUserID :" + reviewDTO.getUser_id());
                 reviewDTOList.add(reviewDTO);
-                System.out.println("[service] reviewDTO : "+reviewDTO.toString());
+                System.out.println("[service] reviewDTO : " + reviewDTO.toString());
             }
         }
         return reviewDTOList;
     }
 
-    public List<ReviewDTO> RecentListReview(int product_num){
-        List<ReviewDTO> reviewDTOList=new ArrayList<>();
-        List<ReviewEntity> reviewEntities=reviewRepository.findTop2ByProductEntityProductNumOrderByReviewRdateDesc(product_num);
-        if(reviewEntities!=null){
-            for(ReviewEntity review:reviewEntities){
-                ReviewDTO reviewDTO=new ReviewDTO();
+    public List<ReviewDTO> RecentListReview(int product_num) {
+        List<ReviewDTO> reviewDTOList = new ArrayList<>();
+        List<ReviewEntity> reviewEntities = reviewRepository.findTop2ByProductEntityProductNumOrderByReviewRdateDesc(product_num);
+        if (reviewEntities != null) {
+            for (ReviewEntity review : reviewEntities) {
+                ReviewDTO reviewDTO = new ReviewDTO();
 
                 reviewDTO.setReview_num(review.getReviewNum());
                 reviewDTO.setReview_title(review.getReviewTitle());
@@ -123,14 +124,21 @@ public class ReviewService {
                 reviewDTO.setUser_id(review.getUserEntity().getUserId());
 
                 reviewDTOList.add(reviewDTO);
-                System.out.println("[service] 최근 2개 리뷰 reviewDTO : "+reviewDTO.toString());
+                System.out.println("[service] 최근 2개 리뷰 reviewDTO : " + reviewDTO.toString());
             }
         }
         return reviewDTOList;
     }
 
-
-
+    @Transactional
+    public String deleteReview(int review_num) {
+        reviewRepository.deleteById(review_num);
+        if (reviewRepository.findById(review_num).isPresent()) {
+            return "요청이 정상적으로 처리되지 않았습니다.";
+        } else {
+            return "리뷰가 정상적으로 삭제되었습니다!";
+        }
+    }
 
 }
 

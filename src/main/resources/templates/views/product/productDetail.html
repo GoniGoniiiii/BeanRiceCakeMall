@@ -85,12 +85,25 @@
         <p class="py-2"><span class="fs-5">상품리뷰</span><span
                 class="text-secondary small px-1">가장 최신 2건만 노출됩니다!</span></p>
         <p th:if="${review == null || #lists.isEmpty(review)}" class="text-secondary">아직 작성된 리뷰가 없어요 ㅠ.ㅠ</p>
-        <div th:each="review:${recent}"  class="py-1 pt-2"><!--리뷰 반복 구간-->
+        <div th:each="review:${recent}" class="py-1 pt-2"><!--리뷰 반복 구간-->
             <span name="review-title py-1 pb-2" th:text="${review.review_title}">완전 귀엽구 강아지가 좋아해요!</span>
-            <div class="float-end" th:if="${user_id}== ${review.user_id}"><button class="btn btn-outline-success mx-2 py-1 px-2">수정</button><button class="btn btn-outline-secondary py-1 px-2">삭제</button></div>
+            <div class="float-end" th:if="${user_id}== ${review.user_id}">
+                <button class="btn btn-outline-success mx-2 py-1 px-2"
+                        data-bs-toggle="modal"
+                        data-bs-target="#reviewModal"
+                        th:data-review-id="${review.review_num}"
+                        th:data-review-title="${review.review_title}"
+                        th:data-review-content="${review.review_content}"
+                        onclick="setReviewData(this)">수정
+                </button>
+                <button class="btn btn-outline-secondary py-1 px-2" th:data-review-id="${review.review_num}"
+                        onclick="deleteReview(this)">삭제
+                </button>
+            </div>
             <div class="d-flex text-secondary mb-2">
                 <small name="user_id" th:text="${review.user_id}">gonigoni1216</small><small class="px-1">-</small>
-                <small name="review-rdate" th:text="${#dates.format(review.review_rdate, 'yyyy-MM-dd')}">2024.04.22</small><small
+                <small name="review-rdate"
+                       th:text="${#dates.format(review.review_rdate, 'yyyy-MM-dd')}">2024.04.22</small><small
                     class="px-1">-</small>
                 <small name="product_name" th:text="${product.product_name}"></small>
             </div>
@@ -114,8 +127,21 @@
     <h5 class="mt-5 pb-3 border-bottom">상품리뷰</h5>
     <p th:if="${review == null || #lists.isEmpty(review)}" class="py-2 text-secondary">아직 작성된 리뷰가 없어요 ㅠ.ㅠ</p>
     <div class="all-review my-3  pb-3 border-bottom" th:each="review:${review}">
+        <input type="hidden" th:value="${review.review_num}" id="review_num">
         <span name="review-title" th:text="${review.review_title}">완전 귀엽구 강아지가 좋아해요!</span>
-        <div class="float-end" th:if="${user_id}== ${review.user_id}"><button class="btn btn-outline-success mx-2 py-1 px-2">수정</button><button class="btn btn-outline-secondary py-1 px-2">삭제</button></div>
+        <div class="float-end" th:if="${user_id}== ${review.user_id}">
+            <button class="btn btn-outline-success mx-2 py-1 px-2"
+                    data-bs-toggle="modal"
+                    data-bs-target="#reviewModal"
+                    th:data-review-id="${review.review_num}"
+                    th:data-review-title="${review.review_title}"
+                    th:data-review-content="${review.review_content}"
+                    onclick="setReviewData(this)">수정
+            </button>
+            <button class="btn btn-outline-secondary py-1 px-2" th:data-review-id="${review.review_num}"
+                    onclick="deleteReview(this)">삭제
+            </button>
+        </div>
         <div class="d-flex text-secondary mb-2 small">
             <small name="user_id" th:text="${review.user_id}">gonigoni1216</small><small class="px-1">-</small>
             <small name="review-rdate" th:text="${#dates.format(review.review_rdate, 'yyyy-MM-dd')}">2024.04.22</small>
@@ -124,6 +150,34 @@
             <p class="m-0"><small class="text-secondary">제품명:<span th:text="${product.product_name}"> </span></small>
             </p>
             <small th:text="${review.review_content}"> 내구성은 물론 디자인도 너무너무 예뻐요 ㅠㅠ 다음에 또 재구매할게요!!</small>
+        </div>
+    </div>
+    <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="review" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    리뷰 수정^ㅇ^
+                    <button type="button" class="btn-close"></button>
+                </div>
+                <div class="modal-body p-3 ">
+                    <input type="hidden" id="update_review_num">
+                    <input type="hidden" id="review_product_num" th:value="${product.product_num}">
+                    <input type="hidden" id="review_user_num" th:value="${user_num}">
+                    <p><span class="bold fs-5">상품명 : </span><span th:text="${product.product_name}"
+                                                                  class="fs-5"></span></p>
+                    <p class="bold my-1">상품이미지</p>
+                    <img th:src="@{|/upload/${product.product_img}|}" style="width:150px; height:100px;">
+                    <p class="bold my-1 mt-2"> 수정할 리뷰제목</p>
+                    <input type="text" id="update_review_title" class="w-100 py-1" required>
+                    <p class="bold mt-2 my-1">수정할 리뷰내용</p>
+                    <textarea rows="5" id="update_review_content" class="w-100" required></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+                            onclick="updateReview()">리뷰 수정
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </section>

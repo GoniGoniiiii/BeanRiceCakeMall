@@ -308,12 +308,18 @@ public class OrderController {
     }
     
     @PostMapping("/my/updateReview")
-    public ResponseEntity<Void> updateReview(@RequestBody ReviewDTO reviewDTO){
+    public ResponseEntity<String> updateReview(@RequestBody ReviewDTO reviewDTO){
         System.out.println("reviewDTO  : " +reviewDTO);
-        reviewService.updateReview(reviewDTO);
-        return ResponseEntity.ok().build();
+        String result=reviewService.updateReview(reviewDTO);
+        return ResponseEntity.ok(result);
     }
 
+    @DeleteMapping("/my/deleteReview")
+    public ResponseEntity<String> deleteReview(@RequestBody ReviewDTO reviewDTO){
+        System.out.println("review_num : " + reviewDTO.getReview_num());
+        String result=reviewService.deleteReview(reviewDTO.getReview_num());
+        return ResponseEntity.ok(result);
+    }
 
     
 }

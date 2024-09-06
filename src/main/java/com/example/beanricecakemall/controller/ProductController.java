@@ -64,11 +64,11 @@ public class ProductController {
     @GetMapping("/productDetail/{product_num}")
     public String productDetail(@PathVariable int product_num, Model model) {
         ProductDTO product = productService.productDetail(product_num);
-        Object principal= SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        String id=SecurityContextHolder.getContext().getAuthentication().getName();
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String id = SecurityContextHolder.getContext().getAuthentication().getName();
 
-        List<ReviewDTO> reviewList=reviewService.ListReview(product_num);
-        List<ReviewDTO> recentReviewList=reviewService.RecentListReview(product_num);
+        List<ReviewDTO> reviewList = reviewService.ListReview(product_num);
+        List<ReviewDTO> recentReviewList = reviewService.RecentListReview(product_num);
 
         System.out.println(reviewList.toString());
         if (principal instanceof CustomUserDetails) {
@@ -80,15 +80,15 @@ public class ProductController {
             model.addAttribute("product", product);
             model.addAttribute("user_id", id);
             model.addAttribute("user_num", userNum);
-            model.addAttribute("recent",recentReviewList);
-            model.addAttribute("review",reviewList);
+            model.addAttribute("recent", recentReviewList);
+            model.addAttribute("review", reviewList);
         } else {
             // principal이 CustomUserDetails가 아닌 경우의 처리
             model.addAttribute("product", product);
             model.addAttribute("user_id", id);
             model.addAttribute("user_num", -1);
-            model.addAttribute("recent",recentReviewList);
-            model.addAttribute("review",reviewList);
+            model.addAttribute("recent", recentReviewList);
+            model.addAttribute("review", reviewList);
         }
         return "product/productDetail";
     }
@@ -104,11 +104,11 @@ public class ProductController {
     @PostMapping("/admin/updateProduct")
     public String updateProduct(@ModelAttribute ProductDTO productDTO, Model model) {
         System.out.println("상품 수정 중");
-        int product_num=productDTO.getProduct_num();
+        int product_num = productDTO.getProduct_num();
         System.out.println(product_num);
         ProductDTO updateProduct = productService.updateProduct(productDTO);
-        model.addAttribute("product",updateProduct);
-        return "redirect:/productDetail/"+product_num;
+        model.addAttribute("product", updateProduct);
+        return "redirect:/productDetail/" + product_num;
     }
 
     @PostMapping("/img/delete/{file_url}")
@@ -119,7 +119,7 @@ public class ProductController {
     }
 
     @GetMapping("/product/deleteProduct/{product_num}")
-    public String deleteProudct(@PathVariable int product_num){
+    public String deleteProudct(@PathVariable int product_num) {
         //상품 삭제
         productService.deleteProduct(product_num);
         return "redirect:/productList/13";
@@ -127,7 +127,7 @@ public class ProductController {
 
     //검색
     @GetMapping("/product/search")
-    public String search(String keyword, Model model){
+    public String search(String keyword, Model model) {
         List<ProductDTO> searchList = new ArrayList<>();
         String category = "검색";
 
@@ -141,8 +141,8 @@ public class ProductController {
             productList.add(searchList.subList(i, Math.min(i + 5, searchList.size())));
         }
 
-        model.addAttribute("productList",productList);
-        model.addAttribute("category",category);
+        model.addAttribute("productList", productList);
+        model.addAttribute("category", category);
         return "product/productList";
     }
 }
