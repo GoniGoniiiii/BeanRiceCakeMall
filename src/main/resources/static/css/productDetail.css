@@ -1,75 +1,97 @@
-.product-content{
-    width:1100px;
-    margin-bottom:100px;
+body, html {
+    overflow-y: auto;
+    height: auto;
 }
-.left-content{
-    width:500px;
+
+.product-content {
+    width: 1100px;
+    margin-bottom: 100px;
 }
-.product-mainImg{
-    padding-top:10px;
-    width:500px;
-    height:470px;
+
+.left-content {
+    width: 500px;
 }
-.right-content{
-    padding-left:50px;
-    width:600px;
+
+.product-mainImg {
+    padding-top: 10px;
+    width: 500px;
+    height: 470px;
 }
-.productDetail-content{
-    width:1100px;
-    padding:30px 0px;
+
+.right-content {
+    padding-left: 50px;
+    width: 600px;
 }
-.product-img{
+
+.productDetail-content {
+    width: 1100px;
+    padding: 30px 0px;
+}
+
+.product-img {
     /*padding-left:30px;*/
-    width:500px;
-    height:480px;
+    width: 500px;
+    height: 480px;
 }
-.product-price{
+
+.product-price {
     box-sizing: border-box;
-    padding-bottom:10px;
-    border-bottom:1px solid #ddd;
+    padding-bottom: 10px;
+    border-bottom: 1px solid #ddd;
 }
-.product-box{
-    padding:20px 0px;
-    border-bottom:1px solid #ddd;
+
+.product-box {
+    padding: 20px 0px;
+    border-bottom: 1px solid #ddd;
 }
+
 .product-item {
     display: inline-block;
     width: 100px; /* 또는 다른 너비값 */
 }
+
 .quantity {
     display: flex;
     align-items: center;
-    margin:10px 0;
+    margin: 10px 0;
 }
+
 .quantity-input {
     width: 50px;
     text-align: center;
-    border:1px solid #ddd;
+    border: 1px solid #ddd;
 }
-.product-button{
-    width:265px;
-    height:60px;
-    margin:10px 0;
+
+.product-button {
+    width: 265px;
+    height: 60px;
+    margin: 10px 0;
 }
-.productDetail-breadcrumb{
-    width:100%;
-    text-align:end;
+
+.productDetail-breadcrumb {
+    width: 100%;
+    text-align: end;
 }
-.breadcrumb{
-    float:right;
+
+.breadcrumb {
+    float: right;
 }
-.product-explain{
-    width:900px;
-    margin:auto !important;
+
+.product-explain {
+    width: 900px;
+    margin: auto !important;
 }
-.product-explain img{
-    width:900px;
-    height:500px;
-    margin:10px 0;
+
+.product-explain img {
+    width: 900px;
+    height: 500px;
+    margin: 10px 0;
 }
-.carousel-control-next{
+
+.carousel-control-next {
     justify-content: end !important;
 }
-.carousel-control-prev{
+
+.carousel-control-prev {
     justify-content: start !important;
 }
