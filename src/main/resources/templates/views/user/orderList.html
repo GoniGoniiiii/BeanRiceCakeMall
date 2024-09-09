@@ -37,7 +37,7 @@
             <th class="order-process">주문처리상태</th>
             <th class="order-cancle">취소/교환/반품</th>
         </tr>
-ccdd
+
         <tr th:each="order,iterStat :${orderDTOList}">
             <input type="hidden" id="user_num" th:value="${order.user_num}">
             <!-- 첫 번째 상품의 경우에만  rowspan과 주문번호, 주문일자를 표시 -->
