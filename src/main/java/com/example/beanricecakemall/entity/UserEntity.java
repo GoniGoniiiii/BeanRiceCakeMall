@@ -48,7 +48,7 @@ public class UserEntity{
     @CreationTimestamp
     private Timestamp userJoindate;
 
-    @Column(columnDefinition = "DEFAULT 0",name="user_point")
+    @Column(name="user_point")
     private int userPoint;
 
     @Column(name="user_role")
