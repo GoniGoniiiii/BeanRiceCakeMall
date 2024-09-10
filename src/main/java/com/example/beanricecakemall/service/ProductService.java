@@ -53,7 +53,7 @@ public class ProductService {
             MultipartFile imgfile = productDTO.getProduct_imgfile();
             String origianl_file = imgfile.getOriginalFilename();
             String file_url = "MainImg_" + System.currentTimeMillis() + "_" + origianl_file;
-            String savePath = "D:/goni/image/" + file_url;
+            String savePath = "C:/goni/image/" + file_url;
             System.out.println("대표 이미지 url : " + savePath);
             try {
                 imgfile.transferTo(new File(savePath));
@@ -76,7 +76,7 @@ public class ProductService {
 
                 if (original_file != null && !original_file.isEmpty()) {
                     String file_url = System.currentTimeMillis() + "_" + original_file;
-                    String savePath = "D:/goni/image/" + file_url;
+                    String savePath = "C:/goni/image/" + file_url;
                     System.out.println("상품 설명 이미지 url " + savePath);
                     try {
                         productFile.transferTo(new File(savePath));
@@ -140,7 +140,7 @@ public class ProductService {
             MultipartFile imgfile = productDTO.getProduct_imgfile();
             String origianl_file = imgfile.getOriginalFilename();
             String file_url = "MainImg_" + System.currentTimeMillis() + "_" + origianl_file;
-            String savePath = "D:/goni/image/" + file_url;
+            String savePath = "C:/goni/image/" + file_url;
             System.out.println("대표 이미지 url : " + savePath);
             try {
                 imgfile.transferTo(new File(savePath));
@@ -165,7 +165,7 @@ public class ProductService {
 
                 if (original_file != null && !original_file.isEmpty()) {
                     String file_url = System.currentTimeMillis() + "_" + original_file;
-                    String savePath = "D:/goni/image/" + file_url;
+                    String savePath = "C:/goni/image/" + file_url;
                     System.out.println("상품 설명 이미지 url " + savePath);
                     try {
                         productFile.transferTo(new File(savePath));
