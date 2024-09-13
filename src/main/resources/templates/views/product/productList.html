@@ -10,6 +10,7 @@
 <section class="content">
     <div class="d-flex justify-content-between align-items-center border-bottom border-black postHeader">
         <h3 class="my-5" th:if="${category!=null}" th:text="${category}"></h3>
+        <input type="hidden" id="category_num" th:value="${category_num}">
         <nav aria-label="breadcrumb">
             <ol class="breadcrumb pt-4">
                 <li class="breadcrumb-item small"><a href="#" class="text-black">Home</a></li>
@@ -18,20 +19,18 @@
         </nav>
     </div>
     <div class="d-flex mt-3 text-secondary"> <!--필터 -->
-        <small>인기도순</small>
+        <small class="sort-option" data-sort="new">최신등록순</small>
         <small class="px-2">|</small>
-        <small>최신등록순</small>
+        <small class="sort-option" data-sort="lowPrice">낮은가격순</small>
         <small class="px-2">|</small>
-        <small>낮은가격순</small>
+        <small class="sort-option" data-sort="highPrice">높은가격순</small>
         <small class="px-2">|</small>
-        <small>높은가격순</small>
+        <small class="sort-option" data-sort="lowRate">낮은할인율순</small>
         <small class="px-2">|</small>
-        <small>할인율순</small>
-        <small class="px-2">|</small>
-        <small>누적판매순</small>
+        <small class="sort-option" data-sort="highRate">높은할인율순</small>
     </div><!--필터 끝-->
-    <div class="container-fluid">
-        <div class="d-flex flex-wrap">
+    <div class="container-fluid" th:fragment="productList">
+        <div class="d-flex flex-wrap" id="productList">
             <!-- 상품 리스트 반복 -->
             <div th:each="row : ${productList}" class="productLine">
                 <div class="d-flex my-4">
@@ -54,12 +53,5 @@
 </section>
 <footer th:include="footer"></footer>
 </body>
-<script>
-    function replaceEnter() {
-        const spanElement = document.getElementById("product_content");
-        const text = spanElement.innerText || spanElement.textContent;  // 텍스트 콘텐츠를 가져옴
-        const formattedText = text.replace(/\n/g, '<br>');  // 줄바꿈 문자를 <br> 태그로 변환
-        spanElement.innerHTML = formattedText;  // 변환된 HTML을 삽입
-    }
-</script>
+<script src="/js/productList.js"></script>
 </html>

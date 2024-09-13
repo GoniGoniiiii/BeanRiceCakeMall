@@ -15,4 +15,15 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
 
     List<ProductEntity> findByProductNameContaining(String keyword);
 
+    //최신등록순
+    List<ProductEntity> findByCategoryEntityCategoryNumOrderByProductRdateDesc(int category_num);
+
+    //낮은가격순
+    List<ProductEntity> findByCategoryEntityCategoryNumOrderByProductSprice(int category_num);
+    //높은가격순
+    List<ProductEntity> findByCategoryEntityCategoryNumOrderByProductSpriceDesc(int category_num);
+    //낮은할인율순
+    List<ProductEntity> findByCategoryEntityCategoryNumOrderByProductRate(int category_num);
+    //높은할인율순
+    List<ProductEntity> findByCategoryEntityCategoryNumOrderByProductRateDesc(int category_num);
 }

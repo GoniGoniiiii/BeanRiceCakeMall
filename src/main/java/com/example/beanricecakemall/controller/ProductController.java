@@ -9,15 +9,13 @@ import com.example.beanricecakemall.service.CategoryService;
 import com.example.beanricecakemall.service.CustomUserDetailsService;
 import com.example.beanricecakemall.service.ProductService;
 import com.example.beanricecakemall.service.ReviewService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,7 +44,7 @@ public class ProductController {
     }
 
     @GetMapping("/productList/{category_num}")
-    public String productList(@PathVariable int category_num, Model model) {
+    public String productList(@PathVariable int category_num, @RequestParam(required = false) String sort, Model model, HttpServletRequest request) {
         List<ProductDTO> product = productService.productDTOList(category_num);
         String category = categoryService.categoryName(category_num);
 
@@ -55,9 +53,21 @@ public class ProductController {
         for (int i = 0; i < product.size(); i += 5) {
             productList.add(product.subList(i, Math.min(i + 5, product.size())));
         }
-        model.addAttribute("productList", productList);
+        model.addAttribute("category_num",category_num);
         model.addAttribute("category", category);
-        System.out.println(productList.toString());
+
+        if(sort!=null){
+          List<ProductDTO> sortProduct=productService.sortProductList(category_num,sort);
+          model.addAttribute("productList",sortProduct);
+        }else{
+            model.addAttribute("productList", productList);
+        }
+
+        // AJAX 요청일 경우, 상품 리스트 HTML만 반환
+        if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+            return "product/productList :: productList"; // 특정 부분만 렌더링
+        }
+
         return "product/productList";
     }
 
