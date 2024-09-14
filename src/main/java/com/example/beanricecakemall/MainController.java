@@ -2,12 +2,14 @@ package com.example.beanricecakemall;
 
 import com.example.beanricecakemall.dto.ProductDTO;
 import com.example.beanricecakemall.service.ProductService;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -68,7 +70,7 @@ public class MainController {
     }
 
     @GetMapping("/")
-    public String mainP(Model model) {
+    public String mainP(Model model, @RequestParam(required = false) String sort, HttpServletRequest request) {
         String id = SecurityContextHolder.getContext().getAuthentication().getName();
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -92,10 +94,24 @@ public class MainController {
         }
 
         //전체상품
-        List<ProductDTO> allProduct = productService.productDTOList(13);
+        List<ProductDTO> product;
+
+        if (sort != null) {
+            // 필터 정렬이 적용된 경우
+            product = productService.sortProductList(13, sort);
+            if(product==null){
+                System.out.println("조회된 결과 없음");
+            }
+        } else {
+            // 정렬되지 않은 경우
+            product = productService.productDTOList(13);
+        }
+
+        // 5개씩 묶기
         List<List<ProductDTO>> allProductList = new ArrayList<>();
-        for (int i = 0; i < allProduct.size(); i += 5) {
-            allProductList.add(allProduct.subList(i, Math.min(i + 5, allProduct.size())));
+        for (int i = 0; i < product.size(); i += 5) {
+            allProductList.add(product.subList(i, Math.min(i + 5, product.size())));
+            System.out.println("allProductList: " + allProductList.toString());
         }
 
         String role = null;
@@ -103,7 +119,7 @@ public class MainController {
         if (iterator.hasNext()) {
             GrantedAuthority auth = iterator.next();
             role = auth.getAuthority();
-        } else {
+        }else{
             role = "no_role";
         }
 
@@ -113,6 +129,11 @@ public class MainController {
         model.addAttribute("newPro", newProductList);
         model.addAttribute("all", allProductList);
         System.out.println("main controller :  " + id + " " + role);
+
+        // AJAX 요청일 경우, 상품 리스트 HTML만 반환
+        if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+            return "index :: allProductList"; // 특정 부분만 렌더링
+        }
         return "index";
     }
 }

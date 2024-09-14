@@ -41,7 +41,7 @@
         <div class="product" th:each="best:${product}"><!--상품1-->
             <a th:href="@{|/productDetail/${best.product_num}|}">
                 <img th:src="@{|upload/${best.product_img}|}" class="product-img">
-                <h5 class="fw-bold mt-3 mb-2"th:text="${best.product_name}"></h5>
+                <h5 class="fw-bold mt-3 mb-2" th:text="${best.product_name}"></h5>
                 <div class="d-flex mb-2"><!--상품 가격, 원래 가격, 할인율-->
                     <p class="fw-bold m-0" th:text="${best.product_sprice}"></p><!--상품 가격-->
                     <del class="px-2 text-secondary small" th:text="${best.product_oprice}"></del><!-- 원래 가격 -->
@@ -71,22 +71,20 @@
 
     <h2 class="fw-bold text-center pt-5 mt-5">상품전체</h2>
     <div class="d-flex justify-content-center mb-5  text-secondary">
-        <small>인기도순</small>
+        <small class="sort-option" data-sort="new">최신등록순</small>
         <small class="px-2">|</small>
-        <small>최신등록순</small>
+        <small class="sort-option" data-sort="lowPrice">낮은가격순</small>
         <small class="px-2">|</small>
-        <small>낮은가격순</small>
+        <small class="sort-option" data-sort="highPrice">높은가격순</small>
         <small class="px-2">|</small>
-        <small>높은가격순</small>
+        <small class="sort-option" data-sort="lowRate">낮은할인율순</small>
         <small class="px-2">|</small>
-        <small>할인율순</small>
-        <small class="px-2">|</small>
-        <small>누적판매순</small>
+        <small class="sort-option" data-sort="highRate">높은할인율순</small>
     </div>
 
-    <div class="container-fluid" >
-        <div class="d-flex flex-wrap">
-            <div class="d-flex justify-content-between my-3" th:each="allProduct : ${all}"><!--상품 한 줄-->
+    <div class="container-fluid" th:fragment="allProductList">
+        <div class="d-flex flex-wrap" id="allProductList">
+            <div class="d-flex justify-content-between my-3" th:each="allProduct : ${all}" ><!--상품 한 줄-->
                 <div class="product" th:each="allPro : ${allProduct}"><!--상품1-->
                     <a th:href="@{|/productDetail/${allPro.product_num}|}">
                         <img th:src="@{|upload/${allPro.product_img}|}" class="All-product-img">
@@ -107,6 +105,6 @@
 <section>
     <footer th:include="footer"></footer>
 </section>
-<script></script>
+<script src="/js/index.js"></script>
 </body>
 </html>
