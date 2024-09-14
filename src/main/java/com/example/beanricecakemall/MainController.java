@@ -99,9 +99,6 @@ public class MainController {
         if (sort != null) {
             // 필터 정렬이 적용된 경우
             product = productService.sortProductList(13, sort);
-            if(product==null){
-                System.out.println("조회된 결과 없음");
-            }
         } else {
             // 정렬되지 않은 경우
             product = productService.productDTOList(13);
@@ -111,7 +108,6 @@ public class MainController {
         List<List<ProductDTO>> allProductList = new ArrayList<>();
         for (int i = 0; i < product.size(); i += 5) {
             allProductList.add(product.subList(i, Math.min(i + 5, product.size())));
-            System.out.println("allProductList: " + allProductList.toString());
         }
 
         String role = null;
