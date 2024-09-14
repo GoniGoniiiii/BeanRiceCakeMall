@@ -17,7 +17,6 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
 
     //최신등록순
     List<ProductEntity> findByCategoryEntityCategoryNumOrderByProductRdateDesc(int category_num);
-
     //낮은가격순
     List<ProductEntity> findByCategoryEntityCategoryNumOrderByProductSprice(int category_num);
     //높은가격순
@@ -26,4 +25,16 @@ public interface ProductRepository extends JpaRepository<ProductEntity, Integer>
     List<ProductEntity> findByCategoryEntityCategoryNumOrderByProductRate(int category_num);
     //높은할인율순
     List<ProductEntity> findByCategoryEntityCategoryNumOrderByProductRateDesc(int category_num);
+
+    //전체 최신등록순
+    List<ProductEntity> findAllByOrderByProductRdateDesc();
+    //전체 낮은가격순
+    List<ProductEntity> findAllByOrderByProductSprice();
+    //전체 높은가격순
+    List<ProductEntity> findAllByOrderByProductSpriceDesc();
+    //전체 낮은할인율순
+    List<ProductEntity> findAllByOrderByProductRate();
+    //전체 높은할인율순
+    List<ProductEntity> findAllByOrderByProductRateDesc();
+
 }

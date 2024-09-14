@@ -265,27 +265,43 @@ public class ProductService {
 
     public List<ProductDTO> sortProductList(int category_num, String sort) {
         List<ProductEntity> productEntities = new ArrayList<>();
-        System.out.println("category_num : "+category_num);
-        System.out.println("sort : "+sort);
-        
+        System.out.println("category_num : " + category_num);
+        System.out.println("sort : " + sort);
+
         if ("new".equals(sort)) { //최신등록순
-            System.out.println("new당");
-            productEntities=productRepository.findByCategoryEntityCategoryNumOrderByProductRdateDesc(category_num);
-            if(productEntities==null) {
-                System.out.println("조회된 결과가 없습니다");
+            if (category_num == 13) {
+                productEntities = productRepository.findAllByOrderByProductRdateDesc();
+            } else {
+                productEntities = productRepository.findByCategoryEntityCategoryNumOrderByProductRdateDesc(category_num);
             }
         } else if ("lowPrice".equals(sort)) { //낮은가격순
-            productEntities=productRepository.findByCategoryEntityCategoryNumOrderByProductSprice(category_num);
+            if (category_num == 13) {
+                productEntities = productRepository.findAllByOrderByProductSprice();
+            } else {
+                productEntities = productRepository.findByCategoryEntityCategoryNumOrderByProductSprice(category_num);
+            }
         } else if ("highPrice".equals(sort)) { //높은가격순
-            productEntities=productRepository.findByCategoryEntityCategoryNumOrderByProductSpriceDesc(category_num);
+            if (category_num == 13) {
+                productEntities = productRepository.findAllByOrderByProductSpriceDesc();
+            } else {
+                productEntities = productRepository.findByCategoryEntityCategoryNumOrderByProductSpriceDesc(category_num);
+            }
         } else if ("lowRate".equals(sort)) { //낮은할인율순
-            productEntities=productRepository.findByCategoryEntityCategoryNumOrderByProductRate(category_num);
+            if (category_num == 13) {
+                productEntities = productRepository.findAllByOrderByProductRate();
+            } else {
+                productEntities = productRepository.findByCategoryEntityCategoryNumOrderByProductRate(category_num);
+            }
         } else if ("highRate".equals(sort)) { //높은할인율순
-            productEntities=productRepository.findByCategoryEntityCategoryNumOrderByProductRateDesc(category_num);
+            if (category_num == 13) {
+                productEntities = productRepository.findAllByOrderByProductRateDesc();
+            } else {
+                productEntities = productRepository.findByCategoryEntityCategoryNumOrderByProductRateDesc(category_num);
+            }
         }
         List<ProductDTO> sortProductList = new ArrayList<>();
 
-        for (ProductEntity product: productEntities) {
+        for (ProductEntity product : productEntities) {
             sortProductList.add(ProductDTO.toProductDTO(product));
             System.out.println(sortProductList.toString());
         }

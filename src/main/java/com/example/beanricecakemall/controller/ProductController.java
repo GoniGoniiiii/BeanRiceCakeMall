@@ -45,23 +45,26 @@ public class ProductController {
 
     @GetMapping("/productList/{category_num}")
     public String productList(@PathVariable int category_num, @RequestParam(required = false) String sort, Model model, HttpServletRequest request) {
-        List<ProductDTO> product = productService.productDTOList(category_num);
+        List<ProductDTO> product;
         String category = categoryService.categoryName(category_num);
+
+        if (sort != null) {
+            // 필터 정렬이 적용된 경우
+            product = productService.sortProductList(category_num, sort);
+        } else {
+            // 정렬되지 않은 경우
+            product = productService.productDTOList(category_num);
+        }
 
         // 5개씩 묶기
         List<List<ProductDTO>> productList = new ArrayList<>();
         for (int i = 0; i < product.size(); i += 5) {
             productList.add(product.subList(i, Math.min(i + 5, product.size())));
         }
-        model.addAttribute("category_num",category_num);
-        model.addAttribute("category", category);
 
-        if(sort!=null){
-          List<ProductDTO> sortProduct=productService.sortProductList(category_num,sort);
-          model.addAttribute("productList",sortProduct);
-        }else{
-            model.addAttribute("productList", productList);
-        }
+        model.addAttribute("category_num", category_num);
+        model.addAttribute("category", category);
+        model.addAttribute("productList", productList);
 
         // AJAX 요청일 경우, 상품 리스트 HTML만 반환
         if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
@@ -70,6 +73,7 @@ public class ProductController {
 
         return "product/productList";
     }
+
 
     @GetMapping("/productDetail/{product_num}")
     public String productDetail(@PathVariable int product_num, Model model) {
