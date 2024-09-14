@@ -1,10 +1,13 @@
 package com.example.beanricecakemall.customDTO;
 
+import com.example.beanricecakemall.entity.UserEntity;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Map;
 
 public class CustomOAuth2User implements OAuth2User {
@@ -26,7 +29,7 @@ public class CustomOAuth2User implements OAuth2User {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        //role값
+//        role값
         Collection<GrantedAuthority> collection = new ArrayList<>();
         collection.add(new GrantedAuthority() {
             @Override
@@ -34,7 +37,7 @@ public class CustomOAuth2User implements OAuth2User {
                 return user_role;
             }
         });
-        return null;
+        return Collections.singletonList(() -> user_role);
     }
 
     @Override
