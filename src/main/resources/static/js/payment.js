@@ -115,6 +115,38 @@ document.addEventListener("DOMContentLoaded", function () {
 
     document.getElementById("point").innerText="적립예정 " + plus_point.value+"원";
 
+
+    //포인트 사용
+    const user_point=document.getElementById("user_point");
+    const final_price=document.getElementById("final-price");
+    const maxPoint=document.getElementById("pointAll").value;
+    const oprice = Number(final_price.innerText);
+
+    user_point.addEventListener('change',function(){
+        console.log("user_point : " +user_point.value);
+        console.log("allPoint:"+maxPoint);
+
+        const userPointValue = Number(user_point.value); // 문자열을 숫자로 변환
+        console.log("user_point : " + userPointValue);
+        console.log("allPoint: " + maxPoint);
+
+        if (isNaN(userPointValue)) {
+            alert("숫자만 입력해주세요!");
+            user_point.value = "";
+            user_point.focus();
+        } else {
+            if (userPointValue > maxPoint) {
+                alert("최대 사용할 수 있는 포인트를 초과했습니다!");
+                user_point.value = "";
+                user_point.focus();
+            }
+        }
+        // 최종 가격을 계산하여 업데이트
+        const finalPrice = oprice - userPointValue;
+
+        // final-price 값을 업데이트
+        final_price.innerText = finalPrice;
+    })
 });
 
 
@@ -151,7 +183,9 @@ function Check() {
         console.log(p_num6.value);
     }
 }
+function usePoint(){
 
+}
 function useAllPoint() {
     var pointCheck = document.getElementById("user_allPoint");
 
