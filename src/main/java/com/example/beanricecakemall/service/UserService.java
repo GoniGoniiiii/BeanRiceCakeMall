@@ -48,7 +48,11 @@ public class UserService {
 
 
     public UserDTO memberInfo(String user_id) {
+        System.out.println("마이페이지 : " + user_id);
         UserEntity userEntity = userRepository.findByUserId(user_id);
+        if(userEntity==null){
+            System.out.println("userEntity값 없음");
+        }
         UserDTO user = UserDTO.toUserDTO(userEntity);
         return user;
     }

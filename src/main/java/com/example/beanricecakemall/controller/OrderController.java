@@ -1,12 +1,15 @@
 package com.example.beanricecakemall.controller;
 
+import com.example.beanricecakemall.customDTO.CustomOAuth2User;
 import com.example.beanricecakemall.dto.*;
 import com.example.beanricecakemall.entity.OrderProductEntity;
 import com.example.beanricecakemall.service.*;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.HttpRequest;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -205,8 +208,20 @@ public class OrderController {
 
     @GetMapping("/my/orderList")
     public String orderListP(Model model) {
-        //security를 이용해서 user_id가져오기
-        String user_id = SecurityContextHolder.getContext().getAuthentication().getName();
+        String user_id;
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        boolean isOauth2User=authentication.getPrincipal() instanceof OAuth2User;
+        System.out.println("소셜로그인 여부 : " + isOauth2User);
+
+        if(isOauth2User){
+            CustomOAuth2User customOAuth2User=(CustomOAuth2User) authentication.getPrincipal();
+            System.out.println("userName : " + customOAuth2User.getUserName());
+            user_id=customOAuth2User.getUserName();
+        }else{
+            user_id = SecurityContextHolder.getContext().getAuthentication().getName();
+        }
+
         //가져온 user_id값으로 orderDTO뽑아주기
         List<OrderDTO> orderDTOS = orderService.orderList(user_id);
 

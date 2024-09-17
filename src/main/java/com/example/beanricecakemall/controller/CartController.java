@@ -1,5 +1,6 @@
 package com.example.beanricecakemall.controller;
 
+import com.example.beanricecakemall.customDTO.CustomOAuth2User;
 import com.example.beanricecakemall.dto.CartDTO;
 import com.example.beanricecakemall.dto.ProductDTO;
 import com.example.beanricecakemall.entity.ProductEntity;
@@ -7,6 +8,9 @@ import com.example.beanricecakemall.service.CartService;
 import com.example.beanricecakemall.service.ProductService;
 import com.example.beanricecakemall.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -36,8 +40,21 @@ public class CartController {
     }
 
     @GetMapping("/my/shoppingBag")
-    public String cartP(Model model, Principal principal) {
-        String user_id = principal.getName();
+    public String cartP(Model model) {
+        String user_id;
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        boolean isOauth2User=authentication.getPrincipal() instanceof OAuth2User;
+        System.out.println("소셜로그인 여부 : " + isOauth2User);
+
+        if(isOauth2User){
+            CustomOAuth2User customOAuth2User=(CustomOAuth2User) authentication.getPrincipal();
+            System.out.println("userName : " + customOAuth2User.getUserName());
+            user_id=customOAuth2User.getUserName();
+        }else{
+            user_id = SecurityContextHolder.getContext().getAuthentication().getName();
+        }
+
         if ("anonymousUser".equals(user_id)) {
             // 비로그인 상태일 때 로그인 페이지로 리다이렉트
             return "redirect:/login";

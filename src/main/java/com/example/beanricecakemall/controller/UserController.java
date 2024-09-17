@@ -1,8 +1,10 @@
 package com.example.beanricecakemall.controller;
 
+import com.example.beanricecakemall.customDTO.CustomOAuth2User;
 import com.example.beanricecakemall.dto.UserDTO;
 import com.example.beanricecakemall.service.UserService;
 import jakarta.servlet.http.Cookie;
+import jakarta.websocket.Session;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -10,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -42,8 +46,20 @@ public class UserController {
     @GetMapping("/my/memberInfo")
     public String memberInfo(Model model) {
         System.out.println("마이페이지 - 회원 정보 수정");
-        String user_id = SecurityContextHolder.getContext().getAuthentication().getName();
-        System.out.println(user_id);
+        String user_id;
+
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        boolean isOauth2User=authentication.getPrincipal() instanceof OAuth2User;
+        System.out.println("소셜로그인 여부 : " + isOauth2User);
+
+        if(isOauth2User){
+            CustomOAuth2User customOAuth2User=(CustomOAuth2User) authentication.getPrincipal();
+            System.out.println("userName : " + customOAuth2User.getUserName());
+            user_id=customOAuth2User.getUserName();
+        }else{
+            user_id = SecurityContextHolder.getContext().getAuthentication().getName();
+        }
+        System.out.println("user_id : " + user_id);
         UserDTO member = userService.memberInfo(user_id);
         model.addAttribute("member", member);
         return "user/memberInfo";

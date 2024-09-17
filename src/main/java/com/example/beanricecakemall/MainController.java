@@ -1,11 +1,14 @@
 package com.example.beanricecakemall;
 
+import com.example.beanricecakemall.customDTO.CustomOAuth2User;
+import com.example.beanricecakemall.customDTO.OAuth2Response;
 import com.example.beanricecakemall.dto.ProductDTO;
 import com.example.beanricecakemall.service.ProductService;
 import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -70,7 +73,7 @@ public class MainController {
     }
 
     @GetMapping("/")
-    public String mainP(Model model, @RequestParam(required = false) String sort, HttpServletRequest request) {
+    public String mainP(Model model, @RequestParam(required = false) String sort, HttpServletRequest request,Authentication authentication2) {
         String id = SecurityContextHolder.getContext().getAuthentication().getName();
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -111,11 +114,17 @@ public class MainController {
         }
 
         String role = null;
+        boolean isOauth2User=authentication.getPrincipal() instanceof OAuth2User;
+        System.out.println("소셜 로그인 여부 : " + isOauth2User);
 
         if (iterator.hasNext()) {
             GrantedAuthority auth = iterator.next();
             role = auth.getAuthority();
-        }else{
+        }
+        else if(isOauth2User){
+            role ="ROLE_USER";
+        }
+        else{
             role = "no_role";
         }
 
@@ -126,6 +135,10 @@ public class MainController {
         model.addAttribute("all", allProductList);
         System.out.println("main controller :  " + id + " " + role);
 
+        if(authentication2!=null && authentication2.getPrincipal() instanceof CustomOAuth2User){
+            CustomOAuth2User customOAuth2User=(CustomOAuth2User) authentication.getPrincipal();
+            System.out.println("User Authorities :" + customOAuth2User.getAuthorities());
+        }
         // AJAX 요청일 경우, 상품 리스트 HTML만 반환
         if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
             return "index :: allProductList"; // 특정 부분만 렌더링
