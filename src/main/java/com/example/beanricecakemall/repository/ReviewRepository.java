@@ -10,5 +10,7 @@ public interface ReviewRepository extends JpaRepository<ReviewEntity,Integer> {
 
     List<ReviewEntity> findTop2ByProductEntityProductNumOrderByReviewRdateDesc(int product_num);
 
+    //사용자가 이 상품에 대해 리뷰를 쓴 적이 있는지!
+    boolean existsByProductEntityProductNumAndUserEntityUserNum(int product_num, int user_num);
 
 }

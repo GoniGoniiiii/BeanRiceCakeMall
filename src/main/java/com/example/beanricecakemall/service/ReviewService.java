@@ -50,18 +50,24 @@ public class ReviewService {
             return "유효한 사용자를 찾을 수 없습니다.";
         }
 
-        ReviewEntity reviewEntity = new ReviewEntity();
-        reviewEntity.setReviewTitle(reviewDTO.getReview_title());
-        reviewEntity.setReviewContent(reviewDTO.getReview_content());
-        reviewEntity.setProductEntity(productEntity);
-        reviewEntity.setUserEntity(userEntity);
+        boolean exist= reviewRepository.existsByProductEntityProductNumAndUserEntityUserNum(reviewDTO.getProduct_num(),reviewDTO.getUser_num());
+        System.out.println("리뷰 작성 여부 : "+exist);
 
-        ReviewEntity review = reviewRepository.save(reviewEntity);
-        if (review != null) {
-            return "리뷰가 정상적으로 추가되었습니다!";
-        } else {
-            return "리뷰가 정상적으로 추가되지 않았습니다! 다시 시도해주세요.";
+        if (!exist) {
+            ReviewEntity reviewEntity = new ReviewEntity();
+            reviewEntity.setReviewTitle(reviewDTO.getReview_title());
+            reviewEntity.setReviewContent(reviewDTO.getReview_content());
+            reviewEntity.setProductEntity(productEntity);
+            reviewEntity.setUserEntity(userEntity);
+
+            ReviewEntity review = reviewRepository.save(reviewEntity);
+            if (review != null) {
+                return "리뷰가 정상적으로 추가되었습니다!";
+            } else {
+                return "리뷰가 정상적으로 추가되지 않았습니다! 다시 시도해주세요.";
+            }
         }
+        return "이미 작성된 리뷰입니다!";
     }
 
 
@@ -140,5 +146,14 @@ public class ReviewService {
         }
     }
 
+    public int reviewCount(int product_num){
+        List<ReviewEntity> reviewEntities=reviewRepository.findByProductEntityProductNum(product_num);
+        int count=0;
+        for(ReviewEntity review:reviewEntities){
+            count++;
+            System.out.println("리뷰건수 :   "+ count);
+        }
+        return count;
+    }
 }
 
