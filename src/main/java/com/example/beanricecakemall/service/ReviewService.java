@@ -50,8 +50,8 @@ public class ReviewService {
             return "유효한 사용자를 찾을 수 없습니다.";
         }
 
-        boolean exist= reviewRepository.existsByProductEntityProductNumAndUserEntityUserNum(reviewDTO.getProduct_num(),reviewDTO.getUser_num());
-        System.out.println("리뷰 작성 여부 : "+exist);
+        boolean exist = reviewRepository.existsByProductEntityProductNumAndUserEntityUserNum(reviewDTO.getProduct_num(), reviewDTO.getUser_num());
+        System.out.println("리뷰 작성 여부 : " + exist);
 
         if (!exist) {
             ReviewEntity reviewEntity = new ReviewEntity();
@@ -75,7 +75,6 @@ public class ReviewService {
 
         ProductEntity productEntity = productRepository.findAllByProductNum(reviewDTO.getProduct_num());
         UserEntity userEntity = userRepository.findByUserNum(reviewDTO.getUser_num());
-
 
         ReviewEntity reviewEntity = new ReviewEntity();
         reviewEntity.setReviewNum(reviewDTO.getReview_num());
@@ -146,12 +145,12 @@ public class ReviewService {
         }
     }
 
-    public int reviewCount(int product_num){
-        List<ReviewEntity> reviewEntities=reviewRepository.findByProductEntityProductNum(product_num);
-        int count=0;
-        for(ReviewEntity review:reviewEntities){
+    public int reviewCount(int product_num) {
+        List<ReviewEntity> reviewEntities = reviewRepository.findByProductEntityProductNum(product_num);
+        int count = 0;
+        for (ReviewEntity review : reviewEntities) {
             count++;
-            System.out.println("리뷰건수 :   "+ count);
+            System.out.println("리뷰건수 :   " + count);
         }
         return count;
     }
