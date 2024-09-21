@@ -39,7 +39,10 @@ td{
     height:80px;
 }
 .order-date a {
-    color: blue; /* 원하는 링크 색상으로 변경 */
-    text-decoration: underline; /* 링크에 밑줄 추가 */
-    cursor: pointer; /* 마우스 커서를 포인터로 변경하여 클릭 가능한 것으로 나타냄 */
+    color: blue;
+    text-decoration: underline;
+    cursor: pointer;
+}
+.product-name{
+    padding-left:60px !important;
 }

@@ -32,7 +32,7 @@
             <th class="order-date">주문일자<br>[주문번호]</th>
             <th class="order-img">이미지</th>
             <th class="order-info">상품정보</th>
-            <th class="order-cnt">수량</th>
+<!--            <th class="order-cnt">수량</th>-->
             <th class="order-price">상품구매금액</th>
             <th class="order-process">주문처리상태</th>
             <th class="order-cancle">취소/교환/반품</th>
@@ -42,18 +42,18 @@
             <input type="hidden" id="user_num" th:value="${order.user_num}">
             <!-- 첫 번째 상품의 경우에만  rowspan과 주문번호, 주문일자를 표시 -->
             <td th:if="${iterStat.index == 0 || order.order_num != (iterStat.index > 0 ? orderDTOList[iterStat.index - 1].order_num : '')}"
-                th:rowspan="${rowspanMap[order.order_num]}"
                 class="order-date">
+                <!--                th:rowspan="${rowspanMap[order.order_num]}"-->
                 <span th:text="${order.order_num}"></span><br>
                 <span><a th:href="@{|/my/orderListDetail/${order.order_num}|}"
                          th:text="'['+${#dates.format(order.order_date, 'yyyy-MM-dd')}+'-'+${order.order_num}+']'"></a></span>
             </td>
             <td><img th:src="@{|/upload/${product_img[iterStat.index]}|}" class="table-img product_img"
                      th:value="${product_img[iterStat.index]}"></td>
-            <td class="text-start ps-3 product_name" th:text="${product_name[iterStat.index]}"
+            <td class="text-start product-name" th:text="${product_name[iterStat.index]}"
                 th:value="${product_name[iterStat.index]}"></td>
-            <td th:if="${iterStat.index < order.order_cnt.size()}" th:text="${order.order_cnt[iterStat.index]}"></td>
-            <td th:text="'Index: ' + ${iterStat.index} + ', Size: ' + ${order.order_cnt.size()}" class="order-cnt"></td>
+<!--            <td th:if="${iterStat.index < order.order_cnt.size()}" th:text="${order.order_cnt[iterStat.index]}"></td>-->
+<!--            <td th:text="'Index: ' + ${iterStat.index} + ', Size: ' + ${order.order_cnt.size()}" class="order-cnt"></td>-->
             <td th:if="${iterStat.index < order.order_cnt.size()}" th:text="${order.order_oprice[iterStat.index]+'원'}"
                 class="order-price"></td>
             <td th:if="${iterStat.index < order.order_cnt.size()}" th:text="${order.order_status[iterStat.index]}"
@@ -71,7 +71,8 @@
             <div class="modal-content">
                 <div class="modal-header">
                     리뷰 작성^ㅇ^
-                    <button type="button" class="btn-close"/></button>
+                    <button type="button" class="btn-close"/>
+                    </button>
                 </div>
                 <div class="modal-body p-3 ">
                     <p class="bold">리뷰할 상품을 선택해주세요!</p>
@@ -106,7 +107,8 @@
                     <p class="bold fs-5" id="result"></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal" onclick="checkReview()">작성한 리뷰 확인
+                    <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal"
+                            onclick="checkReview()">작성한 리뷰 확인
                     </button>
                 </div>
             </div>
