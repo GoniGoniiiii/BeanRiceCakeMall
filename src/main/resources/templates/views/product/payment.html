@@ -55,9 +55,7 @@
                         <input type="hidden" name="user_num" th:value="${user.user_num}">
                     </tr>
                 </table><!--주문자 정보 테이블 끝-->
-                <div th:each="cnt, iterStat : ${order_cnt}">
-                    <input type="hidden" th:name="'order_cnt[' + ${iterStat.index} + ']'" th:value="${cnt}">
-                </div>
+
                 <div class="d-flex justify-content-between align-items-center"><!--배송 정보 테이블 타이틀-->
                     <span class="order-title fs-5">배송 정보</span>
                     <div class="form-check">
@@ -133,9 +131,9 @@
                     <table class="table align-middle text-center mb-5">
                         <tr>
                             <td colspan="2" class="py-3">상품명</td>
+                            <td class="product-cnt">수량</td>
                             <td>할인</td>
-                            <td>쿠폰할인</td>
-                            <td>적립</td>
+                            <td>상품금액</td>
                             <td>주문금액</td>
                         </tr>
                         <tr th:each="product,iterStat:${product}" th:data-index="${iterStat.index}">
@@ -143,28 +141,36 @@
                                    th:value="${product.product_num}">
                             <td class="text-end"><img th:src="@{|/upload/${product.product_img}|}" class="img"></td>
                             <td class="text-start" th:text="${product.product_name}"></td>
-                            <td class="text-danger" th:text="${product.product_rate}+'%'"></td>
-                            <td></td>
-                            <td>
+                            <td class="product-cnt" th:text="${order_cnt[iterStat.index]}"  th:id="'order_cnt' + ${iterStat.index}">
                             </td>
+                            <td class="text-danger" th:text="${product.product_rate}+'%'"></td>
                             <td>
                                 <del><small class="text-secondary" th:value="${product.product_oprice}"
-                                            th:id="'product_oprice_' + ${iterStat.index}" th:text="${product.product_oprice}+'원'"></small></del>
+                                            th:id="'product_oprice_' + ${iterStat.index}"
+                                            th:text="${product.product_oprice}+'원'"></small></del>
                                 <br><strong th:text="${product.product_sprice}+'원'"
-                                            th:id="'product_sprice_' + ${iterStat.index}"></strong></td>
+                                            th:id="'product_sprice_' + ${iterStat.index}"></strong>
+                            </td>
+                            <td>
+                                <span th:id="'order_oprice'+${iterStat.index}" name="order_oprice"></span>
+                            </td>
                         </tr>
                         <tr>
                             <td colspan="6">
                                 <p class="fs-5 pt-3 ">
-                                    주문금액 <strong id="oprice" th:text="${total_oprice}+'원'" th:value="${total_oprice}"></strong><strong
-                                        class="text-danger" id="sprice" th:text="' -상품할인 '+${total_sale}+'원'" ></strong>
+                                    주문금액 <strong id="oprice" th:text="${total_oprice}+'원'"
+                                                 th:value="${total_oprice}"></strong><strong
+                                        class="text-danger" id="sprice" th:text="' -상품할인 '+${total_sale}+'원'"></strong>
                                     +배송비 <strong id="total_delivery" th:text=" ${total_delivery}+'원'"></strong> =<strong
-                                        id="total_price" th:text="' 최종 결제금액 '+${total_price}+'원'" th:value="${total_price}" name="order_price"></strong></p>
-                                <input type="hidden" name="order_oprice" th:value="${total_oprice}">
-                                <input type="hidden" name="order_price" th:value="${total_price}">
+                                        id="total_price" th:text="' 최종 결제금액 '+${total_price}+'원'"
+                                        th:value="${total_price}"
+                                        name="order_price"></strong></p>
                             </td>
                         </tr>
                     </table>
+                </div>
+                <div th:each="cnt, iterStat : ${order_cnt}">
+                    <input type="hidden" th:name="'order_cnt[' + ${iterStat.index} + ']'" th:value="${cnt}">
                 </div>
                 <h5 class="order-title">할인 정보</h5>
                 <table class="table align-middle mb-5">
@@ -239,10 +245,10 @@
                         <div class="order-item"><span class="order-title2">배송비</span><strong class="order-price"
                                                                                              th:text="${total_delivery}">0</strong>
                         </div>
-                        <div class="order-item"><span class="order-title2">할인금액</span><strong
+                        <div class="order-item"><span class="order-title2">상품 할인금액</span><strong
                                 class="order-price text-danger" th:text="${total_sale}"></strong></div>
-                        <div class="order-item"><span class="order-title2">추가금액</span><strong
-                                class="order-price">0</strong></div>
+                        <div class="order-item"><span class="order-title2">추가 할인금액</span><strong
+                                class="order-price" id="add_sale">0</strong></div>
                     </div>
                     <div class="border-top order-items "><!--최종 결제 금액-->
                         <div class="order-item fs-5 fw-bold mb-2"><span class="order-title2">최종 결제 금액</span><strong
@@ -268,7 +274,6 @@
                         </label>
                     </div>
                     <button class="btn btn-outline-warning w-100 py-3 mt-4 fs-5">결제하기</button>
-                    <a href="/paymentCompleted">결제성공</a><a href="/paymentFailed">결제실패</a>
                 </div>
             </div>
         </div>
