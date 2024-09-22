@@ -77,6 +77,6 @@ function checkReview() {
     window.location = "/productDetail/" + productNum;
 }
 
-function orderList(){
-    location.href="/my/orderList";
+function orderList() {
+    location.href = "/my/orderList";
 }
