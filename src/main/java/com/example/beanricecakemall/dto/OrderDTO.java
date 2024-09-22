@@ -40,6 +40,8 @@ public class OrderDTO {
 
     private List<String> order_status;
 
+    private List<Integer> order_deliveryFee;
+
     public static OrderDTO toOrderDTO(OrderEntity orderEntity, List<Integer> productNums) {
         OrderDTO orderDTO = new OrderDTO();
         orderDTO.setOrder_num(orderEntity.getOrderNum());
