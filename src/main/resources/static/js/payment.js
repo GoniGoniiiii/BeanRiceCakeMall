@@ -111,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const point=Number(price);
 
     const plus_point=document.getElementById("plus_point");
-    plus_point.value=Math.round(point*0.05);
+    plus_point.value=Math.round(point*0.03);
 
     document.getElementById("point").innerText="적립예정 " + plus_point.value+"원";
 
@@ -119,6 +119,7 @@ document.addEventListener("DOMContentLoaded", function () {
     //포인트 사용
     const user_point=document.getElementById("user_point");
     const final_price=document.getElementById("final-price");
+    const add_sale=document.getElementById("add_sale");
     const maxPoint=document.getElementById("pointAll").value;
     const oprice = Number(final_price.innerText);
 
@@ -146,7 +147,29 @@ document.addEventListener("DOMContentLoaded", function () {
 
         // final-price 값을 업데이트
         final_price.innerText = finalPrice;
+        add_sale.innerText=userPointValue;
     })
+    
+    //수량 * 상품금액 계산
+    var count = document.querySelectorAll('tr[data-index]').length;
+    console.log("count : "+count);
+
+    for (var index = 0; index < count; index++) {
+        var priceElement = document.getElementById('product_sprice_' + index);
+        var countElement = document.getElementById('order_cnt' + index);
+        var resultElement = document.getElementById('order_oprice' + index); // 각 제품의 결과를 표시할 span
+
+        if (priceElement && countElement) {
+            var productPrice = parseInt(priceElement.textContent.replace('원', '').trim());
+            var orderCount = parseInt(countElement.textContent);
+
+            var totalPrice = productPrice * orderCount;
+
+            resultElement.textContent = totalPrice + '원';
+        } else {
+            console.log('요소를 찾을 수 없습니다. 인덱스:', index);
+        }
+    }
 });
 
 
@@ -183,20 +206,17 @@ function Check() {
         console.log(p_num6.value);
     }
 }
-function usePoint(){
 
-}
 function useAllPoint() {
     var pointCheck = document.getElementById("user_allPoint");
+    var user_point = document.getElementById("user_point");
+    var allPoint = document.getElementById("pointAll").value;
 
-    if (pointCheck.checked) {
-        var allPoint = document.getElementById("pointAll").value;
-        console.log(allPoint);
+    user_point.value = pointCheck.checked ? allPoint : ""; // 체크 여부에 따라 값 설정
 
-        var user_point = document.getElementById("user_point");
-        user_point.value = allPoint;
-
-    }
+    // 변경 이벤트 트리거
+    var event = new Event('change');
+    user_point.dispatchEvent(event);
 }
 
 function uncheckOthers(clickedId) {
