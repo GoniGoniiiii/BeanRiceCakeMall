@@ -76,3 +76,7 @@ function checkReview() {
     const productNum = document.getElementById('product_num').value;
     window.location = "/productDetail/" + productNum;
 }
+
+function orderList(){
+    location.href="/my/orderList";
+}
