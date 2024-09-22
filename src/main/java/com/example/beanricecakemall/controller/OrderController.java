@@ -225,51 +225,41 @@ public class OrderController {
         //가져온 user_id값으로 orderDTO뽑아주기
         List<OrderDTO> orderDTOS = orderService.orderList(user_id);
 
-        OrderDTO orderDTO = new OrderDTO();
         List<String> product_img = new ArrayList<>();
         List<String> product_name = new ArrayList<>();
         List<OrderDTO> orderDTOList = new ArrayList<>();
         List<Integer> product_num = new ArrayList<>();
+        List<Integer> product_count=new ArrayList<>();
 
-        Set<Integer> processedProductNums = new HashSet<>();
+        //처리된 주문번호인지
+        Set<Integer> processedOrderNums = new HashSet<>();
 
         for (OrderDTO order : orderDTOS) {
-            orderDTO = order;
-            System.out.println(" 컨트롤러 orderDTO : " + orderDTO.toString());
-            orderDTOList.add(orderDTO);
-            // 마지막 주문 번호를 리스트에 추가
+            // 이미 처리한 주문 번호라면 스킵
+            if (!processedOrderNums.contains(order.getOrder_num()) && !order.getProduct_num().isEmpty()) {
+                int firstProduct = order.getProduct_num().get(0);
+                System.out.println("firstProduct : " + firstProduct);
+                product_img.add(productService.findProductImg(firstProduct));
+                product_name.add(productService.findProductName(firstProduct));  // 첫 번째 상품 이름 추가
+                product_num.add(firstProduct);  // 첫 번째 상품 번호 추가
 
-            //product_img,product_name 가져오기
-            List<Integer> productNum = orderDTO.getProduct_num();
+                // 처리된 주문 번호 추가
+                processedOrderNums.add(order.getOrder_num());
 
-            for (int product : productNum) {
-                if (!processedProductNums.contains(product)) {
-                    // product가 중복되지 않을 경우에만 추가
-                    processedProductNums.add(product);
-                    product_img.add(productService.findProductImg(product));
-                    product_name.add(productService.findProductName(product));
-                    product_num.add(product);
-                }
+                orderDTOList.add(order);
+
+                //대표상품 외 n건
+                int productCount=order.getProduct_num().size()-1;
+                product_count.add(productCount);
             }
-            System.out.println(product_img.toString());
-            System.out.println(product_name.toString());
         }
-
-        // 주문 번호별로 그룹화
-        Map<Integer, List<OrderDTO>> orders = orderDTOS.stream()
-                .collect(Collectors.groupingBy(OrderDTO::getOrder_num));
-
-        Map<Integer, Integer> rowspanMap = orders.entrySet().stream()
-                .collect(Collectors.toMap(Map.Entry::getKey, entry -> entry.getValue().size()));
 
         // 모델에 데이터 추가
         model.addAttribute("orderDTOList", orderDTOList);
         model.addAttribute("product_num", product_num);
         model.addAttribute("product_img", product_img);
         model.addAttribute("product_name", product_name);
-        model.addAttribute("ordersGroupedByOrderNum", orders);
-        model.addAttribute("rowspanMap", rowspanMap);
-
+        model.addAttribute("product_count", product_count);
         return "user/orderList";
     }
 
@@ -310,6 +300,7 @@ public class OrderController {
         model.addAttribute("orderDTO", orderDTO);
         model.addAttribute("orderProductList", orderProductList);
         model.addAttribute("deliveryDTO", deliveryDTO);
+        model.addAttribute("product_num", product_num);
         model.addAttribute("product_img", product_img);
         model.addAttribute("product_name", product_name);
         return "user/orderListDetail";
