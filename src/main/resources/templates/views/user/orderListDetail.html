@@ -20,6 +20,7 @@
 
     <p class="small">주문정보</p>
     <table class="table border-top border-bottom mb-5 align-middle" th:each="order : ${orderDTO}">
+        <input type="hidden" id="user_num" th:value="${order.user_num}">
         <tr>
             <td class="w-25 border-end ps-3">주문번호</td>
             <td class="w-75 ps-2"><small th:text="${order.order_num}">20230424-1</small></td>
@@ -54,8 +55,9 @@
         </tr>
     </table>
 
+    <div class="mb-3">
     <p class="small">주문 상품 정보</p>
-    <table class="table border-top border-bottom align-middle text-center product-info mb-5" th:each="order,iterStat:${orderDTO}">
+    <table class="table border-top border-bottom align-middle text-center product-info" th:each="order,iterStat:${orderDTO}">
         <tr>
             <td class="order-img">이미지</td>
             <td class="order-info">상품정보</td>
@@ -76,9 +78,58 @@
             <td colspan="6" class="text-end">상품구매금액 <span th:text="${order.order_oprice}">46,220</span> + 배송비 <span >11,000</span> + 지역별배송비 <span>0</span> = 합계 :<span class="fw-bold fs-5"> 57,220원</span></td>
         </tr>
     </table>
-
-
-    <p class="small">배송지정보</p>
+    <input type="hidden" th:value="${product_num}" id="product_num">
+    <button type="button" class="btn btn-outline-secondary  mb-5 float-end" th:if="${product_num}!='null' " data-bs-toggle="modal"
+            data-bs-target="#reviewModal" onclick="review()">리뷰 쓰기
+    </button>
+    </div>
+    <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="cart" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    리뷰 작성^ㅇ^
+                    <button type="button" class="btn-close"></button>
+                </div>
+                <div class="modal-body p-3 ">
+                    <p class="bold">리뷰할 상품을 선택해주세요!</p>
+                    <div id="modal-content" class="my-2 py-1" th:each="review,iterStat:${orderProductList}">
+                        <input type="checkbox" name="select_product" th:value="${product_num[iterStat.index]}">
+                        <img th:src="@{|/upload/${product_img[iterStat.index]}|}"
+                             th:value="${product_img[iterStat.index]}">
+                        <span th:text="${product_name[iterStat.index]}"></span>
+                        <span th:text="${product_num[iterStat.index]}"></span>
+                    </div>
+                    <p class="bold my-1">리뷰제목</p>
+                    <input type="text" id="review_title" class="w-100 py-1">
+                    <p class="bold mt-2 my-1">리뷰내용</p>
+                    <textarea rows="5" id="review_content" class="w-100"></textarea>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
+                            onclick="addReview()">리뷰 작성
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="resultModal" tabindex="-1" aria-labelledby="review" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="btn-close"></button>
+                </div>
+                <div class="modal-body p-3 text-center">
+                    <p class="bold fs-5" id="result"></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-success" data-bs-dismiss="modal"
+                            onclick="checkReview()">작성한 리뷰 확인
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <p class="small mt-5">배송지정보</p>
     <table class="table border-top border-bottom align-middle mb-5" th:each="delivery:${deliveryDTO}">
         <tr>
             <td class="w-25 border-end ps-3">받으시는 분</td>
@@ -107,10 +158,6 @@
     <button class="btn btn-outline-success float-end"  type="button" onclick="orderList()">주문목록보기</button>
 </section>
 <footer th:include="footer"></footer>
-<script>
-    function orderList(){
-        location.href="/orderList";
-    }
-</script>
+<script src="/js/orderListDetail.js"></script>
 </body>
 </html>
