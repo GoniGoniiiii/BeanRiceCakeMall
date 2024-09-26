@@ -30,6 +30,8 @@ public class OrderDTO {
 
     private int plus_point;
 
+    private int use_point;
+
     private List<Integer> order_detail_num;
 
     private List<Integer> order_cnt;
