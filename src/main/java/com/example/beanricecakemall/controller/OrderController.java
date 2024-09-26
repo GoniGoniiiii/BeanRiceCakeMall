@@ -131,9 +131,9 @@ public class OrderController {
         model.addAttribute("total_sale", total_sale);
         model.addAttribute("total_delivery", total_delivery);
         model.addAttribute("total_price", total_price);
-        model.addAttribute("order_cnt", order_cnt);
+        model.addAttribute("order_cnt", Collections.singletonList(order_cnt));
         model.addAttribute("user", userDTO);
-        model.addAttribute("product", productDTO);
+        model.addAttribute("product", Collections.singletonList(productDTO));
 
         return "product/payment";
     }
