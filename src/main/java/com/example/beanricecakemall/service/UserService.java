@@ -148,4 +148,12 @@ public class UserService {
         userEntity.setUserNum(user_num);
         userRepository.save(userEntity);
     }
+
+    public void usePoint(int user_num,int use_point){
+        UserEntity userEntity=userRepository.findByUserNum(user_num);
+        int point= userEntity.getUserPoint();
+        point-=use_point;
+        userEntity.setUserPoint(point);
+        userRepository.save(userEntity);
+    }
 }

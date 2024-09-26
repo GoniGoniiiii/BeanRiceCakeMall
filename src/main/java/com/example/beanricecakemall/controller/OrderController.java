@@ -196,9 +196,10 @@ public class OrderController {
             }
             //주문 상세 테이블에 추가
             orderProductService.insertOrder(orderDTO);
+            //적립금 사용시 차감
+            userService.usePoint(orderDTO.getUser_num(),orderDTO.getUse_point());
             // 적립금 추가
             userService.plusPoint(orderDTO.getUser_num(), orderDTO.getPlus_point());
-
 
             return "product/paymentCompleted";
         } else {
