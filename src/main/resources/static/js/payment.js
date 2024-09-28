@@ -215,7 +215,7 @@ function useAllPoint() {
     var user_point = document.getElementById("user_point");
     var allPoint = document.getElementById("pointAll").value;
 
-    user_point.value = pointCheck.checked ? allPoint : ""; // 체크 여부에 따라 값 설정
+    user_point.value = pointCheck.checked ? allPoint : 0; // 체크 여부에 따라 값 설정
 
     // 변경 이벤트 트리거
     var event = new Event('change');
