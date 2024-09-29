@@ -27,7 +27,6 @@ public class DeliveryDTO {
 
     private String delivery_req;
 
-    private String delivery_def;
 
     public static DeliveryDTO toDeliveryDTO(DeliveryEntity deliveryEntity){
         DeliveryDTO deliveryDTO=new DeliveryDTO();
@@ -40,7 +39,6 @@ public class DeliveryDTO {
         deliveryDTO.setDelivery_addr(deliveryEntity.getDeliveryAddr());
         deliveryDTO.setDelivery_addrDetail(deliveryEntity.getDeliveryAddrdetail());
         deliveryDTO.setDelivery_req(deliveryEntity.getDeliveryReq());
-        deliveryDTO.setDelivery_def(deliveryEntity.getDeliveryDef());
         return deliveryDTO;
     }
 }
