@@ -15,6 +15,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.sql.Timestamp;
 import java.util.*;
 import java.util.stream.Collectors;
 
@@ -181,7 +182,7 @@ public class OrderController {
     }
 
     @PostMapping("/order")
-    public String order(@ModelAttribute OrderDTO orderDTO, @ModelAttribute DeliveryDTO deliveryDTO) {
+    public String order(@ModelAttribute OrderDTO orderDTO, @ModelAttribute DeliveryDTO deliveryDTO,Model model) {
         System.out.println(orderDTO.toString());
         System.out.println(deliveryDTO.toString());
         int order_num = orderService.insertOrder(orderDTO, deliveryDTO);
@@ -196,10 +197,17 @@ public class OrderController {
             }
             //주문 상세 테이블에 추가
             orderProductService.insertOrder(orderDTO);
+
             //적립금 사용시 차감
             userService.usePoint(orderDTO.getUser_num(),orderDTO.getUse_point());
+
             // 적립금 추가
             userService.plusPoint(orderDTO.getUser_num(), orderDTO.getPlus_point());
+
+            //결제일시 가져오기
+            Timestamp orderDate=orderService.findOrderDate(order_num);
+            model.addAttribute("order_price",orderDTO.getOrder_price());
+            model.addAttribute("order_date",orderDate);
 
             return "product/paymentCompleted";
         } else {
