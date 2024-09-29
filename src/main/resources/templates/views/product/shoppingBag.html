@@ -47,6 +47,7 @@
                         <div class="col-6">
                             <div class="d-inline-block">
                                 <div class="text-start my-2" th:text="${product_name[iterStat.index]}"></div>
+                                <input type="hidden"  th:id=" 'product_name['+${iterStat.index}+']' " th:value="${product_name[iterStat.index]}">
                                 <div class="d-flex align-items-center justify-content-between">
                                     <span class="me-2">수량 :</span>
                                     <div class="quantity d-flex align-items-center">
@@ -74,6 +75,7 @@
                                      th:data-oprice="${product_oprice[iterStat.index]}"></div>
                                 <div class="delivery-fee" th:data-fee="${product_deliveryFee[iterStat.index]}"
                                      style="display: none;"></div>
+                                <input type="hidden" id="total-oprice">
                             </div>
                         </div>
                     </div><!--장바구니 상품1-->
