@@ -35,14 +35,16 @@ public class OrderDTO {
     private List<Integer> order_detail_num;
 
     private List<Integer> order_cnt;
-
+    
+    //상품 구매금액
     private List<Integer> order_oprice;
-
-    private List<Integer> order_price;
 
     private List<String> order_status;
 
-    private List<Integer> order_deliveryFee;
+    //최종 결제금액
+    private int order_price;
+
+    private int order_deliveryFee;
 
     public static OrderDTO toOrderDTO(OrderEntity orderEntity, List<Integer> productNums) {
         OrderDTO orderDTO = new OrderDTO();
@@ -53,6 +55,8 @@ public class OrderDTO {
         orderDTO.setOrder_userName(orderEntity.getOrderUserName());
         orderDTO.setOrder_paymethod(orderEntity.getOrderPaymethod());
         orderDTO.setUser_num(orderEntity.getUserEntity().getUserNum());
+        orderDTO.setOrder_price(orderEntity.getOrderPrice());
+        orderDTO.setOrder_deliveryFee(orderEntity.getOrderDeliveryfee());
         orderDTO.setProduct_num(productNums);
         return orderDTO;
     }
