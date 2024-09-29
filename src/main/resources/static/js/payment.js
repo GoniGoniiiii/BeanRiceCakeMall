@@ -207,6 +207,13 @@ function Check() {
         console.log(p_num4.value);
         console.log(p_num5.value);
         console.log(p_num6.value);
+    } else { //uncheck시 칸 비우기
+        document.getElementById("delivery_userName").value = "";
+        document.getElementById("delivery_emailId").value = "";
+        document.getElementById("input_deliveryEmail").value = "";
+        document.getElementById("p_num4").value = "";
+        document.getElementById("p_num5").value = "";
+        document.getElementById("p_num6").value = "";
     }
 }
 
