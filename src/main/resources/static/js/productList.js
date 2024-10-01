@@ -19,6 +19,7 @@ document.querySelectorAll('.sort-option').forEach(filter => {
             .then(response => response.text())
             .then(html => {
                 document.querySelector('#productList').innerHTML = html;
+                formatPrices();
             })
             .catch(error => console.error('Error : ', error));
     });
