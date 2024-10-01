@@ -22,12 +22,6 @@ public class OrderProductEntity {
     private int orderOprice;
 
     @Column
-    private int orderPrice;
-
-    @Column
-    private int orderDeliveryfee;
-
-    @Column
     private String orderStatus;
 
     @ManyToOne
