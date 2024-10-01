@@ -182,7 +182,7 @@ public class OrderController {
     }
 
     @PostMapping("/order")
-    public String order(@ModelAttribute OrderDTO orderDTO, @ModelAttribute DeliveryDTO deliveryDTO,Model model) {
+    public String order(@ModelAttribute OrderDTO orderDTO, @ModelAttribute DeliveryDTO deliveryDTO, Model model) {
         System.out.println(orderDTO.toString());
         System.out.println(deliveryDTO.toString());
         int order_num = orderService.insertOrder(orderDTO, deliveryDTO);
@@ -199,15 +199,15 @@ public class OrderController {
             orderProductService.insertOrder(orderDTO);
 
             //적립금 사용시 차감
-            userService.usePoint(orderDTO.getUser_num(),orderDTO.getUse_point());
+            userService.usePoint(orderDTO.getUser_num(), orderDTO.getUse_point());
 
             // 적립금 추가
             userService.plusPoint(orderDTO.getUser_num(), orderDTO.getPlus_point());
 
             //결제일시 가져오기
-            Timestamp orderDate=orderService.findOrderDate(order_num);
-            model.addAttribute("order_price",orderDTO.getOrder_price());
-            model.addAttribute("order_date",orderDate);
+            Timestamp orderDate = orderService.findOrderDate(order_num);
+            model.addAttribute("order_price", orderDTO.getOrder_price());
+            model.addAttribute("order_date", orderDate);
 
             return "product/paymentCompleted";
         } else {
@@ -220,14 +220,14 @@ public class OrderController {
         String user_id;
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        boolean isOauth2User=authentication.getPrincipal() instanceof OAuth2User;
+        boolean isOauth2User = authentication.getPrincipal() instanceof OAuth2User;
         System.out.println("소셜로그인 여부 : " + isOauth2User);
 
-        if(isOauth2User){
-            CustomOAuth2User customOAuth2User=(CustomOAuth2User) authentication.getPrincipal();
+        if (isOauth2User) {
+            CustomOAuth2User customOAuth2User = (CustomOAuth2User) authentication.getPrincipal();
             System.out.println("userName : " + customOAuth2User.getUserName());
-            user_id=customOAuth2User.getUserName();
-        }else{
+            user_id = customOAuth2User.getUserName();
+        } else {
             user_id = SecurityContextHolder.getContext().getAuthentication().getName();
         }
 
@@ -238,7 +238,7 @@ public class OrderController {
         List<String> product_name = new ArrayList<>();
         List<OrderDTO> orderDTOList = new ArrayList<>();
         List<Integer> product_num = new ArrayList<>();
-        List<Integer> product_count=new ArrayList<>();
+        List<Integer> product_count = new ArrayList<>();
 
         //처리된 주문번호인지
         Set<Integer> processedOrderNums = new HashSet<>();
@@ -258,7 +258,7 @@ public class OrderController {
                 orderDTOList.add(order);
 
                 //대표상품 외 n건
-                int productCount=order.getProduct_num().size()-1;
+                int productCount = order.getProduct_num().size() - 1;
                 product_count.add(productCount);
             }
         }
@@ -294,13 +294,18 @@ public class OrderController {
         //주문상품정보 리스트
         List<OrderDTO> orderProductList = new ArrayList<>();
         orderProductList = orderProductService.findOrderProductList(order_num);
+        int total_product = 0;
 
         for (int product : product_num) {
             product_img.add(productService.findProductImg(product));
             product_name.add(productService.findProductName(product));
             System.out.println(" product : " + product);
-
         }
+        for (int i = 0; i < orderProductList.size(); i++) {
+            total_product += orderProductList.get(i).getOrder_oprice().get(i);
+            System.out.println("상품 구매 금액 : " + total_product);
+        }
+
         System.out.println(product_img.toString());
         System.out.println(product_name.toString());
 
@@ -312,29 +317,30 @@ public class OrderController {
         model.addAttribute("product_num", product_num);
         model.addAttribute("product_img", product_img);
         model.addAttribute("product_name", product_name);
+        model.addAttribute("total_product", total_product);
         return "user/orderListDetail";
     }
 
     @PostMapping("/my/addReview")
-    public ResponseEntity<String> addReview(@RequestBody ReviewDTO reviewDTO){
+    public ResponseEntity<String> addReview(@RequestBody ReviewDTO reviewDTO) {
         System.out.println("reviewDTO : " + reviewDTO);
-        String result=reviewService.insertReview(reviewDTO);
+        String result = reviewService.insertReview(reviewDTO);
         return ResponseEntity.ok(result);
     }
-    
+
     @PostMapping("/my/updateReview")
-    public ResponseEntity<String> updateReview(@RequestBody ReviewDTO reviewDTO){
-        System.out.println("reviewDTO  : " +reviewDTO);
-        String result=reviewService.updateReview(reviewDTO);
+    public ResponseEntity<String> updateReview(@RequestBody ReviewDTO reviewDTO) {
+        System.out.println("reviewDTO  : " + reviewDTO);
+        String result = reviewService.updateReview(reviewDTO);
         return ResponseEntity.ok(result);
     }
 
     @DeleteMapping("/my/deleteReview")
-    public ResponseEntity<String> deleteReview(@RequestBody ReviewDTO reviewDTO){
+    public ResponseEntity<String> deleteReview(@RequestBody ReviewDTO reviewDTO) {
         System.out.println("review_num : " + reviewDTO.getReview_num());
-        String result=reviewService.deleteReview(reviewDTO.getReview_num());
+        String result = reviewService.deleteReview(reviewDTO.getReview_num());
         return ResponseEntity.ok(result);
     }
 
-    
+
 }
