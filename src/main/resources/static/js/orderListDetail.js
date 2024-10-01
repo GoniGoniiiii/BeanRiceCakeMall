@@ -28,6 +28,10 @@ function addReview() {
     const reviewContent = document.getElementById('review_content').value;
     const userNum = document.getElementById('user_num').value;
 
+    const formattedText = reviewContent.replace(/\n/g, '<br>');  // 줄바꿈 문자를 <br> 태그로 변환
+
+    reviewContent.innerHTML = formattedText;  // 변환된 HTML을 삽입
+
     if (reviewTitle == null || reviewTitle === '') {
         alert('리뷰 제을 입력하세요!');
         document.getElementById('review_title').focus();
@@ -92,3 +96,7 @@ function formatPrices(){
     });
 }
 window.onload=formatPrices;
+
+function replaceEnter() {
+
+}
