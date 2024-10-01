@@ -9,8 +9,6 @@ import com.example.beanricecakemall.repository.OrderProductRepository;
 import com.example.beanricecakemall.repository.OrderRepository;
 import com.example.beanricecakemall.repository.ProductRepository;
 import com.example.beanricecakemall.repository.UserRepository;
-import org.aspectj.weaver.ast.Or;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
