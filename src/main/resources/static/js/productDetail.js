@@ -99,13 +99,18 @@ function cart() {
     }
 }
 
+// 가격 포맷팅 함수
+function formatNumber(number) {
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
 function goPay() {
     const userNum = document.getElementById("user_num").value;
     const productNum = document.getElementById("product_num").value;
     const cartCnt = document.getElementById("cart_cnt").value;
     const productImg = document.getElementById("product_img").value;
-    const oprice = document.getElementById("product_oprice").textContent;
-    const sprice = document.getElementById("product_sprice").textContent;
+    const oprice = parseInt(document.getElementById("product_oprice").textContent.replace(/[^0-9]/g, '')); // 숫자로 변환
+    const sprice = parseInt(document.getElementById("product_sprice").textContent.replace(/[^0-9]/g, '')); // 숫자로 변환
     const delivery = Number(document.getElementById("product_delivery").textContent.replace(/[^0-9.-]+/g, ""));
     const total_sprice = Number(document.getElementById("all-price").textContent.replace(/[^0-9.-]+/g, ""));
 
@@ -167,6 +172,18 @@ function keep() {
     //쇼핑 계속하기
     window.location.reload();
 }
+
+function formatPrices(){
+    const priceElements=document.querySelectorAll(".product-price2");
+
+    priceElements.forEach(element =>{
+        const price=parseInt(element.textContent.replace(/[^0-9]/g,''));
+        if(!isNaN(price)){
+            element.textContent=formatNumber(price);
+            }
+    });
+    }
+window.onload=formatPrices;
 
 function deleteProduct() {
     const product_num = document.getElementById("product_num").value;

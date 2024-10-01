@@ -20,14 +20,14 @@
             <div class="d-flex justify-content-between product-price">
                 <div><span class="text-danger fs-4" th:text="${product.product_rate}+'%' "></span></div>
                 <div>
-                    <del class="text-secondary me-2" th:text="${product.product_oprice}" id="product_oprice"></del>
-                    <span class="fw-bold fs-4  text-danger" th:text="${product.product_sprice}"
+                    <del class="text-secondary me-2 product-price2" th:text="${product.product_oprice}" id="product_oprice"></del>
+                    <span class="fw-bold fs-4  text-danger product-price2" th:text="${product.product_sprice}"
                           id="product_sprice"></span></div>
             </div>
             <div class="product-box">
                 <p class="text-secondary">Information</p>
                 <p th:utext="${product.product_info}"></p>
-                <p class="m-0 small"><span>배송비</span><span class="mx-3  " th:text="${product.product_deliveryfee}"
+                <p class="m-0 small"><span>배송비</span><span class="mx-3 product-price2" th:text="${product.product_deliveryfee}"
                                                            id="product_delivery"></span><span>|</span><span
                         class="mx-2">리뷰</span><span th:text="${reviewCount}+'건'"></span></p>
             </div>
@@ -41,7 +41,7 @@
             </div>
             <div class="d-flex justify-content-between my-4 mb-5">
                 <div><span>총합계</span></div>
-                <div><span class="fw-bold fs-4 text-danger" th:data-value="${product.product_sprice}"
+                <div><span class="fw-bold fs-4 text-danger product-price2" th:data-value="${product.product_sprice}"
                            id="all-price"></span></div>
             </div>
             <div class="d-flex justify-content-between">

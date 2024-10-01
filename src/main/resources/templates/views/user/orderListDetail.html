@@ -27,7 +27,8 @@
         </tr>
         <tr>
             <td class="w-25 border-end ps-3">주문일자</td>
-            <td class="w-75 ps-2"><small  th:text="${#dates.format(order.order_date, 'yyyy-MM-dd')}">2024-04-24 </small></td>
+            <td class="w-75 ps-2"><small th:text="${#dates.format(order.order_date, 'yyyy-MM-dd')}">2024-04-24 </small>
+            </td>
         </tr>
         <tr>
             <td class="w-25 border-end ps-3">주문자</td>
@@ -42,12 +43,14 @@
     <p class="small">결제정보</p>
     <table class="table border-top border-bottom align-middle mb-5" th:each="order :${orderDTO}">
         <tr>
-            <td class="w-25 border-end ps-3 fw-bold">총 주문금액</td>
-            <td class="w-75 ps-2"><small th:text="${order.order_oprice}">55,000원</small></td>
+            <td class="w-25 border-end ps-3 fw-bold">총 상품구매금액</td>
+            <td class="w-75 ps-2"><span th:text="${total_product}" id="total_product" class="order-price"></span><small> 원</small></td>
         </tr>
         <tr>
             <td class="w-25 border-end ps-3 fw-bold">총 결제금액</td>
-            <td class="w-75 ps-2 fw-bold" th:text="${order.order_price[0]}">55,000<small>원</small></td>
+            <td class="w-75 ps-2 fw-bold">
+                <span th:text="${order.order_price}" id="total_pay" class="order-price"></span><small> 원</small>
+            </td>
         </tr>
         <tr>
             <td class="w-25 border-end ps-3">결제 수단</td>
@@ -56,32 +59,35 @@
     </table>
 
     <div class="mb-3">
-    <p class="small">주문 상품 정보</p>
-    <table class="table border-top border-bottom align-middle text-center product-info" th:each="order,iterStat:${orderDTO}">
-        <tr>
-            <td class="order-img">이미지</td>
-            <td class="order-info">상품정보</td>
-            <td class="order-cnt">수량</td>
-            <td class="order-price">상품구매금액</td>
-            <td class="order-process">주문처리상태</td>
-            <td class="order-cancle">취소/교환/반품</td>
-        </tr>
-        <tr th:each="orderPro,iterStat:${orderProductList}">
-            <td><img th:src="@{|/upload/${product_img[iterStat.index]}|}" class="table-img"></td>
-            <td class="text-start ps-3" th:text="${product_name[iterStat.index]}">귀여운 강아지 인형</td>
-            <td th:text="${order.order_cnt[iterStat.index]}">1</td>
-            <td th:text="${order.order_oprice[0]}">50,000원</td>
-            <td  th:text="${order.order_status[0]}">입금전</td>
-            <td>-</td>
-        </tr>
-        <tr>
-            <td colspan="6" class="text-end">상품구매금액 <span th:text="${order.order_oprice}">46,220</span> + 배송비 <span >11,000</span> + 지역별배송비 <span>0</span> = 합계 :<span class="fw-bold fs-5"> 57,220원</span></td>
-        </tr>
-    </table>
-    <input type="hidden" th:value="${product_num}" id="product_num">
-    <button type="button" class="btn btn-outline-secondary  mb-5 float-end" th:if="${product_num}!='null' " data-bs-toggle="modal"
-            data-bs-target="#reviewModal" onclick="review()">리뷰 쓰기
-    </button>
+        <p class="small">주문 상품 정보</p>
+        <table class="table border-top border-bottom align-middle text-center product-info"
+               th:each="order,iterStat:${orderDTO}">
+            <tr>
+                <td class="order-img">이미지</td>
+                <td class="order-info">상품정보</td>
+                <td class="order-cnt">수량</td>
+                <td class="order-price">상품구매금액</td>
+                <td class="order-process">주문처리상태</td>
+                <td class="order-cancle">취소/교환/반품</td>
+            </tr>
+            <tr th:each="orderPro,iterStat:${orderProductList}">
+                <td><img th:src="@{|/upload/${product_img[iterStat.index]}|}" class="table-img"></td>
+                <td class="text-start ps-3" th:text="${product_name[iterStat.index]}">귀여운 강아지 인형</td>
+                <td th:text="${order.order_cnt[iterStat.index]}">1</td>
+                <td th:text="${order.order_oprice[iterStat.index]}" class="order-price">50,000원</td>
+                <td th:text="${order.order_status[0]}">입금전</td>
+                <td>-</td>
+            </tr>
+            <tr>
+                <td colspan="6" class="text-end">상품구매금액 <span th:text="${total_product}" class="order-price"></span> + 배송비
+                    <span th:text="${order.order_deliveryfee}" class="order-price"></span> + 추가 할인금액 <span th:text="${order.order_saleprice}" class="order-price"></span> = 합계  <span class="fw-bold fs-5 order-price" th:text="${order.order_price}"></span> 원</td>
+            </tr>
+        </table>
+        <input type="hidden" th:value="${product_num}" id="product_num">
+        <button type="button" class="btn btn-outline-secondary  mb-5 float-end" th:if="${product_num}!='null' "
+                data-bs-toggle="modal"
+                data-bs-target="#reviewModal" onclick="review()">리뷰 쓰기
+        </button>
     </div>
     <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="cart" aria-hidden="true">
         <div class="modal-dialog">
@@ -141,13 +147,15 @@
         </tr>
         <tr>
             <td class="w-25 border-end ps-3">주소</td>
-            <td class="w-75 ps-2"><small th:text="${delivery.delivery_addr}+${delivery.delivery_addrDetail}">서울시 금천구 독산동</small></td>
+            <td class="w-75 ps-2"><small th:text="${delivery.delivery_addr}+${delivery.delivery_addrDetail}">서울시 금천구
+                독산동</small></td>
         </tr>
         <tr>
             <td class="w-25 border-end ps-3">전화번호</td>
             <td class="w-75 ps-2">
                 <small th:text="${delivery.delivery_userTel1}">010-3394-8775</small>
-                <small th:if="${delivery.delivery_userTel2}!=null" th:text="${delivery.delivery_userTel2}">010-3394-8775</small>
+                <small th:if="${delivery.delivery_userTel2}!=null"
+                       th:text="${delivery.delivery_userTel2}">010-3394-8775</small>
             </td>
         </tr>
         <tr>
@@ -155,7 +163,7 @@
             <td class="w-75 ps-2"><small th:text="${delivery.delivery_req}">조심히 안전하게 와주세요~^ㅇ^</small></td>
         </tr>
     </table>
-    <button class="btn btn-outline-success float-end"  type="button" onclick="orderList()">주문목록보기</button>
+    <button class="btn btn-outline-success float-end" type="button" onclick="orderList()">주문목록보기</button>
 </section>
 <footer th:include="footer"></footer>
 <script src="/js/orderListDetail.js"></script>

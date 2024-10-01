@@ -113,8 +113,8 @@ document.addEventListener("DOMContentLoaded", function () {
     const plus_point = document.getElementById("plus_point");
     plus_point.value = Math.round(point * 0.03);
 
-    document.getElementById("point").innerText = "적립예정 " + plus_point.value + "원";
-
+    // document.getElementById("point").innerText = "적립예정 " + plus_point.value + "원";
+    document.getElementById("point").innerText = plus_point.value ;
 
     //포인트 사용
     const user_point = document.getElementById("user_point");
@@ -122,6 +122,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const add_sale = document.getElementById("add_sale");
     const maxPoint = document.getElementById("pointAll").value;
     const oprice = Number(final_price.innerText);
+    const sale_price = document.getElementById("sale_price");
 
     user_point.addEventListener('change', function () {
         console.log("user_point : " + user_point.value);
@@ -146,8 +147,9 @@ document.addEventListener("DOMContentLoaded", function () {
         const finalPrice = oprice - userPointValue;
 
         // final-price 값을 업데이트
-        final_price.innerText = finalPrice;
-        add_sale.innerText = userPointValue;
+            final_price.innerText = finalPrice;
+            add_sale.innerText = userPointValue;
+            sale_price.value = userPointValue;
     })
 
     //수량 * 상품금액 계산
@@ -161,14 +163,16 @@ document.addEventListener("DOMContentLoaded", function () {
         var hiddenElement = document.getElementById('hidden_order_oprice_' + index);
 
         if (priceElement && countElement) {
+            //상품 실제판매가
             var productPrice = parseInt(priceElement.textContent.replace('원', '').trim());
+            console.log("상품 가격 :"+productPrice);
             var orderCount = parseInt(countElement.textContent);
+            console.log("상품 수량 :"+productPrice);
 
             var totalPrice = productPrice * orderCount;
 
             resultElement.textContent = totalPrice + '원';
             hiddenElement.value = totalPrice;
-
         } else {
             console.log('요소를 찾을 수 없습니다. 인덱스:', index);
         }
@@ -297,10 +301,36 @@ function updateOrderPrice() {
     }
 }
 
+function formatNumber(number) {
+    // 숫자를 문자열로 변환하고 정규식을 사용하여 3자리마다 쉼표 추가
+    return number.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+//숫자값 3자리마다 , 찍어주기
+function formatPrices() {
+    const priceElements = document.querySelectorAll(".order-price");
+    const pointInput = document.getElementById("pointAll");
+
+    priceElements.forEach(element => {
+        const price = parseInt(element.textContent.replace(/[^0-9]/g, ''));
+        if (!isNaN(price)) {
+            element.textContent = formatNumber(price) + '원';
+        }
+    });
+
+    if (pointInput) {
+        const pointValue = parseInt(pointInput.value.replace(/[^0-9]/g, ''));
+        if (!isNaN(pointValue)) {
+            pointInput.value = formatNumber(pointValue);
+        }
+    }
+}
+
 // 페이지 로드 시 split() 함수 호출
 window.onload = function () {
     split();
     updateOrderPrice();
+    formatPrices();
 }
 
 function zipcode() {
@@ -373,7 +403,13 @@ function handleSubmit(event) {
     console.log("주문자 연락처 :" + telNumber1);
     console.log("배송지 연락처 :" + telNumber2);
     console.log("배송지 연락처 :" + telNumber3);
+
+    const salePrice=document.getElementById("sale_price").value;
+    if(salePrice!=null || salePrice===''){
+        document.getElementById("sale_price").value=0;
+    }
 }
+
 
 // 폼 제출 이벤트에 핸들러 등록
 form.addEventListener("submit", handleSubmit);

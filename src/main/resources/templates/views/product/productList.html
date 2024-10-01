@@ -40,8 +40,8 @@
                             <h5 class="fw-bold my-2" th:text="${product.product_name}"></h5>
                             <div class="d-flex price">
                                 <p class="fw-bold text-danger" th:text="${product.product_rate}+'%'"></p>
-                                <p class="fw-bold mx-2" th:text="${product.product_sprice}"></p>
-                                <del class="text-secondary small" th:text="${product.product_oprice}">500,000원</del>
+                                <p class="fw-bold mx-2 product-price" th:text="${product.product_sprice}"></p>
+                                <del class="text-secondary small product-price" th:text="${product.product_oprice}">500,000원</del>
                             </div>
                             <small class="text-secondary" th:utext="${product.product_info}"></small>
                         </a>
