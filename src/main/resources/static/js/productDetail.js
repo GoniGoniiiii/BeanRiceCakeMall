@@ -109,6 +109,7 @@ function goPay() {
     const delivery = Number(document.getElementById("product_delivery").textContent.replace(/[^0-9.-]+/g, ""));
     const total_sprice = Number(document.getElementById("all-price").textContent.replace(/[^0-9.-]+/g, ""));
 
+    const total_oprice = Number(oprice) * cartCnt;
     const total_sale = Number(oprice - sprice) * cartCnt;
     const total_price = total_sprice + delivery;
 
@@ -128,7 +129,7 @@ function goPay() {
         product_num: productNum,
         cart_cnt: cartCnt,
         product_img: productImg,
-        total_oprice: oprice,
+        total_oprice: total_oprice,
         total_delivery: delivery,
         total_sale: total_sale,
         total_price: total_price
@@ -237,7 +238,7 @@ function deleteReview(button) {
                 alert(result);
                 window.location.reload();
             })
-    }else{
+    } else {
         alert("리뷰가 삭제되지 않았습니다.");
     }
 }
