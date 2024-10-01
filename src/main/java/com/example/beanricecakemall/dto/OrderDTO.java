@@ -44,7 +44,9 @@ public class OrderDTO {
     //최종 결제금액
     private int order_price;
 
-    private int order_deliveryFee;
+    private int order_deliveryfee;
+
+    private int order_saleprice;
 
     public static OrderDTO toOrderDTO(OrderEntity orderEntity, List<Integer> productNums) {
         OrderDTO orderDTO = new OrderDTO();
@@ -56,7 +58,8 @@ public class OrderDTO {
         orderDTO.setOrder_paymethod(orderEntity.getOrderPaymethod());
         orderDTO.setUser_num(orderEntity.getUserEntity().getUserNum());
         orderDTO.setOrder_price(orderEntity.getOrderPrice());
-        orderDTO.setOrder_deliveryFee(orderEntity.getOrderDeliveryfee());
+        orderDTO.setOrder_deliveryfee(orderEntity.getOrderDeliveryfee());
+        orderDTO.setOrder_saleprice(orderEntity.getOrderSaleprice());
         orderDTO.setProduct_num(productNums);
         return orderDTO;
     }

@@ -45,6 +45,9 @@ public class OrderEntity {
     @Column(name="order_deliveryfee")
     private int orderDeliveryfee;
 
+    @Column(name="order_saleprice")
+    private int orderSaleprice;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_num",insertable = true,updatable = false)
     private UserEntity userEntity;
@@ -63,7 +66,8 @@ public class OrderEntity {
         orderEntity.setOrderUserName(orderDTO.getOrder_userName());
         orderEntity.setOrderPaymethod(orderDTO.getOrder_paymethod());
         orderEntity.setOrderPrice(orderDTO.getOrder_price());
-        orderEntity.setOrderDeliveryfee(orderDTO.getOrder_deliveryFee());
+        orderEntity.setOrderDeliveryfee(orderDTO.getOrder_deliveryfee());
+        orderEntity.setOrderSaleprice(orderDTO.getOrder_saleprice());
         orderEntity.setUserEntity(userEntity);
         return orderEntity;
     }
