@@ -66,10 +66,12 @@ public class OrderProductService {
         for (int i = 0; i < orderDTO.getProduct_num().size(); i++) {
             int productNum = orderDTO.getProduct_num().get(i);
             int orderCnt = orderDTO.getOrder_cnt().get(i);
+            int orderOprice=orderDTO.getOrder_oprice().get(i);
 
             ProductEntity productEntity = productEntities.get(i);
 
             OrderProductEntity orderProductEntity = OrderProductEntity.toSave(orderDTO, orderEntity, productEntity, userEntity);
+            orderProductEntity.setOrderOprice(orderOprice);
             orderProductEntity.setOrderCnt(orderCnt);
             orderProductRepository.save(orderProductEntity);
         }

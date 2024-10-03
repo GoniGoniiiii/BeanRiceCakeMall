@@ -116,6 +116,8 @@ public class OrderController {
 
 
         total_oprice = cart.getTotal_oprice();
+        System.out.println("총 원가 : " +total_oprice);
+
         total_sale = cart.getTotal_sale();
         System.out.println("총 세일값 : " + total_sale);
 
