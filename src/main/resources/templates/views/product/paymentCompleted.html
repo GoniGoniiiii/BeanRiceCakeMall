@@ -21,22 +21,15 @@
         <h4 class="my-1">결제완료</h4>
     </div>
     <div class="d-flex justify-content-between align-items-center my-3">
-        <span class="text-secondary">결제금액</span><span class="fs-5 fw-bold text-success">25,000원</span>
+        <span class="text-secondary">결제금액</span><span class="fs-5 fw-bold text-success product-price" th:text="${order_price}+'원'"></span>
     </div>
     <div class="d-flex justify-content-between align-items-center my-3">
-        <span class="text-secondary">결제일시</span><span>2024.04.27 17:22:25</span>
+        <span class="text-secondary">결제일시</span><span th:text="${#dates.format(order_date,'yyyy-MM-dd HH:mm:ss')}"></span>
     </div>
     <button class="btn btn-outline-warning w-100 mt-4 py-2" type="button" onclick="goOrderList()">결제내역 확인하기</button>
     <button class="btn btn-success w-100 mt-2 mb-4 py-2" type="button" onclick="goHome()">확인</button>
 </section>
 <footer th:include="footer"></footer>
 </body>
-<script>
-    function goOrderList() {
-        window.location = "/my/orderList";
-    }
-    function goHome() {
-        window.location = "/";
-    }
-</script>
+<script src="/js/paymentCompleted.js"></script>
 </html>
