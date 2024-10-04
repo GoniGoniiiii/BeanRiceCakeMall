@@ -13,6 +13,7 @@ import com.example.beanricecakemall.repository.UserRepository;
 import org.hibernate.query.Order;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -66,7 +67,6 @@ public class OrderService {
             List<Integer> productNums = new ArrayList<>();
             List<Integer> orderDetailNums = new ArrayList<>();
             List<Integer> orderOprices = new ArrayList<>();
-            List<Integer> orderPrices = new ArrayList<>();
             List<String> orderStatuses = new ArrayList<>();
             List<Integer> orderCnts=new ArrayList<>();
 
@@ -75,7 +75,6 @@ public class OrderService {
                 productNums.add(orderProduct.getProductEntity().getProductNum());
                 orderDetailNums.add(orderProduct.getOrderDetailNum());
                 orderOprices.add(orderProduct.getOrderOprice());
-                orderPrices.add(orderProduct.getOrderPrice());
                 orderStatuses.add(orderProduct.getOrderStatus());
                 orderCnts.add(orderProduct.getOrderCnt());
 
@@ -83,7 +82,6 @@ public class OrderService {
                 OrderDTO orderDTO = OrderDTO.toOrderDTO(order, productNums);
                 orderDTO.setOrder_detail_num(orderDetailNums);
                 orderDTO.setOrder_oprice(orderOprices);
-                orderDTO.setOrder_price(orderPrices);
                 orderDTO.setOrder_status(orderStatuses);
                 orderDTO.setOrder_cnt(orderCnts);
 
@@ -103,7 +101,6 @@ public class OrderService {
         List<Integer> productNums = new ArrayList<>();
         List<Integer> orderDetailNums = new ArrayList<>();
         List<Integer> orderOprices = new ArrayList<>();
-        List<Integer> orderPrices = new ArrayList<>();
         List<String> orderStatuses = new ArrayList<>();
         List<Integer> orderCnts=new ArrayList<>();
 
@@ -117,18 +114,26 @@ public class OrderService {
                 productNums.add(orderProduct.getProductEntity().getProductNum());
                 orderDetailNums.add(orderProduct.getOrderDetailNum());
                 orderOprices.add(orderProduct.getOrderOprice());
-                orderPrices.add(orderProduct.getOrderPrice());
                 orderStatuses.add(orderProduct.getOrderStatus());
                 orderCnts.add(orderProduct.getOrderCnt());
             }
             orderDTO=OrderDTO.toOrderDTO(order,productNums);
             orderDTO.setOrder_detail_num(orderDetailNums);
             orderDTO.setOrder_oprice(orderOprices);
-            orderDTO.setOrder_price(orderPrices);
             orderDTO.setOrder_status(orderStatuses);
             orderDTO.setOrder_cnt(orderCnts);
             System.out.println("orderDTO : " +orderDTO.toString());
         }
         return orderDTO;
+    }
+
+    public Timestamp findOrderDate(int order_num){
+        OrderEntity order= orderRepository.findByOrderNum(order_num);
+        if(order==null){
+            System.out.println("결제일시 없음");
+        }else{
+            return order.getOrderDate();
+        }
+        return null;
     }
 }
