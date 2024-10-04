@@ -43,8 +43,8 @@
                 <img th:src="@{|upload/${best.product_img}|}" class="product-img">
                 <h5 class="fw-bold mt-3 mb-2" th:text="${best.product_name}"></h5>
                 <div class="d-flex mb-2"><!--상품 가격, 원래 가격, 할인율-->
-                    <p class="fw-bold m-0" th:text="${best.product_sprice}"></p><!--상품 가격-->
-                    <del class="px-2 text-secondary small" th:text="${best.product_oprice}"></del><!-- 원래 가격 -->
+                    <p class="fw-bold m-0 product-price" th:text="${best.product_sprice}"></p><!--상품 가격-->
+                    <del class="px-2 text-secondary small product-price" th:text="${best.product_oprice}"></del><!-- 원래 가격 -->
                     <p class="fw-bold text-danger m-0" th:text="${best.product_rate}+'%'"></p><!--할인율-->
                 </div>
                 <small class="text-secondary" th:text="${best.product_info}"></small>
@@ -60,8 +60,8 @@
                 <img th:src="@{|upload/${newPro.product_img}|}" class="product-img">
                 <h5 class="fw-bold mt-3 mb-2" th:text="${newPro.product_name}"></h5>
                 <div class="d-flex mb-2"><!--상품 가격, 원래 가격, 할인율-->
-                    <p class="fw-bold m-0" th:text="${newPro.product_sprice}"></p><!--상품 가격-->
-                    <del class="px-2 text-secondary small" th:text="${newPro.product_oprice}"></del><!-- 원래 가격 -->
+                    <p class="fw-bold m-0 product-price" th:text="${newPro.product_sprice}"></p><!--상품 가격-->
+                    <del class="px-2 text-secondary small product-price" th:text="${newPro.product_oprice}"></del><!-- 원래 가격 -->
                     <p class="fw-bold text-danger m-0" th:text="${newPro.product_rate}+'%'"></p><!--할인율-->
                 </div>
                 <small class="text-secondary" th:text="${newPro.product_info}"></small>
@@ -90,8 +90,8 @@
                         <img th:src="@{|upload/${allPro.product_img}|}" class="All-product-img">
                         <h5 class="fw-bold my-2" th:text="${allPro.product_name}"></h5>
                         <div class="d-flex mb-2"><!--상품 가격, 원래 가격, 할인율-->
-                            <p class="fw-bold m-0" th:text="${allPro.product_sprice}"></p><!--상품 가격-->
-                            <del class="px-2 text-secondary small" th:text="${allPro.product_oprice}"></del>
+                            <p class="fw-bold m-0 product-price" th:text="${allPro.product_sprice}"></p><!--상품 가격-->
+                            <del class="px-2 text-secondary small product-price" th:text="${allPro.product_oprice}"></del>
                             <!-- 원래 가격 -->
                             <p class="fw-bold text-danger m-0" th:text="${allPro.product_rate}+'%'"></p><!--할인율-->
                         </div>
