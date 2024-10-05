@@ -114,7 +114,7 @@ document.addEventListener("DOMContentLoaded", function () {
     plus_point.value = Math.round(point * 0.03);
 
     // document.getElementById("point").innerText = "적립예정 " + plus_point.value + "원";
-    document.getElementById("point").innerText = plus_point.value ;
+    document.getElementById("point").innerText = plus_point.value;
 
     //포인트 사용
     const user_point = document.getElementById("user_point");
@@ -128,7 +128,8 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log("user_point : " + user_point.value);
         console.log("allPoint:" + maxPoint);
 
-        const userPointValue = Number(user_point.value); // 문자열을 숫자로 변환
+        const userPointValue = Number(user_point.value);
+        console.log("finalValue :  " + oprice);
         console.log("user_point : " + userPointValue);
         console.log("allPoint: " + maxPoint);
 
@@ -136,23 +137,24 @@ document.addEventListener("DOMContentLoaded", function () {
             alert("숫자만 입력해주세요!");
             user_point.value = "";
             user_point.focus();
+        } else if (userPointValue > maxPoint) {
+            alert("최대 사용할 수 있는 포인트를 초과했습니다!");
+            user_point.value = "";
+            user_point.focus();
+        } else if (oprice< userPointValue) {
+            alert("결제금액보다 포인트 사용금액이 더 큽니다!");
+            user_point.value="";
+            user_point.focus();
         } else {
-            if (userPointValue > maxPoint) {
-                alert("최대 사용할 수 있는 포인트를 초과했습니다!");
-                user_point.value = "";
-                user_point.focus();
-            }
-        }
-        // 최종 가격을 계산하여 업데이트
-        const finalPrice = oprice - userPointValue;
-
-        // final-price 값을 업데이트
+            const finalPrice = oprice - userPointValue;
+            // final-price 값을 업데이트
             final_price.innerText = finalPrice;
             add_sale.innerText = userPointValue;
-            sale_price.value = userPointValue;
+            sale_price.svalue = userPointValue;
+        }
     })
 
-    //수량 * 상품금액 계산
+//수량 * 상품금액 계산
     var count = document.querySelectorAll('tr[data-index]').length;
     console.log("count : " + count);
 
@@ -165,9 +167,9 @@ document.addEventListener("DOMContentLoaded", function () {
         if (priceElement && countElement) {
             //상품 실제판매가
             var productPrice = parseInt(priceElement.textContent.replace('원', '').trim());
-            console.log("상품 가격 :"+productPrice);
+            console.log("상품 가격 :" + productPrice);
             var orderCount = parseInt(countElement.textContent);
-            console.log("상품 수량 :"+productPrice);
+            console.log("상품 수량 :" + productPrice);
 
             var totalPrice = productPrice * orderCount;
 
@@ -177,7 +179,8 @@ document.addEventListener("DOMContentLoaded", function () {
             console.log('요소를 찾을 수 없습니다. 인덱스:', index);
         }
     }
-});
+})
+;
 
 
 //위 정보와 동일 누르면 배송정보에 주문자 정보 입력
@@ -404,9 +407,9 @@ function handleSubmit(event) {
     console.log("배송지 연락처 :" + telNumber2);
     console.log("배송지 연락처 :" + telNumber3);
 
-    const salePrice=document.getElementById("sale_price").value;
-    if(salePrice!=null || salePrice===''){
-        document.getElementById("sale_price").value=0;
+    const salePrice = document.getElementById("sale_price").value;
+    if (salePrice != null || salePrice === '') {
+        document.getElementById("sale_price").value = 0;
     }
 }
 
