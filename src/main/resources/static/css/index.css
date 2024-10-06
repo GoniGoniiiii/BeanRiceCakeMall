@@ -23,3 +23,6 @@
 .All-product-img:nth-last-child(1){
     margin-right:0;
 }
+del{
+    padding-top:2.5px;
+}
