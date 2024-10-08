@@ -163,6 +163,12 @@ document.addEventListener('DOMContentLoaded', function () {
         const checkedItems = document.querySelectorAll('.item-checkbox:checked');
         const orderData = [];
 
+        // 아이템이 선택되지 않았을 때 경고 메시지 표시
+        if (checkedItems.length === 0) {
+            alert("상품이 선택되지 않았습니다. 주문하실 상품을 선택해주세요!");
+            return;
+        }
+
         checkedItems.forEach((item, index) => {
             const cartNum = item.value;
             const productNum = document.getElementById(`product_num[${index}]`).value;
@@ -172,6 +178,8 @@ document.addEventListener('DOMContentLoaded', function () {
             const totalSale = document.getElementById('total-sale').value;
             const deliveryFee = document.getElementById('delivery-fee').value;
             const finalPrice = document.getElementById('final-price').value;
+
+            console.log(cartNum);
 
             orderData.push({
                 cart_num: cartNum,
