@@ -70,6 +70,9 @@ public class OrderController {
     @PostMapping("/my/payment")
     public ResponseEntity<String> paymentP(@RequestBody List<CartDTO> cartList, HttpSession session) {
         //cartList에서 user_num 뽑아오기(user_num은 어차피 하나라서 아무거나 뽑아오면 됨)
+        if(cartList==null || cartList.isEmpty()){
+            return ResponseEntity.badRequest().body("cartList is null");
+        }
         int user_num = cartList.get(0).getUser_num();
         System.out.println("뽑아온 user_num: " + user_num);
 
@@ -147,6 +150,11 @@ public class OrderController {
         List<CartDTO> cartList = (List<CartDTO>) session.getAttribute("cart");
         UserDTO userDTO = (UserDTO) session.getAttribute("user");
         List<ProductDTO> productDTOList = (List<ProductDTO>) session.getAttribute("product");
+//
+//        if(cartList==null || cartList.isEmpty()){
+//            return "redirect:/my/shoppingBag";
+//        }
+
         System.out.println(cartList.toString());
 
         int total_oprice = 0;
