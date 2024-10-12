@@ -72,6 +72,11 @@ public class MainController {
         return "admin/uploadProduct";
     }
 
+    @GetMapping("/error")
+    public String errorP(){
+        return "error";
+    }
+
     @GetMapping("/")
     public String mainP(Model model, @RequestParam(required = false) String sort, HttpServletRequest request,Authentication authentication2) {
         String id = SecurityContextHolder.getContext().getAuthentication().getName();
