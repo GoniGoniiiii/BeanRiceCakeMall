@@ -39,7 +39,7 @@ public class ProductEntity {
     @Column(nullable = false,name="product_sprice")
     private int productSprice;
 
-    @Column(name="product_rdate")
+    @Column(updatable =false, name="product_rdate")
     @CreationTimestamp
     private Timestamp productRdate;
 
