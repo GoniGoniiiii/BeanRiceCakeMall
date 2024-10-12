@@ -38,7 +38,7 @@ public class ProductDTO {
 
     private String product_delete;
 
-    private String product_img; //단일 이미지 url
+    private String product_img; //대표 이미지(단일 이미지) url
 
     private int product_deliveryfee;
 
