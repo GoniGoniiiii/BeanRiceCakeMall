@@ -20,12 +20,12 @@ public class FileEntity {
     private String fileUrl;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="product_num",insertable = true)
+    @JoinColumn(name="product_num")
     private ProductEntity productEntity;
 
 
     @ManyToOne(fetch=FetchType.LAZY)
-    @JoinColumn(name="review_num",insertable = true ,updatable = false)
+    @JoinColumn(name="review_num")
     private ReviewEntity reviewEntity;
 
     public static FileEntity toFileEntity(ProductEntity productEntity,String file_url){
@@ -34,4 +34,13 @@ public class FileEntity {
         fileEntity.setProductEntity(productEntity);
         return fileEntity;
     }
+
+    public static FileEntity toUpdateFileEntity(ProductEntity productEntity,String file_url,int file_num){
+        FileEntity fileEntity=new FileEntity();
+        fileEntity.setFileNum(file_num);
+        fileEntity.setFileUrl(file_url);
+        fileEntity.setProductEntity(productEntity);
+        return fileEntity;
+    }
+
 }
