@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // 총 가격 계산
         const totalPrice = pricePerItem * quantity;
         // 총 가격 업데이트
-        allPriceElement.textContent = totalPrice + "원";
+        allPriceElement.textContent = formatNumber(totalPrice);
     }
 
     // 페이지 로드시 초기 가격 표시
