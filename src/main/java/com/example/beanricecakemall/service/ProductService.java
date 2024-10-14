@@ -44,56 +44,60 @@ public class ProductService {
 
     public void upload(ProductDTO productDTO) {
         Optional<CategoryEntity> category = categoryRepository.findById(productDTO.getCategory_num());
-        CategoryEntity categoryEntity = category.get();
+        if (category.isPresent()) {
+            CategoryEntity categoryEntity = category.get();
 
-        ProductEntity productEntity = ProductEntity.toProductEntity(productDTO, categoryEntity);
-        int save_id = productRepository.save(productEntity).getProductNum();
+            ProductEntity productEntity = ProductEntity.toProductEntity(productDTO, categoryEntity);
+            int save_id = productRepository.save(productEntity).getProductNum();
 
-        if (productDTO.getProduct_imgfile() != null && !productDTO.getProduct_imgfile().isEmpty()) {
-            MultipartFile imgfile = productDTO.getProduct_imgfile();
-            String origianl_file = imgfile.getOriginalFilename();
-            String file_url = "MainImg_" + System.currentTimeMillis() + "_" + origianl_file;
-            String savePath = "C:/goni/image/" + file_url;
-            System.out.println("대표 이미지 url : " + savePath);
-            try {
-                imgfile.transferTo(new File(savePath));
+            if (productDTO.getProduct_imgfile() != null && !productDTO.getProduct_imgfile().isEmpty()) {
+                MultipartFile imgfile = productDTO.getProduct_imgfile();
+                String origianl_file = imgfile.getOriginalFilename();
+                String file_url = "MainImg_" + System.currentTimeMillis() + "_" + origianl_file;
+                String savePath = "/home/ubuntu/bean/image/" + file_url;
+                System.out.println("대표 이미지 url : " + savePath);
+                try {
+                    imgfile.transferTo(new File(savePath));
+
+                    FileEntity file = FileEntity.toFileEntity(productEntity, file_url);
+                    productEntity.setProductImg(file_url);
+                    fileRepository.save(file);
+                } catch (IOException e) {
+                    System.err.println("파일 저장 중 오류 발생: " + e.getMessage());
+                }
+            } else {
+                System.out.println("대표 이미지가 등록되지 않았습니다.");
+            }
+            if (productDTO.getProduct_images() != null && !productDTO.getProduct_images().isEmpty()) {
                 ProductEntity product = productRepository.findById(save_id).get();
 
-                FileEntity file = FileEntity.toFileEntity(productEntity, file_url);
-                productEntity.setProductImg(file_url);
-                fileRepository.save(file);
-            } catch (IOException e) {
-                System.err.println("파일 저장 중 오류 발생: " + e.getMessage());
-            }
-        } else {
-            System.out.println("대표 이미지가 등록되지 않았습니다.");
-        }
-        if (productDTO.getProduct_images() != null && !productDTO.getProduct_images().isEmpty()) {
-            ProductEntity product = productRepository.findById(save_id).get();
+                for (MultipartFile productFile : productDTO.getProduct_images()) {
+                    String original_file = productFile.getOriginalFilename();
 
-            for (MultipartFile productFile : productDTO.getProduct_images()) {
-                String original_file = productFile.getOriginalFilename();
-
-                if (original_file != null && !original_file.isEmpty()) {
-                    String file_url = System.currentTimeMillis() + "_" + original_file;
-                    String savePath = "C:/goni/image/" + file_url;
-                    System.out.println("상품 설명 이미지 url " + savePath);
-                    try {
-                        productFile.transferTo(new File(savePath));
-                        FileEntity file = FileEntity.toFileEntity(product, file_url);
-                        fileRepository.save(file);
-                    } catch (IOException e) {
-                        System.err.println("파일 저장 중 오류 발생: " + e.getMessage());
+                    if (original_file != null && !original_file.isEmpty()) {
+                        String file_url = System.currentTimeMillis() + "_" + original_file;
+                        String savePath = "/home/ubuntu/bean/image/" + file_url;
+                        System.out.println("상품 설명 이미지 url " + savePath);
+                        try {
+                            productFile.transferTo(new File(savePath));
+                            FileEntity file = FileEntity.toFileEntity(productEntity, file_url);
+                            fileRepository.save(file);
+                        } catch (IOException e) {
+                            System.err.println("파일 저장 중 오류 발생: " + e.getMessage());
+                        }
+                    } else {
+                        System.out.println("상품 설명 이미지가 입력되지 않았습니다!");
                     }
-                } else {
-                    System.out.println("상품 설명 이미지가 입력되지 않았습니다!");
                 }
             }
-        }
-        //할인율 설정
-        setDiscountRate(productEntity);
 
-        productRepository.save(productEntity);
+            //할인율 설정
+            setDiscountRate(productEntity);
+
+            productRepository.save(productEntity);
+        }else{
+            System.out.println(category.toString());
+        }
     }
 
     public List<ProductDTO> productDTOList(int category_num) {
@@ -122,32 +126,40 @@ public class ProductService {
         return null;
     }
 
+    @Transactional
     public ProductDTO updateProduct(ProductDTO productDTO) {
         Optional<CategoryEntity> category = categoryRepository.findById(productDTO.getCategory_num());
         CategoryEntity categoryEntity = category.get();
 
         ProductEntity productEntity = ProductEntity.updateEntity(productDTO, categoryEntity);
         int save_id = productRepository.save(productEntity).getProductNum();
-//
-//        if(productDTO.getProduct_imgfile() ==null || productDTO.getProduct_imgfile().isEmpty()){
-//            String mainImg=productDTO.getProduct_img();
-//            productEntity.setProductImg(mainImg);
-//            FileEntity file=FileEntity.toFileEntity(productEntity,mainImg);
-//            fileRepository.save(file);
-//        }
 
         if (productDTO.getProduct_imgfile() != null && !productDTO.getProduct_imgfile().isEmpty()) {
+            //새로운 대표 이미지를 등록했을때
             MultipartFile imgfile = productDTO.getProduct_imgfile();
             String origianl_file = imgfile.getOriginalFilename();
             String file_url = "MainImg_" + System.currentTimeMillis() + "_" + origianl_file;
-            String savePath = "C:/goni/image/" + file_url;
+            String savePath = "/home/ubuntu/bean/image/" + file_url;
             System.out.println("대표 이미지 url : " + savePath);
             try {
                 imgfile.transferTo(new File(savePath));
                 ProductEntity product = productRepository.findById(save_id).get();
+                List<FileEntity> fileEntity = fileRepository.findByProductEntityProductNum(save_id);
+                System.out.println("크기 :  " +fileEntity.size());
+                int file_num=0;
 
-                FileEntity file = FileEntity.toFileEntity(productEntity, file_url);
-                productEntity.setProductImg(file_url);
+                for(FileEntity file : fileEntity) {
+                    System.out.println("file_url : " + file.getFileUrl());
+                    if(file.getFileUrl().startsWith("MainImg")) {
+                        file_num = file.getFileNum();
+                        System.out.println("Main image found. file_num: " + file_num);
+                    }
+                }
+                System.out.println("file_num  : " +file_num);
+
+                //MainIMg가 들어있는 file_num를 구하고
+                FileEntity file=FileEntity.toUpdateFileEntity(productEntity,file_url,file_num);
+                product.setProductImg(file_url);
                 fileRepository.save(file);
             } catch (IOException e) {
                 System.err.println("파일 저장 중 오류 발생: " + e.getMessage());
@@ -165,11 +177,11 @@ public class ProductService {
 
                 if (original_file != null && !original_file.isEmpty()) {
                     String file_url = System.currentTimeMillis() + "_" + original_file;
-                    String savePath = "C:/goni/image/" + file_url;
+                    String savePath = "/home/ubuntu/bean/image/" + file_url;
                     System.out.println("상품 설명 이미지 url " + savePath);
                     try {
                         productFile.transferTo(new File(savePath));
-                        FileEntity file = FileEntity.toFileEntity(product, file_url);
+                        FileEntity file=FileEntity.toFileEntity(productEntity,file_url);
                         fileRepository.save(file);
                     } catch (IOException e) {
                         System.err.println("파일 저장 중 오류 발생: " + e.getMessage());
@@ -182,7 +194,6 @@ public class ProductService {
         //할인율 설정
         setDiscountRate(productEntity);
 
-        ProductDTO product = ProductDTO.toProductDTO(productEntity);
         return productDTO;
     }
 
