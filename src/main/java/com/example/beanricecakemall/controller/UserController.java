@@ -3,29 +3,26 @@ package com.example.beanricecakemall.controller;
 import com.example.beanricecakemall.customDTO.CustomOAuth2User;
 import com.example.beanricecakemall.dto.UserDTO;
 import com.example.beanricecakemall.service.UserService;
-import jakarta.servlet.http.Cookie;
-import jakarta.websocket.Session;
-import lombok.Getter;
-import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
+import jakarta.servlet.http.HttpSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.oauth2.client.userinfo.OAuth2UserRequest;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
-//@ResponseBody
 public class UserController {
 
     private final UserService userService;
 
-    public UserController(UserService userService) {
+    private final HttpSession session;
+
+    public UserController(UserService userService, HttpSession session) {
         this.userService = userService;
+        this.session = session;
     }
 
     @PostMapping("/user/check-id")
@@ -77,6 +74,7 @@ public class UserController {
         System.out.println("user_num : " + user_num);
         System.out.println("회원 탈퇴");
         userService.delete(user_num);
+        session.invalidate();
         return "redirect:/";
     }
 
