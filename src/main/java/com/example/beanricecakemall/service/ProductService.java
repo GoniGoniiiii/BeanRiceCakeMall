@@ -95,7 +95,7 @@ public class ProductService {
             setDiscountRate(productEntity);
 
             productRepository.save(productEntity);
-        }else{
+        } else {
             System.out.println(category.toString());
         }
     }
@@ -145,20 +145,19 @@ public class ProductService {
                 imgfile.transferTo(new File(savePath));
                 ProductEntity product = productRepository.findById(save_id).get();
                 List<FileEntity> fileEntity = fileRepository.findByProductEntityProductNum(save_id);
-                System.out.println("크기 :  " +fileEntity.size());
-                int file_num=0;
+                int file_num = 0;
 
-                for(FileEntity file : fileEntity) {
+                for (FileEntity file : fileEntity) {
                     System.out.println("file_url : " + file.getFileUrl());
-                    if(file.getFileUrl().startsWith("MainImg")) {
+                    if (file.getFileUrl().startsWith("MainImg")) {
                         file_num = file.getFileNum();
                         System.out.println("Main image found. file_num: " + file_num);
                     }
                 }
-                System.out.println("file_num  : " +file_num);
+                System.out.println("file_num  : " + file_num);
 
                 //MainIMg가 들어있는 file_num를 구하고
-                FileEntity file=FileEntity.toUpdateFileEntity(productEntity,file_url,file_num);
+                FileEntity file = FileEntity.toUpdateFileEntity(productEntity, file_url, file_num);
                 product.setProductImg(file_url);
                 fileRepository.save(file);
             } catch (IOException e) {
@@ -181,7 +180,7 @@ public class ProductService {
                     System.out.println("상품 설명 이미지 url " + savePath);
                     try {
                         productFile.transferTo(new File(savePath));
-                        FileEntity file=FileEntity.toFileEntity(productEntity,file_url);
+                        FileEntity file = FileEntity.toFileEntity(productEntity, file_url);
                         fileRepository.save(file);
                     } catch (IOException e) {
                         System.err.println("파일 저장 중 오류 발생: " + e.getMessage());
@@ -193,7 +192,7 @@ public class ProductService {
         }
         //할인율 설정
         setDiscountRate(productEntity);
-
+        productRepository.save(productEntity);
         return productDTO;
     }
 
