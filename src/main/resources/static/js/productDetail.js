@@ -192,8 +192,11 @@ function formatPrices() {
 window.onload = formatPrices;
 
 function deleteProduct() {
-    const product_num = document.getElementById("product_num").value;
-    window.location = "/product/deleteProduct/" + product_num;
+    const deleteCheck = confirm("정말 상품을 삭제하시겠습니까?");
+    if (deleteCheck) {
+        const product_num = document.getElementById("product_num").value;
+        window.location = "/product/deleteProduct/" + product_num;
+    }
 }
 
 function setReviewData(button) {
