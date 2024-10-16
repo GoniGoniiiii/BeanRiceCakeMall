@@ -2,15 +2,8 @@ package com.example.beanricecakemall.service;
 
 import com.example.beanricecakemall.dto.DeliveryDTO;
 import com.example.beanricecakemall.dto.OrderDTO;
-import com.example.beanricecakemall.entity.DeliveryEntity;
-import com.example.beanricecakemall.entity.OrderEntity;
-import com.example.beanricecakemall.entity.OrderProductEntity;
-import com.example.beanricecakemall.entity.UserEntity;
-import com.example.beanricecakemall.repository.DeliveryRepository;
-import com.example.beanricecakemall.repository.OrderProductRepository;
-import com.example.beanricecakemall.repository.OrderRepository;
-import com.example.beanricecakemall.repository.UserRepository;
-import org.hibernate.query.Order;
+import com.example.beanricecakemall.entity.*;
+import com.example.beanricecakemall.repository.*;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -28,12 +21,14 @@ public class OrderService {
     private final UserRepository userRepository;
 
     private final OrderProductRepository orderProductRepository;
+    private final ProductRepository productRepository;
 
-    public OrderService(OrderRepository orderRepository, DeliveryRepository deliveryRepository, UserRepository userRepository, OrderProductRepository orderProductRepository) {
+    public OrderService(OrderRepository orderRepository, DeliveryRepository deliveryRepository, UserRepository userRepository, OrderProductRepository orderProductRepository, ProductRepository productRepository, ProductRepository productRepository1) {
         this.orderRepository = orderRepository;
         this.deliveryRepository = deliveryRepository;
         this.userRepository = userRepository;
         this.orderProductRepository = orderProductRepository;
+        this.productRepository = productRepository1;
     }
 
     public int insertOrder(OrderDTO orderDTO, DeliveryDTO deliveryDTO) {
@@ -45,6 +40,19 @@ public class OrderService {
 
             DeliveryEntity deliveryEntity2 = DeliveryEntity.toSave(deliveryDTO, orderEntity);
             deliveryRepository.save(deliveryEntity2);
+
+            List<Integer> productNums=orderDTO.getProduct_num();
+            List<Integer> orderCnts=orderDTO.getOrder_cnt();
+
+            for(int i=0; i<productNums.size(); i++){
+                int product_num=productNums.get(i);
+                int order_cnt=orderCnts.get(i);
+
+                ProductEntity product=productRepository.findByProductNum(product_num);
+                int product_cnt=product.getProductCnt() - order_cnt;
+                product.setProductCnt(product_cnt);
+                productRepository.save(product);
+            }
 
             return orderEntity.getOrderNum();
         }
