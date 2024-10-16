@@ -15,11 +15,13 @@
     padding-left: 45px;
     display: flex;
     flex-wrap: wrap;
+    justify-content: flex-start;
+    gap : 10px;
 }
 
 .imagebox {
     width: 200px;
-    height: 100px;
-    flex : 1 1 calc(25% - 10px);
+    height: 150px;
+    flex : 0 0 200px;
     box-sizing: border-box;
 }

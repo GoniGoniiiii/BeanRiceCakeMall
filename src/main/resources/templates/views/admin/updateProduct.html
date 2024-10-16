@@ -33,7 +33,7 @@
             <div class="label">상품 대표 이미지</div>
             <input type="hidden" th:value="${product.product_img}" name="product_img"/>
             <span th:text="${product.product_img}"></span>
-            <button onclick="imgDelete(this)" th:value="${product.product_img}" class="ms-3">이미지 삭제</button>
+            <button onclick="imgDelete(this)" th:value="${product.product_img}" class="btn btn-outline-secondary">이미지 삭제</button>
         </div>
         <div class="product">
             <div class="label"></div>
@@ -69,7 +69,7 @@
                 <div th:each="file_url, stat : ${product.file_url}" th:if="${stat.index != 0}" class="imagebox">
                     <input type="hidden" name="file_url" th:value="${file_url}">
                     <img th:src="@{|/upload/${file_url}|}" alt="Product Image" class="img">
-                    <button th:value="${file_url}" class="my-2" onclick="imgDelete(this)">삭제</button>
+                    <button th:value="${file_url}" class="btn btn-outline-secondary" onclick="imgDelete(this)">삭제</button>
                 </div>
             </div>
         </div>
