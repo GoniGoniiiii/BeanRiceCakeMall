@@ -20,14 +20,16 @@
             <div class="d-flex justify-content-between product-price">
                 <div><span class="text-danger fs-4" th:text="${product.product_rate}+'%' "></span></div>
                 <div>
-                    <del class="text-secondary me-2 product-price2" th:text="${product.product_oprice}" id="product_oprice"></del>
+                    <del class="text-secondary me-2 product-price2" th:text="${product.product_oprice}"
+                         id="product_oprice"></del>
                     <span class="fw-bold fs-4  text-danger product-price2" th:text="${product.product_sprice}"
                           id="product_sprice"></span></div>
             </div>
             <div class="product-box">
                 <p class="text-secondary">Information</p>
                 <p th:utext="${product.product_info}"></p>
-                <p class="m-0 small"><span>배송비</span><span class="mx-3 product-price2" th:text="${product.product_deliveryfee}"
+                <p class="m-0 small"><span>배송비</span><span class="mx-3 product-price2"
+                                                           th:text="${product.product_deliveryfee}"
                                                            id="product_delivery"></span><span>|</span><span
                         class="mx-2">리뷰</span><span th:text="${reviewCount}+'건'"></span></p>
             </div>
@@ -45,9 +47,11 @@
                            id="all-price"></span><span class="text-danger fw-bold fs-4">원</span></div>
             </div>
             <div th:if="${product.product_cnt<=0}" class="fs-5 fw-bold text-secondary text-center">
-                현재 이 상품은 품절입니다! ㅠㅠ <br>빠른 시일내로 재입고하도록 하겠습니다!</div>
+                현재 이 상품은 품절입니다! ㅠㅠ <br>빠른 시일내로 재입고하도록 하겠습니다!
+            </div>
             <div class="d-flex justify-content-between">
-                <button th:if="${user_id!='admin' && product.product_cnt > 0}" class="btn btn-light product-button" id="user_num"
+                <button th:if="${user_id!='admin' && product.product_cnt > 0}" class="btn btn-light product-button"
+                        id="user_num"
                         th:value="${user_num}" data-bs-toggle="modal" data-bs-target="#cartModal" onclick="cart()">장바구니
                     담기
                 </button>
@@ -70,7 +74,8 @@
                         </div>
                     </div>
                 </div>
-                <button th:if="${user_id!='admin' && product.product_cnt>0}" class="btn btn-warning product-button" th:value="${user_num}"
+                <button th:if="${user_id!='admin' && product.product_cnt>0}" class="btn btn-warning product-button"
+                        th:value="${user_num}"
                         onclick="goPay()">바로 구매
                 </button>
                 <button th:if="${user_id=='admin'}" class="btn btn-light product-button" onclick="updateProduct()">수정
@@ -121,7 +126,7 @@
         <div th:each="img:${product.file_url}">
             <img th:if="${!img.contains('MainImg')}" th:src="@{|/upload/${img}|}" th:text="${imgl}"/>
         </div>
-        <p class="product-content content mt-3"  th:utext="${product.product_content}"></p>
+        <p class="product-content content mt-3" th:utext="${product.product_content}"></p>
     </div>
 
     <h5 class="mt-5 pb-3 border-bottom" id="product-review">상품리뷰</h5>
@@ -150,6 +155,11 @@
             <p class="m-0"><small class="text-secondary">제품명:<span th:text="${product.product_name}"> </span></small>
             </p>
             <small><span th:text="${review.review_content}" class="content"></span></small>
+            <div class="image-box d-flex justify-content-start flex-wrap">
+                <div th:each="img:${review.review_images}">
+                    <img th:src="@{|/upload/${img}|}" class="review-img">
+                </div>
+            </div>
         </div>
     </div>
     <div class="modal fade" id="reviewModal" tabindex="-1" aria-labelledby="review" aria-hidden="true">
