@@ -1,15 +1,20 @@
 package com.example.beanricecakemall.service;
 
 import com.example.beanricecakemall.dto.ReviewDTO;
+import com.example.beanricecakemall.entity.FileEntity;
 import com.example.beanricecakemall.entity.ProductEntity;
 import com.example.beanricecakemall.entity.ReviewEntity;
 import com.example.beanricecakemall.entity.UserEntity;
+import com.example.beanricecakemall.repository.FileRepository;
 import com.example.beanricecakemall.repository.ProductRepository;
 import com.example.beanricecakemall.repository.ReviewRepository;
 import com.example.beanricecakemall.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +26,13 @@ public class ReviewService {
     private final ProductRepository productRepository;
 
     private final UserRepository userRepository;
+    private final FileRepository fileRepository;
 
-    public ReviewService(ReviewRepository reviewRepository, ProductRepository productRepository, UserRepository userRepository) {
+    public ReviewService(ReviewRepository reviewRepository, ProductRepository productRepository, UserRepository userRepository, FileRepository fileRepository) {
         this.reviewRepository = reviewRepository;
         this.productRepository = productRepository;
         this.userRepository = userRepository;
+        this.fileRepository = fileRepository;
     }
 
     public String insertReview(ReviewDTO reviewDTO) {
@@ -61,6 +68,25 @@ public class ReviewService {
             reviewEntity.setUserEntity(userEntity);
 
             ReviewEntity review = reviewRepository.save(reviewEntity);
+
+            if (reviewDTO.getReview_img() != null && !reviewDTO.getReview_img().isEmpty()) {
+                for (MultipartFile file : reviewDTO.getReview_img()) {
+                    String original_file = file.getOriginalFilename();
+
+                    if (original_file != null && !original_file.isEmpty()) {
+                        String file_url = System.currentTimeMillis() + "_" + original_file;
+                        String savePath = "/home/ubuntu/bean/image/" + file_url;
+                        System.out.println("포토 리뷰 이미지 url :  " + savePath);
+                        try {
+                            file.transferTo(new File(savePath));
+                            FileEntity fileEntity=FileEntity.toFileEntity(review,file_url);
+                            fileRepository.save(fileEntity);
+                        } catch (IOException e) {
+                            System.out.println("파일저장중 오류 발생 : "+e.getMessage());
+                        }
+                    }
+                }
+            }
             if (review != null) {
                 return "리뷰가 정상적으로 추가되었습니다!";
             } else {
@@ -99,12 +125,19 @@ public class ReviewService {
             for (ReviewEntity review : reviewEntities) {
                 ReviewDTO reviewDTO = new ReviewDTO();
 
+                List<FileEntity> file=fileRepository.findByReviewEntityReviewNum(review.getReviewNum());
+                List<String> Images=new ArrayList<>();
+                for(FileEntity fileEntity:file){
+                    Images.add(fileEntity.getFileUrl());
+                }
+
                 reviewDTO.setReview_num(review.getReviewNum());
                 reviewDTO.setReview_title(review.getReviewTitle());
                 reviewDTO.setReview_content(review.getReviewContent());
                 reviewDTO.setReview_rdate(review.getReviewRdate());
                 reviewDTO.setProduct_num(review.getProductEntity().getProductNum());
                 reviewDTO.setUser_id(review.getUserEntity().getUserId());
+                reviewDTO.setReview_images(Images);
 
                 System.out.println("reviewUserID :" + reviewDTO.getUser_id());
                 reviewDTOList.add(reviewDTO);

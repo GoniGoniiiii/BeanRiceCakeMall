@@ -13,6 +13,7 @@ import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.security.Principal;
 import java.sql.Timestamp;
@@ -70,7 +71,7 @@ public class OrderController {
     @PostMapping("/my/payment")
     public ResponseEntity<String> paymentP(@RequestBody List<CartDTO> cartList, HttpSession session) {
         //cartList에서 user_num 뽑아오기(user_num은 어차피 하나라서 아무거나 뽑아오면 됨)
-        if(cartList==null || cartList.isEmpty()){
+        if (cartList == null || cartList.isEmpty()) {
             return ResponseEntity.badRequest().body("cartList is null");
         }
         int user_num = cartList.get(0).getUser_num();
@@ -119,7 +120,7 @@ public class OrderController {
 
 
         total_oprice = cart.getTotal_oprice();
-        System.out.println("총 원가 : " +total_oprice);
+        System.out.println("총 원가 : " + total_oprice);
 
         total_sale = cart.getTotal_sale();
         System.out.println("총 세일값 : " + total_sale);
@@ -332,8 +333,18 @@ public class OrderController {
     }
 
     @PostMapping("/my/addReview")
-    public ResponseEntity<String> addReview(@RequestBody ReviewDTO reviewDTO) {
-        System.out.println("reviewDTO : " + reviewDTO);
+    public ResponseEntity<String> addReview(@RequestParam("review_title") String review_title,
+                                            @RequestParam("review_content") String review_content,
+                                            @RequestParam("product_num") int product_num,
+                                            @RequestParam("user_num") int user_num,
+                                            @RequestParam("review_img") List<MultipartFile> review_img
+    ) {
+        ReviewDTO reviewDTO = new ReviewDTO();
+        reviewDTO.setReview_title(review_title);
+        reviewDTO.setReview_content(review_content);
+        reviewDTO.setProduct_num(product_num);
+        reviewDTO.setUser_num(user_num);
+        reviewDTO.setReview_img(review_img);
         String result = reviewService.insertReview(reviewDTO);
         return ResponseEntity.ok(result);
     }
