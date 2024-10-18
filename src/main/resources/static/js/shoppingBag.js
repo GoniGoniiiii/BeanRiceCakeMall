@@ -216,7 +216,7 @@ document.addEventListener('DOMContentLoaded', function () {
 function cartDelete(index) {
     const product_name = document.getElementById(`product_name[${index}]`).value;
 
-    if (confirm(product_name + "을(를) 삭제하시겠습니까?")) {
+    if (confirm("장바구니에서 " + product_name + " 상품을 삭제하시겠습니까?")) {
         const product_num = document.getElementById(`product_num[${index}]`).value;
         const user_num = document.getElementById("user_num").value;
         console.log(user_num, product_num);
