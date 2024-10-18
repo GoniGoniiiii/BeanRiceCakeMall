@@ -2,8 +2,10 @@ package com.example.beanricecakemall.dto;
 
 import lombok.*;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @Getter
 @Setter
@@ -25,4 +27,8 @@ public class ReviewDTO {
     private int product_num;
 
     private String user_id;
+
+    private List<MultipartFile> review_img; //파일 저장
+
+    private List<String> review_images; //url 저장
 }
