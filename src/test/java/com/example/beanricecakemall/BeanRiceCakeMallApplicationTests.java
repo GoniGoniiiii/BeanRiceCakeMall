@@ -34,4 +34,16 @@ class BeanRiceCakeMallApplicationTests {
             System.out.println(fileEntity1.getProductEntity().getProductNum());
         }
     }
+
+    @Test
+    public void testFindByReviewEntityReviewNum(){
+        int review_num=8;
+        List<FileEntity> fileEntity=fileRepository.findByReviewEntityReviewNum(review_num);
+        assertNotNull(fileEntity);
+        for(FileEntity fileEntity1:fileEntity){
+            System.out.println(fileEntity1.getFileNum() );
+            System.out.println(fileEntity1.getFileUrl());
+            System.out.println(fileEntity1.getReviewEntity().getReviewNum());
+        }
+    }
 }
