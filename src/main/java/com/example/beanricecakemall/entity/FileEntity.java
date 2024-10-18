@@ -43,4 +43,10 @@ public class FileEntity {
         return fileEntity;
     }
 
+    public static FileEntity toFileEntity(ReviewEntity reviewEntity,String file_url){
+        FileEntity fileEntity=new FileEntity();
+        fileEntity.setFileUrl(file_url);
+        fileEntity.setReviewEntity(reviewEntity);
+        return fileEntity;
+    }
 }
