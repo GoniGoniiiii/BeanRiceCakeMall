@@ -15,4 +15,6 @@ public interface FileRepository extends JpaRepository<FileEntity, Integer> {
     FileEntity findByFileUrl(String file_url);
 
     List<FileEntity> findByProductEntityProductNum(int product_num);
+
+    List<FileEntity> findByReviewEntityReviewNum(int review_num);
 }
