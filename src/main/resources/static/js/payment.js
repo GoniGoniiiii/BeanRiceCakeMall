@@ -150,7 +150,7 @@ document.addEventListener("DOMContentLoaded", function () {
             // final-price 값을 업데이트
             final_price.innerText = finalPrice;
             add_sale.innerText = userPointValue;
-            sale_price.svalue = userPointValue;
+            sale_price.value =userPointValue;
         }
     })
 
@@ -408,7 +408,7 @@ function handleSubmit(event) {
     console.log("배송지 연락처 :" + telNumber3);
 
     const salePrice = document.getElementById("sale_price").value;
-    if (salePrice != null || salePrice === '') {
+    if (salePrice == null || salePrice === '') {
         document.getElementById("sale_price").value = 0;
     }
 }
