@@ -95,3 +95,14 @@ body, html {
 .carousel-control-prev {
     justify-content: start !important;
 }
+
+.review-img{
+    width: 250px;
+    height: 250px;
+    margin : 0 15px 15px 0 !important;
+}
+.review-img2{
+    width:100px;
+    height:100px;
+    margin: 5px 10px 10px 0 !important;
+}
