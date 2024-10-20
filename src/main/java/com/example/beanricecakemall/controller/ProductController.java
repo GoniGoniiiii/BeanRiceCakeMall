@@ -101,7 +101,6 @@ public class ProductController {
         List<ReviewDTO> reviewList = reviewService.ListReview(product_num);
         List<ReviewDTO> recentReviewList = reviewService.RecentListReview(product_num);
         int reviewCount=reviewService.reviewCount(product_num);
-        System.out.println("reviewCount:"+reviewCount);
 
         model.addAttribute("product", product);
         model.addAttribute("user_id", user_id);
