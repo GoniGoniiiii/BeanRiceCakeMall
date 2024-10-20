@@ -337,7 +337,7 @@ public class OrderController {
                                             @RequestParam("review_content") String review_content,
                                             @RequestParam("product_num") int product_num,
                                             @RequestParam("user_num") int user_num,
-                                            @RequestParam("review_img") List<MultipartFile> review_img
+                                            @RequestParam(value = "review_img",required = false) List<MultipartFile> review_img
     ) {
         ReviewDTO reviewDTO = new ReviewDTO();
         reviewDTO.setReview_title(review_title);
@@ -354,7 +354,7 @@ public class OrderController {
                                                @RequestParam("review_content") String review_content,
                                                @RequestParam("product_num") int product_num,
                                                @RequestParam("user_num") int user_num,
-                                               @RequestParam("review_img") List<MultipartFile> review_img,
+                                               @RequestParam(value = "review_img", required = false) List<MultipartFile> review_img,
                                                @RequestParam("review_num") int review_num) {
         ReviewDTO reviewDTO = new ReviewDTO();
         reviewDTO.setReview_num(review_num);
