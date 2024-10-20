@@ -87,11 +87,7 @@ public class ReviewService {
                     }
                 }
             }
-            if (review != null) {
                 return "리뷰가 정상적으로 추가되었습니다!";
-            } else {
-                return "리뷰가 정상적으로 추가되지 않았습니다! 다시 시도해주세요.";
-            }
         }
         return "이미 작성된 리뷰입니다!";
     }
@@ -133,11 +129,7 @@ public class ReviewService {
                 }
             }
         }
-        if (review != null) {
-            return "리뷰가 정상적으로 수정되었습니다!";
-        } else {
-            return "리뷰가 정상적으로 수정되지 않았습니다! 다시 시도해주세요.";
-        }
+        return "리뷰가 정상적으로 수정되었습니다!";
     }
 
     public List<ReviewDTO> ListReview(int product_num) {
