@@ -17,17 +17,17 @@
 <header>
     <div class="alarm-box ">
         <ul class="nav pt-1 justify-content-end">
+            <li class="pt-2"><a th:if="${#authentication.name!='admin'}" href="/my/memberInfo">마이페이지</a></li>
             <li class="pt-2">
-                <a th:if="${#authentication.name =='admin'}" href="/admin/main">관리자 페이지</a>
+                <a th:if="${#authentication.name!='admin'}" href="/my/shoppingBag">장바구니</a>
+            <li class="pt-2">
+                <a th:if="${#authentication.name!='admin'}" href="/my/orderList">주문내역</a>
+                <a th:if="${#authentication.name=='admin'}" href="/admin/uploadProduct">상품 업로드</a>
             </li>
-            <li class="pt-2"><a href="/my/memberInfo">마이페이지</a></li>
-            <li class="pt-2">
-            <a href="/my/shoppingBag">장바구니</a>
             <li class="pt-2">
                 <a th:if="${#authentication.name != 'anonymousUser'}" href="/logout">로그아웃</a>
                 <a th:if="${#authentication.name == 'anonymousUser'}" href="/login">로그인</a>
             </li>
-            <li class="pt-2"><a href="/my/orderList">주문내역</a></li>
         </ul>
     </div>
     <nav class="navbar ">
@@ -84,7 +84,8 @@
             <li class="nav-item pt-2 float-end">
                 <form class="d-flex float-end" role="search" action="/product/search" method="get">
                     <div class="position-relative ms-auto">
-                        <input class="text border-0 border-bottom search" name="keyword" type="search" placeholder="Search"
+                        <input class="text border-0 border-bottom search" name="keyword" type="search"
+                               placeholder="Search"
                                aria-label="Search">
                         <button class="btn position-absolute top-50 start-100 translate-middle" type="submit"
                                 style="transform: translateX(-50%);"><i class="bi bi-search "></i></button>
