@@ -84,6 +84,16 @@ document.addEventListener('DOMContentLoaded', function () {
         let totalOprice = 0;
         let totalSprice = 0;
 
+
+        // 체크된 아이템이 없으면 초기화
+        if (itemCheckboxes.length === 0) {
+            totalPriceElement.textContent = '0원';
+            deliveryFeeElement.textContent = '0원';
+            finalPriceElement.textContent = '0원';
+            totalSaleElement.textContent = '0원';
+            return; // 더 이상 진행하지 않음
+        }
+
         itemCheckboxes.forEach((checkbox, index) => {
             if (checkbox.checked) {
                 let quantity = parseInt(quantityInputs[index].value);
