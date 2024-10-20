@@ -217,7 +217,7 @@ function updateReview() {
     const productNum = document.getElementById("review_product_num").value;
     const userNum = document.getElementById("review_user_num").value;
     const inputImg = document.querySelector('.file');
-    const files=inputImg.files;
+    const files = inputImg.files;
 
 
     console.log(uReviewNum);
@@ -234,14 +234,14 @@ function updateReview() {
     formData.append('product_num', productNum);
     formData.append('user_num', userNum);
 
-    for(let i=0; i<files.length; i++){
+    for (let i = 0; i < files.length; i++) {
         formData.append('review_img', files[i]);
     }
 
 
     fetch('/my/updateReview', {
         method: 'Post',
-        body:formData,
+        body: formData,
     })
         .then(response => response.text())
         .then(result => {
@@ -276,6 +276,7 @@ function deleteReview(button) {
     }
 }
 
+//이미지 미리보기
 const fileDOM = document.querySelector('.file');
 const preview = document.querySelector('.preview-box');
 
@@ -283,24 +284,24 @@ fileDOM.addEventListener('change', () => {
     preview.innerHTML = '';
     const files = fileDOM.files;
 
-    if(files.length>10){
+    if (files.length > 10) {
         alert('최대 10개까지 이미지를 선택하실 수 있습니다!');
         return;
     }
 
     const fileCount = Math.min(files.length, 10);
 
-    for (let i = 0; i < fileCount; i++){
-        const file=files[i];
-        const reader=new FileReader();
+    for (let i = 0; i < fileCount; i++) {
+        const file = files[i];
+        const reader = new FileReader();
 
-        reader.onload=({target})=>{
-            const img=document.createElement('img');
-            img.src=target.result;
-            img.style.width='100px';
-            img.style.height='100px';
-            img.style.marginRight='10px';
-            img.style.marginBottom='5px';
+        reader.onload = ({target}) => {
+            const img = document.createElement('img');
+            img.src = target.result;
+            img.style.width = '100px';
+            img.style.height = '100px';
+            img.style.marginRight = '10px';
+            img.style.marginBottom = '5px';
 
             preview.appendChild(img);
         }
