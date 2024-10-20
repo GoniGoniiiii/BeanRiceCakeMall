@@ -79,10 +79,10 @@ public class ReviewService {
                         System.out.println("포토 리뷰 이미지 url :  " + savePath);
                         try {
                             file.transferTo(new File(savePath));
-                            FileEntity fileEntity=FileEntity.toFileEntity(review,file_url);
+                            FileEntity fileEntity = FileEntity.toFileEntity(review, file_url);
                             fileRepository.save(fileEntity);
                         } catch (IOException e) {
-                            System.out.println("파일저장중 오류 발생 : "+e.getMessage());
+                            System.out.println("파일저장중 오류 발생 : " + e.getMessage());
                         }
                     }
                 }
@@ -110,7 +110,29 @@ public class ReviewService {
         reviewEntity.setUserEntity(userEntity);
 
         ReviewEntity review = reviewRepository.save(reviewEntity);
+        if (reviewDTO.getReview_img() != null && !reviewDTO.getReview_img().isEmpty()) {
+            System.out.println("review_num : " + reviewDTO.getReview_num());
 
+            for (MultipartFile reviewImg : reviewDTO.getReview_img()) {
+                String original_file = reviewImg.getOriginalFilename();
+                System.out.println("original_file: " + original_file);
+
+                if (original_file != null && !original_file.isEmpty()) {
+                    String file_url = System.currentTimeMillis() + "_" + original_file;
+                    String savePath = "/home/ubuntu/bean/image/" + file_url;
+                    System.out.println("상품 설명 이미지 url " + savePath);
+                    try {
+                        reviewImg.transferTo(new File(savePath));
+                        FileEntity file = FileEntity.toFileEntity(review, file_url);
+                        fileRepository.save(file);
+                    } catch (IOException e) {
+                        System.err.println("파일 저장 중 오류 발생: " + e.getMessage());
+                    }
+                } else {
+                    System.out.println("상품 설명 이미지가 입력되지 않았습니다!");
+                }
+            }
+        }
         if (review != null) {
             return "리뷰가 정상적으로 수정되었습니다!";
         } else {
@@ -125,9 +147,9 @@ public class ReviewService {
             for (ReviewEntity review : reviewEntities) {
                 ReviewDTO reviewDTO = new ReviewDTO();
 
-                List<FileEntity> file=fileRepository.findByReviewEntityReviewNum(review.getReviewNum());
-                List<String> Images=new ArrayList<>();
-                for(FileEntity fileEntity:file){
+                List<FileEntity> file = fileRepository.findByReviewEntityReviewNum(review.getReviewNum());
+                List<String> Images = new ArrayList<>();
+                for (FileEntity fileEntity : file) {
                     Images.add(fileEntity.getFileUrl());
                 }
 

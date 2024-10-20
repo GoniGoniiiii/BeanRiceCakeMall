@@ -350,8 +350,19 @@ public class OrderController {
     }
 
     @PostMapping("/my/updateReview")
-    public ResponseEntity<String> updateReview(@RequestBody ReviewDTO reviewDTO) {
-        System.out.println("reviewDTO  : " + reviewDTO);
+    public ResponseEntity<String> updateReview(@RequestParam("review_title") String review_title,
+                                               @RequestParam("review_content") String review_content,
+                                               @RequestParam("product_num") int product_num,
+                                               @RequestParam("user_num") int user_num,
+                                               @RequestParam("review_img") List<MultipartFile> review_img,
+                                               @RequestParam("review_num") int review_num) {
+        ReviewDTO reviewDTO = new ReviewDTO();
+        reviewDTO.setReview_num(review_num);
+        reviewDTO.setReview_title(review_title);
+        reviewDTO.setReview_content(review_content);
+        reviewDTO.setProduct_num(product_num);
+        reviewDTO.setUser_num(user_num);
+        reviewDTO.setReview_img(review_img);
         String result = reviewService.updateReview(reviewDTO);
         return ResponseEntity.ok(result);
     }
