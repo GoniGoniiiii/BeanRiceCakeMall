@@ -216,6 +216,9 @@ function updateReview() {
     const uReviewContent = document.getElementById("update_review_content").value;
     const productNum = document.getElementById("review_product_num").value;
     const userNum = document.getElementById("review_user_num").value;
+    const inputImg = document.querySelector('.file');
+    const files=inputImg.files;
+
 
     console.log(uReviewNum);
     console.log(uReviewTitle);
@@ -223,18 +226,22 @@ function updateReview() {
     console.log(productNum);
     console.log(userNum);
 
+    const formData = new FormData();
+
+    formData.append('review_title', uReviewTitle);
+    formData.append('review_content', uReviewContent);
+    formData.append('review_num', uReviewNum);
+    formData.append('product_num', productNum);
+    formData.append('user_num', userNum);
+
+    for(let i=0; i<files.length; i++){
+        formData.append('review_img', files[i]);
+    }
+
+
     fetch('/my/updateReview', {
         method: 'Post',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-            review_num: uReviewNum,
-            review_title: uReviewTitle,
-            review_content: uReviewContent,
-            product_num: productNum,
-            user_num: userNum
-        })
+        body:formData,
     })
         .then(response => response.text())
         .then(result => {
@@ -267,4 +274,63 @@ function deleteReview(button) {
     } else {
         alert("리뷰가 삭제되지 않았습니다.");
     }
+}
+
+const fileDOM = document.querySelector('.file');
+const preview = document.querySelector('.preview-box');
+
+fileDOM.addEventListener('change', () => {
+    preview.innerHTML = '';
+    const files = fileDOM.files;
+
+    if(files.length>10){
+        alert('최대 10개까지 이미지를 선택하실 수 있습니다!');
+        return;
+    }
+
+    const fileCount = Math.min(files.length, 10);
+
+    for (let i = 0; i < fileCount; i++){
+        const file=files[i];
+        const reader=new FileReader();
+
+        reader.onload=({target})=>{
+            const img=document.createElement('img');
+            img.src=target.result;
+            img.style.width='100px';
+            img.style.height='100px';
+            img.style.marginRight='10px';
+            img.style.marginBottom='5px';
+
+            preview.appendChild(img);
+        }
+        reader.readAsDataURL(file);
+    }
+})
+
+function imgDelete(button) {
+    event.preventDefault();
+    let file_url = button.value;
+    console.log(file_url);
+
+    fetch(`/img/delete/${encodeURIComponent(file_url)}`, {
+        method: 'POST',
+    })
+        .then(response => {
+            if (response.ok) {
+                console.log("파일 삭제 완료");
+                alert("이미지 삭제 완료");
+
+                // 이미지 박스를 DOM에서 제거
+                let imageBox = button.closest('.imagebox'); // 버튼의 가장 가까운 부모 .imagebox 찾기
+                if (imageBox) {
+                    imageBox.remove(); // 이미지 박스 삭제
+                }
+            } else {
+                console.log("파일 삭제 실패");
+            }
+        })
+        .catch(error => {
+            console.error("삭제 요청 중 오류 발생:", error);
+        });
 }

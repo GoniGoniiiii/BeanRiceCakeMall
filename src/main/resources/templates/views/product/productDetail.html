@@ -181,6 +181,17 @@
                     <input type="text" id="update_review_title" class="w-100 py-1" required>
                     <p class="bold mt-2 my-1">수정할 리뷰내용</p>
                     <textarea rows="5" id="update_review_content" class="w-100" required></textarea>
+                    <p class="bold mt-2 my-1">현재 이미지</p>
+                    <div th:each="review:${review}" class="d-flex flex-wrap">
+                        <div th:each="img:${review.review_images}" class="d-block align-items-center imagebox" >
+                            <img th:src="@{|/upload/${img}|}" class="review-img2" style="display: block; margin-bottom: 10px;">
+                            <button th:value="${img}" class="btn btn-outline-secondary " onclick="imgDelete(this)" style="display: block;">삭제</button>
+                        </div>
+                    </div>
+                    <p class="bold mt-2 my-1">수정할 이미지</p>
+                    <input type="file" name="review_imgfile" class="file mb-1" multiple>
+                    <div class="preview-box">
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal"
