@@ -129,7 +129,7 @@ public class ProductService {
     @Transactional
     public ProductDTO updateProduct(ProductDTO productDTO) {
         Optional<CategoryEntity> category = categoryRepository.findById(productDTO.getCategory_num());
-        CategoryEntity categoryEntity = category.get();
+        CategoryEntity categoryEntity = category.orElse(null);
 
         ProductEntity productEntity = ProductEntity.updateEntity(productDTO, categoryEntity);
         int save_id = productRepository.save(productEntity).getProductNum();
