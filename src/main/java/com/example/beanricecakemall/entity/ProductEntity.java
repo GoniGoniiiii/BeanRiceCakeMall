@@ -63,7 +63,7 @@ public class ProductEntity {
     private UserEntity userEntity;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="category_num", insertable = true,updatable = false)
+    @JoinColumn(name="category_num", insertable = true)
     private CategoryEntity categoryEntity;
 
     @OneToMany(mappedBy = "productEntity",cascade = CascadeType.REMOVE,orphanRemoval = true,fetch = FetchType.LAZY)
