@@ -1,6 +1,8 @@
 package com.example.beanricecakemall;
 
+import com.example.beanricecakemall.entity.CategoryEntity;
 import com.example.beanricecakemall.entity.FileEntity;
+import com.example.beanricecakemall.repository.CategoryRepository;
 import com.example.beanricecakemall.repository.FileRepository;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,8 @@ class BeanRiceCakeMallApplicationTests {
 
     @Autowired
     private FileRepository fileRepository;
+    @Autowired
+    private CategoryRepository categoryRepository;
 
     @Test
     void contextLoads() {
@@ -46,4 +50,15 @@ class BeanRiceCakeMallApplicationTests {
             System.out.println(fileEntity1.getReviewEntity().getReviewNum());
         }
     }
-}
+
+    @Test
+    public void testFindById(){
+        int category_num=1;
+        Optional<CategoryEntity> categoryEntity=categoryRepository.findById(category_num);
+        assertNotNull(categoryEntity);
+        CategoryEntity category=categoryEntity.get();
+        System.out.println(category.getCategoryName());
+        System.out.println(category.getCategoryNum());
+
+        }
+    }
