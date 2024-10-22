@@ -258,8 +258,35 @@ public class ProductService {
         return product_img;
     }
 
-    public List<ProductDTO> search(String keyword) {
+    public List<ProductDTO> search(String keyword){
         List<ProductEntity> productEntities = productRepository.findByProductNameContaining(keyword);
+        List<ProductDTO> productDTOList = new ArrayList<>();
+
+        if (productEntities != null) {
+            for (ProductEntity product : productEntities) {
+                productDTOList.add(ProductDTO.toProductDTO(product));
+            }
+            return productDTOList;
+        } else {
+            System.out.println("검색 결과가 존재하지 않습니다!");
+        }
+        return null;
+    }
+
+    public List<ProductDTO> sortSearch(String keyword, String sort) {
+        List<ProductEntity> productEntities = new ArrayList<>();
+        if ("new".equals(sort)) {
+            productEntities = productRepository.findByProductNameContainingOrderByProductRdateDesc(keyword);
+        } else if ("lowPrice".equals(sort)) {
+            productEntities = productRepository.findByProductNameContainingOrderByProductSprice(keyword);
+        } else if ("highPrice".equals(sort)) {
+            productEntities = productRepository.findByProductNameContainingOrderByProductSpriceDesc(keyword);
+        } else if ("lowRate".equals(sort)) { //낮은할인율순
+            productEntities = productRepository.findByProductNameContainingOrderByProductRate(keyword);
+        } else if ("highRate".equals(sort)) { //높은할인율순
+            productEntities = productRepository.findByProductNameContainingOrderByProductRateDesc(keyword);
+        }
+
         List<ProductDTO> productDTOList = new ArrayList<>();
 
         if (productEntities != null) {

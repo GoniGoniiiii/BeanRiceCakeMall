@@ -147,13 +147,20 @@ public class ProductController {
 
     //검색
     @GetMapping("/product/search")
-    public String search(String keyword, Model model) {
+    public String search(String keyword, @RequestParam(required=false) String sort, Model model,HttpServletRequest request) {
         List<ProductDTO> searchList = new ArrayList<>();
         String category = "검색";
 
+        System.out.println("keyword : " + keyword + "sort : "+sort);
+
         if (keyword != null && !keyword.trim().isEmpty()) {
             // 키워드가 있을 경우에만 검색 실행
-            searchList = productService.search(keyword);
+            if (sort != null) {
+                // 필터 정렬이 적용된 경우
+                searchList = productService.sortSearch(keyword, sort);
+            }else{
+                searchList=productService.search(keyword);
+            }
         }
         // 5개씩 묶기
         List<List<ProductDTO>> productList = new ArrayList<>();
@@ -163,6 +170,13 @@ public class ProductController {
 
         model.addAttribute("productList", productList);
         model.addAttribute("category", category);
+        model.addAttribute("keyword",keyword);
+
+        // AJAX 요청일 경우, 상품 리스트 HTML만 반환
+        if ("XMLHttpRequest".equals(request.getHeader("X-Requested-With"))) {
+            return "product/productList :: productList"; // 특정 부분만 렌더링
+        }
+
         return "product/productList";
     }
 }

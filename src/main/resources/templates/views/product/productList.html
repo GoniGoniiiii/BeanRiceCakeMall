@@ -29,6 +29,7 @@
         <small class="px-2">|</small>
         <small class="sort-option" data-sort="highRate">높은할인율순</small>
     </div><!--필터 끝-->
+    <input type="hidden" id="keyword" th:value="${keyword}">
     <div class="container-fluid" th:fragment="productList">
         <div class="d-flex flex-wrap" id="productList">
             <!-- 상품 리스트 반복 -->
