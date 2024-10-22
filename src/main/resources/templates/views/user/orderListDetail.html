@@ -44,7 +44,8 @@
     <table class="table border-top border-bottom align-middle mb-5" th:each="order :${orderDTO}">
         <tr>
             <td class="w-25 border-end ps-3 fw-bold">총 상품구매금액</td>
-            <td class="w-75 ps-2"><span th:text="${total_product}" id="total_product" class="order-price"></span><small> 원</small></td>
+            <td class="w-75 ps-2"><span th:text="${total_product}" id="total_product" class="order-price"></span><small>
+                원</small></td>
         </tr>
         <tr>
             <td class="w-25 border-end ps-3 fw-bold">총 결제금액</td>
@@ -71,16 +72,28 @@
                 <td class="order-cancle">취소/교환/반품</td>
             </tr>
             <tr th:each="orderPro,iterStat:${orderProductList}">
-                <td><img th:src="@{|/upload/${product_img[iterStat.index]}|}" class="table-img"></td>
-                <td class="text-start ps-3" th:text="${product_name[iterStat.index]}">귀여운 강아지 인형</td>
+                <td>
+                    <a th:href="@{|/productDetail/${order.product_num[iterStat.index]}|}">
+                        <img th:src="@{|/upload/${product_img[iterStat.index]}|}" class="table-img">
+                    </a>
+                </td>
+                <td class="text-start ps-3">
+                    <a th:href="@{|/productDetail/${order.product_num[iterStat.index]}|}">
+                        <span th:text="${product_name[iterStat.index]}"></span>
+                    </a>
+                </td>
                 <td th:text="${order.order_cnt[iterStat.index]}">1</td>
                 <td th:text="${order.order_oprice[iterStat.index]}" class="order-price">50,000원</td>
                 <td th:text="${order.order_status[0]}">입금전</td>
                 <td>-</td>
             </tr>
             <tr>
-                <td colspan="6" class="text-end">상품구매금액 <span th:text="${total_product}" class="order-price"></span> + 배송비
-                    <span th:text="${order.order_deliveryfee}" class="order-price"></span> + 추가 할인금액 <span th:text="${order.order_saleprice}" class="order-price"></span> = 합계  <span class="fw-bold fs-5 order-price" th:text="${order.order_price}"></span> 원</td>
+                <td colspan="6" class="text-end">상품구매금액 <span th:text="${total_product}" class="order-price"></span> +
+                    배송비
+                    <span th:text="${order.order_deliveryfee}" class="order-price"></span> + 추가 할인금액 <span
+                            th:text="${order.order_saleprice}" class="order-price"></span> = 합계 <span
+                            class="fw-bold fs-5 order-price" th:text="${order.order_price}"></span> 원
+                </td>
             </tr>
         </table>
         <input type="hidden" th:value="${product_num}" id="product_num">
