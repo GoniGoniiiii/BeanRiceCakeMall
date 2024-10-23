@@ -7,18 +7,176 @@
 
 ## 프로젝트 목표
 - **반려동물과 반려인의 삶의 질 향상:** 반려동물과 그들의 가족에게 더 나은 삶의 질을 제공할 수 있는 고품질의 제품과 서비스를 선별하여 제공함으로써, 반려동물의 건강과 행복을 증진시키고, 반려인들이 보다 편리하고 만족스러운 삶을 영위할 수 있도록 지원합니다.
-- **신뢰 기반 커뮤니티 구축:** 반려인들이 제품에 대한 리뷰를 공유하고, 반려동물 관리에 대한 정보와 경험을 나눌 수 있는 신뢰할 수 있는 커뮤니티 공간을 마련합니다. 이는 사용자 간의 신뢰를 구축하고, 정보의 질을 높이는 데 기여합니다.
 
 
 ## 개발환경
-### Language 
-JAVA , HTML , JS , CSS
-### DATABASE 
-MySQL , DBEAVER
-### TOOL 
-Notion , Visual Studio , GitHub , IntelliJ IDEA
-### FRAMEWORK & API
-BootStrap , spring boot, Ajax
+  <div style="margin: ; text-align: left;" "text-align: left;">
+          <h2>Languages</h2>
+          <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=white">
+          <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white">
+          <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white">
+          <img src="https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=Javascript&logoColor=white">
+          <h2>Frameworks&API</h2>
+          <img src="https://img.shields.io/badge/Spring Boot-578B34?style=for-the-badge&logo=Spring Boot&logoColor=white">
+          <img src="https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=Bootstrap&logoColor=white">
+          <img src="https://img.shields.io/badge/Ajax-9999FF?style=for-the-badge&logo=Ajax&logoColor=white">
+          <img src="https://img.shields.io/badge/JPA-90E59A?style=for-the-badge&logo=JPA&logoColor=white">
+          <h2>DataBase</h2>
+          <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
+          <h2>Tools</h2>
+          <img src="https://img.shields.io/badge/Dbeaver-1997B5?style=for-the-badge&logo=DBeaver&logoColor=white">
+          <img src="https://img.shields.io/badge/IntelliJ IDea-FF5A5F?style=for-the-badge&logo=IntelliJ IDea&logoColor=white">  
+          <img src="https://img.shields.io/badge/VS code-0078C0?style=for-the-badge&logo=VS Code&logoColor=white"> 
+          <img src="https://img.shields.io/badge/Github-FFDF6F?style=for-the-badge&logo=Github&logoColor=white">
+          <br/>
+          </div>
+    </div>
+
+## 디렉토리 구조
+```plaintext
+main
+├── java
+│   └── com
+│       └── example
+│           └── beanricecakemall
+│               ├── BeanRiceCakeMallApplication.java
+│               ├── MainController.java
+│               ├── config
+│               │   ├── SecurityConfig.java
+│               │   └── WebConfig.java
+│               ├── controller
+│               │   ├── CartController.java
+│               │   ├── OrderController.java
+│               │   ├── ProductController.java
+│               │   └── UserController.java
+│               ├── customDTO
+│               │   ├── CustomOAuth2User.java
+│               │   ├── CustomUserDetails.java
+│               │   ├── GoogleResponse.java
+│               │   ├── NaverResponse.java
+│               │   └── OAuth2Response.java
+│               ├── dto
+│               │   ├── CartDTO.java
+│               │   ├── CategoryDTO.java
+│               │   ├── DeliveryDTO.java
+│               │   ├── OrderDTO.java
+│               │   ├── ProductDTO.java
+│               │   ├── ReviewDTO.java
+│               │   └── UserDTO.java
+│               ├── entity
+│               │   ├── CartEntity.java
+│               │   ├── CategoryEntity.java
+│               │   ├── DeliveryEntity.java
+│               │   ├── FileEntity.java
+│               │   ├── OrderEntity.java
+│               │   ├── OrderProductEntity.java
+│               │   ├── ProductEntity.java
+│               │   ├── ReviewEntity.java
+│               │   └── UserEntity.java
+│               ├── oauth2
+│               │   ├── CustomClientRegistrationRepository.java
+│               │   └── SocialClientRegistration.java
+│               ├── repository
+│               │   ├── CartRepository.java
+│               │   ├── CategoryRepository.java
+│               │   ├── DeliveryRepository.java
+│               │   ├── FileRepository.java
+│               │   ├── OrderProductRepository.java
+│               │   ├── OrderRepository.java
+│               │   ├── ProductRepository.java
+│               │   ├── ReviewRepository.java
+│               │   └── UserRepository.java
+│               └── service
+│                   ├── CartService.java
+│                   ├── CategoryService.java
+│                   ├── CustomOAuth2UserService.java
+│                   ├── CustomUserDetailsService.java
+│                   ├── DeliveryService.java
+│                   ├── OrderProductService.java
+│                   ├── OrderService.java
+│                   ├── ProductService.java
+│                   ├── ReviewService.java
+│                   └── UserService.java
+└── resources
+    ├── application.properties
+    ├── static
+    │   ├── css
+    │   │   ├── findId.css
+    │   │   ├── findPw.css
+    │   │   ├── header.css
+    │   │   ├── index.css
+    │   │   ├── join.css
+    │   │   ├── login.css
+    │   │   ├── memberInfo.css
+    │   │   ├── orderList.css
+    │   │   ├── orderListDetail.css
+    │   │   ├── payment.css
+    │   │   ├── paymentCompleted.css
+    │   │   ├── paymentFailed.css
+    │   │   ├── productDetail.css
+    │   │   ├── productList.css
+    │   │   ├── shoppingBag.css
+    │   │   └── updateProduct.css
+    │   ├── img
+    │   │   ├── error.jpg
+    │   │   ├── google.png
+    │   │   ├── img1.png
+    │   │   ├── img2.png
+    │   │   ├── img3.png
+    │   │   ├── img4.png
+    │   │   ├── img5.png
+    │   │   ├── img6.png
+    │   │   ├── kakao.png
+    │   │   ├── logo.png
+    │   │   ├── logo2.png
+    │   │   └── naver.png
+    ├── js
+    │   ├── findId.js
+    │   ├── findPw.js
+    │   ├── index.js
+    │   ├── join.js
+    │   ├── login.js
+    │   ├── memberInfo.js
+    │   ├── orderList.js
+    │   ├── orderListDetail.js
+    │   ├── payment.js
+    │   ├── paymentCompleted.js
+    │   ├── productDetail.js
+    │   ├── productList.js
+    │   ├── shoppingBag.js
+    │   ├── updateProduct.js
+    │   └── uploadProduct.js
+    └── templates
+        └── views
+            ├── error.html
+            ├── footer.html
+            ├── header.html
+            ├── index.html
+            ├── admin
+            │   ├── updateProduct.html
+            │   └── uploadProduct.html
+            ├── product
+            │   ├── payment.html
+            │   ├── paymentCompleted.html
+            │   ├── paymentFailed.html
+            │   ├── productDetail.html
+            │   ├── productList.html
+            │   └── shoppingBag.html
+            └── user
+                ├── findId.html
+                ├── findPw.html
+                ├── join.html
+                ├── login.html
+                ├── memberInfo.html
+                ├── orderList.html
+                └── orderListDetail.html
+test
+└── java
+    └── com
+        └── example
+            └── beanricecakemall
+                └── BeanRiceCakeMallApplicationTests.java
+```
 
 
 ## 주요 기능
