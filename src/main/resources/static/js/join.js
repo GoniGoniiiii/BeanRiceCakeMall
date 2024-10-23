@@ -31,7 +31,7 @@ user_id.addEventListener("change", function () {
 var user_pw = document.getElementById("user_pw");
 var pwMessage = document.getElementById("pwMessage");
 
-user_pw.addEventListener("change", function () {
+user_pw.addEventListener("input", function () {
     var pw = user_pw.value;
     // 비밀번호 유효성 검사 조건 설정(최소 8자리 이상, 대문자,소문자,숫자,특수문자 포함)
     var minLength = 8;
@@ -69,7 +69,7 @@ user_pw.addEventListener("change", function () {
 var user_pw2 = document.getElementById("user_pw2");
 var checkMsg = document.getElementById("checkMessage");
 
-user_pw2.addEventListener("change", function () {
+user_pw2.addEventListener("input", function () {
     var pw = user_pw.value;
     var pwCheck = user_pw2.value;
 
