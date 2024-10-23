@@ -95,7 +95,9 @@
                             <!-- 원래 가격 -->
                             <p class="fw-bold text-danger m-0" th:text="${allPro.product_rate}+'%'"></p><!--할인율-->
                         </div>
-                        <small class="text-secondary" th:text="${allPro.product_info}"></small>
+                        <div class="product-info">
+                            <small class="text-secondary" th:text="${allPro.product_info}"></small>
+                        </div>
                     </a>
                 </div>
             </div>

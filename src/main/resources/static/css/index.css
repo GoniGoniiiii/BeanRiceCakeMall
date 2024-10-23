@@ -26,3 +26,6 @@
 del{
     padding-top:2.5px;
 }
+.product-info{
+    max-width:232px !important;
+}

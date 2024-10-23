@@ -45,7 +45,9 @@
                                 <del class="text-secondary small product-price" th:text="${product.product_oprice}">500,000원</del>
                                 <span class="text-danger fw-bold fs-5 mx-2" th:if="${product.product_cnt<=0}">품절</span>
                             </div>
-                            <small class="text-secondary" th:utext="${product.product_info}"></small>
+                            <div class="product-info">
+                                <small class="text-secondary" th:utext="${product.product_info}"></small>
+                            </div>
                         </a>
                     </div>
                 </div>
