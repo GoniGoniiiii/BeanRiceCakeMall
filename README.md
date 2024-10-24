@@ -1,12 +1,23 @@
 # 콩떡몰
-<p align="center"><img src="https://github.com/GoniGoniiiii/BeanRiceCakeMall/assets/51067529/6f6df39e-6ba5-4716-8902-7ee1fd17b6b7" width="300" height="200"></p>
+<p align="center"><a href="http://beanricecakemall.store/"><img src="https://github.com/GoniGoniiiii/BeanRiceCakeMall/assets/51067529/6f6df39e-6ba5-4716-8902-7ee1fd17b6b7" width="300" height="200"></a></p>
+<p align="center">로고를 누르시면 콩떡몰로 바로 이동해요!~</p>
+
+# 목차
+- [프로젝트 소개](#프로젝트-소개)
+- [프로젝트 목표](#프로젝트-목표)
+- [개발환경](#개발환경)
+- [사용기술](#사용기술)
+- [디렉토리 구조](#디렉토리-구조)
+- [E-R 다이어그램](#E-R-다이어그램)
+- [주요기능](#주요기능)
+- [화면구성](#화면구성)
 
 ## 프로젝트 소개
 요즘은 반려동물을 가족처럼 여기는 문화가 점점 확산되고 있습니다. 이러한 변화에 따라 반려동물의 행복과 건강을 최우선 가치로 여기며, 그에 맞는 전용 제품 및 서비스 시장이 급속도로 성장하고 있습니다. 이런 시대적 흐름에 발맞추어, 반려견 '콩떡'이를 모델로 한 반려견쇼핑몰을 운영하며 신뢰할 수 있는 서비스를 제공하고자 합니다.
 
 
 ## 프로젝트 목표
-- **반려동물과 반려인의 삶의 질 향상:** 반려동물과 그들의 가족에게 더 나은 삶의 질을 제공할 수 있는 고품질의 제품과 서비스를 선별하여 제공함으로써, 반려동물의 건강과 행복을 증진시키고, 반려인들이 보다 편리하고 만족스러운 삶을 영위할 수 있도록 지원합니다.
+- **반려동물과 반려인의 삶의 질 향상:** 반려동물과 함께하는 가족이 더 나은 삶의 질을 누릴 수 있도록 신중하게 선별된 고품질 제품과 서비스를 제공하는 것입니다. 이를 통해 반려동물의 건강과 행복을 증진시키고, 반려인들이 더욱 편리하고 만족스러운 삶을 즐길 수 있도록 돕고자 합니다.
 
 
 ## 개발환경
@@ -29,8 +40,7 @@
           <img src="https://img.shields.io/badge/VS code-0078C0?style=for-the-badge&logo=VS Code&logoColor=white"> 
           <img src="https://img.shields.io/badge/Github-FFDF6F?style=for-the-badge&logo=Github&logoColor=white">
           <br/>
-          </div>
-    </div>
+  </div>
 
 ## 디렉토리 구조
 ```plaintext
@@ -187,3 +197,32 @@ test
 - 나의 주문내역 확인
 - 리뷰작성
 - 소셜로그인
+
+## 화면구성
+<table>
+  <tr>
+    <td align="center">메인페이지</td>
+    <td align="center">상품 판매 페이지</td>
+  </tr>
+  <tr>
+    <td><img src="![Uploading image.png…]()
+" width="400" height="300"></td>
+    <td><img src="https://github.com/GoniGoniiiii/HwagaeMarket/assets/51067529/6a3c2555-51b2-4a88-8b28-e2e3997d986b" width="400" height="300"></td>
+  </tr>  
+   <tr>
+    <td align="center">장바구니 페이지</td>
+    <td align="center">주문내역 페이지</td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/GoniGoniiiii/HwagaeMarket/assets/51067529/6417e3a0-b077-4349-808d-409144903c7e" width="400" height="300"></td>
+    <td><img src="https://github.com/GoniGoniiiii/HwagaeMarket/assets/51067529/66447e68-6ae2-4463-adba-43a549b4c2cc" width="400" height="300"></td>
+  </tr>  
+   <tr>
+    <td align="center">주문상세 페이지</td>
+    <td align="center">리뷰 작성</td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/GoniGoniiiii/HwagaeMarket/assets/51067529/6417e3a0-b077-4349-808d-409144903c7e" width="400" height="300"></td>
+    <td><img src="https://github.com/GoniGoniiiii/HwagaeMarket/assets/51067529/66447e68-6ae2-4463-adba-43a549b4c2cc" width="400" height="300"></td>
+  </tr>  
+</table>
