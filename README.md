@@ -242,8 +242,8 @@ test
 ```
 
 ## E-R 다이어그램
-
 <br>
+
 ![콩떡몰 erd](https://github.com/user-attachments/assets/f9a28254-3e7c-499f-a896-e5450d1fb32b)
 
 
@@ -259,28 +259,43 @@ test
 ## 화면구성
 <table>
   <tr>
-    <td align="center">메인페이지</td>
-    <td align="center">상품 판매 페이지</td>
+    <td align="center">메인 페이지</td>
+    <td align="center">상품 상세 페이지</td>
+    <td align="center">장바구니</td>
   </tr>
   <tr>
-    <td>
-    </td>
-    <td><img src="https://github.com/GoniGoniiiii/HwagaeMarket/assets/51067529/6a3c2555-51b2-4a88-8b28-e2e3997d986b" width="400" height="300"></td>
+    <td><img src="https://github.com/user-attachments/assets/7e3c3486-5a32-4c73-ab05-554b10a53e01" width="336" height="275"></td>
+    <td><img src="https://github.com/user-attachments/assets/c5fe9040-33b6-42ad-bcae-d2ea7ef2c5ef" width="336" height="275"></td>
+    <td><img src="https://github.com/user-attachments/assets/afc9f40e-e7ee-44bd-82a5-773bb58b4c7b" width="336" height="275"></td>
   </tr>  
    <tr>
-    <td align="center">장바구니 페이지</td>
-    <td align="center">주문내역 페이지</td>
+    <td align="center">로그인</td>
+    <td align="center">회원가입</td>
+    <td align="center">ID.PW찾기</td>
   </tr>
   <tr>
-    <td><img src="https://github.com/GoniGoniiiii/HwagaeMarket/assets/51067529/6417e3a0-b077-4349-808d-409144903c7e" width="400" height="300"></td>
-    <td><img src="https://github.com/GoniGoniiiii/HwagaeMarket/assets/51067529/66447e68-6ae2-4463-adba-43a549b4c2cc" width="400" height="300"></td>
+    <td><img src="https://github.com/user-attachments/assets/0eba6e7d-59e4-457b-9fd5-e18c09aaed5f" width="336" height="275"></td>
+    <td><img src="https://github.com/user-attachments/assets/706a1293-10e5-4a92-bd70-6a329a3656fe" width="336" height="275"></td>
+    <td><img src="https://github.com/user-attachments/assets/ed376c92-4884-4cb0-96b0-cddce05b4676" width="336" height="275"></td>
   </tr>  
    <tr>
-    <td align="center">주문상세 페이지</td>
+    <td align="center">주문 페이지</td>
+    <td align="center">주문 내역</td>
+    <td align="center">주문 상세</td>
+  </tr>
+  <tr>
+    <td><img src="https://github.com/user-attachments/assets/32f0a1c0-0e62-4b07-b9cc-6632cfb119b9" width="336" height="275"></td>
+    <td><img src="https://github.com/user-attachments/assets/edfd0d7e-4e38-46ed-acb7-bcf48a17c957" width="336" height="275"></td>
+    <td><img src="https://github.com/user-attachments/assets/ce665b44-4407-4a18-8631-c457755df15b" width="336" height="275"></td>
+  </tr>  
+   <tr>
     <td align="center">리뷰 작성</td>
+    <td align="center">검색</td>
+    <td align="center">마이페이지</td>
   </tr>
   <tr>
-    <td><img src="https://github.com/GoniGoniiiii/HwagaeMarket/assets/51067529/6417e3a0-b077-4349-808d-409144903c7e" width="400" height="300"></td>
-    <td><img src="https://github.com/GoniGoniiiii/HwagaeMarket/assets/51067529/66447e68-6ae2-4463-adba-43a549b4c2cc" width="400" height="300"></td>
-  </tr>  
+    <td><img src="https://github.com/user-attachments/assets/ca945287-5426-47b5-96db-941358b3a2c9" width="336" height="275"></td>
+    <td><img src="https://github.com/user-attachments/assets/1cbf272e-c8c2-4fe3-9855-e8d3a60caea7" width="336" height="275"></td>
+    <td><img src="https://github.com/user-attachments/assets/fd56b835-09b2-4a7d-a128-9b70336378d8" width="336" height="275"></td>
+</tr>  
 </table>
