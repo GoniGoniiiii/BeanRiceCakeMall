@@ -243,6 +243,9 @@ test
 
 ## E-R 다이어그램
 
+<br>
+![콩떡몰 erd](https://github.com/user-attachments/assets/f9a28254-3e7c-499f-a896-e5450d1fb32b)
+
 
 ## 주요 기능
 - 상품 구매
