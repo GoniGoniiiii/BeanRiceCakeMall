@@ -9,7 +9,7 @@
 - [사용기술](#사용기술)
 - [디렉토리 구조](#디렉토리-구조)
 - [E-R 다이어그램](#E-R-다이어그램)
-- [주요기능](#주요기능)
+- [주요기능](#주요-기능)
 - [화면구성](#화면구성)
 
 ## 프로젝트 소개
@@ -21,26 +21,79 @@
 
 
 ## 개발환경
-  <div style="margin: ; text-align: left;" "text-align: left;">
-          <h2>Languages</h2>
-          <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=white">
-          <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white">
-          <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white">
-          <img src="https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=Javascript&logoColor=white">
-          <h2>Frameworks&API</h2>
-          <img src="https://img.shields.io/badge/Spring Boot-578B34?style=for-the-badge&logo=Spring Boot&logoColor=white">
-          <img src="https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=Bootstrap&logoColor=white">
-          <img src="https://img.shields.io/badge/Ajax-9999FF?style=for-the-badge&logo=Ajax&logoColor=white">
-          <img src="https://img.shields.io/badge/JPA-90E59A?style=for-the-badge&logo=JPA&logoColor=white">
-          <h2>DataBase</h2>
-          <img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
-          <h2>Tools</h2>
-          <img src="https://img.shields.io/badge/Dbeaver-1997B5?style=for-the-badge&logo=DBeaver&logoColor=white">
+  <div style="margin: ; text-align: left;">
           <img src="https://img.shields.io/badge/IntelliJ IDea-FF5A5F?style=for-the-badge&logo=IntelliJ IDea&logoColor=white">  
           <img src="https://img.shields.io/badge/VS code-0078C0?style=for-the-badge&logo=VS Code&logoColor=white"> 
           <img src="https://img.shields.io/badge/Github-FFDF6F?style=for-the-badge&logo=Github&logoColor=white">
-          <br/>
+          <img src="https://img.shields.io/badge/Dbeaver-1997B5?style=for-the-badge&logo=DBeaver&logoColor=white">
   </div>
+
+<br>
+
+- IntelliJ
+- Visual Studio Code
+- GitHub
+- DBeaver
+
+## 사용기술
+
+### 백엔드
+<div>
+  <img src="https://img.shields.io/badge/Java-007396?style=for-the-badge&logo=Java&logoColor=white">
+  <img src="https://img.shields.io/badge/Spring Boot-578B34?style=for-the-badge&logo=Spring Boot&logoColor=white">
+  <img src="https://img.shields.io/badge/Spring Security-6DB33F?style=for-the-badge&logo=Spring Security&logoColor=white">
+  <img src="https://img.shields.io/badge/JPA-90E59A?style=for-the-badge&logo=JPA&logoColor=white">
+  <img src="https://img.shields.io/badge/Lombok-9999FF?style=for-the-badge&logo=Lombok&logoColor=white">
+  <img src="https://img.shields.io/badge/Oauth2-5395FD?style=for-the-badge&logo=Oauth2&logoColor=white">
+</div>
+
+<br>
+
+
+- Java 17
+- Spring Boot 3.2.5
+- Spring Security6
+- Spring Data JPA
+- Lombok
+- Oauth2.0
+
+### 프론트엔드
+<div>
+  <img src="https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=HTML5&logoColor=white">
+  <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=CSS3&logoColor=white">
+  <img src="https://img.shields.io/badge/Thymeleaf-005F0F?style=for-the-badge&logo=Thymeleaf&logoColor=white">
+  <img src="https://img.shields.io/badge/Javascript-F7DF1E?style=for-the-badge&logo=Javascript&logoColor=white">
+  <img src="https://img.shields.io/badge/Bootstrap-7952B3?style=for-the-badge&logo=Bootstrap&logoColor=white">
+</div>
+
+<br>
+
+
+- HTML5/css3
+- JavaScript
+- Thymeleaf
+- Bootstrap 5.3.3
+
+### 빌드 툴
+<img src="https://img.shields.io/badge/Gradle-02303A?style=for-the-badge&logo=Gradle&logoColor=white">
+
+- Gradle 8.7
+
+### 데이터베이스
+<img src="https://img.shields.io/badge/MySQL-4479A1?style=for-the-badge&logo=MySQL&logoColor=white">
+
+  
+- Mysql
+
+### 인프라
+<div>
+    <img src="https://img.shields.io/badge/Amazon EC2-FF9900?style=for-the-badge&logo=Amazon Ec2&logoColor=white">
+    <img src="https://img.shields.io/badge/Amazon RDS-527FFF?style=for-the-badge&logo=Amazon RDS&logoColor=white">
+</div>
+<br>
+
+- AWS EC2
+- AWS RDS
 
 ## 디렉토리 구조
 ```plaintext
@@ -188,6 +241,8 @@ test
                 └── BeanRiceCakeMallApplicationTests.java
 ```
 
+## E-R 다이어그램
+
 
 ## 주요 기능
 - 상품 구매
@@ -205,8 +260,8 @@ test
     <td align="center">상품 판매 페이지</td>
   </tr>
   <tr>
-    <td><img src="![Uploading image.png…]()
-" width="400" height="300"></td>
+    <td>
+    </td>
     <td><img src="https://github.com/GoniGoniiiii/HwagaeMarket/assets/51067529/6a3c2555-51b2-4a88-8b28-e2e3997d986b" width="400" height="300"></td>
   </tr>  
    <tr>
