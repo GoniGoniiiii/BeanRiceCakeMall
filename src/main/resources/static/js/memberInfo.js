@@ -2,7 +2,7 @@
 var user_pw = document.getElementById("user_pw");
 var pwMessage = document.getElementById("pwMessage");
 
-user_pw.addEventListener("change", function () {
+user_pw.addEventListener("input", function () {
     var pw = user_pw.value;
     var minLength = 8;
     var hasUpperCase = /[A-Z]/.test(pw);
@@ -33,7 +33,7 @@ user_pw.addEventListener("change", function () {
 var user_pw2 = document.getElementById("user_pw2");
 var checkMsg = document.getElementById("checkMessage");
 
-user_pw2.addEventListener("change", function () {
+user_pw2.addEventListener("input", function () {
     var pw = user_pw.value;
     var pwCheck = user_pw2.value;
 
