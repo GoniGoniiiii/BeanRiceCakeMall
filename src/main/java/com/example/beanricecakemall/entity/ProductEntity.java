@@ -59,10 +59,6 @@ public class ProductEntity {
     private int productRate;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_num",insertable = true,updatable = false)
-    private UserEntity userEntity;
-
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="category_num", insertable = true)
     private CategoryEntity categoryEntity;
 
