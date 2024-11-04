@@ -1,5 +1,5 @@
 # 콩떡몰
-<p align="center"><a href="http://beanricecakemall.store/"><img src="https://github.com/GoniGoniiiii/BeanRiceCakeMall/assets/51067529/6f6df39e-6ba5-4716-8902-7ee1fd17b6b7" width="300" height="200"></a></p>
+<p align="center"><a href="http://beanricecakemall.store/"><img src="https://private-user-images.githubusercontent.com/51067529/382224747-c444a786-2d99-4817-89cc-6cd772e290a2.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3MzA2NTI5NjIsIm5iZiI6MTczMDY1MjY2MiwicGF0aCI6Ii81MTA2NzUyOS8zODIyMjQ3NDctYzQ0NGE3ODYtMmQ5OS00ODE3LTg5Y2MtNmNkNzcyZTI5MGEyLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNDExMDMlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjQxMTAzVDE2NTEwMlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTk2NDRhZGNhYmYxNTc3NTUwMTBjZWEzYmU3YTEyNGY4NmE2ZmU2ODI4NzUwZjVjNzg5MTE2ZmViZTc0ZDRjMjAmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.BzwvI3vr-cCpbIi8ZNUgU8yZJFtXitKY1P6Q_Q-xV9A" width="300" height="200"></a></p>
 <p align="center">로고를 누르시면 콩떡몰로 바로 이동해요!~</p>
 
 # 목차
@@ -13,7 +13,8 @@
 - [화면구성](#화면구성)
 
 ## 프로젝트 소개
-요즘은 반려동물을 가족처럼 여기는 문화가 점점 확산되고 있습니다. 이러한 변화에 따라 반려동물의 행복과 건강을 최우선 가치로 여기며, 그에 맞는 전용 제품 및 서비스 시장이 급속도로 성장하고 있습니다. 이런 시대적 흐름에 발맞추어, 반려견 '콩떡'이를 모델로 한 반려견쇼핑몰을 운영하며 신뢰할 수 있는 서비스를 제공하고자 합니다.
+요즘은 반려동물을 가족처럼 여기는 문화가 점점 확산되고 있습니다. 이러한 변화에 따라 반려동물의 행복과 건강을 최우선 가치로 여기며, 그에 맞는 전용 제품 및 서비스 시장이 급속도로 성장하고 있습니다. <br>
+이런 시대적 흐름에 발맞추어, 반려견 '콩떡'이를 모델로 한 반려견쇼핑몰을 운영하며 신뢰할 수 있는 서비스를 제공하고자 합니다.
 
 
 ## 프로젝트 목표
