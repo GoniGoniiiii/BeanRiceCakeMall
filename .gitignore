@@ -47,3 +47,6 @@ gen
 .gradle
 build
 src/main/java/com/example/beanricecakemall/oauth2/SocialClientRegistration.java
+.gitsecret/keys/random_seed
+!*.secret
+src/main/java/com/example/beanricecakemall/oauth2/CustomClientRegistrationRepository.java
